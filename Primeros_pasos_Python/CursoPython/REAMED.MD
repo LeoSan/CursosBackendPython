@@ -78,3 +78,36 @@ Esta guía te llevará a través del proceso de instalación de Python en sistem
 3.  Si Python 3 se instaló correctamente, deberías ver la versión de Python que instalaste (por ejemplo, `Python 3.X.Y`).
 4.  También puedes probar el intérprete de Python 3 escribiendo `python3` y presionando Enter. Esto abrirá la consola interactiva de Python 3 (indicada por `>>>`). Para salir, escribe `exit()` y presiona Enter.
 
+
+## clase 2: 
+
+## Semántica y Sintaxis en Programación: Breve Descripción con Ejemplos
+
+En programación, la **sintaxis** y la **semántica** son dos conceptos fundamentales que describen cómo se escribe y qué significa el código.
+
+**Sintaxis:**
+
+* Se refiere a las **reglas gramaticales** que definen la estructura correcta de un lenguaje de programación. Es como la ortografía y la gramática del lenguaje humano.
+* Si la sintaxis es incorrecta, el compilador o intérprete **no podrá entender el código** y generará errores.
+* Se centra en la **forma** en que se escriben los símbolos, las palabras clave y las estructuras del lenguaje.
+
+**Ejemplo de Sintaxis (Python):**
+
+```python
+# Sintaxis correcta:
+if edad > 18:
+    print("Es mayor de edad")
+
+# Sintaxis incorrecta (falta el colon al final del if):
+# if edad > 18
+#     print("Es mayor de edad") # Esto generará un error de sintaxis
+```
+
+**Semántica:**
+
+* Se refiere al significado del código. Describe qué hace el programa cuando se ejecuta.
+* Un código puede tener una sintaxis correcta pero una semántica incorrecta, lo que significa que el programa se ejecutará sin errores pero no hará lo que se esperaba.
+* Se centra en la lógica y el comportamiento del programa.
+
+
+## Clase 5: Manipulación de Cadenas de Texto en Python 
