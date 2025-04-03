@@ -9,7 +9,7 @@
 ## Estructura 
 - Primeros pasos con Python
     - Curso de Python -> Abril 2025 
-    - Curso de Git y GitHub
+    - Curso de Git y GitHub -> Abril 2025
     - Curso de Python: Comprehensions, Funciones y Manejo de Errores
     - Curso de Python: PIP y Entornos Virtuales
     - Curso de Unit Testing en Python
