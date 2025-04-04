@@ -110,4 +110,381 @@ if edad > 18:
 * Se centra en la lógica y el comportamiento del programa.
 
 
-## Clase 5: Manipulación de Cadenas de Texto en Python 
+## Clase 5: Manipulación de Cadenas de Texto en Python
+
+**¿Cómo se definen las cadenas en Python?**
+Para crear una cadena en Python, puedes utilizar comillas simples, dobles o triples. Por ejemplo:
+
+```python
+Comillas simples: name = 'Carli'
+Comillas dobles: name = "Carli"
+Comillas triples: name = '''    Carli''' -> si permite anexar espacios 
+```
+
+**¿Cómo se indexan las cadenas en Python?**
+Las cadenas son colecciones ordenadas y accesibles por índices. Puedes acceder a un carácter específico utilizando corchetes:
+
+```python
+name = 'Carli'
+print(name[0])  # Imprime 'C'
+print(name[-1])  # Imprime 'i'
+```
+
+**¿Cómo se concatenan cadenas?**
+Puedes concatenar cadenas utilizando el operador + y repetirlas con el operador *:
+
+```python
+first_name = 'Carli'
+last_name = 'Florida'
+full_name = first_name + ' ' + last_name
+print(full_name)  # Imprime 'Carli Florida'
+
+print(name * 5)  # Imprime 'CarliCarliCarliCarliCarli'
+```
+
+**metodos  definidas** 
+- len()
+- .count() 
+- .capitalize()
+- .title() 
+- .swapcase() 
+- .replace(,) 
+- .split() 
+- .strip() 
+- .lstrip() 
+- .rstrip() 
+- .find()
+- .index() 
+- eval() # Este y el siguiente son super métodos
+- .exec()
+
+## Clasee 6: Enteros, Flotantes y Booleanos
+
+
+**Tipos de datos**
+
+- Enteros: Son todos los números enteros. Se representa con la palabra Integer (INT)
+- Flotantes: Son todos los números decimales. Se representa con la palabra FLOAT
+- Booleanos: Representa verdadero (true) o falso (false).
+
+
+**¿Qué es un tipo de dato en Python?**
+En Python, un tipo de dato se refiere a la clase de datos que una variable puede contener. Esto se puede verificar con la función type(), que devuelve la clase del valor contenido en la variable. Por ejemplo, type('Hello') devuelve class 'str', indicando que el dato es una cadena de texto.
+
+**¿Cómo se utiliza la notación científica en Python?**
+La notación científica se emplea para representar números muy grandes o muy pequeños de manera compacta. Por ejemplo, 1e6 representa 1,000,000 y 1e-6 representa 0.000001. Esta notación es útil en cálculos científicos y financieros, donde los números pueden variar significativamente en magnitud.
+
+La notación cientifica (exponencial) se utiliza cuando tenemos números muy grandes o muy pequeños y se utiliza con la nomenclatura e o E.
+
+Para comentar en Python se comienza el texto con # y automaticamente se coloca de color verde indicando que Python ignora esta sentencia.
+
+El typecasting en Python se refiere a la conversión explícita de un tipo de dato a otro. Por curiosidad los invito a que lo intente.
+
+Acá les comparto unos cuantos ejemplos:
+
+```python
+# Typecasting
+
+print(float(2))
+print(int(2.6))
+print(int(True))
+print(int(False))
+print(bool(1))
+print(float(True))
+print(type("hello" == "world"))
+```
+
+## Clase 7: Todo lo que Debes Saber sobre print en Python
+
+Esta información es Oro!
+
+No haré resumen, pero si quizás los usos más importantes que te servirán a nivel laboral. :).
+
+Sep: Te puede ayudar para la construcción de archivos planos en caso de que necesites que la salida tenga algún separador especial: Ej: print("Nunca", "pares", "de", "aprender", sep="; ")
+
+```python
+## Separadores 
+print("manzana", "banana", "naranja", sep="-")
+print(1, 2, 3, sep=", ")
+
+## Especificar el final de línea (end):
+## Por defecto, print() añade un salto de línea (\n) al final de la salida. Puedes cambiar este comportamiento utilizando el parámetro end.
+
+print("Esto se imprime en", end=" ")
+print("la misma línea.")
+
+for i in range(5):
+    print(i, end=", ")
+print("fin")
+
+## Usar cadenas formateadas (f-strings):
+## Las f-strings (disponibles desde Python 3.6) son una forma concisa y legible de insertar expresiones dentro de cadenas de texto. Se definen prefijando la cadena con una f o F y colocando las expresiones entre llaves
+
+nombre = "Carlos"
+puntuacion = 95
+print(f"El estudiante {nombre} obtuvo una puntuación de {puntuacion}.")
+print(f"El doble de {puntuacion} es {puntuacion * 2}.")
+
+# Usar el método .format():
+# El método .format() también permite formatear cadenas, aunque es un poco más verboso que las f-strings.
+
+nombre = "Laura"
+profesion = "ingeniera"
+print("Mi nombre es {} y soy {}.".format(nombre, profesion))
+print("El número {0} al cuadrado es {1}.".format(5, 5**2)) # Usando índices
+print("Nombre: {n}, Edad: {e}".format(n="Pedro", e=25)) # Usando nombres de clave
+
+## combinaciones 
+
+productos = ["manzana", "plátano", "uva"]
+print("Lista de productos:", *productos, sep=", ", end=".\n¡Gracias!")
+```
+
+## Clase 8:  Operaciones Matemáticas en Python
+
+En el mundo de la programación con Python, las operaciones matemáticas básicas como la suma, resta, multiplicación y división son fundamentales. Sin embargo, Python ofrece operaciones adicionales que expanden nuestras posibilidades.
+
+
+PEMDAS es unaregla que indica el orden correcto de operaciones en una expresión matemática. Es una abreviación de las palabras en inglés "Parentheses" (paréntesis), "Exponents" (exponentes), "Multiplication" (multiplicación), "Division" (división), "Addition" (suma) y "Subtraction" (resta).
+
+Gente corriganme si estoy mal, pero según yo recuerdo el acrónimo PEMDAS es:
+
+P -> Paréntesis
+
+E -> Exponenciación
+
+M -> Multiplicación
+
+D -> División
+
+A -> Adición
+
+S -> Sustracción
+
+```python
+#Operadores numéricos
+a = 10
+b = 10
+print("Suma:", a + b)
+print("Resta:", a - b)
+print("Multiplicación:", a * b)
+print("Potenciación:", a ** b)
+print("División:", a / b)
+print("Parte entera de la división:", a // b)
+print("Módulo:", a % b)
+a /= 2
+print(a)
+operation_1  = 2 + 3 * 4
+operation_2  = (2 + 3) * 4
+print(operation_1)
+print(operation_2)
+operation_3 = (2+3) * (4**2)/ 8 - 1
+print(operation_3)
+
+a = 10
+b = 3
+print(a > b)
+print(a < b)
+print(a >= b)
+print(a <= b)
+print(a == b)
+print(a != b)
+```
+
+## Clase 9 Operaciones de Entrada/Salida en Consola
+
+
+En Python, cuando trabajamos con proyectos que requieren interacción del usuario, es común solicitar datos como correo o contraseña para ejecutar acciones específicas. Este mismo enfoque es útil para entender la función input.
+
+**¿Cómo se recibe información del usuario en Python?**
+Para recibir información del usuario desde la consola, creamos una variable y asignamos el resultado de la función input. Por ejemplo, para pedir el nombre del usuario:
+```python
+nombre = input("Ingrese su nombre: ")
+print(nombre)
+```
+Al ejecutar este código, se habilita una sección para introducir información. Ingresamos un nombre, presionamos Enter y se imprime el valor guardado en la variable nombre.
+
+**¿Qué ocurre si eliminamos la función print?**
+Si eliminamos print y ejecutamos el código, el nombre ingresado no se mostrará en la consola:
+
+nombre = input("Ingrese su nombre: ")
+Para ver el resultado, es imprescindible usar print.
+
+Podemos solicitar la edad del usuario creando una variable edad y utilizando input, luego imprimimos ambos valores:
+```python
+nombre = input("Ingrese su nombre: ")
+edad = input("Ingrese su edad: ")
+print(nombre)
+print(edad)
+```
+Al ejecutar, ingresamos el nombre y la edad, y ambos valores se muestran en pantalla.
+
+**¿Cuál es el tipo de dato devuelto por input?**
+El resultado de input es siempre un string, incluso si ingresamos un número. Podemos verificar el tipo de dato usando type:
+
+```python
+name = input("Ingrese su nombre: ")
+age = input("Ingrese su edad: ")
+print(type(name))
+print(type(age))
+```
+Al ejecutar, se mostrará que ambos valores son de tipo str.
+
+**¿Cómo se convierte el tipo de dato (casting)?**
+Si queremos que la edad sea un número entero en lugar de un string, usamos el casting:
+```python
+age = int(input("Ingrese su edad: "))
+#Ejecutamos y verificamos que age ahora es un entero. También podemos convertir a otros tipos de datos, como flotantes:
+
+age = float(input("Ingrese su edad: "))
+```
+**¿Qué sucede si ingresamos un dato inesperado?**
+Si el código espera un entero, pero ingresamos un string, se produce un ValueError. Es importante manejar el tipo de datos correctamente para evitar errores
+
+
+## Clase 10: Lista 
+
+Una lista en Python es una colección ordenada de elementos que puede contener elementos de diferentes tipos (enteros, flotantes, cadenas, etc.). Las listas son mutables, lo que significa que sus elementos se pueden cambiar después de que se ha creado la lista.
+
+
+```python
+
+# Creación de listas
+lista_vacia = []
+lista_numeros = [1, 2, 3, 4, 5]
+lista_mixta = [1, "dos", 3.0, True]
+
+print("Lista vacía:", lista_vacia)
+print("Lista de números:", lista_numeros)
+print("Lista mixta:", lista_mixta)
+
+# Acceder a elementos
+print("\nAcceso a elementos")
+print("Primer elemento:", lista_numeros[0])
+print("Último elemento:", lista_numeros[-1])
+
+# Modificar elementos
+print("\nModificar elementos")
+lista_numeros[0] = 10
+print("Lista de números modificada:", lista_numeros)
+
+# Agregar y eliminar elementos
+print("\nAgregar y eliminar elementos")
+lista_numeros.append(6)
+print("Lista después de append:", lista_numeros)
+lista_numeros.insert(2, 99)
+print("Lista después de insert:", lista_numeros)
+lista_numeros.remove(99)
+print("Lista después de remove:", lista_numeros)
+ultimo = lista_numeros.pop()
+print("Elemento eliminado con pop:", ultimo)
+print("Lista después de pop:", lista_numeros)
+elemento = lista_numeros.pop(1)
+print("Elemento eliminado en la posición 1:", elemento)
+print("Lista después de eliminar en la posición 1:", lista_numeros)
+
+# Operaciones básicas
+print("\nOperaciones básicas")
+lista_concatenada = lista_numeros + lista_mixta
+print("Lista concatenada:", lista_concatenada)
+lista_repetida = lista_numeros * 2
+print("Lista repetida:", lista_repetida)
+print("¿Está 3 en la lista?", 3 in lista_numeros)
+print("Longitud de la lista:", len(lista_numeros))
+
+# Iteración sobre los elementos de una lista
+print("\nIteración sobre elementos de la lista")
+for elemento in lista_numeros:
+    print(elemento)
+
+# Salida final
+print("\nGracias por utilizar el programa de listas. ¡Hasta la próxima!")
+```
+
+## Clase 11:  Método slice
+
+Cuando asignamos una lista a una nueva variable, por ejemplo, B = A, no estamos creando una copia independiente. Ambas variables apuntan al mismo espacio de memoria. Así, cualquier cambio en A se reflejará en B.
+
+¿Cómo evitar que dos listas apunten al mismo espacio de memoria?
+Para evitar que dos variables apunten al mismo espacio de memoria, debemos crear una copia superficial de la lista original usando slicing. Por ejemplo:
+
+Crear una lista A con números del 1 al 5.
+Asignar B = A y luego imprimir ambas listas muestra que ambas son idénticas.
+Eliminar un elemento de A también lo elimina de B
+
+
+```python
+
+a = [1,2,3,4]
+b = a
+
+print(id(a))
+print(id(b)) ## Imprimer mismo espacio de memoria asignado si alteras b se altera a 
+
+#Para esto podemos aplicar slice o copy 
+
+#Ejemplo Slice 
+c = a[:]
+c = a.copy()
+print(id(c))
+
+# Lista de ejemplo
+lista = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Ejemplos de slicing
+sublista1 = lista[2:5]
+sublista2 = lista[:4]
+sublista3 = lista[5:]
+sublista4 = lista[::2]
+sublista5 = lista[1:7:2]
+
+# Slicing con índices negativos
+sublista6 = lista[-5:]
+sublista7 = lista[:-5]
+sublista8 = lista[-8:-2:2]
+
+```
+
+## Notas 
+
+- validar espacio de memorai print(id(a))
+
+**¿Por qué es importante entender la asignación de memoria en listas?**
+En Python, a diferencia de otros lenguajes, podemos almacenar diferentes tipos de datos en una colección. Entender cómo funciona la memoria es crucial para evitar errores en el código, especialmente en aplicaciones del mundo laboral.
+
+
+## Clase Listas de más dimensiones y Tuplas
+
+Las matrices en Python son una herramienta poderosa que permite organizar datos en listas de listas, facilitando su manejo y manipulación.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+
+for row in matrix:
+    for element in row:
+        print(element)
+
+```
+
+**¿Cuál es la diferencia entre matrices y tuplas?**
+A diferencia de las matrices, las tuplas son inmutables, lo que significa que no se pueden modificar después de su creación. Las tuplas se utilizan para almacenar datos que no deben cambiar.
+
+```python
+# Ejemplo de tupla:
+numbers = (1, 2, 3)
+# Intentar modificar una tupla genera un error:
+numbers[0] = 10  # Genera TypeError: 'tuple' object does not support item assignment
+
+
+```
+
+## Notas Mentales 
+- Recuerda Leo, existen Listas, Diccionarios y Tuplas
+- Las Listas [] es un conjunto de datos distintos ordenados o no ordenados 
+- Los diccionarios [] es un conjunto variado de datos solo que tiene un key para indentificarlos 
+- Las Tuplas () es un conjunto de datos inmutble 
