@@ -453,7 +453,7 @@ sublista8 = lista[-8:-2:2]
 En Python, a diferencia de otros lenguajes, podemos almacenar diferentes tipos de datos en una colección. Entender cómo funciona la memoria es crucial para evitar errores en el código, especialmente en aplicaciones del mundo laboral.
 
 
-## Clase Listas de más dimensiones y Tuplas
+## Clase 12 Listas de más dimensiones y Tuplas
 
 Las matrices en Python son una herramienta poderosa que permite organizar datos en listas de listas, facilitando su manejo y manipulación.
 
@@ -488,3 +488,311 @@ numbers[0] = 10  # Genera TypeError: 'tuple' object does not support item assign
 - Las Listas [] es un conjunto de datos distintos ordenados o no ordenados 
 - Los diccionarios [] es un conjunto variado de datos solo que tiene un key para indentificarlos 
 - Las Tuplas () es un conjunto de datos inmutble 
+
+## Clase 13: Aplicación de Matrices
+
+>Las matrices son una herramienta fundamental en muchas áreas de la computación y las matemáticas. En Python, podemos usar listas dentro de listas para representar matrices bidimensionales (2D). Hoy, vamos a explorar varias aplicaciones prácticas de las matrices y cómo estas estructuras pueden ser usadas para representar tableros de juego.
+
+- Análisis de Datos: Las matrices se utilizan para almacenar y manipular grandes conjuntos de datos, realizar cálculos estadísticos y análisis de datos.
+- Inteligencia Artificial y Machine Learning: Las matrices son esenciales para representar datos de entrada y salida, pesos de redes neuronales y otros parámetros en algoritmos de aprendizaje automático.
+- Computación Científica: Las matrices se utilizan para resolver ecuaciones lineales, realizar simulaciones y modelar fenómenos científicos.
+- Gráficos por Computadora: Las matrices se utilizan para representar y transformar objetos en gráficos 2D y 3D.
+
+## Clase 14: Diccionarios
+
+> Los diccionarios en Python son una estructura que almacenan dos datos, la clave y el valor. Un ejemplo cotidiano es un diccionario físico donde buscamos el significado de una palabra y encontramos la palabra (clave) y su definición (valor). Veamos cómo se utilizan en código.
+
+```python
+# Configuración de una aplicación
+config = {
+    "host": "localhost",
+    "port": 8080,
+    "debug": True
+}
+print("Configuración:", config)
+
+# Contador de palabras
+palabras = ["manzana", "banana", "naranja", "manzana", "banana"]
+contador = {}
+for palabra in palabras:
+    if palabra in contador:
+        contador[palabra] += 1
+    else:
+        contador[palabra] = 1
+print("Contador de palabras:", contador)
+
+# Mapeo de usuarios a datos
+usuarios = {
+    "user123": {"nombre": "Juan", "edad": 30},
+    "user456": {"nombre": "Ana", "edad": 25}
+}
+print("Datos de usuario user123:", usuarios["user123"])
+
+# Almacenamiento de datos estructurados
+libro = {
+    "título": "Cien años de soledad",
+    "autor": "Gabriel García Márquez",
+    "año": 1967
+}
+print("Datos del libro:", libro)
+
+# Datos en formato JSON
+import json
+json_data = json.dumps(libro)
+print("Datos en JSON:", json_data)
+```
+
+## Clase 15: Comprehension Lists en Python (CLASE NUEVA)
+
+>Una Comprehension List es una forma concisa de crear listas en Python, pues permite generar listas nuevas transformando cada elemento de una colección existente o creando elementos a partir de un rango. La sintaxis es compacta y directa, lo que facilita la comprensión del propósito de tu código de un vistazo.
+
+```python
+squares = [x**2 for x in range(1,11)]
+#print("Cuadrados:", squares)
+
+celsius = [0, 10, 20, 30, 40]
+fahrenheit = [(temp * 9/5) *32 for temp in celsius]
+#print("Temperatura en F:", fahrenheit)
+
+#Numeros pares
+evens = [x for x in range(1,21) if x%2 ==0]
+#print(evens)
+
+matrix = [[1,2,3],
+          [4,5,6],
+          [7,8,9]]
+
+transposed = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
+
+print(matrix)
+#print(transposed)
+
+transposed = []
+for i in range(len(matrix[0])):
+    transposed_row = []
+    for row in matrix:
+        transposed_row.append(row[i])
+    transposed.append(transposed_row)
+
+print(transposed)
+```
+
+## Clase 16 Estructuras condicionales
+>En programación, las estructuras condicionales son esenciales para tomar decisiones basadas en ciertas condiciones. Por ejemplo, al usar la instrucción IF en Python, se puede verificar si una variable cumple con una condición específica y ejecutar el código correspondiente.
+
+**¿Cómo se usa la estructura IF en Python?**
+```python
+x = 10
+if x > 5:
+    print("x es mayor que 5")
+```
+
+**¿Qué pasa si la condición del IF es falsa?**
+
+```python
+x = 3
+if x > 5:
+    print("x es mayor que 5")
+else:
+    print("x es menor o igual a 5")
+```
+
+**¿Cómo se manejan múltiples condiciones?**
+```python
+x = 5
+if x > 5:
+    print("x es mayor que 5")
+elif x == 5:
+    print("x es igual a 5")
+else:
+    print("x es menor que 5")
+```
+
+**¿Cómo se manejan múltiples condiciones en un solo IF?**
+```python
+x = 15
+y = 30
+if x > 10 and y > 25:
+    print("x es mayor que 10 y y es mayor que 25")
+if x > 10 or y > 35:
+    print("x es mayor que 10 o y es mayor que 35")
+```
+
+**¿Qué es la negación en las condiciones?**
+
+```python
+x = 15
+if not x > 20:
+    print("x no es mayor que 20")
+```
+
+**¿Cómo se anidan las estructuras IF?**
+
+```python
+isMember = True
+age = 15
+if isMember:
+    if age >= 15:
+        print("Tienes acceso ya que eres miembro y mayor que 15")
+    else:
+        print("No tienes acceso ya que eres miembro, pero menor a 15 años")
+else:
+    print("No eres miembro y no tienes acceso")
+```
+
+**Condicional ternario** 
+
+```python
+edad = 21
+print("mayor de edad") if edad > 18 else print("menor de edad") 
+```
+
+## Clase 17 Bucles y Control de Iteraciones
+> Aprender a automatizar el proceso de iteración en listas utilizando bucles y controles de iteración es fundamental para optimizar el manejo de datos en Python.
+
+**¿Cómo iterar una lista usando un bucle for?**
+```python
+numbers = [1, 2, 3, 4, 5, 6]
+for i in numbers:
+    print(f"i es igual a: {i}")
+```
+
+**¿Cómo iterar usando la función range?**
+
+```python
+for i in range(10):
+    print(i)  # Imprime del 0 al 9
+
+for i in range(3, 10):
+    print(i)  # Imprime del 3 al 9
+```
+
+**¿Cómo funciona el bucle while?**
+```python
+x = 0
+while x < 5:
+    print(x)
+    x += 1
+```
+
+## Clase 18 Generadores e Iteradores
+
+> Trabajar con iteradores y generadores en Python permite manejar grandes cantidades de datos de manera eficiente, sin necesidad de cargar todo en memoria.
+
+
+## generador iterador 
+```python
+
+# Crear una lista
+lista = [1, 2, 3, 4]
+
+# Obtener el iterador de la lista
+iterador = iter(lista)
+
+# Usar el iterador para obtener elementos
+print(next(iterador))  # Imprime: 1
+print(next(iterador))  # Imprime: 2
+print(next(iterador))  # Imprime: 3
+print(next(iterador))  # Imprime: 4
+
+# Intentar obtener otro elemento después de finalizar la iteración
+print(next(iterador))  # Esto generará una excepción StopIteration
+
+```
+
+## Crear cadenas con iter 
+```python
+# Crear una cadena
+texto = "hola mundo"
+
+# Obtener el iterador de la cadena
+iterador_texto = iter(texto)
+
+# Iterar a través de la cadena
+for caracter in iterador_texto:
+    print(caracter)
+
+```
+
+## ¿Qué es un generador y cómo se utiliza?
+
+```python
+def mi_generador():
+    yield 1
+    yield 2
+    yield 3
+
+# Usar el generador
+for valor in mi_generador():
+    print(valor)
+```
+
+## ¿Cómo crear un generador para la serie de Fibonacci?
+```python
+def fibonacci(limite):
+    a, b = 0, 1
+    while a < limite:
+        yield a
+        a, b = b, a + b
+
+# Usar el generador para la serie de Fibonacci hasta 10
+for numero in fibonacci(10):
+    print(numero)
+
+```
+
+## Clase 19 Uso de Funciones en Python
+
+>En Python, uno de los principios fundamentales es el de divide y vencerás. Esto se refiere a dividir el código en porciones más pequeñas para facilitar su legibilidad, mantenimiento y reutilización. Las funciones nos permiten encapsular lógica específica, evitando la duplicación de código.
+```python
+def saludar(name, last_name):
+    print(f"Hola, {name} {last_name}")
+
+saludar("Diego", "Antezano")
+```
+
+## Clase 20: Funciones Lambda y Programación Funcional en Python
+
+> Para realizar operaciones sencillas con lambda, no necesitamos especificar el nombre de la función. Solo requerimos parámetros y la operación deseada. Por ejemplo, para sumar dos números, podemos definir una función lambda así:
+
+```python
+sumar = lambda a, b: a + b
+print(sumar(10, 4))
+```
+
+**¿Cómo aplicar lambda a elementos de una lista con map?**
+
+```python
+numeros = list(range(11))
+cuadrados = list(map(lambda x: x ** 2, numeros))
+print("Cuadrados:", cuadrados)
+```
+
+**¿Cómo filtrar elementos de una lista con lambda y filter?**
+```python
+numeros_pares = list(filter(lambda x: x % 2 == 0, numeros))
+print("Pares:", numeros_pares)
+```
+
+## Clase 21:¿Cómo realizar una función recursiva en Python?
+> La recursividad es una técnica fundamental en programación donde una función se llama a sí misma para resolver problemas complejos de manera más sencilla y estructurada.
+
+## Ejemplo factorial 
+
+En código Python, la función factorial se puede definir recursivamente de la siguiente manera:
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+```
+
+
+
+```python
+
+```
+
+
