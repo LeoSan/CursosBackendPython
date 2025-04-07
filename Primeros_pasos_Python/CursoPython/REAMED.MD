@@ -789,6 +789,541 @@ def factorial(n):
         return n * factorial(n - 1)
 ```
 
+## Clase 22: Manejo de Excepciones y Uso de Pass (CLASE NUEVA)
+
+Las excepciones en Python están organizadas en una jerarquía de clases, donde las excepciones más generales se encuentran en la parte superior y las más específicas en la parte inferior.
+
+Esta organización jerárquica permite a los programadores manejar excepciones de manera más precisa y efectiva.
+
+```python
+
+try:
+    divisor = int(input("Ingresa un numero divisor: "))
+    result = 100/divisor
+    print(result)
+except ZeroDivisionError as e:
+    print("Error: El divisor no puede ser cero")
+    print("Ha ocurrido un error: ", e)
+except ValueError as e:
+    print("Error: Debes introducir un número válido ")
+    print("Ha ocurrido un error: ", e)
+
+
+    #podemos tambien lanzar exeption se hace de esta manewra 
+    raise NombreExeption('mensaje')
+
+```
+
+Es bueno mencionar que las exception se pueden clasificar y manejar por jeraquia: 
+En la documentación de Python las podemos encontrar 
+[Documentacion Exception](https://docs.python.org/es/3/library/exceptions.html)
+
+
+## clase 23: Fundamentos de Programación Orientada a Objetos en Python
+
+> La Programación Orientada a Objetos es un paradigma de programación que organiza el diseño del software en torno a objetos. Los objetos son instancias de clases, que pueden tener atributos (datos) y métodos (funciones).
+
+## Conceptos Clave
+- Clase: Es un molde o plantilla que define los atributos y métodos que tendrán los objetos.
+- Objeto: Es una instancia de una clase.
+- Atributo: Es una variable que pertenece a una clase o a un objeto.
+- Método: Es una función que pertenece a una clase o a un objeto.
+- Herencia: Es un mecanismo por el cual una clase puede heredar atributos y métodos de otra clase.
+- Encapsulamiento: Es el concepto de ocultar los detalles internos de un objeto y exponer sólo lo necesario.
+- Polimorfismo: Es la capacidad de diferentes clases de ser tratadas como instancias de la misma clase a través de una interfaz común.
+
+
+## Clase 24 - 25 - 26: Herencia en POO con Python
+> El concepto de herencia en programación permite que una clase derive atributos y métodos de otra, facilitando la reutilización de código y la creación de estructuras jerárquicas lógicas. En este ejercicio, se aplica herencia para modelar una concesionaria que vende autos, bicicletas y camiones.
+
+## ¿Cómo definir una clase y aplicar herencia?
+Comenzamos con la creación de una clase Vehículo que servirá como superclase para nuestras otras clases. Esta clase define los parámetros fundamentales que comparten en común todos los vehículos.
+
+```python
+class Vehiculo:
+    def __init__(self, marca, modelo, precio):
+        self.marca = marca
+        self.modelo = modelo
+        self.precio = precio
+        self.disponible = True
+
+    def iniciar(self):
+        pass  # Implementación específica en clases hijas
+
+    def detener(self):
+        pass  # Implementación específica en clases hijas
+```
+
+## Creación de subclases: Bicicleta y Camión
+Nuestra clase Vehículo puede ser expandida mediante herencia. A continuación, creamos las clases Bicicleta y Camión que heredan de Vehiculo, adaptando las funciones de la superclase a su uso específico.
+
+```python
+class Bicicleta(Vehiculo):
+    def iniciar(self):
+        print(f"La bicicleta {self.marca} está en marcha")
+
+    def detener(self):
+        print(f"La bicicleta {self.marca} se ha detenido")
+
+class Camion(Vehiculo):
+    def iniciar(self):
+        print(f"El motor del camión {self.marca} está en marcha")
+
+    def detener(self):
+        print(f"El motor del camión {self.marca} se ha detenido")
+```
+
+## ¿Cómo gestionar clientes y concesionarios en un sistema OOP?
+Las clases Comprador y Concesionaria permitirán la interacción entre vehículos y clientes dentro del contexto de una tienda.
+
+## Implementación de clase Comprador
+Esta clase no hereda de ninguna, pero integra la funcionalidad para comprar y consultar vehículos disponibles.
+
+```python
+class Comprador:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.coleccion_vehiculos = []
+
+    def comprar_vehiculo(self, vehiculo):
+        if vehiculo.disponible:
+            self.coleccion_vehiculos.append(vehiculo)
+            vehiculo.disponible = False
+            print(f"{vehiculo.marca} ha sido añadido a la colección de {self.nombre}")
+        else:
+            print(f"Lo siento, el {vehiculo.marca} no está disponible")
+```
+
+## Desarrollo de clase Concesionaria
+La Concesionaria manejará el inventario de vehículos y el registro de clientes, permitiendo la adición y la visualización del inventario.
+
+```python
+class Concesionaria:
+    def __init__(self):
+        self.inventario = []
+        self.clientes = []
+
+    def añadir_vehiculo(self, vehiculo):
+        self.inventario.append(vehiculo)
+        print(f"{vehiculo.marca} ha sido añadido al inventario")
+
+    def registrar_cliente(self, cliente):
+        self.clientes.append(cliente)
+        print(f"{cliente.nombre} ha sido registrado como cliente")
+    
+    def mostrar_vehiculos_disponibles(self):
+        print("Vehículos disponibles en la tienda:")
+        for vehiculo in self.inventario:
+            if vehiculo.disponible:
+                print(f"Marca: {vehiculo.marca}, Precio: {vehiculo.precio}")
+```
+
+## Instanciamos los Objetos y vemos el funcionamiento 
+
+```python
+class Vehicle:
+    def __init__(self, brand, model, price):
+        #Encapsulación
+        self.brand = brand
+        self.model = model
+        self.price = price
+        self.is_available = True
+
+    def sell(self):
+        if self.is_available:
+            self.is_available = False
+            print(f"El vehiculo {self.brand}. Ha sido vendido")
+        else:
+            print(f"El vehiculo {self.brand}. No está disponible")
+    
+    #Abstracción
+    def check_available(self):
+        return self.is_available
+    
+    #Abstracción
+    def get_price(self):
+        return self.price
+    
+    def start_engine(self):
+        raise NotImplementedError("Este metodo debe ser implementado por la subclase")
+    
+    def stop_engine(self):
+        raise NotImplementedError("Este metodo debe ser implementado por la subclase")
+
+#Herencia
+class Car(Vehicle):
+    #Polimorfismo
+    def start_engine(self):
+        if not self.is_available:
+            return f"El motor del coche {self.brand} está en marcha"
+        else:
+            return f"El coche {self.brand} no está disponible"
+    
+    #Polimorfismo   
+    def stop_engine(self):
+        if self.is_available:
+            return f"El motor del coche {self.brand} se ha detenido"
+        else:
+            return f"El coche {self.brand} No está disponible"
+
+#Herencia
+class Bike(Vehicle):
+    #Polimorfismo
+    def start_engine(self):
+        if not self.is_available:
+            return f"La bicicleta {self.brand} está en marcha"
+        else:
+            return f"La bicicleta {self.brand} no está disponible"
+
+     #Polimorfismo   
+    def stop_engine(self):
+        if self.is_available:
+            return f"La bicicleta {self.brand} se ha detenido"
+        else:
+            return f"La bicicleta {self.brand} No está disponible"
+
+#Herencia
+class Truck(Vehicle):
+    #Polimorfismo
+    def start_engine(self):
+        if not self.is_available:
+            return f"El motor del camión {self.brand} está en marcha"
+        else:
+            return f"El camión {self.brand} no está disponible"
+    
+    #Polimorfismo
+    def stop_engine(self):
+        if self.is_available:
+            return f"El motor del camión {self.brand} se ha detenido"
+        else:
+            return f"El camión {self.brand} No está disponible"
+        
+class Customer:
+    def __init__(self, name):
+        self.name = name
+        self.purchased_vehicles = []
+
+    def buy_vehicle(self, vehicle: Vehicle):
+        if vehicle.check_available():
+            vehicle.sell()
+            self.purchased_vehicles.append(vehicle)
+        else:
+            print(f"Lo siento,{vehicle.brand} no está disponible")
+
+    def inquire_vehicle(self, vehicle: Vehicle):
+        if vehicle.check_available():
+            availablity = "Disponible"
+        else:
+            availablity = "No disponible"
+        print(f"El {vehicle.brand} está {availablity} y cuesta {vehicle.get_price()}")
+
+class Dealership:
+    def __init__(self):
+        self.inventory = []
+        self.customers = []
+
+    def add_vehicles(self, vehicle: Vehicle):
+        self.inventory.append(vehicle)
+        print(f"El {vehicle.brand} ha sido añadido al inventario")
+
+    def register_customers(self, customer: Customer):
+        self.customers.append(customer)
+        print(f"El cliente {customer.name} ha sido añadido")
+
+    def show_available_vehicle(self):
+        print("Vehiculos disponibles en la tienda")
+        for vehicle in self.inventory:
+            if vehicle.check_available():
+                print(f"- {vehicle.brand} por {vehicle.get_price()}")
+    
+car1 = Car("Toyota", "Corolla", 20000)
+bike1 = Bike("Yamaha", "MT-07", 7000)
+truck1 = Truck("Volvo", "FH16", 80000)
+
+customer1 = Customer("Carlos")
+
+dealership = Dealership()
+dealership.add_vehicles(car1)
+dealership.add_vehicles(bike1)
+dealership.add_vehicles(truck1)
+
+#Mostrar vehiculos disponibles
+dealership.show_available_vehicle()
+
+#Cliente consultar un vehiculo
+customer1.inquire_vehicle(car1)
+
+#Cliente comprar un vehiculo
+customer1.buy_vehicle(car1)
+
+#Mostrar vehiculos disponibles
+dealership.show_available_vehicle()
+
+```
+
+## Clase 27: Los 4 pilares de la programacion orientada a objetos
+
+
+- Encapsulamiento:* Agrupa datos y métodos relacionados en una clase. Oculta los detalles internos y controla el acceso a los datos.
+    - Ejemplo: Una clase "Coche" que encapsula propiedades como "color" y métodos como "arrancar".
+
+- Abstracción:* Simplifica sistemas complejos ocultando detalles innecesarios. Permite centrarse en las características esenciales de un objeto.
+    - Ejemplo: Una interfaz "Vehículo" con método "mover", sin especificar cómo se implementa.
+
+- Herencia:* Permite que una clase (hija) herede propiedades y métodos de otra (padre). Promueve la reutilización de código y la jerarquía de clases.
+    - Ejemplo: "Coche" y "Moto" heredan de "Vehículo".
+
+- Polimorfismo:* Permite que objetos de diferentes clases respondan al mismo método de manera única. Facilita el uso de una interfaz común para tipos de datos diversos.
+    - Ejemplo: Diferentes tipos de "Vehículo" implementan el método "mover" de forma distinta.
+
+
+## Clase 28: Uso de super() en Python (CLASE NUEVA)
+
+>La función super() en Python es una herramienta clave para trabajar con la herencia en programación orientada a objetos. Permite a las subclases acceder y extender los métodos y atributos de su superclase sin referenciarlos explícitamente. Esto es muy útil en estructuras de herencia complejas, ya que facilita el mantenimiento y la extensión del código. En esta explicación, descubrirás cómo funciona super() en el contexto de clases de Python y su importancia en la programación orientada a objetos.
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print("Hello! I am a person.")
+
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+    def greet(self):
+        super().greet()
+        print(f"Hello, my student ID is {self.student_id}")
+
+student = Student("Ana", 20, "S123")
+student.greet()
+```
+
+## Clase 29: Superando los Fundamentos de Programación Orientada a Objetos en Python
+
+Métodos que Vienen por Defecto en Python
+En Python, todas las clases heredan de la clase base object. Esto significa que todas las clases tienen ciertos métodos por defecto, algunos de los cuales pueden ser útiles para personalizar el comportamiento de tus clases.
+
+Métodos por Defecto Más Comunes
+- __init__(self): Constructor de la clase. Es llamado cuando se crea una nueva instancia de la clase. Inicializa los atributos del objeto.
+- __str__(self): Devuelve una representación en cadena del objeto, utilizada por print() y str(). Este método es útil para proporcionar una representación legible del objeto.
+- __repr__(self): Devuelve una representación “oficial” del objeto, utilizada por repr(). Este método está diseñado para devolver una cadena que represente al objeto de manera que se pueda recrear.
+
+- Extender Funcionalidades: super() permite extender las funcionalidades de una superclase sin duplicar código.
+- Inicialización Correcta: El uso adecuado de constructores asegura que todos los atributos sean inicializados correctamente.
+- Personalizar Representaciones: Métodos como __str__ y __repr__ permiten personalizar cómo se representan los objetos, facilitando la depuración y el manejo de datos.
+- Comparar y Ordenar Objetos: Métodos como __eq__, __lt__, etc., permiten definir cómo se comparan y ordenan los objetos, lo cual es esencial para muchas operaciones de datos.
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"{self.name}, {self.age} años"
+
+    def __repr__(self):
+        return f"Person(name={self.name}, age={self.age})"
+
+# Crear instancias de Person
+person1 = Person("Alice", 30)
+person2 = Person("Bob", 25)
+
+# Uso de __str__
+print(person1)  # Output: Alice, 30 años
+
+# Uso de __repr__
+print(repr(person1))  # Output: Person(name=Alice, age=30)
+```
+## Clase 30: Manejo de Archivos .TXT (CLASE NUEVA)
+> Uno de los aspectos más poderosos de Python es su capacidad para interactuar con archivos de texto, y no solo con variables como lo hemos hecho hasta ahora. Desde archivos TXT hasta CSV y JSON, Python facilita la lectura, escritura, y modificación de archivos externos. Imagina tener la capacidad de acceder a un cuento clásico, como el de Caperucita Roja, para extraer, manipular y enriquecer datos. Vamos a explorar cómo hacerlo paso a paso
+
+
+
+## clase 31: Manejo de Archivos CSV (CLASE NUEVA)
+>Manipular archivos CSV es esencial para gestionar datos tabulares, como registros de inventario, y es fundamental en la ciencia y el análisis de datos. En esta guía, aprenderás a leer, escribir, actualizar y añadir información a archivos CSV utilizando Python.
+
+
+## ¿Cómo se lee un archivo CSV?
+Para comenzar, es necesario importar la librería csv en Python, lo cual se hace con el siguiente comando:
+
+```python
+import csv
+A continuación, se procede a abrir el archivo en modo lectura especificando su nombre. En este ejemplo, trabajamos con un archivo llamado products.csv que contiene columnas como nombre, precio, cantidad, etc.
+
+with open('products.csv', mode='r') as file:
+    csv_reader = csv.DictReader(file)
+    for row in csv_reader:
+        print(row)
+```
+
+Esto itera sobre cada fila del archivo y las imprime como diccionarios, donde la llave es el nombre de la columna y el valor es el dato correspondiente.
+
+## ¿Cómo se visualiza la información por columnas?
+Si se desea visualizar datos específicos por columnas, se puede modificar el código para que imprima solo los valores de interés:
+
+```python
+with open('products.csv', mode='r') as file:
+    csv_reader = csv.DictReader(file)
+    for row in csv_reader:
+        print(f"Producto: {row['nombre']}, Precio: {row['precio']}")
+```
+Este fragmento muestra cómo imprimir específicamente la columna de nombres junto con el precio correspondiente de cada producto.
+
+
+## ¿Cómo se añade una nueva fila a un CSV?
+Para añadir información al final de un archivo CSV, emplea el modo de apertura "append" ('a'). Aquí creamos un nuevo producto y agregamos sus datos:
+
+```python
+new_product = {
+    'nombre': 'Cargador Inalámbrico',
+    'precio': '75',
+    'cantidad': 100,
+    'marca': 'MarcaX',
+    'categoría': 'accesorios',
+    'fecha_entrada': '2023-10-15'
+}
+
+with open('products.csv', mode='a', newline='') as file:
+    writer = csv.DictWriter(file, fieldnames=new_product.keys())
+    writer.writerow(new_product)
+```
+
+Este ejemplo muestra cómo se estructura un nuevo producto y luego se agrega al archivo existente sin sobrescribir la información previa.
+
+## ¿Cómo añadir una nueva columna en un archivo CSV?
+A veces es necesario no solo agregar, sino también crear nuevos datos derivados de las operaciones en las columnas existentes, como calcular un valor total. Aquí se ilustra cómo:
+
+```python
+with open('products.csv', mode='r') as file:
+    csv_reader = csv.DictReader(file)
+    fieldnames = csv_reader.fieldnames + ['total_value']
+
+    with open('products_updated.csv', mode='w', newline='') as new_file:
+        csv_writer = csv.DictWriter(new_file, fieldnames=fieldnames)
+        csv_writer.writeheader()
+
+        for row in csv_reader:
+            row['total_value'] = float(row['precio']) * int(row['cantidad'])
+            csv_writer.writerow(row)
+```
+Este código añade una nueva columna 'total_value' calculando el precio total multiplicado por la cantidad de cada producto, y guarda los cambios en un archivo nuevo para evitar alterar los datos originales.
+
+
+## clase 32: Manejo de Archivos JSON (CLASE NUEVA)
+> JSON, que significa JavaScript Object Notation, es un formato liviano de intercambio de datos. Es crucial para trabajar con datos en aplicaciones web y APIs. Aprender a manejarlo con Python es esencial para desarrolladores que buscan eficiencia y flexibilidad.
+
+
+- Para leer un archivo JSON en Python, sigue estos sencillos pasos:
+- Importar la librería JSON: Primeramente, debes importar el módulo JSON de Python.
+
+```python
+import json
+##Abrir el archivo JSON: Utiliza la función open para acceder al archivo. Asegúrate de especificar el modo de lectura.
+
+with open('Products.json', 'r') as file:
+    products = json.load(file)
+##Iterar sobre el contenido: Una vez cargados los datos, puedes iterar sobre ellos como si fueran una lista de diccionarios.
+
+for product in products:
+    print(product)
+##Cada producto se imprimirá con sus claves y valores gracias a la estructura de diccionario que utiliza JSON.
+```
+
+## ¿Cómo extraer claves específicas de un archivo JSON?
+En JSON, puedes extraer información específica iterando sobre las claves deseadas. Imagina que quieres solo los nombres y precios de los productos:
+
+Iterar y extraer claves: Usa bucles para acceder a la información específica que necesitas.
+
+```python
+for product in products:
+    print(f"Product: {product['name']}, Price: ${product['price']}")
+##Al ejecutar este fragmento, obtendrás los nombres y precios de cada producto. Esta técnica es útil si trabajas con grandes volúmenes de datos.
+```
+
+## ¿Cómo añadir información a un archivo JSON?
+Añadir información a un archivo JSON es tan sencillo como leerlo. Supongamos que quieres añadir un nuevo producto:
+
+Crear el nuevo producto: Define el producto que deseas agregar en forma de diccionario.
+```python
+new_product = {
+    "name": "Wireless Charger",
+    "price": 75,
+    "quantity": 100,
+    "brand": "ChargeMaster",
+    "category": "Accessories",
+    "entry_date": "2024-07-01"
+}
+
+## Abrir y modificar el archivo: Primero, lee los datos existentes y luego añade el producto nuevo al final de la lista.
+
+with open('Products.json', 'r') as file:
+    products = json.load(file)
+
+products.append(new_product)
+
+with open('Products.json', 'w') as file:
+    json.dump(products, file, indent=4)
+## Ejecutar y verificar: Tras ejecutar el código, verifica que el nuevo producto se haya añadido correctamente al archivo JSON.
+```
+
+Manipular archivos JSON es una habilidad poderosa y esencial para cualquier desarrollador. Te permite conservar la estructura y legibilidad del archivo mientras gestionas información de manera eficaz. Además, la práctica constante y el aprendizaje con ejercicios adicionales, como convertir archivos entre CSV y JSON, potenciarán tus habilidades en el manejo de datos.
+
+
+## Clase 33: Biblioteca estándar en Python (CLASE NUEVA)
+
+## ¿Qué es la Biblioteca Estándar de Python?
+La Biblioteca Estándar de Python es como tener un conjunto de herramientas integradas directamente en el lenguaje que te ayudan a realizar una variedad de tareas sin tener que reinventar la rueda. Desde la manipulación de archivos, pasando por cálculos matemáticos complejos, hasta la creación de servidores web, la Biblioteca Estándar tiene módulos que simplifican casi cualquier tarea que te propongas.
+
+## ¿Qué es una Librería y qué es un Módulo?
+
+- Librería: En Python, una librería es un conjunto organizado de módulos que puedes usar para añadir funcionalidades a tu código sin tener que escribirlas tú mismo. Piensa en ello como una colección de herramientas especializadas listas para usar.
+
+- Módulo: Un módulo es un archivo de Python que contiene código que puedes reutilizar en tus proyectos. Un módulo puede incluir funciones, clases, y variables que te ayudan a resolver problemas específicos de manera eficiente. 
+
+
+## Clase 34: Librería Os, Math y Random (CLASE NUEVA)
+
+1. OS (Sistema Operativo):
+    - os.getcwd() Retorna el directorio de trabajo actual.
+    - os.chdir(path): Cambia el directorio de trabajo actual al especificado.
+    - os.listdir(path): Lista los archivos y carpetas en el directorio especificado.
+    - os.makedirs(path): Crea directorios de manera recursiva.
+    - os.remove(path): Elimina el archivo especificado.
+    - os.path.join(*paths): Une componentes de una ruta de manera segura según el sistema operativo.
+    - os.path.exists(path): Verifica si una ruta existe.
+    - os.rename(src, dst): Renombra un archivo o directorio.
+    - os.environ: Proporciona acceso a las variables de entorno del sistema.
+2. Módulo (Operaciones Matemáticas):
+    - math.sqrt(x): Retorna la raíz cuadrada de x.
+    - math.pow(x, y): Eleva x a la potencia y (equivalente a x ** y).
+    - math.ceil(x): Redondea un número hacia arriba (al entero más cercano).
+    - math.floor(x): Redondea un número hacia abajo (al entero más cercano).
+    - math.factorial(x): Retorna el factorial de x.
+    - math.fabs(x): Retorna el valor absoluto de x (como número flotante).
+    - math.log(x[, base]): Retorna el logaritmo de x con base base (por defecto, base e).
+    - math.sin(x), math.cos(x), math.tan(x): Retorna el seno, coseno y tangente de x (en radianes).
+    - math.pi: Retorna el valor de π (pi).
+3. Módulo (Generación Aleatoria):
+    - random.random(): Retorna un número flotante aleatorio entre 0.0 y 1.0.
+    - random.randint(a, b): Retorna un entero aleatorio entre a y b (ambos inclusive).
+    - random.choice(seq): Retorna un elemento aleatorio de una secuencia (como una lista).
+    - random.shuffle(seq): Baraja una secuencia (lista) en su lugar.
+    - random.sample(population, k): Retorna una lista de tamaño k con elementos aleatorios sin repetición de la population.
+    - random.uniform(a, b): Retorna un número flotante aleatorio entre a y b.
+    - random.gauss(mu, sigma): Retorna un número siguiendo una distribución normal (gaussiana) con media mu y desviación estándar sigma.
+
+## Clase 35: Librería Statistics y Análisis Estadístico (CLASE NUEVA)
+
+
+
+
+
 
 
 ```python
