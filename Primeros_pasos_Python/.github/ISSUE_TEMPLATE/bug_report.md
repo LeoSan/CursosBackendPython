@@ -141,3 +141,20 @@ REPASAR
 25.
 En GitHub Actions, ¿cómo se llama el archivo YAML que define un 'job' para ejecutar pruebas?
 `.github/workflows/.yml`
+
+26. 
+¿Cómo configuras GitHub Pages para desplegar desde la rama `docs` en lugar de `main`?
+En la configuración de GitHub Pages, seleccionando `docs` en lugar de `main`
+
+27.
+¿Qué representa `HEAD` en Git?
+La referencia al commit actual en la rama activa
+
+28. 
+¿Qué sucede si intentas hacer `push` sin permisos en el repositorio remoto?
+La operación es rechazada con un mensaje de error
+
+29. 
+¿Qué ocurre cuando usas `git push origin main` en tu terminal?
+Se envían los cambios locales de `main` al repositorio remoto
+

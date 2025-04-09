@@ -1320,7 +1320,226 @@ La Biblioteca Estándar de Python es como tener un conjunto de herramientas inte
 
 ## Clase 35: Librería Statistics y Análisis Estadístico (CLASE NUEVA)
 
+> En el análisis de datos, es fundamental comprender y utilizar diversas medidas estadísticas para interpretar correctamente la información. Estas medidas nos permiten resumir y describir las características principales de un conjunto de datos, facilitando la toma de decisiones informadas.
 
+De los metodos mas importantes de la libreria statistics de python podemos destacar son las siguientes: 
+
+```python
+import statistics 
+
+## Puntos Claves es que podemos leer un archivo csv y listar en una variable tipo list y pasarlo directamente a la libreria con sus disferentes metodos. 
+
+sales = list(monthly_sales.values())
+#print(sales)
+
+#Hallar la media
+mean_sales = statistics.mean(sales)
+print(f"La media es: {mean_sales}")
+
+#Hallar la mediana
+median_sales = statistics.median(sales)
+print(f"La mediana es: {median_sales}")
+
+#Hallar la moda
+mode_sales = statistics.mode(sales)
+print(f"La moda es: {mode_sales}")
+
+#Desviación Estándar
+stdev_sales = statistics.stdev(sales)
+print(f"La desviación estándar es: {stdev_sales}")
+
+#Hallar la varianza
+variance_sales = statistics.variance(sales)
+print(f"La moda es: {variance_sales}")
+
+max_sales = max(sales)
+min_sales = min(sales)
+
+```
+
+## Clase 36: Crear el juego de Guerra naval en Python
+
+
+
+## Clase 37: Recapitulación de lo aprendido hasta ahora 
+
+En esta nueva etapa, es crucial contar con conocimientos sólidos sobre:
+
+- Programación orientada a objetos (POO): cómo estructurar mejor tu código, creando clases y objetos que sean reutilizables y fáciles de entender.
+- Manejo avanzado de excepciones: cómo gestionar errores de forma elegante y robusta.
+- Decoradores y generadores: formas avanzadas de controlar el flujo de tu código y maximizar la eficiencia.
+- Módulos y paquetes: cómo organizar y estructurar grandes proyectos de forma profesional.
+- Escritura de código eficiente y legible: técnicas para escribir código que no solo funcione, sino que sea mantenible y optimizado.
+
+
+## Clase 38: Escribir código Pythonico y profesional
+
+> Escribir código Pytónico es fundamental para cualquier desarrollador que aspire a trabajar en proyectos grandes y colaborativos. No se trata solo de hacer que el código funcione, sino de garantizar que sea claro, eficiente y mantenible. Al dominar estas habilidades, un desarrollador no solo mejora su capacidad para colaborar con otros, sino que también contribuye significativamente a la calidad de los proyectos. Este enfoque resalta la importancia de seguir las mejores prácticas de Python, un lenguaje celebrado por su simplicidad y legibilidad.
+
+# Resumen de PEP 8: Guía de Estilo para Código Python
+
+PEP 8 es una guía de estilo que busca mejorar la legibilidad y consistencia del código Python. Seguir estas convenciones facilita la colaboración y el mantenimiento del código.
+
+## 1. Disposición del Código
+
+* **Indentación:** Usar 4 espacios por nivel de indentación. No usar tabulaciones.
+* **Longitud de Línea:** Limitar todas las líneas a un máximo de 79 caracteres. Para comentarios largos o cadenas de texto, se recomienda un máximo de 72 caracteres.
+* **Líneas en Blanco:**
+    * Separar las definiciones de funciones y clases de nivel superior con dos líneas en blanco.
+    * Dentro de una clase, separar los métodos con una línea en blanco.
+    * Usar líneas en blanco con moderación dentro de las funciones para separar secciones lógicas.
+* **Importaciones:**
+    * Importar cada módulo en una línea separada.
+    * Los imports siempre deben colocarse en la parte superior del archivo, justo después de cualquier comentario o docstring del módulo.
+    * Agrupar los imports en el siguiente orden:
+        1.  Librerías estándar.
+        2.  Librerías de terceros.
+        3.  Importaciones locales/del mismo proyecto.
+    * Dejar una línea en blanco entre cada grupo de imports.
+* **Espacios en Expresiones y Sentencias:**
+    * **Dentro de paréntesis, corchetes o llaves:** No usar espacios. `spam(ham[1], {eggs: 2})`
+    * **Antes de una coma, punto y coma o dos puntos:** No usar espacios.
+    * **Después de una coma o punto y coma:** Usar un espacio.
+    * **Alrededor de operadores binarios:** Usar un espacio a cada lado (asignación `=`, comparaciones `==`, `<`, `>`, `!=`, `in`, `not in`, `is`, `is not`, booleanos `and`, `or`, `not`).
+    * **Excepciones:**
+        * No usar espacios alrededor del signo igual cuando se usa para definir un argumento con un valor por defecto. `def complex(real, imag=0.0):`
+        * No usar espacios alrededor del operador binario con diferente prioridad. `i = i + 1` (correcto), `i=i+1` (incorrecto).
+    * **Llamadas a funciones:** No usar espacios entre el nombre de la función y el paréntesis de apertura. `spam(1)` (correcto), `spam (1)` (incorrecto).
+    * **Indexación/Slicing:** No usar espacios dentro de los corchetes. `ham[1:9]`, `ham[i:i+1:2]`
+
+## 2. Nombres
+
+* **Convenciones Generales:**
+    * Evitar nombres de un solo carácter, excepto para contadores en bucles o variables matemáticas.
+    * Usar nombres descriptivos y concisos.
+* **Estilos de Nombres:**
+    * **`lowercase`:** Para variables, funciones y métodos.
+    * **`lowercase_with_underscores`:** Para variables, funciones y métodos (recomendado).
+    * **`UPPERCASE_WITH_UNDERSCORES`:** Para constantes.
+    * **`CapitalizedWords` (o `CamelCase`):** Para nombres de clases.
+    * **`_single_leading_underscore`:** Para indicar miembros internos no públicos.
+    * **`__double_leading_underscore`:** Para invocar el mecanismo de name mangling de Python (evitar su uso innecesario).
+    * **`__double_leading_and_trailing_underscore__`:** Para nombres mágicos o atributos especiales.
+* **Evitar:**
+    * Usar nombres que sean palabras clave de Python.
+    * Usar caracteres `l` (ele minúscula), `O` (o mayúscula) o `I` (i mayúscula) como nombres de variables de un solo carácter, ya que pueden confundirse con los números uno y cero.
+
+## 3. Comentarios
+
+* **Comentarios de Bloque:**
+    * Generalmente aplican a algo del código que les sigue.
+    * Indentados al mismo nivel que el código al que se refieren.
+    * Comienzan con `#` y un espacio.
+    * Separar párrafos dentro de un comentario de bloque con una línea en blanco que contenga un `#` único.
+* **Comentarios en Línea:**
+    * Usar con moderación.
+    * Deben estar separados por al menos dos espacios de la sentencia.
+    * Comienzan con `#` y un espacio.
+    * No deben ser obvios o explicar lo que el código ya hace.
+* **Docstrings:**
+    * Escribir docstrings para todos los módulos, funciones, clases y métodos públicos.
+    * Los docstrings de una línea se delimitan con triples comillas dobles (`"""Docstring de una línea."""`).
+    * Los docstrings multilínea se delimitan con triples comillas dobles. El primer párrafo debe ser un resumen conciso del objeto. Dejar una línea en blanco después del párrafo de resumen. Los párrafos siguientes pueden detallar la convención de llamada, los efectos secundarios, etc.
+
+## 4. Otras Recomendaciones
+
+* **Espacios alrededor de operadores:** Usar un espacio alrededor de operadores binarios, operadores de asignación y comparaciones.
+* **No comparar booleanos con `True` o `False` usando `==`:** Usar `if is_active:` en lugar de `if is_active == True:`.
+* **No usar comparaciones de tipo directamente:** Usar `isinstance()` en lugar de comparar `type(obj) is Type`.
+* **Manejo de Excepciones:** Especificar excepciones concretas en las cláusulas `except`. Usar `except Exception as e:` con precaución.
+* **Retorno Consistente:** Si una función tiene una sentencia `return`, todas las rutas de ejecución deben tener una sentencia `return`. Si una función no devuelve explícitamente un valor, debe devolver implícitamente `None`.
+
+Este es un resumen de los puntos clave del PEP 8. Se recomienda leer el documento completo para una comprensión más profunda. ¡Seguir estas directrices ayudará a escribir código Python más limpio y legible!
+
+
+## Clase 39: Comentarios y Docstrings en Python
+
+> Trabajar en proyectos grandes y complejos requiere no solo habilidades técnicas sino también la capacidad de comunicar eficazmente dentro del equipo. Mantener la claridad a través de documentación precisa, como comentarios y docstrings, es esencial. Estos no solamente facilitan la comprensión del código por parte de otros programadores, sino que también nos ayudan a recordar la lógica detrás de nuestras propias líneas de código en el futuro. Es crucial actualizar tanto el código como los comentarios si hacemos cambios, evitando así la confusión y el desorden.
+
+```python
+
+def calcular_promedio(numbers):
+    """
+    Calcula el promedio de una lista de números.
+
+    Parameters:
+    numbers (list): Lista de enteros o flotantes.
+
+    Returns:
+    float: El promedio de los números en la lista.
+    """
+    return sum(numbers) / len(numbers)
+
+```
+
+##  Clase 40: Scope y closures: variables locales y globales
+
+> En el fascinante mundo de la programación, comprender la vida útil de una variable es vital para evitar errores comunes y mejorar el rendimiento del código
+
+
+## ¿Cómo trabajan las variables locales?
+Para ilustrar este concepto, imaginemos una función que crea una variable local en Python. Aquí, la variable x es asignada al número 10. Esta variable es de tipo local porque solo persiste y puede ser accesada dentro del cuerpo de la función donde se define.
+```python
+def funcion_local():
+    x = 10  # Variable local
+    print("El valor de la variable es", x)
+
+funcion_local()
+```
+
+
+## ¿Cómo se comportan las variables globales?
+En contraste, una variable global x puede ser definida fuera de cualquier función, lo que permite que su valor sea accedido o modificado desde cualquier parte del programa.
+
+```python
+x = 100  # Variable global
+
+def mostrar_variable_global():
+    print("El valor de la variable global es", x)
+
+mostrar_variable_global()
+```
+
+## Usando variables globales con funciones internas
+Supongamos que tenemos una variable global y deseamos modificar sus valores a través de funciones interiores y exteriores.
+
+```python
+x = "global"  # Variable global
+
+def funcion_externa():
+    x = "externa"  # Redefine 'x' en el ámbito de la función externa
+
+    def funcion_interna():
+        x = "local"  # Redefine 'x' en el ámbito de la función interna
+        print(x)
+
+    funcion_interna()
+    print(x)
+
+funcion_externa()
+print(x)
+```
+
+
+## ¿Qué son las variables nonlocal?
+Las variables nonlocal actúan como un puente entre variables locales y globales, permitiendo que las funciones internas accedan y modifiquen variables en funciones 'encapsulantes' externas.
+
+```python
+def funcion_externa():
+    x = "inicial"
+
+    def funcion_interna():
+        nonlocal x
+        x = "modificado"
+        print("El valor en inner es", x)
+
+    funcion_interna()
+    print("El valor afuera es", x)
+
+funcion_externa()
+```
+
+## Clase 41: Anotaciones de tipo
 
 
 
@@ -1330,4 +1549,10 @@ La Biblioteca Estándar de Python es como tener un conjunto de herramientas inte
 
 ```
 
+```python
 
+```
+
+```python
+
+```
