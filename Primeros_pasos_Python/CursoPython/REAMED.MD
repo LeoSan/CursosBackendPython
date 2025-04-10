@@ -488,6 +488,7 @@ numbers[0] = 10  # Genera TypeError: 'tuple' object does not support item assign
 - Las Listas [] es un conjunto de datos distintos ordenados o no ordenados 
 - Los diccionarios [] es un conjunto variado de datos solo que tiene un key para indentificarlos 
 - Las Tuplas () es un conjunto de datos inmutble 
+- Recueda leo puedes consultar los diccionario así ->  employee.get('rol') donde rol si sabes que asi se llama la key podras obtener su valor 
 
 ## Clase 13: Aplicación de Matrices
 
@@ -1540,19 +1541,806 @@ funcion_externa()
 ```
 
 ## Clase 41: Anotaciones de tipo
+> Las anotaciones en Python son una herramienta que permite agregar información adicional sobre las variables, funciones y métodos que programamos
+
+## ¿Cómo se utilizan las anotaciones en las variables?
+Las anotaciones para las variables consisten en especificar el tipo esperado usando dos puntos seguidos de la declaración del tipo. Por ejemplo, al crear un identificador para empleados, podríamos especificarlo de la siguiente manera:
+
+```python
+id1: int = 101
+id2: int = 102
+total_id: int = id1 + id2
+##Al realizar operaciones, también podemos anotar el tipo de resultado:
+```
+
+## ¿Cómo se implementan en funciones y métodos?
+En las funciones, las anotaciones ayudan a definir los tipos de datos que los parámetros deben recibir y el tipo de dato que devolverá la función. La sintaxis se asemeja a esto:
+
+```python
+def sumar_ids_empleados(id1: int, id2: int) -> int:
+    return id1 + id2
+```
+
+## ¿Cómo usar anotaciones en clases?
+Al trabajar con clases, las anotaciones ayudan a definir tipos de los atributos y métodos. Veamos un ejemplo de una clase Empleado:
+
+```python
+class Empleado:
+    def __init__(self, nombre: str, edad: int, salario: float):
+        self.nombre = nombre
+        self.edad = edad
+        self.salario = salario
+
+    def presentarse(self) -> str:
+        return f"Hola, me llamo {self.nombre}. Tengo {self.edad} años."
+```
+
+
+## ¿Cómo verificar tipos de datos usando librerías?
+Además de las anotaciones, es posible utilizar herramientas como MyPy para analizar estáticamente el tipo de datos en un archivo Python, buscando posibles inconsistencias o errores. MyPy no es parte de la biblioteca estándar de Python, por lo que necesitas instalarlo:
+
+pip install mypy
+Luego, puedes usarlo para analizar un archivo:
+
+mypy mi_archivo.py
+
+
+¿Qué son Optional y Union?
+Las librerías Optional y Union permiten mayor flexibilidad en las anotaciones al trabajar con funciones que pueden manejar múltiples tipos de datos o retornar None.
+
+Optional: Indica que un valor podría ser del tipo especificado o None.
+
+```python
+
+from typing import Optional
+
+def encontrar_empleado(ids: list[int], id_buscado: int) -> Optional[int]:
+    if id_buscado in ids:
+        return id_buscado
+    return None
+
+# Union: Se usa cuando necesitas aceptar múltiples tipos de datos específicos, pero no None.
+from typing import Union
+
+def procesar_salario(salario: Union[int, float]) -> float:
+    return float(salario)
+
+```
+
+## Clase 42: Validación de tipos en métodos
+
+> La validación de tipos y manejo de excepciones en Python es esencial, sobre todo en proyectos colaborativos o críticos donde los datos externos juegan un papel crucial
+
+## Nota 
+- usamos la palabra reservada isinstance que permite evaluar el valor de una variable 
+- podemos usar try except -> la mas usadas son ValueError, TypeError
+
+```python
+def dividir(a, b):
+    if not isinstance(a, int) or not isinstance(b, int):
+        raise TypeError("Ambos parámetros deben ser enteros")
+    if b == 0:
+        raise ValueError("El divisor no puede ser cero")
+    return a / b
+
+
+try:
+    resultado = dividir(10, '2')
+except TypeError as e:
+    print(f"Error: {e}")
+
+try:
+    resultado = dividir(10, 0)
+except ValueError as e:
+    print(f"Error: {e}")
+
+```
+
+
+## Classe 43: Librería Collections y Enumeraciones
+
+> Python es conocido por su versatilidad y la amplia gama de librerías estándar que ofrece, facilitando el manejo de estructuras de datos complejas.
+
+#### Counter
+
+Counter es un diccionario especializado para contar elementos hashables, como caracteres en una cadena o elementos en una lista.
+
+
+```python
+from collections import Counter
+
+texto = "banana"
+contador = Counter(texto)
+print(contador)  # Salida: Counter({'a': 3, 'n': 2, 'b': 1})
+
+```
+
+#### deque
+
+deque (double-ended queue) es una estructura de datos que permite agregar y eliminar elementos desde ambos extremos de la cola de manera eficiente.
+
+
+```python
+from collections import deque
+
+d = deque([1, 2, 3])
+
+d.append(4)       # Agrega al final
+
+d.appendleft(0)   # Agrega al principio
+
+print(d)          # Salida: deque([0, 1, 2, 3, 4])
+```
+
+#### defaultdict
+
+defaultdict es como un diccionario regular, pero permite especificar un valor por defecto para claves no existentes.
+
+
+```python
+from collections import defaultdict
+
+def_dict = defaultdict(int)
+
+def_dict['a'] += 1
+
+print(def_dict)  # Salida: defaultdict(\<class 'int'>, {'a': 1})
+```
+
+#### namedtuple
+
+namedtuple permite definir tuplas con nombres para cada elemento, lo que las hace más legibles y permite acceder a los valores por nombre.
+
+
+```python
+from collections import namedtuple
+
+Punto = namedtuple('Punto', ['x', 'y'])
+
+p = Punto(3, 5)
+
+print(p.x, p.y)  # Salida: 3 5
+```
+
+
+#### OrderedDict
+
+OrderedDict es como un diccionario regular, pero mantiene el orden de los elementos según el orden de inserción.
+
+
+```python
+from collections import OrderedDict
+
+orden_dict = OrderedDict()
+
+orden_dict['a'] = 1
+
+orden_dict['b'] = 2
+
+orden_dict['c'] = 3
+
+print(orden_dict)  # Salida: OrderedDict(\[('a', 1), ('b', 2), ('c', 3)])
+```
+
+### 2. Enum: Enumeraciones
+
+Las enumeraciones son colecciones de constantes con nombres simbólicos que mejoran la legibilidad del código y evitan errores en valores repetidos o difíciles de entender.
+
+Para crear una enumeración en Python, puedes usar la clase Enum del módulo enum:
+
+```python
+
+from enum import Enum
+
+
+class DiaSemana(Enum):
+    LUNES = 1
+    MARTES = 2
+    MIERCOLES = 3
+    JUEVES = 4
+    VIERNES = 5
+
+print(DiaSemana.LUNES)         # Salida: DiaSemana.LUNES
+
+print(DiaSemana.LUNES.name)    # Salida: LUNES
+
+print(DiaSemana.LUNES.value)   # Salida: 1
+```
+
+#### Enumeraciones avanzadas: IntEnum y auto()
+
+- **IntEnum**: Permite que las enumeraciones se comporten como enteros.
+
+- **auto()**: Asigna automáticamente valores secuenciales.
+
+
+```python
+from enum import IntEnum, auto
+
+class Nivel(IntEnum):
+    BAJO = auto()
+
+    MEDIO = auto()
+
+    ALTO = auto()
+
+
+print(Nivel.BAJO)      # Salida: Nivel.BAJO
+
+print(Nivel.BAJO.value)  # Salida: 1
+```
+
+### Conclusión
+
+- collections ofrece estructuras de datos eficientes para tareas comunes de manipulación de datos.
+
+- Enum ayuda a definir constantes simbólicas, mejorando la legibilidad y evitando errores de valores ambiguos.
+
+Ambas herramientas amplían las funcionalidades de Python de una manera eficaz y elegante.
+
+## Clase 4: Decoradores en Python
+> Los decoradores en Python son una herramienta poderosa que permite modificar o extender el comportamiento de las funciones o métodos, sin alterar su código original
+
+```python
+
+def procesar_pago():
+    print("2. Procesando pago...")
+
+def log_decorator(func):
+    def wrapper():
+        print("1. Iniciando log de la transacción...")
+        func()
+        print("3. Log de la transacción terminado.")
+    return wrapper
+
+# Aplicar el decorador
+@log_decorator
+def procesar_pago():
+    print("Procesando pago...")
+
+procesar_pago()
+
+## Salida 
+# 1. Iniciando log de la transacción...
+# 2. Procesando pago...
+# 3. Log de la transacción terminado
+
+
+## Otro ejemplo 
+
+def check_access(func):
+    def wrapper(employee):
+        if employee.get('role') == 'admin':
+           return func(employee)
+        else:
+            print('Acceso denegado.')
+    return wrapper
+
+
+@check_access
+def delete_empleado(employee):
+    print(f'Empleado {employee['name']} ha sido eliminado')
+
+admin = {'name':'carlos', 'role':'admin'}
+employee = {'name':'ana', 'role':'rrhh'}
+
+
+delete_empleado(admin)
+
+delete_empleado(employee)
+
+
+```
+
+## Clase 45: Decoradores anidados y con parámetros
+
+> Los decoradores anidados son una técnica avanzada en Python que permite aplicar múltiples decoradores a una sola función
+
+
+- Decoradores con Parámetros: Se utilizan cuando necesitas pasar parámetros adicionales al decorador, permitiendo personalizar su comportamiento.
+- Decoradores Anidados: Se usan para aplicar múltiples decoradores secuencialmente, añadiendo capas de funcionalidad a la función.
+
+- Neta si esta complicado 
+
+
+## Clase 46: Uso de Decoradores en clases y métodos
+
+> Los decoradores en Python son un elemento poderoso que añade funcionalidad adicional a métodos o funciones sin modificar su estructura interna
+
+- Sigue siendo un dolor de cabeza
+## ¿Qué es un método estático?
+Los métodos estáticos no dependen de la instancia de la clase sino que pertenecen a la clase en sí. Se utiliza el decorador @staticmethod cuando se desea crear un método que no necesita acceder a la clase o modificar sus datos.
+
+```python
+class Calculadora:
+    @staticmethod
+    def suma(a: int, b: int) -> int:
+        return a + b
+```
+
+## ¿Qué hace un método de clase?
+Un método de clase está vinculado a la clase y no a la instancia. Utiliza el decorador @classmethod, y el primer parámetro siempre es cls, que representa la clase.
+
+```python
+class Contador:
+    cuenta = 0
+
+    @classmethod
+    def incrementar(cls):
+        cls.cuenta += 1
+```
+
+## ¿Cómo se utiliza el decorador property?
+El decorador property permite acceder a un método como si fuese un atributo. Esto mejora la encapsulación y mantiene el control sobre cómo se manipula la información interna de la clase.
+
+Ejemplo de clase Círculo
+
+```python
+class Circulo:
+    def __init__(self, radio: float):
+        self._radio = radio
+    
+    @property
+    def area(self) -> float:
+        return 3.1416 * self._radio ** 2
+    
+    @property
+    def radio(self) -> float:
+        return self._radio
+
+    @radio.setter
+    def radio(self, valor: float):
+        if valor < 0:
+            raise ValueError("El radio no puede ser negativo")
+        self._radio = valor
+
+circle = Circle(5)
+print(circle.area)
+
+circle.radius = -10
+print(cirlce.area)
+
+```
+
+## Reflexiones finales sobre decoradores en POO
+> Los decoradores como staticmethod, classmethod, y property son herramientas valiosas que enriquecen el diseño de clases en Python. Permiten:
+
+- Añadir funcionalidad especial sin modificar el código base.
+- Mejorar la legibilidad y profesionalidad del código.
+- Mantener un diseño orientado a objetos disciplinado y eficiente.
+
+
+## Clase 47:  Métodos mágicos
+> Los métodos mágicos en Python son funciones especiales que se utilizan para agregar funcionalidades internas a las clases. Se llaman "mágicos" porque se identifican por estar encapsulados entre dobles guiones bajos, como __init__ o __str__. Su finalidad es permitirnos personalizar el comportamiento de las instancias de nuestras clases de maneras específicas.
+
+
+```python
+
+class Persona:
+    def __init__(self, nombre: str, edad: int):
+        self.nombre = nombre
+        self.edad = edad
+
+    def __str__(self) -> str:
+        # Devuelve una representación amigable para el usuario
+        return f"Persona: {self.nombre}, {self.edad} años"
+
+    def __repr__(self) -> str:
+        # Devuelve una representación detallada del objeto para depuración
+        return f"Persona(nombre='{self.nombre}', edad={self.edad})"
+
+    def __eq__(self, otra_persona) -> bool:
+        # Compara si dos personas son iguales en función del nombre y la edad
+        return self.nombre == otra_persona.nombre and self.edad == otra_persona.edad
+
+    def __lt__(self, otra_persona) -> bool:
+        # Compara si una persona es "menor" que otra en función de la edad
+        return self.edad < otra_persona.edad
+
+    def __add__(self, otra_persona):
+        # Sobrecarga el operador + para sumar las edades de dos personas
+        return self.edad + otra_persona.edad
+
+# Crear instancias de Persona
+p1 = Persona("Ana", 28)
+p2 = Persona("Luis", 35)
+p3 = Persona("Ana", 28)
+
+# __str__: Representación legible
+#print(p1)  # Output: Persona: Ana, 28 años
+
+# __repr__: Representación detallada
+#print(repr(p2))  # Output: Persona(nombre='Luis', edad=35)
+
+# __eq__: Comparación de igualdad
+
+#print(p1 == p3)  # Output: True (son iguales en nombre y edad)
+
+# __lt__: Comparación "menor que" por edad
+#print(p1 < p2)  # Output: True (porque 28 es menor que 35)
+
+# __add__: Sumar edades de dos personas
+print(p1 + p2)  # Output: 63 (28 + 35)
+
+```
+
+## Clase 48: Sobrecarga de operaciones 
+
+## ¿Qué es la Sobrecarga de Operadores?
+Por defecto, los operadores en Python como + o == solo funcionan con tipos de datos predefinidos (números, cadenas, listas, etc.). Sin embargo, con la sobrecarga de operadores, podemos modificar cómo estos operadores funcionan con nuestras clases personalizadas.
+
+Es generar metodos que podemos alterar el comportamientos de los operadores logicos, aritmeticos etc. 
+
+
+1. Inicialización y Representación
+- __init__: Inicializa una nueva instancia.
+- __new__: Controla la creación de una instancia antes de inicializarla.
+- __del__: Ejecuta lógica al eliminar una instancia.
+- __repr__: Devuelve una representación formal del objeto.
+- __str__: Devuelve una representación informal legible del objeto.
+
+2. Operadores Aritméticos
+- __add__: Suma (+).
+- __sub__: Resta (-).
+- __mul__: Multiplicación (*).
+- __truediv__: División (/).
+- __floordiv__: División entera (//).
+- __mod__: Módulo (%).
+- __pow__: Potencia (**).
+- __neg__: Negativo (-obj).
+
+3. Operadores de Comparación
+- __eq__: Igualdad (==).
+- __ne__: Desigualdad (!=).
+- __lt__: Menor que (<).
+- __le__: Menor o igual que (<=).
+- __gt__: Mayor que (>).
+- __ge__: Mayor o igual que (>=).
+
+4. Contenedores e Iteradores
+- __getitem__: Acceso por índice (obj[i]).
+- __setitem__: Asignación por índice (obj[i] = valor).
+- __delitem__: Eliminación por índice (del obj[i]).
+- __len__: Tamaño (len(obj)).
+- __iter__: Devuelve un iterador para el objeto.
+- __next__: Devuelve el siguiente elemento del iterador.
+- __contains__: Verifica si un elemento está contenido (x in obj).
+
+5. Representaciones Numéricas
+- __int__: Conversión a entero (int(obj)).
+- __float__: Conversión a flotante (float(obj)).
+- __bool__: Conversión a booleano (bool(obj)).
+
+6. Gestión de Contextos
+- __enter__: Lógica al entrar en un contexto (with obj:).
+- __exit__: Lógica al salir de un contexto.
+
+7. Operadores Bit a Bit
+- __and__: AND bit a bit (&).
+- __or__: OR bit a bit (|).
+- __xor__: XOR bit a bit (^).
+
+8. Manejo de Atributos
+- __getattr__: Acceso a atributos inexistentes.
+- __setattr__: Asignación de atributos (obj.attr = valor).
+- __delattr__: Eliminación de atributos (del obj.attr).
+
+
+```python
+
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y})"
+
+v1 = Vector(2, 3)
+v2 = Vector(4, 1)
+
+v3 = v1 + v2  # Sobrecarga de `+`
+print(v3)  # Output: Vector(6, 4)
+
+```
+
+## Buenas Prácticas al Sobrecargar Operadores
+- Usa la sobrecarga cuando tenga sentido: No abuses de la sobrecarga de operadores. Solo la utilices cuando sea intuitivo y claro que un operador debe funcionar con tus clases.
+- Mantén la consistencia: Si sobrecargas un operador como +, asegúrate de que el comportamiento sea consistente con lo que los usuarios esperan (por ejemplo, que la suma de dos vectores realmente sume sus componentes).
+- Documenta el comportamiento: Aunque la sobrecarga de operadores puede hacer que tu código sea más limpio, es importante que documentes claramente cómo se comportan los operadores sobrecargados, especialmente si tienen un comportamiento no convencional.
+
+# clase 49: Implementación de `if __name__ == "__main__":`
+> Python cuenta con una característica poderosa que permite ejecutar código de manera directa usando la variable __name__. Este enfoque es invaluable para desarrolladores, facilitando la modularidad, la ejecución de pruebas y la depuración eficiente del código. La acción de establecer if __name__ == "__main__": nos permite ejecutar directamente el código que se encuentra dentro de este bloque cuando el archivo es ejecutado como un script principal.
+
+```python
+
+def sumar(a, b):
+    return a + b
+
+def restar(a, b):
+    return a - b
+
+def multiplicar(a, b):
+    return a * b
+
+def dividir(a, b):
+    if b == 0:
+        raise ValueError("El divisor no puede ser cero.")
+    return a / b
+
+
+if __name__ = "__name__":
+    print('Operaciones')
+    resp_1 = add(3,4)
+    print(f"Suma: {resp_1}")
+
+```
+
+
+## Clase 50: Metaprogramación en Python
+> Este enfoque no solo nos permite crear clases y objetos, sino que también nos brinda herramientas avanzadas para optimizar y controlar la creación de instancias. 
+```python
+
+class MultiplierFactory:
+    
+    def __new__(cls, factor: int):
+        print(f"Creando instancia con factor {factor}")
+        return super(MultiplierFactory, cls).__new__(cls)
+    
+    def __init__(self, factor: int):
+        print(f"Inicializando con factor {factor}")
+        self.factor = factor
+    
+    def __call__(self, number: int) -> int:
+    return number * self.factor
+    
+multiplier = MultiplierFactory(5)
+
+result = multiplier(10)
+print(result)
+```
+
+
+## Clase 51: Uso de *args y **kwargs
+>En el mundo de la programación, especialmente cuando trabajamos con funciones, nos encontramos con situaciones donde la cantidad de argumentos que vamos a recibir es incierta. 
+
+
+## args 
+> es una herramienta que se utiliza para recibir un número indefinido de argumentos. En Python, cuando definimos una función y le precedemos de un asterisco *, indicamos que estamos listos para recibir múltiples argumentos.
+
+```python
+
+def sum_numbers(*args):
+    return sum(args)
+
+# Llamada a la función con diferentes números de argumentos
+print(sum_numbers(1, 2, 3, 4, 5))  # Retorna 15
+print(sum_numbers(1, 2))           # Retorna 3
+print(sum_numbers(7, 8, 9, 10))    # Retorna 34
+
+```
+## **kwargs
+
+> Cuando se requiere trabajar con argumentos que poseen etiquetas (es decir, pares de llave y valor), el método adecuado es **kwargs. Al anteponer dos asteriscos ** a nuestra variable, indicamos que estamos preparados para recibir argumentos con nombre.
+
+```python
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+# Llamada a la función con diferentes argumentos
+print_info(name="Carlos", age=30, city="Bogotá")
+print_info(name="Carlos", age=30, city="Bogotá", salary=12123.89, family=True )
+
+```
+
+## Podemos combinar 
+
+```python
+class Empleado:
+    def __init__(self, name, *skills, **details):
+        self.name = name
+        self.skills = skills
+        self.details = details
+
+    def show_info(self):
+        print(f"Name: {self.name}")
+        print(f"Skills: {self.skills}")
+        print(f"Details: {self.details}")
+
+# Creación de un objeto e instancia de la clase
+empleado = Empleado("Carlos", "Python", "Java", "C++", age=30, city="Bogotá")
+empleado.show_info()
+
+```
+
+## ¿Qué es el desempaquetado y cuándo usarlo?
+
+```python
+
+def suma(a, b, c):
+    return a + b + c
+
+# Desempaquetado de lista
+valores = [1, 2, 3]
+print(suma(*valores))  # Retorna 6
+
+def mostrar_informacion(name, age):
+    print(f"Name: {name}, Age: {age}")
+
+# Desempaquetado de diccionario
+datos = {'name': 'Carlos', 'age': 30}
+mostrar_informacion(**datos)
+
+```
+
+
+## Clase 52: Métodos privados y protegidos
+> El encapsulamiento en programación orientada a objetos es fundamental para proteger la integridad de los datos y delimitar el acceso a los mismos.
+
+## Nota
+- La forma de proteger variables en pythin es así -> _protected_variable
+- Atributo privado -> __provate_variable
+- La forma de proteger metodos -> def _protected_metodo(): 
+- La forma de ser un metodo privado -> __private_metodo() 
+- Es dificil de ver pero son los subbraydos uno "_" es protegido cuando son  Dos "__" es privado no tiene que ver con las palabras privated o protected 
+
+
+```python
+
+class BaseClass:
+    def __init__(self):
+        self._variable_protegida = "Valor protegido"
+    
+    def _metodo_protegido(self):
+        print("Este es un método protegido")
+
+```
 
 
 
 
+## Clase 53: Gestión avanzada de propiedades
+> La manipulación de valores acumulativos y la invocación de atributos son parte esencial del flujo de trabajo en programación. Estos conceptos se vinculan directamente con el uso de propiedades, sobre todo cuando se trabaja con métodos y atributos protegidos o encapsulados.
+
+
+```python
+class Product:
+    def __init__(self, name: str, stock: int, price: int):
+        self.name = name
+        self._stock = stock
+        self._price = price
+
+    @property
+    def stock(self):
+        return self._stock
+    
+    @property
+    def price(self):
+        return self._price
+    
+    @stock.setter
+    def stock(self, new_stock: int):
+        if new_stock < 0:
+            raise ValueError("Stock cannot be negative")
+        self._stock = new_stock
+
+    @price.setter
+    def price(self, new_price: int):
+        if new_price < 0:
+            raise ValueError("Price need to be a possitive number")
+        self._price = new_price
+
+    @stock.deleter
+    def stock(self):
+        print(f"Stock of '{self.name}' product has been deleted")
+        del self._stock
+
+    @price.deleter
+    def price(self):
+        print(f"Price of '{self.name}' product has been deleted.")
+        del self._price
+
+    def print_info(self):
+        print(f"Producto: {self.name} - Stock: {self.stock if hasattr(self, '_stock') else 'N/A'} - $ {self.price if hasattr(self, '_price') else 'N/A'}")
+
+#crear instancia de producto
+producto1 = Product("Harina",4,1000)
+producto1.print_info()
+
+#modificar stock, precio y nombre de producto controladamente
+producto1.stock = 6
+producto1.price = 1200
+producto1.name = "Arroz"
+producto1.print_info()
+
+#intentar establecer stock o precio negativo
+#producto1.stock = -6
+#producto1.price = -600
+
+#Eliminar un stock y un precio
+del producto1.stock
+del producto1.price
+producto1.print_info()
+
+```
+
+
+
+## Clase 54: Métodos estáticos y de clase avanzados
+> El dominio de los métodos estáticos y de clase en Python es crucial para aprovechar al máximo las funciones de la programación orientada a objetos. Estos métodos ofrecen una solución eficiente para acceder y modificar las propiedades de las clases sin necesidad de crear instancias
+
+
+
+```python
+class CalculadoraImpuestos:
+    @staticmethod
+    def calcular_impuesto(monto, tasa_impuesto):
+        return monto * tasa_impuesto / 100
+
+# Uso del método estático
+resultado = CalculadoraImpuestos.calcular_impuesto(1000, 60)
+print(resultado)  # Salida: 600.0
+
+
+class Pedido:
+    descuento_global = 10
+
+    @classmethod
+    def actualizar_descuento(cls, nuevo_descuento):
+        cls.descuento_global = nuevo_descuento
+
+# Uso del class method
+Pedido.actualizar_descuento(15)
+print(Pedido.descuento_global)  # Salida: 15
+
+```
+
+
+
+## Clase 55: Introducción a la concurrencia y paralelismo
+> Cuando creamos una aplicación, el manejo de tareas puede ser sencillo con pocos usuarios. Sin embargo, a medida que la aplicación gana popularidad, la gestión de un número creciente de solicitudes se complica. ¿Cómo podemos solucionar esto? A través de técnicas de paralelismo y concurrencia. Estas técnicas permiten una administración más eficiente de las tareas, especialmente en situaciones donde se requiere procesar múltiples operaciones de forma simultánea.
 
 ```python
 
 ```
 
+
+## Clase 56: 
+
 ```python
 
 ```
 
+
+## Clase 57: 
 ```python
 
 ```
+
+## Clase 58: 
+
+```python
+
+```
+
+
+## Clase 59: 
+
+```python
+
+```
+
+
+## Clase 60: 
+
+```python
+
+```
+
+
+
+
