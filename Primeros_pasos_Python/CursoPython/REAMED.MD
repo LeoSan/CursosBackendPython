@@ -2304,22 +2304,339 @@ print(Pedido.descuento_global)  # Salida: 15
 ## Clase 55: Introducción a la concurrencia y paralelismo
 > Cuando creamos una aplicación, el manejo de tareas puede ser sencillo con pocos usuarios. Sin embargo, a medida que la aplicación gana popularidad, la gestión de un número creciente de solicitudes se complica. ¿Cómo podemos solucionar esto? A través de técnicas de paralelismo y concurrencia. Estas técnicas permiten una administración más eficiente de las tareas, especialmente en situaciones donde se requiere procesar múltiples operaciones de forma simultánea.
 
+### Concurrencia
+
+La **concurrencia** se refiere a la capacidad de un sistema para gestionar múltiples tareas al mismo tiempo, sin necesariamente ejecutarlas simultáneamente. En un entorno concurrente, las tareas pueden progresar en paralelo, aunque no estén ejecutándose al mismo tiempo, ya que el sistema cambia rápidamente entre tareas.
+
+¿Cómo implementar concurrencia usando Python?
+En Python, la librería threading nos permite introducir concurrencia a través de hilos. A continuación, se muestra un ejemplo de cómo realizar esto.
+
 ```python
+
+import threading
+import time
+
+def procesar_solicitud(request_id):
+    print(f"Procesando solicitud {request_id}")
+    time.sleep(3)
+    print(f"Solicitud {request_id} completada")
+
+hilos = []
+for i in range(3):
+    hilo = threading.Thread(target=procesar_solicitud, args=(i,))
+    hilos.append(hilo)
+    hilo.start()
+
+for hilo in hilos:
+    hilo.join()
+
+print("Todas las solicitudes completadas")
+
+```
+## Paralelismo
+
+El **paralelismo** es la capacidad de ejecutar múltiples tareas al mismo tiempo, aprovechando varios núcleos de CPU. En un entorno verdaderamente paralelo, varias tareas se ejecutan simultáneamente en diferentes núcleos, lo que es ideal para tareas que requieren un uso intensivo de CPU.
+
+
+```python
+import multiprocessing
+
+def calcular_cuadrado(n):
+    return n * n
+
+if __name__ == "__main__":
+    numeros = [1, 2, 3, 4, 5]
+    ## Crear un pool: Nos ayuda a ejecutar hilos en paralelo 
+    with multiprocessing.Pool() as pool:
+        resultados = pool.map(calcular_cuadrado, numeros)
+    print(resultados)
+```
+
+## ¿Cuándo elegir concurrencia sobre paralelismo?
+- Concurrencia: Ideal para tareas que involucran entrada/salida de datos, ya que permite dividir y manejar las tareas asíncronamente.
+
+- Paralelismo: Recomendado para procesos intensivos de cálculo que requieren potencia de procesamiento y pueden ser ejecutados de manera simultánea.
+
+### Resumen
+
+- **Concurrencia**: Capacidad de manejar múltiples tareas a la vez, alternando entre ellas. Ideal para tareas de I/O intensivas.
+
+- **Paralelismo**: Ejecución simultánea de tareas en múltiples núcleos. Ideal para tareas CPU intensivas.
+
+- **asyncio**: Permite manejar tareas asíncronas y concurrentes de manera eficiente sin usar múltiples hilos o procesos.
+
+Cada enfoque tiene sus fortalezas y limitaciones, y la elección depende de la naturaleza de las tareas.
+
+## Clase 56: Threading y multiprocessing en Python
+
+> Repasar este tema esta complejo 
+
+```python
+
+Imagina que estás trabajando en una aplicación que necesita procesar múltiples tareas al mismo tiempo: desde manejar solicitudes web hasta realizar cálculos complejos de manera simultánea. A medida que las aplicaciones se vuelven más exigentes, las soluciones básicas de concurrencia ya no son suficientes. Aquí es donde entran las herramientas avanzadas de Python como threading y multiprocessing, que te permiten sacar el máximo provecho de tu CPU y gestionar tareas de manera eficiente y sin errores.
+
+En esta clase, aprenderás a manejar escenarios más complicados, como evitar que los hilos interfieran entre sí, compartir datos de manera segura entre procesos y prevenir bloqueos que puedan detener tu aplicación. Prepárate para llevar la programación concurrente y paralela a un nivel más profesional y resolver problemas que los desarrolladores enfrentan en proyectos del mundo real.
+
+1. Sincronización de Hilos en Python
+Cuando varios hilos intentan acceder a un mismo recurso al mismo tiempo, pueden ocurrir problemas de coherencia. Para evitar esto, se utilizan mecanismos de sincronización, como Lock y RLock, que garantizan que solo un hilo acceda a un recurso crítico a la vez.
+
+Ejemplo: Uso de Lock para Evitar Condiciones de Carrera
+
+import threading
+
+# Variable compartida
+saldo = 0
+lock = threading.Lock()  # Crear un Lock
+
+def depositar(dinero):
+    global saldo
+    for _ in range(100000):
+        with lock:  # Bloquear el acceso para evitar condiciones de carrera
+            saldo += dinero
+
+hilos = []
+for _ in range(2):
+    hilo = threading.Thread(target=depositar, args=(1,))
+    hilos.append(hilo)
+    hilo.start()
+
+for hilo in hilos:
+    hilo.join()
+
+print(f"Saldo final: {saldo}")  # Esperamos ver 200000 como saldo
+Explicación:
+
+El uso de Lock asegura que solo un hilo modifique la variable saldo en un momento dado, evitando que el resultado final sea incorrecto.
+2. Compartir Datos entre Procesos con multiprocessing
+A diferencia de los hilos, los procesos no comparten memoria de forma predeterminada. Para que dos procesos puedan compartir datos, Python proporciona herramientas como multiprocessing.Queue y multiprocessing.Value.
+
+Ejemplo: Compartir Datos con Queue en multiprocessing
+
+import multiprocessing
+
+def calcular_cuadrado(numeros, cola):
+    for n in numeros:
+        cola.put(n * n)
+
+if __name__ == "__main__":
+    numeros = [1, 2, 3, 4, 5]
+    cola = multiprocessing.Queue()
+
+    proceso = multiprocessing.Process(target=calcular_cuadrado, args=(numeros, cola))
+    proceso.start()
+    proceso.join()
+
+    # Extraer resultados de la cola
+    while not cola.empty():
+        print(cola.get())
+Explicación:
+
+Usamos Queue para que el proceso secundario pueda pasar datos de vuelta al proceso principal.
+3. Problemas de Sincronización y Cómo Evitarlos
+A medida que manejas tareas más complejas, es posible que te encuentres con problemas como deadlocks y race conditions. Entender estos problemas es crucial para escribir código concurrente robusto.
+
+Evitar Deadlocks con RLock
+Un deadlock ocurre cuando dos o más hilos se bloquean mutuamente al esperar por un recurso que está siendo utilizado por otro hilo. Para evitar esto, podemos usar RLock en lugar de Lock.
+
+Ejemplo: Uso de RLock para Evitar Deadlocks
+
+import threading
+
+class CuentaBancaria:
+    def __init__(self, saldo):
+        self.saldo = saldo
+        self.lock = threading.RLock()
+
+    def transferir(self, otra_cuenta, cantidad):
+        with self.lock:
+            self.saldo -= cantidad
+            otra_cuenta.depositar(cantidad)
+
+    def depositar(self, cantidad):
+        with self.lock:
+            self.saldo += cantidad
+
+cuenta1 = CuentaBancaria(500)
+cuenta2 = CuentaBancaria(300)
+
+hilo1 = threading.Thread(target=cuenta1.transferir, args=(cuenta2, 200))
+hilo2 = threading.Thread(target=cuenta2.transferir, args=(cuenta1, 100))
+
+hilo1.start()
+hilo2.start()
+
+hilo1.join()
+hilo2.join()
+
+print(f"Saldo cuenta1: {cuenta1.saldo}")
+print(f"Saldo cuenta2: {cuenta2.saldo}")
+Explicación:
+
+Usamos RLock para evitar que múltiples operaciones simultáneas en una cuenta causen bloqueos.
+4. Coordinación de Tareas con multiprocessing.Manager
+Cuando los procesos deben compartir estructuras de datos complejas (como listas o diccionarios), podemos usar un Manager para crear un espacio de memoria compartido entre procesos.
+
+Ejemplo: Uso de Manager para Compartir Listas entre Procesos
+
+import multiprocessing
+
+def agregar_valores(lista_compartida):
+    for i in range(5):
+        lista_compartida.append(i)
+
+if __name__ == "__main__":
+    with multiprocessing.Manager() as manager:
+        lista_compartida = manager.list()
+
+        proceso1 = multiprocessing.Process(target=agregar_valores, args=(lista_compartida,))
+        proceso2 = multiprocessing.Process(target=agregar_valores, args=(lista_compartida,))
+
+        proceso1.start()
+        proceso2.start()
+
+        proceso1.join()
+        proceso2.join()
+
+        print(f"Lista compartida: {lista_compartida}")
+Explicación:
+
+multiprocessing.Manager nos permite crear una lista compartida entre varios procesos, facilitando la comunicación entre ellos.
 
 ```
 
 
-## Clase 56: 
+## Clase 57: Asincronismo con asyncio
+> El asincronismo es un concepto crucial en el desarrollo contemporáneo de software, especialmente cuando buscamos eficiencia en el procesamiento de tareas. Tradicionalmente, las tareas se realizan de manera sincrónica: una acción se ejecuta y debe completarse antes de comenzar la siguiente. Sin embargo, con el asincronismo, podemos enviar múltiples solicitudes al servidor simultáneamente. El servidor procesa todas y envía las respuestas en un periodo más corto, lo que ayuda a mejorar el rendimiento del sistema.
+
+El asincronismo en Python permite ejecutar tareas concurrentes sin bloquear el flujo de ejecución del programa. La biblioteca **asyncio** de Python facilita la creación y gestión de tareas asíncronas, lo que es ideal para aplicaciones que necesitan manejar múltiples operaciones de entrada y salida (I/O) de manera eficiente, como las solicitudes de red, el acceso a bases de datos y la lectura de archivos.
+
+### Fundamentos del Asincronismo con asyncio
+
+- **Asincronismo**: Consiste en realizar tareas de manera concurrente, de modo que una tarea pueda comenzar mientras otra está en pausa, sin detener el flujo general del programa.
+
+- **async y await**: Estas palabras clave son esenciales en asyncio. async se usa para definir una función asíncrona (async def), mientras que await se usa dentro de estas funciones para pausar su ejecución hasta que se complete una operación asíncrona.
+
+- **Corutinas**: Las funciones asíncronas en Python son "corutinas", que pueden ser pausadas y reanudadas. Esto permite que otras corutinas se ejecuten mientras una está esperando, optimizando el rendimiento.
+
+### Ejemplo Básico con asyncio
+
+Supongamos que tenemos una tarea simple que se ejecuta durante algunos segundos, como simulación de una tarea de red o una solicitud a una API.
+
+
+
 
 ```python
 
+import asyncio
+
+async def tarea(nombre, duracion):
+
+print(f"Iniciando {nombre}")
+await asyncio.sleep(duracion)  # Simula una tarea que toma tiempo
+print(f"Terminando {nombre} después de {duracion} segundos")
+
+
+
+# Ejecutar varias tareas
+
+async def main():
+
+await asyncio.gather(
+    tarea("Tarea 1", 2),
+    tarea("Tarea 2", 3),
+    tarea("Tarea 3", 1)
+)
+
+
+# Ejecutar la función principal
+
+asyncio.run(main())
+### Explicación
+
+# - async def tarea(nombre, duracion): Define una función asíncrona que simula el trabajo con asyncio.sleep(duracion).
+
+# - await asyncio.gather(...): Ejecuta varias tareas de forma concurrente. gather acepta múltiples corutinas y las ejecuta al mismo tiempo, permitiendo que las tareas esperen sin bloquear el flujo general del programa.
+
+### Uso de asyncio.gather y asyncio.sleep
+
+# - **asyncio.gather**: Permite agrupar varias corutinas para ejecutarlas al mismo tiempo. Esto es útil cuando tienes varias tareas independientes que deseas que se completen en paralelo.
+
+# - **asyncio.sleep**: Simula una operación de espera asíncrona, como el tiempo que toma una solicitud a una API o la lectura de un archivo.
+
+### Ejemplo Realista: Descarga Simultánea de Páginas Web
+
+# Imaginemos un programa que descarga contenido de varias URLs. Podemos simular el proceso de espera de las respuestas de una API con asyncio.sleep.
+
+import asyncio
+
+async def descargar_pagina(url):
+
+   print(f"Descargando {url}")
+
+   await asyncio.sleep(2)  # Simula la espera de respuesta de la red
+
+   print(f"Descarga completa: {url}")
+
+   return f"Contenido de {url}"
+
+
+
+async def main():
+
+   urls = ["https://ejemplo.com/1", "https://ejemplo.com/2", "https://ejemplo.com/3"]
+
+  # Ejecutar todas las descargas en paralelo
+
+   resultados = await asyncio.gather(*(descargar_pagina(url) for url in urls))
+
+  print("Resultados de las descargas:")
+
+   for resultado in resultados:
+
+       print(resultado)
+
+
+asyncio.run(main())
+
+### Explicación
+
+# - **Lista de URLs**: Simulamos una lista de URLs que queremos "descargar".
+
+# - **await asyncio.gather(...)**: Llama a descargar_pagina para cada URL en paralelo, esperando los resultados de todas las descargas antes de continuar.
 ```
+## Ejecución Secuencial vs. Asíncrona
+
+>  Si las descargas se ejecutaran de forma secuencial, cada una tendría que esperar a que la anterior termine. Con asyncio.gather, se ejecutan en paralelo, y el tiempo total es aproximadamente el de la tarea más larga.
+
+## Buenas Prácticas en asyncio
+
+1. **Usa await correctamente**: Solo se puede utilizar await dentro de funciones definidas con async def. Usar await permite pausar la corutina y ceder el control para que otras corutinas avancen.
+
+2. **asyncio.run(main())**: Es la forma recomendada para ejecutar el bucle de eventos asíncrono en el programa principal.
+
+3. **Evita el bloqueo**: Las funciones sin await, como operaciones de CPU o funciones de espera síncronas, bloquearán el flujo de ejecución asíncrono.
+
+## Ventajas del Asincronismo con asyncio
+
+- **Rendimiento**: Permite manejar miles de operaciones I/O sin necesidad de crear múltiples hilos o procesos.
+
+- **Escalabilidad**: Ideal para aplicaciones que necesitan manejar muchas conexiones simultáneamente, como servidores web.
+
+- **Eficiencia**: Reduce el consumo de memoria y CPU al evitar el uso de múltiples procesos o hilos.
+
+## Resumen
+
+- **Asincronismo** con asyncio permite que las tareas de entrada y salida se ejecuten sin bloquear el flujo.
+
+- **Corutinas** (async def) y **await** son esenciales para ejecutar código de forma asíncrona.
+
+- **asyncio.gather** ejecuta varias tareas en paralelo.
+
+- asyncio es ideal para tareas de I/O intensivas y es la solución recomendada para aplicaciones que necesitan alto rendimiento en operaciones concurrentes de red o archivo.
+
+- Este enfoque permite crear aplicaciones eficientes y escalables en entornos de alto rendimiento.
 
 
-## Clase 57: 
-```python
-
-```
 
 ## Clase 58: 
 
