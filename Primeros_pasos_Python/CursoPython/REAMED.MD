@@ -2947,4 +2947,70 @@ Finalmente, tienes dos opciones para finalizar este curso: presentar un examen o
 Si tienes dudas o deseas compartir tus aportes, puedes dejarlos en la sección de comentarios del curso. Carly, tu instructora, está disponible en redes sociales como carly.code para cualquier cuestión adicional. ¡Continúa explorando y nunca dejes de aprender!
 
 
+## Respuestas 
+
+1.
+¿Cómo se define una clase en Python?
+Usando la palabra clave class seguida del nombre de la clase.
+
+2.
+polimorfismo en la programación orientada a objetos?
+La capacidad de una función, objeto o método de tomar varias formas.
+
+3.
+¿Cuál es la ventaja principal de manejar excepciones en tu código Python?
+Prevenir que el programa se detenga abruptamente
+
+4.
+¿Cuál es el propósito principal de la función super() en Python?
+Crear instancias de la superclase directamente
+Repasar
+
+5.
+Si necesitas calcular la desviación estándar de una lista de ventas mensuales, ¿qué función de statistics usarías?
+statistics.stdev()
+
+6.
+¿Qué herramienta puedes usar en Python para verificar que las anotaciones de tipo sean correctas en tiempo de desarrollo?
+mypy
+
+7.
+¿Cuál es la función nativa de Python que permite validar si una variable es de un tipo específico en tiempo de ejecución?
+isinstance()
+
+8.
+¿Cuál es la principal función de un decorador en Python?
+Un decorador permite modificar o extender el comportamiento de una función sin cambiar su código original.
+
+9.
+¿Cuál es la ventaja principal de usar *args y **kwargs en decoradores?
+Aseguran que solo se acepten argumentos posicionales en la función decorada.
+Repasar
+
+10.
+¿Qué valor toma el atributo name cuando se ejecuta un archivo Python directamente?
+main
+
+11.
+¿Qué tipo de valores se agrupan dentro de *args cuando se utiliza en una función?
+Argumentos de tipo cadena únicamente.
+Repasar
+
+12.
+¿Cuál es la principal diferencia entre concurrencia y paralelismo en términos de ejecución de tareas?
+
+La concurrencia permite que varias tareas progresen al mismo tiempo sin ejecutarse simultáneamente, mientras que el paralelismo permite que las tareas se ejecuten simultáneamente en diferentes núcleos de CPU.
+
+13.
+¿Qué es el propósito principal del uso de async y await en Python?
+Permitir que una función sea pausada y reanudada sin bloquear la ejecución de otras tareas, lo que es ideal para operaciones de I/O.
+
+14.
+¿Cuál es la principal diferencia entre la concurrencia y el asincronismo en Python?
+La concurrencia permite ejecutar varias tareas “simultáneamente” en múltiples hilos o procesos, mientras que la asincronía gestiona tareas dependientes de I/O sin bloquear el programa en un solo hilo.
+
+15.
+¿Cuál es el propósito principal del archivo init.py en un paquete de Python?
+Indicar que el directorio es un paquete de Python.
+
 
