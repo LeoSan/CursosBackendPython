@@ -2638,26 +2638,313 @@ asyncio.run(main())
 
 
 
-## Clase 58: 
+## Clase 58: Asincronismo y concurrencia
+> En el mundo de la programación, la ejecución asíncrona de tareas es una técnica esencial que permite realizar múltiples operaciones de manera eficiente. Al abordar la programación asíncrona, podemos mejorar el rendimiento de nuestras aplicaciones y garantizar que se mantenga responsiva incluso en tareas que consumen tiempo
+
+## Beneficios de la programación asíncrona
+- Eficiencia: Permite realizar otras operaciones mientras se espera a que se completen tareas largas.
+- Mejora del rendimiento: Optimiza el uso de recursos, especialmente en aplicaciones de red y sistemas distribuidos.
+- Interactividad: Mantiene la aplicación responsiva, mejorando la experiencia del usuario.
+
+## Consejos prácticos para implementar operaciones asíncronas
+- Mantén el código limpio: Evita el uso de multiple callbacks anidados, utiliza promesas o async/await para mantener la claridad en el flujo del código.
+- Manejo de errores: Siempre implementa un manejo adecuado de excepciones en funciones asíncronas utilizando try/catch.
+- Optimiza las llamadas: Minimiza las llamadas asíncronas innecesarias agrupándolas cuando sea posible.
+
+## asyncio.gather()
+
+asyncio.gather() en Python es una herramienta poderosa dentro de la librería asyncio que te permite ejecutar múltiples corrutinas de manera concurrente y esperar a que todas ellas se completen.
+
 
 ```python
+
+## Ejemplo de asyncio.gather()
+
+Este ejemplo muestra cómo usar `asyncio.gather()` para ejecutar dos corrutinas concurrentemente y obtener sus resultados.
+
+```python
+import asyncio
+import time
+
+async def tarea_uno():
+    print("Tarea uno comenzando...")
+    await asyncio.sleep(2)
+    print("Tarea uno completada.")
+    return "Resultado de la tarea uno"
+
+async def tarea_dos():
+    print("Tarea dos comenzando...")
+    await asyncio.sleep(1)
+    print("Tarea dos completada.")
+    return "Resultado de la tarea dos"
+
+async def main():
+    resultados = await asyncio.gather(tarea_uno(), tarea_dos())
+    print("Resultados:", resultados)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
 
 ```
 
 
-## Clase 59: 
+## Clase 59: Creación de módulos en Python
+
+> El uso de módulos y paquetes en Python es una práctica esencial que potencia la organización y reutilización del código. Un módulo es un archivo .py que contiene definiciones y declaraciones de funciones, variables y clases que puedes reutilizar en diferentes partes de un proyecto e incluso en múltiples proyectos
 
 ```python
+from reports import generate_sales_report, generate_expenses_report
+
+print(generate_sales_report('November', 12000))
+print(generate_expenses_report('November', 3000))
+
 
 ```
 
 
-## Clase 60: 
+## Clase 60: Gestión de paquetes
+
+> Los paquetes en Python son una poderosa herramienta que permite la organización eficiente de módulos. Un paquete es esencialmente un directorio que contiene un archivo __init__.py y varios módulos o subpaquetes. 
+
+
 
 ```python
 
+mi\_proyecto/
+
+│
+
+├── mi\_paquete/
+
+│   ├── \_\_init\_\_.py
+
+│   ├── operaciones\_matematicas.py
+
+│   └── operaciones\_texto.py
+
+└── main.py
+
+
+
 ```
 
+## Gestión de Entornos Virtuales
+> Para evitar conflictos entre dependencias de diferentes proyectos, es recomendable usar # entornos virtuales. Puedes crear y activar un entorno virtual usando venv:
+
+
+## Crear un entorno virtual
+python -m venv mi_entorno
+
+## Activar el entorno virtual
+## En Windows
+mi_entorno\Scripts\activate
+
+## En Unix o MacOS
+source mi_entorno/bin/activate
+
+## Clase 61: ublicación de paquetes en PyPI
+> Publicar un paquete en PyPi (Python Package Index) puede ser un proceso revelador y emocionante. Tener la capacidad de compartir con la comunidad mil millones de líneas de código de valor incalculable y facilitar las funcionalidades en tu flujo de trabajo es una experiencia sin igual
+
+## ¿Qué es PyPi?
+> PyPi es el repositorio oficial de paquetes de Python. Este vasto repositorio incluye más de medio millón de paquetes, cada uno proporcionando diferentes versiones que los desarrolladores pueden utilizar. El proceso de publicación es esencial para asegurar que el paquete no solo esté disponible, sino que también esté bien documentado y listo para su uso por cualquier persona. Ofrece las siguientes ventajas:
+
+- Distribución sencilla de paquetes y módulos gestionables.
+- Instalación fácil mediante pip install seguido del nombre del paquete.
+- Versionamiento para gestionar y compartir actualizaciones con toda la comunidad.
+- Documentación y metadatos manteniendo a la comunidad informada sobre cambios y actualizaciones.
+
+## ¿Cómo estructurar tu paquete para PyPi?
+Antes de publicar un paquete, es esencial seguir ciertas guías para estructurarlo correctamente:
+
+1. Nombre y versiones del paquete: Comienza definiendo el nombre de tu paquete. Las versiones empiezan con 0.0.1 y deben incrementarse cada vez que realices actualizaciones.
+
+2. Información del autor: Introduce los detalles del autor, utilizando el correo con el que te registraste en PyPi.
+
+3. Archivo pyproject.toml: Este archivo es clave ya que incluye información esencial del paquete, desde el nombre y versiones compatibles hasta datos del autor.
+
+4. Archivo README: Formato Markdown es ideal para este archivo, ya que proporciona instrucciones, ejemplos de uso y cualquier otro detalle que los usuarios deban conocer.
+
+5. Licencia: Aborda los términos y condiciones para el uso de tu paquete, asegurando claridad y cumplimiento legal.
+
+6. Creación de espacio en GitHub: Una presencia en GitHub es mínima para facilitar contribuciones y control de versiones efectivas.
+
+## ¿Cuáles son los pasos para publicar un paquete?
+Publicar tu paquete implica una serie de comandos y herramientas indispensables:
+
+Actualizar PIP: Asegúrate de tener la última versión de PIP para facilitar conexiones con PyPi.
+
+Estructurar el proyecto: Logos básicos como el archivo __init__ y módulos internos deben estar debidamente preparados.
+
+Utilizar Twine para publicación: Esta librería es vital para completar el proceso de publicación:
+
+python3 -m pip install --upgrade twine
+python3 -m twine upload dist/*
+Comandos para creación de archivos necesarios: Crear archivos adicionales necesarios para la publicación:
+
+python3 setup.py sdist bdist_wheel
+¿Por qué compartir tu código en PyPi?
+Publicar tu código en PyPi no solo facilita su distribución, sino que también contribuye al crecimiento y fortaleza de la comunidad de Python. Al compartir tu trabajo:
+
+Empoderas a otros desarrolladores que pueden beneficiarse de tu innovación.
+Gestión y actualización centralizada de versiones sin complicaciones.
+Reconocimiento y prestigio como contribuyente a la comunidad de Python.
+
+
+## Paso 1: Preparar tu Paquete
+Asegúrate de que tu paquete esté bien estructurado. Una estructura típica podría ser:
+
+mi_paquete/
+
+│
+
+├── mi_paquete/
+
+│   ├── __init__.py
+
+│   ├── modulo1.py
+
+│   └── modulo2.py
+
+├── tests/
+
+│   ├── __init__.py
+
+│   └── test_modulo1.py
+
+├── setup.py
+
+└── README.md
+
+
+## Paso 2: Crear el Archivo setup.py
+El archivo setup.py es crucial para definir los metadatos de tu paquete. Aquí tienes un ejemplo básico:
+
+```python
+
+from setuptools import setup, find_packages
+
+setup(
+    name="mi_paquete",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        # Lista de dependencias
+    ],
+    author="Tu Nombre",
+    author_email="tu_email@example.com",
+    description="Una breve descripción de tu paquete",
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
+    url="https://github.com/tu_usuario/mi_paquete",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
+)
+
+```
+## Paso 3: Crear un Archivo README.md
+
+Este archivo proporciona una descripción detallada de tu paquete. Es recomendable usar Markdown para formatearlo.
+
+## Paso 4: Construir tu Paquete
+Usa setuptools y wheel para construir tu paquete. Primero, asegúrate de tener estas herramientas instaladas:
+
+pip install setuptools wheel
+
+Luego, construye tu paquete
+
+python setup.py sdist bdist_wheel
+
+
+
+## Paso 5: Publicar en PyPI
+Para publicar tu paquete, usa twine. Primero, instala twine si no lo tienes:
+
+pip install twine
+
+Luego, sube tu paquete a PyPI:
+
+twine upload dist/*
+
+Se te pedirá tu nombre de usuario y contraseña de PyPI. Si no tienes una cuenta, puedes crearla en PyPI.
+
+## Paso 6: Verificar la Publicación
+Después de una carga exitosa, tu paquete estará disponible en PyPI y podrás instalarlo usando pip:
+
+pip install mi_paquete
+
+
+Si estan subiendo el paquete y tienen problemas con el token en windows creen un archivo ".pypirc" en su raíz con la siguiente estructura:
+
+[pypi]
+
+  username = __token__
+
+  password = <SU API_KEY>
+
+De ahi ejecuten python twine upload dist/*
+
+```python
+
+
+```
+
+
+## Clase 62: Proyecto 
+
+Resumen
+
+¿Qué habilidades aprendiste en este curso?
+Este curso ha sido un viaje educativo fascinante en el mundo de Python, donde no solo aprendiste a escribir código de manera eficaz, sino que también te introdujiste en programación orientada a objetos, manejo de concurrencia, sincronización y creación de paquetes. Exploraste cómo implementar las mejores prácticas del lenguaje para mejorar tus habilidades como desarrollador.
+
+¿Cómo utilizar las mejores prácticas al escribir código Paitónico?
+Adoptar prácticas Paitónicas implica escribir código limpio, legible y eficiente. Algunas de estas prácticas incluyen:
+
+Usar convenciones de nomenclatura adecuadas: Asegúrate de seguir el estándar de convenciones propuesto por Python, como nombres de variables en minúsculas y utilizar guion bajo para separar palabras (e.g.: mi_variable).
+Emplear comentarios y docstrings: Documenta siempre tu código para hacerlo comprensible para otros programadores y tu yo futuro.
+Simplificar el código: El mantra es “mantenerlo simple”. No sobrecomplicar funciones y asegurarte de que sean pequeñas y específicas.
+¿Cómo añadir características a métodos orientados a objetos?
+La programación orientada a objetos te abrió un camino hacia estructuras más organizadas. Aprendiste a:
+
+Usar decoradores: Estos permiten modificar el comportamiento de funciones o métodos de una manera limpia y reutilizable.
+Crear clases y objetos: Usar clases para definir estructuras con métodos y atributos, lo que facilita la gestión de datos complejos.
+¿Qué es la concurrencia y sincronización en Python?
+El manejo de concurrencia y asincronía en Python puede optimizar ampliamente tus programas, especialmente en tareas que pueden realizarse de manera simultánea, como peticiones de red o procesamiento de datos en segundo plano.
+
+Concurrencia: Permite ejecutar múltiples operaciones al mismo tiempo, mejorando la eficiencia del programa.
+Asincronía: Usa asyncio para manejar tareas que se puedan ejecutar concurrentemente sin bloquear el flujo de tu programa.
+¿Cómo crear un sistema de gestión de reservas para un hotel?
+Vamos a aplicar los conceptos aprendidos creando un sistema que gestiona reservas de hotel. Este sistema constará de varios componentes y funcionalidades.
+
+¿Cuáles son los archivos clave en el proyecto?
+El proyecto se compone de cuatro archivos principales:
+
+Reservas: Donde cada cliente podrá hacer una reserva de una habitación.
+Pagos: Gestión de los pagos de las reservas.
+Habitaciones: Control de disponibilidad de habitaciones.
+Main: Archivo principal que importa librerías y centraliza acciones.
+¿Cómo estructurar el proyecto en Visual Studio Code?
+Al observar la estructura del proyecto, notarás que hay dos carpetas en los recursos del curso:
+
+Solución completa del proyecto: Una carpeta con la solución finalizada.
+Plantilla: Estructura básica del proyecto que debes completar.
+Además, contarás con instrucciones detalladas paso a paso para guiarte en la implementación del sistema de reservas.
+
+¿Cómo se utilizan las clases y funciones en este proyecto?
+En este sistema, utilizarás clases para manejar reservas y gestionar las habitaciones. Aquí es donde la orientación a objetos muestra su potencia, permitiéndote instanciar objetos y gestionar el estado de cada reserva e interacción con las habitaciones.
+
+¿Cómo gestionar las reservas y pagos?
+Los archivos de sistemas asíncronos y funciones proporcionan las directrices para recibir parámetros y gestionar cada aspecto de las reservas y los pagos de forma eficaz.
+
+¿Cómo completar este curso?
+Finalmente, tienes dos opciones para finalizar este curso: presentar un examen o completar el proyecto de gestión de reservas. La elección dependerá de tu preferencia personal y de cómo prefieras consolidar el conocimiento aprendido.
+
+Si tienes dudas o deseas compartir tus aportes, puedes dejarlos en la sección de comentarios del curso. Carly, tu instructora, está disponible en redes sociales como carly.code para cualquier cuestión adicional. ¡Continúa explorando y nunca dejes de aprender!
 
 
 
