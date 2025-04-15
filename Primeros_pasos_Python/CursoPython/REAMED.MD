@@ -3014,3 +3014,50 @@ La concurrencia permite ejecutar varias tareas “simultáneamente” en múltip
 Indicar que el directorio es un paquete de Python.
 
 
+17.
+¿Cuál es la diferencia principal entre un comentario y un docstring en Python?
+Los comentarios explican decisiones técnicas o partes complejas del código, mientras que los docstrings documentan la funcionalidad de módulos, clases o funciones y son accesibles en tiempo de ejecución.
+
+18. 
+¿Cuál es la principal ventaja de usar defaultdict sobre un diccionario estándar en Python?
+defaultdict asigna automáticamente un valor predeterminado a las claves inexistentes, evitando errores al acceder a claves no inicializadas.
+
+
+19.
+¿Cuál de los siguientes fragmentos de código es más “Pythonico” según los principios de simplicidad, claridad y eficiencia?
+python numbers = [1, 2, 3, 4, 5] squares = list(map(lambda x: x**2, numbers))
+REPASAR 
+
+20.
+¿Qué función se utiliza para aplicar una función a cada elemento de una lista en Python?
+map()
+
+21.
+¿Qué hace la función return en una función?
+Devuelve un valor desde una función
+
+22.¿Qué ocurre si abres un archivo CSV en modo ‘a’ y escribes un nuevo registro?
+El nuevo registro se añade al final del archivo
+
+23. 
+¿Cuál es la principal ventaja de utilizar módulos en Python?
+Mejorar la organización y reutilización del código en proyectos grandes.
+
+24. 
+¿Cuál es la función del método mágico call en Python?
+
+25. 
+¿Qué decorador debes usar en Python cuando necesitas un método que no dependa de ninguna instancia ni de la clase misma?
+Convierte una instancia de una clase en un objeto invocable como si fuera una función.
+
+26.
+¿Qué es una tupla en Python?
+Una lista que no puede modificarse.
+
+
+
+
+
+
+
+
