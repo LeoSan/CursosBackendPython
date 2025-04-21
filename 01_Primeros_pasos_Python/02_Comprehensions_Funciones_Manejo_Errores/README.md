@@ -109,7 +109,7 @@ set_countries = {'col', 'mex', 'bol'}
 size = len(set_countries)
 print(size)
 
-#in, permite sabes si un elemento se encuentra en el conjunto, la expresión se evalua como true si el elemento se encuentra en el conjunto y false si el elemento no se encuentra en el conjunto
+#in, nueva Forma busqueda, [in] permite sabes si un elemento se encuentra en el conjunto, la expresión se evalua como true si el elemento se encuentra en el conjunto y false si el elemento no se encuentra en el conjunto
 print('col' in set_countries)
 print('pe' in set_countries)
 
@@ -187,7 +187,7 @@ print(set_a & set_b)  # {'bol'}
 set_c = set_a.difference(set_b)
 print(set_c)  # {'col', 'mex'}
 print(set_a - set_b)  # {'col', 'mex'}
-
+e
 # es hacer una unión, sin los elementos en común
 set_c = set_a.symmetric_difference(set_b)
 print(set_c) # {'col', 'mex', 'pe'}
@@ -198,21 +198,88 @@ print(set_a ^ set_b) # {'col', 'mex', 'pe'}
 
 
 
-## Clase 5: 
+## Clase 5: Playgrounds: Elimina elementos duplicados usando conjuntos
+> Podemos usar union para resolver ciertos problemas de conjuntos  
+
 
 ```python
+set_a = {'leo1', 'leo2', 'leo3'}
+set_b = {'leo1', 'leo2', 'leo3', 'leo4'}
+set_c = {'leo2', 'leo4', 'leo6', 'leo8'}
+
+new_set = (set_a | set_b | set_c )
+print(new_set) ## leo1, leo2, leo3, leo4, leo6, leo8
+
 
 ```
 
-## Clase 6: 
+## Clase 6: List Comprehension
+> El List Comprehension es una técnica poderosa y eficiente en Python que permite generar listas de manera concisa. Su sintaxis más corta y directa mejora la legibilidad del código, uno de los principios fundamentales de Python
+
+# Sintaxis 
+![Ejemplo De sinytasois de Lista comprimida](../02_Comprehensions_Funciones_Manejo_Errores/info/info_001.png)
 
 ```python
+## Antes 
+days = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
+newlist = []
+
+for i in days:
+  if "a" in i:
+    newlist.append(i)
+
+print(newlist) #["martes", "sabado"]
+
+## Ahora 
+
+days = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
+
+newlist = [i for i in days if "a" in i]
+
+print(newlist) # ["martes", "sabado"]
+
 
 ```
 
-## Clase 7: 
+## Clase 7: Dictionary Comprehension
+> Una herramienta que permite lograr estas cualidades en la creación de diccionarios es el Dictionary Comprehension. 
+
 
 ```python
+
+## Antes 
+
+dict = {}
+for i in range(1,5):
+    dict[i] = i * 2
+    
+print(dict)
+
+## Ahora
+
+dict_v2 = { i : i * 2 for i in range(1,5)}
+print(dict_v2)
+
+## Otro Ejemplo 
+## Antes 
+countries = {'col', 'mex', 'bol', 'pe'}
+population = {}
+
+import random 
+
+for i in countries:
+    population[i] = random.randint(1, 100)
+
+print(population) ## col:100, mex:1, bol:2, pe:140
+
+## ahora
+
+countries = {'col', 'mex', 'bol', 'pe'}
+population_v2 = {country : random.randint(1, 100) for country in countries}
+
+
+
+
 
 ```
 
