@@ -1277,9 +1277,34 @@ if age < 18:
 
 ```
 
-## Clase 33: 
-> 
+## Clase 33: Manejo de excepciones
+> PRUEBA & ERROR Cuando se nos presenta un error o una excepción como se le llama en python, el programa se detiene y presenta el error que se presento, pero si utilizamos la excepción try() podemos omitir ese error y continuar con el programa. Esto es de uso fundamental para que el programa no continue con su ejecución por el error y así evitar retrasos en la producción, también de su uso para determinar en los bloques de código si se nos presenta un error poder ser identificado de manera mas facil.
 
+Para qué try sea efectivo podemos utilizar estas declaraciones:
+
+- Exception	Description
+- try 	Permite probar un bloque de código en búsqueda de un error.
+- except 	Permite manejar el tipo de error en el bloque.
+- else 	Permite ejecutar el código cuando no hay ningún tipo de error en el bloque.
+- finally 	Permite ejecutar el código en el bloque, independiente en el resultado de los bloques de prueba y excepción
+
+```python
+
+try:
+    pass
+except Exception as e:
+    raise
+else:
+    pass
+finally:
+    pass
+
+
+```
+
+
+## Clase 34 : Captura la excepción: ZeroDivisionError
+> 
 
 ```python
 
@@ -1288,91 +1313,422 @@ if age < 18:
 ```
 
 
-## Clase 34
-> 
+
+## Clase 35 : Leer un archivo de texto
+> Aprender a manejar la lectura de archivos de texto en Python puede ser una habilidad crucial para todo desarrollador. Esta habilidad nos permite acceder a grandes volúmenes de datos, manipularlos y analizarlos de manera eficiente
+
+
+## Notas Mentales 
+
+- Excelente, muy importante saber que el .read ocupa mas espacio en memoria y que siempre se debe cerrar con .close, y para evitar esto, mejor debemos usar el with open. Muchas gracias!
+
+- Una mejor manera de manipular archivos es utilizando context managers, porque garantizan que el archivo se cierre. With es un manejador contextual, controlar el flujo y que el archivo no se rompa
+
+-  También es recomendable usar esta estructura para que no aparezcan símbolos raros encaso de que se sean archivos binarios. 'r' = para leer el archivo 'encoding="UTF-8' = convierte todo en letras ´with open("./archivos/numbers.txt", "r", encoding="UTF-8") as f:´
+
+- Para archivos cortos podemos usar readLine() ya que funciona como un iterator tu le dices linea por linea y vas obteniendo el resultado linea por linea. 
+
+- Siempre que podamos leer el archivo hay que cerrarlo 
+
+
 
 
 ```python
+
+## Forma BAsica interada linea por linea 
+file = open('./text.txt')
+# print(file.read())
+# print(file.readline())
+# print(file.readline())
+# print(file.readline())
+# print(file.readline())
+
+## usanjdo for y cerrando el archivo 
+for line in file:
+  print(line)
+
+file.close()
+
+## Otra forma la mas recomendada ya que maneja automaticamente el autoclose
+
+with open('./text.txt', "r", encoding="UTF-8") as file:
+  for line in file:
+    print(line)
 
 
 
 ```
 
+## Clase 36: Escribir en un archivo
+> A la hora de manejar archivos de texto en Python, saber cómo escribir y leer en ellos es esencial. Ya sea para registrar datos o simplemente para modificar archivos existentes, el lenguaje Python brinda herramientas poderosas para hacerlo de manera eficiente. 
+
+## Notas mentales 
+
+- r: Permisos de solo lectura.
+- w: Permisos de solo escritura, lo que sobrescribe el archivo si ya existe.
+- r+: Permisos de lectura y escritura sin borrar el contenido existente.
+- w+: Permisos de lectura y escritura que sobrescriben el contenido.
+- https://www.w3schools.com/python/python_file_write.asp
 
 
-## Clase 35
+```python
+
+with open('./texs.txt', 'w+') as file:
+  for line in file:
+    print(line)
+  file.write('nuevas cosas en este archivo\n')
+  file.write('otra linea\n')
+  file.write(' mas linea\n')
+
+
+```
+
+## Clase 37: Leer un CSV
+> Los archivos CSV son una herramienta fundamental en el manejo y análisis de datos. Son ampliamente utilizados por equipos de finanzas y data science debido a su versatilidad para organizar información en filas y columnas.
+
+## NOTAS MENTALES 
+- El open es un iterable podemos acceder linea por linea usando next()
+
+## Pasos para leer un CSV 
+
+## Paso 1: Configurar el entorno
+- Subir el archivo CSV: Antes de empezar a trabajar, debes subir el archivo worldpopulation.csv a la carpeta de tu proyecto y renombrarlo como data.csv.
+
+- Crear un módulo para leer el CSV: Crea un nuevo archivo Python, read_with_csv.py, donde desarrollarás el script para procesar el CSV.
+
+## Paso 2: Importar el módulo CSV de Python
+- Comienza por importar el módulo nativo csv de Python, el cual facilita la lectura y manipulación de archivos CSV.
+
+## Paso 3: Definir la función de lectura
+Esta función leerá el archivo CSV y lo procesará:
+
+```python
+import csv
+
+
+def read_csv(file_path):
+    with open(file_path, mode='r') as csv_file:
+        reader = csv.reader(csv_file, delimiter=',')
+        data = []
+        for row in reader:
+            print("Esto es una fila:", row)
+            data.append(row)
+        return data
+```
+
+## ¿Cómo transformar datos CSV en diccionarios?
+Una vez que tenemos los datos del CSV, es crucial transformarlos en un formato de diccionario para facilitar su manipulación y consulta.
+
+## Paso 4: Extraer el encabezado
+El encabezado del CSV nos proporcionará los nombres de las columnas, que serán las claves en nuestros diccionarios:
+
+```python
+header = next(reader)
+```
+
+## Paso 5: Convertir filas en diccionarios
+Utilizamos zip para crear pares clave-valor con el encabezado y cada fila del CSV, generando así una lista de diccionarios:
+
+```python
+for row in reader:
+    country_data = {key: value for key, value in zip(header, row)}
+    data.append(country_data)
+```
+
+## ¿Cómo ejecutar el script como un programa independiente?
+Configura tu módulo para que funcione tanto como parte del proyecto como un script independiente:
+```python
+if __name__ == "__main__":
+    data = read_csv('app/data.csv')
+    print(data[0])
+```
+## EJEMPLO 
+
+```python
+import csv
+
+def read_csv(path):
+  with open(path, 'r') as csvfile:
+    reader = csv.reader(csvfile, delimiter=',')
+    header = next(reader)
+    data = []
+    for row in reader:
+      iterable = zip(header, row)
+      country_dict = {key: value for key, value in iterable} ## Importante punto s
+      data.append(country_dict)
+    return data
+
+if __name__ == '__main__':
+  data = read_csv('./app/data.csv')
+  print(data[0])
+
+
+```
+
+## Clase 38: Lee un CSV para calcular el total de gastos - Playgrounds: Lee un CSV para calcular el total de gastos
+> 
+
+Para resolver este desafío, debes utilizar el archivo data.csv que contiene los datos de los gastos de una empresa. El archivo tiene dos columnas: el nombre del área y el total de gastos del año.
+
+Tu reto es implementar la función read_csv que lee el archivo CSV y calcula el total de gastos de la empresa. Para leer el archivo CSV, puedes utilizar la función open y el módulo csv de Python. Una vez que hayas leído los datos, puedes calcular el total de gastos implementando la lógica que consideres necesaria.
+
+Ejemplo
+
+
+
+```python
+Input: data.csv
+Administration,10
+Marketing,20
+Purchasing,10
+Human Resources,20
+
+Output:
+60
+
+```
+
+
+## Clase 39: Creando una gráfica
+> Bienvenido al fascinante mundo de la visualización de datos utilizando Python, un lenguaje conocido por su simplicidad y eficiencia. La visualización de datos no solo es perentoria en cualquier análisis, sino que representa la médula para comunicar resultados de manera clara y persuasiva. En esta guía, exploramos la creación de gráficos utilizando la librería Matplotlib, paso a paso, para facilitar tu aprendizaje y aplicación.
+
+## ¿Qué es Matplotlib?
+Matplotlib es una biblioteca de visualización de datos sumamente versátil que facilita la creación de una variedad de gráficos en Python. Aunque no viene instalada por defecto con Python, su instalación es sencilla y compatible con diversas aplicaciones dentro del entorno de desarrollo de datos. Algunos de los gráficos más comunes que puedes crear con Matplotlib son barras (bar charts) y gráficos circulares (pie charts).
+
+
+## Recomendaciones para seguir aprendiendo
+Practica creando más gráficos: Experimenta con diferentes tipos de gráfico, ajusta colores y personaliza configuraciones para mejorar la presentación visual de tus datos.
+
+Profundiza en el uso de Matplotlib: Participa en cursos avanzados que exploran el potencial completo de esta librería. En la sección de recursos de Platzi encontrarás cursos que profundizan en el uso de Matplotlib y otras herramientas de Data Science.
+
+Aplica tus conocimientos en proyectos reales: Desarrolla pequeñas aplicaciones que utilicen gráficos para analizar y presentar datos reales, consolidando tu aprendizaje y habilidades.
+
+## Paso 1: instalar la libreria Matplolib 
+- Ejecutar el comando ->  pip install matplotlib
+- sudo apt-get install python3-tk
+
+
+
+```python
+
+import matplotlib.pyplot as plt
+
+def generate_bar_chart(labels, values):
+  fig, ax = plt.subplots()
+  ax.bar(labels, values)
+  plt.show()
+
+def generate_pie_chart(labels, values):
+  fig, ax = plt.subplots()
+  ax.pie(values, labels=labels)
+  ax.axis('equal')
+  plt.show()
+
+if __name__ == '__main__':
+  labels = ['a', 'b', 'c']
+  values = [10, 40, 800]
+  # generate_bar_chart(labels, values)
+  generate_pie_chart(labels, values)
+
+
+## Otro Ejemplo 
+
+import matplotlib.pyplot as plt
+#plt es un alias para matplotlib.pyplot
+
+
+# funcion para grafico de barra
+def generate_bar_chart(labels, values):
+  fig, ax = plt.subplots()
+  #son dos valores que nos da la librería, fig es como la figura y ax se refire a las coordenadas donde  vamos a empezar a graficar
+  ax.bar(labels, values)
+  #aquí le estás indicando que quieres generar una gráfica de barras (bar), y le envías labels y values para que sepa que tiene que crear el gráfico con esos valores
+  plt.show()
+  #es para mque nos pide que muestre la gráfica
+
+
+
+# funcion para pie chart
+def generate_pie_chart(labels, values):
+  fig, ax = plt.subplots()
+  ax.pie(values, labels=labels)
+  """
+ Aquí le estamos indicando que queremos que nos muestre una gráfica de torta, 
+  fijate que en el anterior pusimos un bar y no un pie.
+
+  Ahora le indicamos los labels pero también tenemos que indicarle como van a ser los labels 
+  """
+  ax.axis('equal')
+  plt.show()
+
+
+# ejecutar archivo como script desde la terminal
+if __name__ == '__main__':
+  labels = ['a', 'b', 'c']
+  values = [20, 50, 10]
+  #son los valores y los labels que tendrá la gráfica
+  generate_bar_chart(labels, values)
+    #Llamando a la función
+
+  generate_pie_chart(labels, values)
+    #Llamamos a la función pie chart
+
+```
+
+
+## Clase 40: ejemplo usando Pandas para leer y graficar un archivo CSV 
 > 
 
 
 ```python
 
+# Importar las bibliotecas necesarias
+import pandas as pd
+import matplotlib.pyplot as plt
 
+# Leer el archivo CSV con datos de población mundial
+df = pd.read_csv('world_population.csv')
+
+# Solicitar al usuario que ingrese el nombre del país
+while True:
+    nombre_pais = input("Ingrese el nombre del país: ")
+
+    # Verificar si el país está en el DataFrame
+    if nombre_pais in df["Country"].values:
+        break  # Salir del bucle si el país es válido
+    else:
+        print("¡País no encontrado! Por favor, ingrese un país válido.")
+
+# Especificar el nuevo orden de las columnas invirtiendo la lista original
+desired_order = [
+    '1970 Population', 
+    '1980 Population', 
+    '1990 Population', 
+    '2000 Population', 
+    '2010 Population', 
+    '2015 Population', 
+    '2020 Population', 
+    '2022 Population'
+]
+data = df.loc[df["Country"] == nombre_pais, desired_order]
+
+# Crear un gráfico de barras con los datos seleccionados
+# Añadir width para especificar el ancho de las barras
+plt.bar(data.columns, data.values[0], width=0.6)  
+
+# Configurar el tamaño de la figura
+plt.rcParams['figure.figsize'] = (5, 4)  # Ajustar el tamaño según sea necesario
+
+# Rotar las etiquetas del eje x para mejorar la legibilidad
+# Cambiar las etiquetas del eje x
+nuevas_etiquetas = ['1970', '1980', '1990', '2000', '2010', '2015', '2020', '2022']
+plt.xticks(data.columns, nuevas_etiquetas, rotation=45)
+
+# Marcar el eje y con líneas punteadas para indicar el tamaño de la población
+for columna, valor_poblacion in zip(data.columns, data.values[0]):
+    plt.axhline(
+        y=valor_poblacion, 
+        color='gray', 
+        linestyle='--', 
+        linewidth=0.8)
+    
+    plt.text(
+        columna, 
+        valor_poblacion, 
+        f'{valor_poblacion:,}', 
+        va='bottom', ha='right', 
+        fontsize=8, color='black'
+    )
+
+# Agregar el nombre del país al gráfico
+plt.text(
+    0.5, 
+    1.1, 
+    f'País: {nombre_pais}', 
+    transform=plt.gca().transAxes, 
+    ha='center', 
+    va='center', 
+    fontsize=20, 
+    color='black'
+)
+
+
+# Mostrar el gráfico
+plt.show()
 
 ```
+## Respuestas
 
-## Clase 36
-> 
+1.
+¿Cuál de los siguientes es un principio de The Zen of Python?
+Los errores nunca deben pasar silenciosamente, ni siquiera si así se expresa explícitamente.
+REPASAR
 
+2.
+¿Cuál de las siguientes es una propiedad principal CORRECTA de los Sets o Conjuntos en Python?
+No pueden tener duplicados.
 
-```python
+3.
+Tienes un set o conjunto de Python almacenado en la variable trips. ¿Cómo obtienes su cantidad de elementos?
+len(trips)
 
+4.
+Dado el siguiente bloque de código:
+list_comprehension.png
+¿Cuál de las siguientes respuestas con List Comprehension nos peermite obtener el mismo resultad con una sintaxis más corta?
 
+n = [i - 1 for i in range(1,6) if i <= 2]
 
-```
+5.
+Dado el siguiente bloque de código:
+Dictionary Comprehension condition.png
+¿Cuál de las siguientes respuestas con Dictionary Comprehension nos permite obtener el mismo resultad con una sintaxis más corta?
+d = { e: e - 1 for e in range(1,6) if e <= 2 }
 
-## Clase 37
-> 
+6.
+¿Cuál de las siguientes estructuras de datos NO nos permite duplicar elementos?
+Set
 
+7.
+¿Cuál es la palabra clave reservada para crear una función en Python?
+def
 
-```python
+8.
+Creaste una función sum que recibe 2 parámetros y los suma entre ellos. Ahora debes almacenar el resultado de esas sumas en un conjunto. ¿Cómo lo harias?
+func_return_correct.png
 
+9.
+Dado el siguiente bloque de código:
+def sum(a = 1, b = 0):
+  return a + b
+¿Cómo enviarías únicamente el valor de b para realizar la suma usando el valor por defecto de a?
 
+No es posible. Para poder enviar un segundo argumento también debemos enviar el valor del primero.
+Repasar
 
-```
+10.
+¿Cuál de las siguientes funciones SIEMPRE devuelve la misma cantidad de elementos de la lista original?
+map
 
-## Clase 38
-> 
+11.
+¿Cuál de las siguientes funciones SIEMPRE devuelve un solo valor después de iterar sobre todos los elementos de la lista original?
+reduce
 
+12.
+¿Cómo se importa el módulo functools (nativo de Python)?
+import functools
 
-```python
+13.
+Creaste una función sum dentro del archivo math.py. Ahora desde el archivo main.py (en la misma carpeta que math.py) debes importar ese módulo y usar la función sum. ¿Cómo lo harías?
+import math math.sum(1,2)
 
+14.
+¿Cuál es la función del siguinte bloque de código: if __name__ == '__main__'?
+Nos informa si el archivo se está ejecutando como script o como módulo.
 
-
-```
-
-
-## Clase 39
-> 
-
-
-```python
-
-
-
-```
-
-
-## Clase 40
-> 
-
-
-```python
-
-
-
-```
-
-
-## Clase 41ß
-> 
-
-
-```python
-
-
-
-```
-
+15.
+¿Cuál de los siguientes bloques de código provoca un error en Python?
+Todas las respuestas arrojan un error.
 
 
 
