@@ -1730,6 +1730,47 @@ Nos informa si el archivo se está ejecutando como script o como módulo.
 ¿Cuál de los siguientes bloques de código provoca un error en Python?
 Todas las respuestas arrojan un error.
 
+16. 
+¿Qué uso se le da al método map() de Python?
+
+17. 
+¿Cuál de las siguientes estructuras de datos es mutable?
+List
+
+18.
+¿Cuál estructura de datos usa Python para retornar varios valores en una función?
+Tuple
+
+19.
+¿Cuál será el resultado del siguiente bloque de código?
+{2}
+
+20.
+¿Cuál es la forma correcta de crear una función en Python?
+def nombre_func:
+	# …
+
+
+21.
+¿Cuál es la forma correcta de generar una lista usando comprensión de listas en Python?
+characters = [character for character in 'Platzi']
+
+
+22.
+¿Cuál es la diferencia entre remove y discard al trabajar con Sets o Conjuntos en Python?
+Si el elemento que eliminamos no existe en el conjunto, remove da error, discard no.
+
+
+23.
+Dado el siguiente bloque de código: print(10 / user_option). Y siendo user_option una variable que puede recibir cualquier valor numérico (incluyendo 0). ¿Cómo manejarías la excepción de división sobre cero para que el código siga ejecutando a pesar del error?
+
+try:
+	print(10 / user_option)
+except ZeroDivisionError as error:
+	print(error) ```
+
+
+
 
 
 
