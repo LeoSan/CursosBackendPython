@@ -1,0 +1,46 @@
+[
+    [
+        {
+            "nombre": "Leo001",
+            "fecha": "2025-04-24T00:17:01.380015",
+            "tiempo": 22.876988,
+            "categoria": "cocina",
+            "palabra_secreta": "estufa",
+            "nivel": "medio",
+            "win": true
+        }
+    ],
+    [
+        {
+            "nombre": "Leo002",
+            "fecha": "2025-04-24T00:17:36.669573",
+            "tiempo": 23.686107,
+            "categoria": "humano",
+            "palabra_secreta": "estomago",
+            "nivel": "medio",
+            "win": true
+        }
+    ],
+    [
+        {
+            "nombre": "Leo004",
+            "fecha": "2025-04-24T00:22:52.785446",
+            "tiempo": 19.148849,
+            "categoria": "cocina",
+            "palabra_secreta": "pala",
+            "nivel": "medio",
+            "win": false
+        }
+    ],
+    [
+        {
+            "nombre": "leo005",
+            "fecha": "2025-04-24T00:24:04.538114",
+            "tiempo": 17.51441,
+            "categoria": "cocina",
+            "palabra_secreta": "pala",
+            "nivel": "medio",
+            "win": false
+        }
+    ]
+]

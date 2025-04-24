@@ -1,18 +1,21 @@
 import datetime
+import json
+import os 
 
 class Tablero:
     def __init__(self, nombre = 'Ahorcado', nivel = 'facil'):
-        self.list_nivel         = {'facil':10, 'medio':5, 'dificil':3 }
-        self.list_categoria     = ['animales','pais','cocina','humano'] 
-        self.nombre             = nombre
-        self.nivel              = nivel
-        self.nombre_jugador     = 'Anonimos'
-        self.tiempo_inicio      = datetime.datetime.now()
-        self.tiempo_fin         = ''
-        self.lista_jugadores    = {} # {'jugador':{'fecha':datetime.datetime.now(), 'tiempo':}} 
-        self.categoria          = 'animales'
-        self.intentos_fallidos  = 0
+        self.list_nivel        = {'facil':10, 'medio':5, 'dificil':3 }
+        self.list_categoria    = ['animales','pais','cocina','humano'] 
+        self.nombre            = nombre
+        self.nivel             = nivel
+        self.nombre_jugador    = 'Anonimos'
+        self.tiempo_inicio     = datetime.datetime.now()
+        self.tiempo_fin        = ''
+        self.tiempo_score        = ''
+        self.lista_jugadores   = {} # {'jugador':{'fecha':datetime.datetime.now(), 'tiempo':}} 
+        self.categoria         = 'animales'
         self.palabra_secreta   = ''
+        self.is_ganaste        = False
         self.palabras_del_juego = {
            'animales':['elefante', 'ballenas', 'perro', 'gato', 'caballo'],
            'pais':['mexico', 'colombia', 'venezuela', 'noruega', 'china'],
@@ -40,6 +43,7 @@ class Tablero:
                 self.list_nivel[resp_nivel]
                 valida = False
                 self.vidas = self.list_nivel[resp_nivel]
+                self.nivel = resp_nivel
             except KeyError as e:
                 print(f"Error: Por favor introduce un nivel valido recuerda son estos tres ->{self.list_nivel} \n")
         self.mensajeExito() 
@@ -62,15 +66,31 @@ class Tablero:
             except KeyError as e:
                 print(f"Error: Por favor introduce una categoria correcta :  {self.list_categoria} \n")
         
-    def dibujarAhorcado(self):
+    def dibujarPresentacion(self):
         cal_vidas = " ❤️ "*(self.vidas) 
         print("**************************************************************************************************************")
         print(f"********* Iniciamos al juego del : {self.nombre}, {self.nombre_jugador } adivina tu palabra ? ****************")
         print(f"********* Dificultad : {self.nivel}                     ****************")
         print(f"********* Vidas      : {cal_vidas}                     ****************")
         print(f"********* Categoria  : {self.categoria}                 ****************")
-        print(f"*********      : {self.tiempo_inicio}             ****************")
+        print(f"*********      : {self.tiempo_inicio}                   ****************")
                  
+    def dibujarPizarra(self):
+        pizarra = [
+            "  ___    Pizarra     _____ ",
+            " |/                     /| ",
+            " |                       | ",
+            "  ", " ".join([letra for letra in self.letras_fallidas]) ,
+            " |                       | ",
+            " |_______________________| ",
+            " |                       | ",
+            "_|_                     _|_"
+        ]
+
+        for linea in pizarra:
+            print(linea)
+
+    def dibujarAhorcado(self):
         dibujo = [
             "  _______  ",
             " |/      |  ",
@@ -81,64 +101,126 @@ class Tablero:
             "_|_      "
         ]
 
-        if self.intentos_fallidos >= 1:
-            dibujo[2] = " |       O  "
-        if self.intentos_fallidos >= 2:
-            dibujo[3] = " |       |  "
-        if self.intentos_fallidos >= 3:
-            dibujo[3] = " |      /|  "
-        if self.intentos_fallidos >= 4:
-            dibujo[3] = " |      /|\ "
-        if self.intentos_fallidos >= 5:
-            dibujo[4] = " |      /   "
-        if self.intentos_fallidos >= 6:
-            dibujo[4] = " |      / \  "
+        if self.nivel == 'facil':
+            if self.vidas <= 9:
+                dibujo[2] = " |       O   "
+            if self.vidas <=8 :
+                dibujo[2] = " |      .O  "
+            if self.vidas <=7 :
+                dibujo[2] = " |      .O.  "  
+            if self.vidas <=6 :
+                dibujo[3] = " |       | "            
+            if self.vidas <= 5:
+                dibujo[3] = " |      /|  "
+            if self.vidas <= 4:
+                dibujo[3] = " |     ./|  "            
+            if self.vidas <= 3:
+                dibujo[3] = " |     ./|\ "             
+            if self.vidas <= 2:
+                dibujo[3] = " |     ./|\. "
+            if self.vidas <= 1:
+                dibujo[4] = " |      /   "
+            if self.vidas == 0:
+                dibujo[4] = " |      / \  "
+
+        if self.nivel == 'medio':
+            if self.vidas <= 4:
+                dibujo[2] = " |       O  "
+            if self.vidas <= 3:
+                dibujo[3] = " |       |  "
+            if self.vidas <= 2:
+                dibujo[3] = " |      /|  "
+            if self.vidas <= 1:
+                dibujo[3] = " |      /|\ "
+            if self.vidas == 0:
+                dibujo[4] = " |      / \  "
+
+        if self.nivel == 'dificil':
+            if self.vidas < 2:
+                dibujo[2] = " |       O  "
+            if self.vidas <= 1:
+                dibujo[3] = " |       |  "
+            if self.vidas == 0:
+                dibujo[3] = " |      /|  "
+            if self.vidas <= 2:
+                dibujo[3] = " |      /|\ "
+            if self.vidas <= 1:
+                dibujo[4] = " |      /   "
+            if self.vidas == 0:
+                dibujo[4] = " |      / \  "
 
         for linea in dibujo:
             print(linea)
 
-
-        pizarra = [
-            "  ___    Pizarra     _____  ",
-            " |/                     /|  ",
-            " |                       | ",
-            " |                       |",
-            " |_______________________|",
-            " |                       |",
-            "_|_                     _|_"
-        ]
-
-        for linea in pizarra:
-            print(linea)
-
-
-    def validaLetraIngresada(self, letra):
-
+    def validaLetraIngresada(self, letra):        
         if letra in self.palabra_secreta:
             self.letras_adivinadas.add(letra)
             if set(self.palabra_secreta) == self.letras_adivinadas:
                 print("\n¡Felicidades!", self.palabra_secreta + "!")
+                self.is_ganaste = True
         else:
-            self.intentos_fallidos +=1
             self.letras_fallidas.add(letra)
-            self.vidas = self.vidas - self.intentos_fallidos 
-            print("Letra incorrecta. te quitamos una vida, te quedan :", self.vidas )
-
+            self.vidas = self.vidas - 1 
+            cal_vidas = " ❤️ "*(self.vidas) 
+            if self.vidas > 0:
+                print("Letra incorrecta. te quitamos una vida, te quedan :", cal_vidas ) 
+                self.dibujarPizarra()
 
     def capturaLetras(self):
-            
             ## Ingresar validación que solo sea letras 
             while True:
                 print("\nPalabra:", " ".join([letra if letra in self.letras_adivinadas else "_" for letra in self.palabra_secreta]))
                 print(self.palabra_secreta)
+                print(self.nivel)
 
                 letra_capturada = input("Ingresa una letra: ").lower()
                 self.validaLetraIngresada(letra_capturada)
-                if self.vidas <=0:
+                self.dibujarAhorcado()
+
+                if self.is_ganaste == True:#Cuando Gana
+                    break 
+                
+                if self.vidas <=0:#Cuando Pierde 
                     break 
 
-            if self.vidas <=0:
+            if self.vidas ==0:
                 print("\n¡Perdiste! La palabra era:", self.palabra_secreta)
             else:
-                print("\Ganaste! La palabra ")    
-            
+                print("\Ganaste! Eres afortunado de no perder en este juego!!  ")   
+            self.tiempo_fin     = datetime.datetime.now()
+            self.tiempo_score   = self.tiempo_fin - self.tiempo_inicio
+            self.escribeScore()
+
+    def escribeScore(self):
+        #Genero Dicionario 
+        lista_jugadores = []
+        nuevo_registro = [
+            {'nombre': self.nombre_jugador, 'fecha':self.tiempo_inicio.isoformat(), 'tiempo':self.tiempo_score.total_seconds(), 'categoria':self.categoria, 'palabra_secreta':self.palabra_secreta, 'nivel':self.nivel, 'win':self.is_ganaste}
+        ]
+        directorio = '/Users/leonard/Documents/Dev/python/CursosBackendPython/01_Primeros_pasos_Python/01_CursoPython/Practicas/JuegosPy/AdivinaPalabras/jugadores.txt'
+
+        try:
+            # Verifico si el archivo existe
+            if os.path.exists(directorio):
+                with open(directorio, 'r') as file:
+                    try:
+                        # Cargo el contenido existente como una lista JSON
+                        contenido_existente = json.load(file)
+                        if isinstance(contenido_existente, list):# Esta es una función incorporada en Python que se utiliza para verificar si un objeto pertenece a una clase específica o a una tupla de clases.
+                            lista_jugadores.extend(contenido_existente)
+                        else:
+                            print("Advertencia: El archivo existente no contiene una lista JSON válida. Se sobrescribirá.")
+                    except json.JSONDecodeError:
+                        print("Advertencia: Error al decodificar el archivo JSON existente. Se sobrescribirá.")
+
+            # Append para añadir el nuevo registro a la lista
+            lista_jugadores.append(nuevo_registro)
+
+            # Escribo la lista actualizada al archivo (sobrescribiendo el contenido anterior)
+            with open(directorio, 'w') as file:
+                json.dump(lista_jugadores, file, indent=4)
+            print("Puntaje guardado en jugadores.txt")
+
+        except Exception as e:
+            print("Error: ", e)
+        
