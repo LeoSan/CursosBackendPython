@@ -1,7 +1,7 @@
 import datetime
 import json
 import os 
-from graficas import grafica_barras 
+from graficas import grafica_barras, grafica_pastel 
 
 class Tablero:
     def __init__(self, nombre = 'Ahorcado', nivel = 'facil'):
@@ -200,6 +200,7 @@ class Tablero:
             datos_graficar = self.calculoTotalWinLoser(score)
             #Aqui genero la grafica
             grafica_barras(datos_graficar[0], datos_graficar[1], self.directorio)
+            grafica_pastel(datos_graficar[0], datos_graficar[1], self.directorio)
 
     def imprimeWin(self):
         print("..... (¯`v´¯)♥")

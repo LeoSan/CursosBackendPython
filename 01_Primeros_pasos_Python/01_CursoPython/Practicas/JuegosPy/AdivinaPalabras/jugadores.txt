@@ -152,5 +152,49 @@
             "nivel": "medio",
             "win": 1
         }
+    ],
+    [
+        {
+            "nombre": "leo",
+            "fecha": "2025-04-28T15:49:45.292886",
+            "tiempo": 26.601525,
+            "categoria": "cocina",
+            "palabra_secreta": "cuchillo",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "leo",
+            "fecha": "2025-04-28T15:51:19.241543",
+            "tiempo": 21.500716,
+            "categoria": "cocina",
+            "palabra_secreta": "nevera",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "kenny",
+            "fecha": "2025-04-28T15:58:30.133301",
+            "tiempo": 22.385632,
+            "categoria": "humano",
+            "palabra_secreta": "estomago",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "kenny",
+            "fecha": "2025-04-28T15:59:27.932089",
+            "tiempo": 30.514869,
+            "categoria": "animal",
+            "palabra_secreta": "caballo",
+            "nivel": "medio",
+            "win": 1
+        }
     ]
 ]

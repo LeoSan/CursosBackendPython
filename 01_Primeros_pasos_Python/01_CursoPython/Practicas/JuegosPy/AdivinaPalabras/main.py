@@ -8,6 +8,6 @@ def iniciar_juego():
     time.sleep(3) 
     obj_tablero.dibujarPresentacion()
     obj_tablero.logicaJuego()
-
+    
 if __name__ == "__main__":
     iniciar_juego()
