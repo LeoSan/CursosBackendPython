@@ -7,7 +7,7 @@
             "categoria": "cocina",
             "palabra_secreta": "estufa",
             "nivel": "medio",
-            "win": true
+            "win": 1
         }
     ],
     [
@@ -18,7 +18,7 @@
             "categoria": "humano",
             "palabra_secreta": "estomago",
             "nivel": "medio",
-            "win": true
+            "win": 1
         }
     ],
     [
@@ -29,7 +29,7 @@
             "categoria": "cocina",
             "palabra_secreta": "pala",
             "nivel": "medio",
-            "win": false
+            "win": 0
         }
     ],
     [
@@ -40,7 +40,117 @@
             "categoria": "cocina",
             "palabra_secreta": "pala",
             "nivel": "medio",
-            "win": false
+            "win": 0
+        }
+    ],
+    [
+        {
+            "nombre": "Jose",
+            "fecha": "2025-04-28T14:11:59.083892",
+            "tiempo": 27.526995,
+            "categoria": "pais",
+            "palabra_secreta": "colombia",
+            "nivel": "medio",
+            "win": 0
+        }
+    ],
+    [
+        {
+            "nombre": "daniel",
+            "fecha": "2025-04-28T14:24:41.658011",
+            "tiempo": 25.046599,
+            "categoria": "cocina",
+            "palabra_secreta": "nevera",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "Luis",
+            "fecha": "2025-04-28T14:44:14.490734",
+            "tiempo": 113.836068,
+            "categoria": "cocina",
+            "palabra_secreta": "cuchillo",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "Jose",
+            "fecha": "2025-04-28T15:02:40.063301",
+            "tiempo": 72.051846,
+            "categoria": "pais",
+            "palabra_secreta": "china",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "Mama",
+            "fecha": "2025-04-28T15:12:30.611938",
+            "tiempo": 104.862622,
+            "categoria": "animales",
+            "palabra_secreta": "perro",
+            "nivel": "medio",
+            "win": 0
+        }
+    ],
+    [
+        {
+            "nombre": "pap\u00e1",
+            "fecha": "2025-04-28T15:17:19.519363",
+            "tiempo": 62.137648,
+            "categoria": "cocina",
+            "palabra_secreta": "pala",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "Ronald",
+            "fecha": "2025-04-28T15:19:35.548252",
+            "tiempo": 71.12582,
+            "categoria": "animal",
+            "palabra_secreta": "elefante",
+            "nivel": "medio",
+            "win": 1
+        }
+    ],
+    [
+        {
+            "nombre": "Kenny",
+            "fecha": "2025-04-28T15:22:18.001896",
+            "tiempo": 218.436239,
+            "categoria": "animal",
+            "palabra_secreta": "gato",
+            "nivel": "medio",
+            "win": 0
+        }
+    ],
+    [
+        {
+            "nombre": "Kenny",
+            "fecha": "2025-04-28T15:39:33.459541",
+            "tiempo": 145.76264,
+            "categoria": "humano",
+            "palabra_secreta": "ri\u00f1on",
+            "nivel": "medio",
+            "win": 0
+        }
+    ],
+    [
+        {
+            "nombre": "Kenny",
+            "fecha": "2025-04-28T15:44:05.987631",
+            "tiempo": 27.130031,
+            "categoria": "cocina",
+            "palabra_secreta": "nevera",
+            "nivel": "medio",
+            "win": 1
         }
     ]
 ]

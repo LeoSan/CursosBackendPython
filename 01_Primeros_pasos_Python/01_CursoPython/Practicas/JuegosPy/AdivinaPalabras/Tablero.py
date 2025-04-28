@@ -1,11 +1,12 @@
 import datetime
 import json
 import os 
+from graficas import grafica_barras 
 
 class Tablero:
     def __init__(self, nombre = 'Ahorcado', nivel = 'facil'):
         self.list_nivel        = {'facil':10, 'medio':5, 'dificil':3 }
-        self.list_categoria    = ['animales','pais','cocina','humano'] 
+        self.list_categoria    = ['animal','pais','cocina','humano'] 
         self.nombre            = nombre
         self.nivel             = nivel
         self.nombre_jugador    = 'Anonimos'
@@ -13,11 +14,11 @@ class Tablero:
         self.tiempo_fin        = ''
         self.tiempo_score        = ''
         self.lista_jugadores   = {} # {'jugador':{'fecha':datetime.datetime.now(), 'tiempo':}} 
-        self.categoria         = 'animales'
+        self.categoria         = 'animal'
         self.palabra_secreta   = ''
-        self.is_ganaste        = False
+        self.is_ganaste        = 0
         self.palabras_del_juego = {
-           'animales':['elefante', 'ballenas', 'perro', 'gato', 'caballo'],
+           'animal':['elefante', 'ballenas', 'perro', 'gato', 'caballo'],
            'pais':['mexico', 'colombia', 'venezuela', 'noruega', 'china'],
            'cocina':['pala', 'cuchillo', 'tabla', 'estufa', 'nevera'],
            'humano':['corazon', 'riñon', 'estomago', 'celula', 'cerebro']
@@ -25,6 +26,7 @@ class Tablero:
         self.vidas = ''
         self.letras_adivinadas = set()
         self.letras_fallidas   = set()
+        self.directorio = '/Users/leonard/Documents/Dev/python/CursosBackendPython/01_Primeros_pasos_Python/01_CursoPython/Practicas/JuegosPy/AdivinaPalabras/'
 
     def mensajeExito(self):
         print("!Muy Bien! sigamos con el siguiente paso \n")
@@ -70,17 +72,17 @@ class Tablero:
         cal_vidas = " ❤️ "*(self.vidas) 
         print("**************************************************************************************************************")
         print(f"********* Iniciamos al juego del : {self.nombre}, {self.nombre_jugador } adivina tu palabra ? ****************")
-        print(f"********* Dificultad : {self.nivel}                     ****************")
+        print(f"********* Dificultad : {self.nivel}                                ****************")
         print(f"********* Vidas      : {cal_vidas}                     ****************")
-        print(f"********* Categoria  : {self.categoria}                 ****************")
-        print(f"*********      : {self.tiempo_inicio}                   ****************")
+        print(f"********* Categoria  : {self.categoria}                            ****************")
+        print(f"********* Tiempo     : {self.tiempo_inicio}                        ****************")
                  
     def dibujarPizarra(self):
         pizarra = [
             "  ___    Pizarra     _____ ",
             " |/                     /| ",
             " |                       | ",
-            "  ", " ".join([letra for letra in self.letras_fallidas]) ,
+            "  ", "  ".join([letra for letra in self.letras_fallidas]) ,
             " |                       | ",
             " |_______________________| ",
             " |                       | ",
@@ -157,7 +159,7 @@ class Tablero:
             self.letras_adivinadas.add(letra)
             if set(self.palabra_secreta) == self.letras_adivinadas:
                 print("\n¡Felicidades!", self.palabra_secreta + "!")
-                self.is_ganaste = True
+                self.is_ganaste = 1
         else:
             self.letras_fallidas.add(letra)
             self.vidas = self.vidas - 1 
@@ -166,30 +168,64 @@ class Tablero:
                 print("Letra incorrecta. te quitamos una vida, te quedan :", cal_vidas ) 
                 self.dibujarPizarra()
 
-    def capturaLetras(self):
+    def logicaJuego(self):
             ## Ingresar validación que solo sea letras 
             while True:
                 print("\nPalabra:", " ".join([letra if letra in self.letras_adivinadas else "_" for letra in self.palabra_secreta]))
-                print(self.palabra_secreta)
-                print(self.nivel)
+               # print(self.palabra_secreta)
+               # print(self.nivel)
 
                 letra_capturada = input("Ingresa una letra: ").lower()
                 self.validaLetraIngresada(letra_capturada)
                 self.dibujarAhorcado()
 
-                if self.is_ganaste == True:#Cuando Gana
+                if self.is_ganaste == 1:#Cuando Gana
                     break 
                 
                 if self.vidas <=0:#Cuando Pierde 
                     break 
+            #Calculo del tiempo 
+            self.tiempo_fin     = datetime.datetime.now()
+            self.tiempo_score   = self.tiempo_fin - self.tiempo_inicio
 
             if self.vidas ==0:
                 print("\n¡Perdiste! La palabra era:", self.palabra_secreta)
+                self.imprimeLoser()
             else:
-                print("\Ganaste! Eres afortunado de no perder en este juego!!  ")   
-            self.tiempo_fin     = datetime.datetime.now()
-            self.tiempo_score   = self.tiempo_fin - self.tiempo_inicio
-            self.escribeScore()
+                print("\Ganaste! Eres afortunado de no perder en este juego!!  ") 
+                self.imprimeWin()  
+            #Aqui genero el txt con el score 
+            score = self.escribeScore()
+            #Aqui genero calculo para la grafica
+            datos_graficar = self.calculoTotalWinLoser(score)
+            #Aqui genero la grafica
+            grafica_barras(datos_graficar[0], datos_graficar[1], self.directorio)
+
+    def imprimeWin(self):
+        print("..... (¯`v´¯)♥")
+        print(".......•.¸.•´")
+        print("....¸.•´")
+        print("... (")
+        print("☻/")
+        print("/▌♥♥")
+        print("/ \ ♥♥")
+        print(f"You win {self.nombre_jugador}")
+
+    def imprimeLoser(self):
+        print("..... (¯ ☹ ¯)")
+        print(".......•.¸.•´")
+        print("....¸.•´")
+        print("... (")
+        print(" ")
+        print("/▌")
+        print("/ \ ")
+        print(f"You Loser {self.nombre_jugador}")
+
+    def calculoTotalWinLoser(self, score):
+        wins = sum(jugador[0]['win'] == 1 for jugador in score)
+        losers = len(score) - wins
+        resultado = [['win', 'loser'], [wins, losers]]
+        return resultado
 
     def escribeScore(self):
         #Genero Dicionario 
@@ -197,12 +233,11 @@ class Tablero:
         nuevo_registro = [
             {'nombre': self.nombre_jugador, 'fecha':self.tiempo_inicio.isoformat(), 'tiempo':self.tiempo_score.total_seconds(), 'categoria':self.categoria, 'palabra_secreta':self.palabra_secreta, 'nivel':self.nivel, 'win':self.is_ganaste}
         ]
-        directorio = '/Users/leonard/Documents/Dev/python/CursosBackendPython/01_Primeros_pasos_Python/01_CursoPython/Practicas/JuegosPy/AdivinaPalabras/jugadores.txt'
 
         try:
             # Verifico si el archivo existe
-            if os.path.exists(directorio):
-                with open(directorio, 'r') as file:
+            if os.path.exists(self.directorio + "jugadores.txt"):
+                with open(self.directorio + "jugadores.txt", 'r') as file:
                     try:
                         # Cargo el contenido existente como una lista JSON
                         contenido_existente = json.load(file)
@@ -217,10 +252,10 @@ class Tablero:
             lista_jugadores.append(nuevo_registro)
 
             # Escribo la lista actualizada al archivo (sobrescribiendo el contenido anterior)
-            with open(directorio, 'w') as file:
+            with open(self.directorio + "jugadores.txt", 'w') as file:
                 json.dump(lista_jugadores, file, indent=4)
             print("Puntaje guardado en jugadores.txt")
 
         except Exception as e:
             print("Error: ", e)
-        
+        return lista_jugadores
