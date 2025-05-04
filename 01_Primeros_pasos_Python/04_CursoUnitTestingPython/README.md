@@ -686,8 +686,7 @@ Utilizando Coverage
 
 5.
 ¿Cuál es la ventaja principal de automatizar las pruebas con Python?
-Garantizar que no haya errores en producción
-REPASAR 
+Detectar errores más rápido y en mayor cantidad
 
 6.
 ¿Qué método en TestCase se utiliza para preparar los recursos antes de cada prueba?
@@ -719,8 +718,7 @@ Omitir temporalmente una prueba que aún no debe ejecutarse
 
 13.
 ¿Cuál sería un buen nombre para una prueba de un método withdraw que reduce el saldo con un valor positivo?
-test_withdraw_reduce_balance_positively
-REPASAR
+test_withdraw_positive_amount_reduce_balance
 
 14.
 ¿Cómo puedes ejecutar las pruebas de Doctest en un archivo Python?
@@ -729,3 +727,7 @@ Usando el comando python -m doctest nombre_archivo.py
 15.
 Si quieres analizar qué partes de tu código no han sido probadas, ¿qué deberías hacer?
 Revisar el reporte HTML de Coverage
+
+16. 
+En una prueba unitaria con Python, si una función devuelve 5 pero se esperaba 7, ¿cómo se detectaría el error?
+Usando assert para comparar el resultado esperado con el real
