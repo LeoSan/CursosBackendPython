@@ -271,9 +271,7 @@ Dificultades para intercambiar implementaciones sin afectar al sistema principal
 
 6.
 Si deseas implementar el principio de inversión de dependencias en un servicio de pagos, ¿qué patrón de diseño sería más adecuado para evitar que la clase de alto nivel dependa de la creación de clases de bajo nivel?
-Patrón Strategy
-Patrón Decorator
-REPASAR
+Patrón Factory
 
 7.
 Al aplicar el principio de inversión de dependencias, ¿cuál es la principal ventaja de hacer que la clase de alto nivel dependa de interfaces en lugar de implementaciones concretas?
@@ -335,6 +333,7 @@ Definiendo una interfaz de listener con un método notify y gestionando los list
 En el contexto del patrón Observer, si un listener no está suscrito al manager, ¿qué sucederá cuando se notifique un evento de pago?
 El manager lanzará un error al intentar notificar.
 El evento se perderá y no se notificará a ningún listener.
+El listener recibirá la notificación pero no podrá procesarla.
 REPASAR
 
 22.
@@ -391,6 +390,8 @@ Patrón de Estrategia
 34. 
 Si decides modificar una interfaz que afecta a muchas clases, ¿qué principio de diseño te ayudaría a minimizar el impacto de esos cambios en el resto del sistema?
 Principio de Inversión de Dependencias (DIP)
+REPASAR 
+
 
 35. 
 ¿Cómo podrías aplicar el principio abierto/cerrado para añadir un nuevo método de notificación sin modificar el código existente?
@@ -404,8 +405,8 @@ El patrón decorador, ya que permite componer comportamientos adicionales.
 
 37. 
 Si decides usar el patrón Builder para crear un objeto, ¿qué aspecto es crucial para asegurar que el proceso de construcción sea efectivo?
-Usar un solo método para crear el objeto
-REPASAR 
+Definir claramente los pasos de construcción
+
 
 38. 
 Si estás diseñando un sistema de notificaciones y quieres que sea fácil de mantener y escalar, ¿cómo aplicarías el principio de inversión de dependencias para lograrlo?
@@ -426,3 +427,7 @@ Patrón Strategy
 42. 
 ¿Qué problema surge si una clase no cumple con el principio de sustitución de Liskov en un sistema de notificaciones?
 Las clases no son intercambiables, lo que puede causar errores en tiempo de ejecución.
+
+43. 
+Si estás diseñando un sistema de validación de pagos y necesitas que cada validación se realice de manera secuencial, ¿cuál patrón de diseño sería más adecuado para implementar?
+chain of Responsibility 

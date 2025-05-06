@@ -1,0 +1,333 @@
+# Curso de Django
+
+> Construye aplicaciones web completas con Django. Crea modelos, vistas, plantillas, administra datos, usa relaciones, realiza pruebas, despliega en AWS y conecta con bases de datos y REST APIs.
+
+## Clase 1:  Entornos Virtuales y Configuración de Django en Python
+> Django es un framework para desarrollo web escrito en Python que inicialmente fue utilizado para crear blogs, pero ha evolucionado para soportar aplicaciones complejas, como las primeras versiones de Instagram y Spotify. 
+
+## ¿Cuáles son los requerimientos previos para aprender Django?
+- Conocer Python, ya que Django está construido en este lenguaje.
+  - Sintaxis básica: if, for, definición de variables.
+- Comprender la programación orientada a objetos.
+  - Reutilización de código mediante clases y herencia.
+- Conocer HTML para diseñar la interfaz de usuario.
+- Conocimientos básicos de CSS para estilizar la aplicación.
+
+
+## ¿Por qué es importante usar entornos virtuales en Django?
+Los entornos virtuales permiten gestionar diferentes versiones de paquetes y librerías en un mismo equipo sin conflictos. Esto es crucial cuando se trabaja en múltiples proyectos que requieren distintas versiones de Django o cualquier otro paquete de Python.
+
+## ¿Cómo se crea un entorno virtual en Python?
+- Abre la terminal en tu editor de código preferido, como Visual Studio Code.
+- Crea una carpeta para tu proyecto y ábrela en el editor.
+- Usa la librería venv de Python para crear un entorno virtual:
+    - python -m venv ~/path_to_your_folder/.venvs/my_first_env -> python3 -m venv django_one
+- Verifica la creación del entorno con ls en la carpeta especificada.
+
+## ¿Cómo se activa un entorno virtual?
+- Para activar el entorno virtual y asegurarte de que los comandos se ejecuten en este entorno específico:
+    - source ~/path_to_your_folder/.venvs/my_first_env/bin/activate -> source django_one/bin/activate
+- Notarás que el nombre del entorno virtual aparece en la terminal, indicando que está activo.
+
+## ¿Qué significa tener un entorno virtual activo?
+Significa que cualquier comando que ejecutes utilizará las librerías instaladas en ese entorno específico, evitando conflictos con otras versiones de librerías que puedas tener en tu sistema. Esta práctica es esencial para evitar colisiones y mantener un entorno de desarrollo limpio y manejable
+
+
+## Clase 2: 
+>
+
+## Pasos para instalar Django 
+- Paso 1: pip3 install Django
+![Ejemplo](../06_Curso_Django/info/info_001.png)
+- Paso 2: debemos validar los comandos instalados en Django este comando es ´django-admin --help´
+![Ejemplo](../06_Curso_Django/info/info_002.png)
+- Paso 3: Ejecutamos el comando para iniciar el protecto ´django-admin startproject miPrimerDjango5´ Nombre del proyecto no debe estar separado usemos camelCase
+- Paso 4: ya dentro del proyecto podemos ejeuctar este comando para validar los comandos del proyecto -> ´ python3 manage.py --help´
+- Paso 5: para correr el servidor de django es de la siguiente manera ´python3 manage.py runserver´
+![Ejemplo](../06_Curso_Django/info/info_003.png)
+
+## Clase 3: Arquitectura MBT en Frameworks Web: Model, View y Template
+> La arquitectura del framework está diseñada para ser reutilizable y organizar todas tus tareas. Utiliza el modelo MVT (Model, View, Template).
+
+## ¿Qué es el modelo en MVT (Model, View, Template)?
+El modelo es la parte de los datos:
+
+Guarda y procesa los datos.
+Contiene la lógica del negocio, como una calculadora que suma 2 más 2.
+
+## ¿Qué es la vista en MTV?
+La vista actúa como un conector:
+
+Accede y dirige los datos.
+Controla el flujo de peticiones y respuestas.
+Verifica permisos y realiza comprobaciones necesarias.
+
+
+## ¿Qué es el template en MTV?
+El template maneja la parte gráfica:
+
+Usa HTML y CSS para mostrar los datos.
+Por ejemplo, muestra una lista de zapatos almacenada en el modelo.
+
+## ¿Cómo interactúan modelo, vista y template?
+El flujo de datos es el siguiente:
+
+El modelo pasa datos a la vista en un array.
+La vista pasa esos datos al template en un contexto.
+El template muestra los datos gráficos.
+En sentido contrario:
+
+Un usuario busca en el template.
+La vista recibe la búsqueda y consulta al modelo.
+El modelo devuelve los resultados a la vista.
+La vista envía los datos al template para mostrarlos.
+
+## estructura tus archivos 
+
+![Ejemplo](../06_Curso_Django/info/info_004.png)
+
+
+
+> Nota: No debe haber conexión directa entre template y model. Siempre usa la vista para asegurar verificaciones y permisos.
+
+
+## Clase 4: Modelo, Vista y Plantilla en Django: Creación y Conexión Básica
+>
+## ¿Cómo se definen los modelos en Django?
+
+
+## Pasos 
+- Paso 1: se ejecuta el comando para crear nuestra primera app ´python3 manage.py startapp my_first_app´ OJO esto debe estar al mismo nivel de MiPrimerDjango5 ya que se usa este repositorio para configurar nuestra app. este comando genera un directorio nuevo con archivos que podemos editar para dar forma a nuestra app 
+
+    - Debe quedar así 
+    - ![Ejemplo](../06_Curso_Django/info/info_005.png)
+
+- Paso 2: Debemos ir al archivo setting.py de nuestro gestor de proyectos para este caso se llama ´miPrimerDjango5´ y agregar el nombre de la app previamente del paso 1 ->  ´python3 manage.py startapp my_first_app´
+    - Debe quedar así 
+    - ![Ejemplo](../06_Curso_Django/info/info_006.png)
+
+- Paso 3: Podemos generar nuestros template de la siguiente forma debemos ir a nuestro **desarrollo app** recuerda es lo generado del paso 1, y crear el siguiente directorio template/nombre_app/nombre_del_html.html -> 'template/my_first_app/car_list.html' 
+    - Debe quedar así 
+    - ![Ejemplo](../06_Curso_Django/info/info_007.png)
+
+- Paso 4: Debemos crear nueva rutas para esto debemos editar el archivo ´/Users/leonard/Documents/Dev/python/CursosBackendPython/01_Primeros_pasos_Python/06_Curso_Django/practica/miPrimerDjango5/miPrimerDjango5/urls.py´
+    - Debe quedar así 
+    - ![Ejemplo](../06_Curso_Django/info/info_008.png)
+
+- Paso 5: Debemos ahora trabajar en la app y hacer los ajustes necesarios siguiente el MVT 
+    - View 
+    ´´´python
+        from django.shortcuts import render
+
+        # Create your views here.
+        def my_view(request):
+            return render(request, "my_first_app/car_list.html")
+
+    ´´´
+    - model
+    ´´´python
+        from django.db import models
+
+        # Create your models here.
+        class Car(models.Model):
+            title = models.TextField(max_length=250)
+
+    ´´´
+    - template 
+    ´´´html
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Lista de Coches </title>
+        </head>
+        <body>
+            <h1>Esta es la lista de coches</h1>
+            
+        </body>
+        </html>
+
+    ´´´
+- Paso 6: Podemos ejeuctar el runserver ´python3 manage.py runserver´
+
+## Clase 5: Modelos y Migraciones en Django ORM
+>La “M” en el patrón MVC se refiere al Modelo, que es crucial para manejar datos de la base de datos en Django. En lugar de utilizar listas con datos estáticos en las vistas, ahora trabajaremos con datos provenientes del modelo, aprovechando el ORM de Django.
+
+## ¿Qué es el ORM en Django?
+El ORM (Object-Relational Mapping) en Django nos permite definir clases de Python que se relacionan directamente con las tablas de la base de datos. De esta forma, evitamos escribir sentencias SQL, ya que todo se maneja mediante Python.
+
+## ¿Cómo se define una clase de modelo en Django?
+Para definir un modelo, creamos una clase en el archivo models.py. Cada clase de modelo se corresponde con una tabla en la base de datos. Por ejemplo, si definimos la clase Car, esta se convertirá en una tabla con el nombre Car en la base de datos.
+
+## ¿Qué son las migraciones en Django?
+Las migraciones son un sistema que Django usa para aplicar y revertir cambios en la base de datos. Cuando creamos o modificamos un modelo, generamos migraciones que se pueden aplicar para crear o actualizar tablas en la base de datos.
+
+- Aplicar una migración
+- Creamos la clase Car con un atributo title.
+- Ejecutamos la migración hacia adelante para crear la tabla Car en la base de datos.
+- Si agregamos un campo year a la clase Car, otra migración aplicará este cambio a la tabla.
+- Revertir una migración
+
+Si es necesario, podemos revertir una migración para volver al estado anterior de la tabla.
+Por ejemplo, al revertir la migración del campo year, la tabla Car quedará como antes de agregar dicho campo.
+
+
+
+## Clase 6: Migraciones en Django: Creación de Tablas en la Base de Datos
+> La migración de modelos en Django es un proceso fundamental para mantener la base de datos en sincronía con las clases del proyecto. Este artículo explora el uso de comandos para migrar modelos en Django, específicamente cómo manejar la migración de un modelo llamado “carro”.
+
+## ¿Cómo identificar migraciones pendientes en Django?
+Al ejecutar el comando python manage.py runserver, puedes encontrar un error que indica migraciones pendientes. Este mensaje significa que las tablas correspondientes a tus clases de Django no están creadas en la base de datos, lo que impide el correcto funcionamiento del proyecto.
+
+## ¿Cómo crear migraciones en Django?
+Para crear migraciones, usa el comando ´python manage.py makemigrations´ Este comando genera un archivo en la carpeta de migraciones con la creación de la tabla correspondiente al modelo “carro”.
+
+## ¿Cómo aplicar migraciones en Django?
+Una vez creadas las migraciones, se deben aplicar usando ´python manage.py migrate´. Esto ejecuta todas las migraciones y crea las tablas necesarias en la base de datos.
+
+## ¿Cómo verificar la base de datos en Django?
+Puedes revisar la base de datos usando ´python manage.py dbshell´ Este comando te conecta a la base de datos definida en el archivo settings.py. En este caso, se utilizó SQLite, que es fácil de usar pero no ideal para producción debido a su baja concurrencia.
+
+## ¿Cómo configurar la base de datos en Django?
+La configuración de la base de datos se encuentra en el archivo settings.py bajo el diccionario DATABASES. Django soporta múltiples motores de base de datos como PostgreSQL, MariaDB, MySQL, Oracle y SQLite. En este curso, se utilizará PostgreSQL.
+
+
+
+## Clase 7 - 8: Creación y Gestión de Campos en Tablas de Django ORM
+>
+
+## ¿Qué pasos se siguen después de modificar el modelo?
+Después de agregar el nuevo campo al modelo, sigue estos pasos:
+- Guardar los cambios en el archivo del modelo: No olvides guardar el archivo después de realizar modificaciones.
+- Crear nuevas migraciones: Ejecuta el comando ´python3 manage.py makemigrations´. Si no detecta cambios, verifica si guardaste el archivo.
+- Aplicar las migraciones: Ejecuta python ´python3 manage.py migrate´. Este comando actualiza la base de datos con la nueva estructura.
+- Podemos usar el shell de python para interactuar con la base de datos ´python3 manage.py shell´ => Es como tinker en laravel
+- Podemos usar el shell de python para interactuar con la base de datos ´python3 manage.py dbshell´ podemos acceder a la base de datos -> .tables -> select * from my_first_app_book;
+-  podemos instalar este paquete para ayudarnos en comsola para auto completar -> ´pip3 install ipython´
+
+## Clase 9: Relaciones de Tablas Uno a Muchos con Django
+> Manera de crear nuevas clases del modelo y como relacionar de 1 - 1 
+
+
+´´´python
+
+class Publisher(models.Model):
+    name = models.TextField(max_length=250, null=True, default='n/a')
+    direccion = models.TextField(max_length=250, null=True, default='n/a')
+
+    def __str__(self):
+        return f"{self.name} - {self.direccion} "
+    
+class Book(models.Model):
+    title = models.TextField(max_length=200)
+    publication_date = models.DateField()
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+
+´´´
+
+
+## Clase 10: Relaciones de Muchos a Muchos en Modelos de Base de Datos
+> 
+## Notas mentales 
+- Lo importante resaltar es el orden de las classes 
+- La propiedad en la clase hija [authors = models.ManyToManyField(Autor, related_name="authors") ]
+- si lo hacemos por consola impportante 
+    - In [15]: autor_list = [danny, audry2]
+    - In [16]: book.authors.set(autor_list)
+
+
+
+´´´python
+
+class Publisher(models.Model):
+    name = models.TextField(max_length=250, null=True, default='n/a')
+    direccion = models.TextField(max_length=250, null=True, default='n/a')
+
+    def __str__(self):
+        return f"{self.name} - {self.direccion} "
+    
+class Autor(models.Model):
+    nombre = models.TextField(max_length=200)
+    birth_date = models.DateField()
+
+    def __str__(self):
+        return self.nombre
+
+class Book(models.Model):
+    title = models.TextField(max_length=200)
+    publication_date = models.DateField()
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    authors = models.ManyToManyField(Autor, related_name="authors") ## Muy importante el orden por eso el Autor esta en la parte superior
+
+    def __str__(self):
+        return self.title
+
+
+
+´´´
+
+
+## Clase 11:  Relaciones 1 a 1 en Django: Creación y Gestión de Perfiles de Autor
+
+## Notas mentales 
+- Lo importante resaltar es el orden de las classes 
+- La propiedad en la clase hija [author = models.OneToOneField(Autor, on_delete=models.CASCADE) ]
+- si lo hacemos por consola impportante 
+
+´´´python
+
+
+´´´
+
+## Clase 12: Uso de Managers en Django para Consultas de Base de Datos
+> Los managers en Django son una herramienta poderosa que permite realizar diversas acciones dentro de las listas de objetos de un modelo, como contar, traer el primero o el último elemento, crear nuevos registros y mucho más.
+
+## Notas Mentales 
+-  autor1 = Autor.objects.first() -> Nos trae el primero 
+-  autor1 = Autor.objects.count()  -> Cuenta el total de autores 
+-  autor1 = Autor.objects.last() -> Nos trae el ultimo 
+-  Autor?? -> Nos indica como esta definida la clase dento del model 
+-  Autor.objects.create(nombre='Leonard', birth_date='1988-01-20') -> Crea un objeto directo en la base 
+-  Autor.objects.all() -> Nos devuelve una lista de los autores 
+-  Autor.objects.filter(nombre='Leonard')-> Podemos filtrar datos con el filter
+-  Autor.objects.filter(nombre='Leonard').delete()-> Podemos concatenar metodos para este caso filtro y elimino
+-  Autor.objects.all().order_by('nombre') -> Podemos ordenarlos 
+
+´´´python
+
+
+´´´
+
+## Clase 13: URLs Dinámicas en Django: Creación y Gestión Eficiente
+> Podemos generar nuestro propio archivo de url para este caso seguiremos los pasos 
+
+## Paso 
+- Paso 1: 
+- Paso 2: 
+- Paso 3:  
+
+´´´python
+
+
+´´´
+
+## Clase 14: 
+> 
+
+´´´python
+
+
+´´´
+
+## Clase 15: 
+> 
+
+´´´python
+
+
+´´´

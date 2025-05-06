@@ -1106,10 +1106,10 @@ student.greet()
 
 ## Clase 29: Superando los Fundamentos de Programación Orientada a Objetos en Python
 
-Métodos que Vienen por Defecto en Python
+## Métodos que Vienen por Defecto en Python
 En Python, todas las clases heredan de la clase base object. Esto significa que todas las clases tienen ciertos métodos por defecto, algunos de los cuales pueden ser útiles para personalizar el comportamiento de tus clases.
 
-Métodos por Defecto Más Comunes
+## Métodos por Defecto Más Comunes
 - __init__(self): Constructor de la clase. Es llamado cuando se crea una nueva instancia de la clase. Inicializa los atributos del objeto.
 - __str__(self): Devuelve una representación en cadena del objeto, utilizada por print() y str(). Este método es útil para proporcionar una representación legible del objeto.
 - __repr__(self): Devuelve una representación “oficial” del objeto, utilizada por repr(). Este método está diseñado para devolver una cadena que represente al objeto de manera que se pueda recrear.
