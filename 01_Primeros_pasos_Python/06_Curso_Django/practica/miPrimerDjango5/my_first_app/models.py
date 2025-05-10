@@ -31,8 +31,8 @@ class Profile(models.Model):
 class Book(models.Model):
     title = models.TextField(max_length=200)
     publication_date = models.DateField()
-    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    authors = models.ManyToManyField(Autor, related_name="authors") ## Muy importante el orden por eso el Autor esta en la parte superior
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, null=True)
+    authors = models.ManyToManyField(Autor, related_name="authors", null=True) ## Muy importante el orden por eso el Autor esta en la parte superior
 
     def __str__(self):
         return self.title

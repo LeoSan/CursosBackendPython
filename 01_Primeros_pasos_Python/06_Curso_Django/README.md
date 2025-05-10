@@ -37,6 +37,7 @@ Significa que cualquier comando que ejecutes utilizará las librerías instalada
 >
 
 ## Pasos para instalar Django 
+- Paso 0: se recomienda generar el entorno -> python3 -m venv django_one -> source django_one/bin/  
 - Paso 1: pip3 install Django
 ![Ejemplo](../06_Curso_Django/info/info_001.png)
 - Paso 2: debemos validar los comandos instalados en Django este comando es ´django-admin --help´
@@ -45,6 +46,7 @@ Significa que cualquier comando que ejecutes utilizará las librerías instalada
 - Paso 4: ya dentro del proyecto podemos ejeuctar este comando para validar los comandos del proyecto -> ´ python3 manage.py --help´
 - Paso 5: para correr el servidor de django es de la siguiente manera ´python3 manage.py runserver´
 ![Ejemplo](../06_Curso_Django/info/info_003.png)
+- paso 6: ´pip3 install -r requiriments.txt´
 
 ## Clase 3: Arquitectura MBT en Frameworks Web: Model, View y Template
 > La arquitectura del framework está diseñada para ser reutilizable y organizar todas tus tareas. Utiliza el modelo MVT (Model, View, Template).
@@ -94,7 +96,6 @@ La vista envía los datos al template para mostrarlos.
 ## Clase 4: Modelo, Vista y Plantilla en Django: Creación y Conexión Básica
 >
 ## ¿Cómo se definen los modelos en Django?
-
 
 ## Pasos 
 - Paso 1: se ejecuta el comando para crear nuestra primera app ´python3 manage.py startapp my_first_app´ OJO esto debe estar al mismo nivel de MiPrimerDjango5 ya que se usa este repositorio para configurar nuestra app. este comando genera un directorio nuevo con archivos que podemos editar para dar forma a nuestra app 
@@ -172,8 +173,6 @@ Las migraciones son un sistema que Django usa para aplicar y revertir cambios en
 Si es necesario, podemos revertir una migración para volver al estado anterior de la tabla.
 Por ejemplo, al revertir la migración del campo year, la tabla Car quedará como antes de agregar dicho campo.
 
-
-
 ## Clase 6: Migraciones en Django: Creación de Tablas en la Base de Datos
 > La migración de modelos en Django es un proceso fundamental para mantener la base de datos en sincronía con las clases del proyecto. Este artículo explora el uso de comandos para migrar modelos en Django, específicamente cómo manejar la migración de un modelo llamado “carro”.
 
@@ -193,14 +192,13 @@ Puedes revisar la base de datos usando ´python manage.py dbshell´ Este comando
 La configuración de la base de datos se encuentra en el archivo settings.py bajo el diccionario DATABASES. Django soporta múltiples motores de base de datos como PostgreSQL, MariaDB, MySQL, Oracle y SQLite. En este curso, se utilizará PostgreSQL.
 
 
-
 ## Clase 7 - 8: Creación y Gestión de Campos en Tablas de Django ORM
 >
 
 ## ¿Qué pasos se siguen después de modificar el modelo?
 Después de agregar el nuevo campo al modelo, sigue estos pasos:
 - Guardar los cambios en el archivo del modelo: No olvides guardar el archivo después de realizar modificaciones.
-- Crear nuevas migraciones: Ejecuta el comando ´python3 manage.py makemigrations´. Si no detecta cambios, verifica si guardaste el archivo.
+- Crear nuevas migraciones: Ejecuta el comando ´python3 manage.py makemigrations´. Si no detecta cambios, verifica si guardaste el archivo. ejecutalo dentro del app del proyecto. 
 - Aplicar las migraciones: Ejecuta python ´python3 manage.py migrate´. Este comando actualiza la base de datos con la nueva estructura.
 - Podemos usar el shell de python para interactuar con la base de datos ´python3 manage.py shell´ => Es como tinker en laravel
 - Podemos usar el shell de python para interactuar con la base de datos ´python3 manage.py dbshell´ podemos acceder a la base de datos -> .tables -> select * from my_first_app_book;
@@ -208,7 +206,6 @@ Después de agregar el nuevo campo al modelo, sigue estos pasos:
 
 ## Clase 9: Relaciones de Tablas Uno a Muchos con Django
 > Manera de crear nuevas clases del modelo y como relacionar de 1 - 1 
-
 
 ´´´python
 
@@ -226,10 +223,7 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-
-
 ´´´
-
 
 ## Clase 10: Relaciones de Muchos a Muchos en Modelos de Base de Datos
 > 
@@ -239,8 +233,6 @@ class Book(models.Model):
 - si lo hacemos por consola impportante 
     - In [15]: autor_list = [danny, audry2]
     - In [16]: book.authors.set(autor_list)
-
-
 
 ´´´python
 
@@ -267,11 +259,7 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-
-
 ´´´
-
-
 ## Clase 11:  Relaciones 1 a 1 en Django: Creación y Gestión de Perfiles de Autor
 
 ## Notas mentales 
@@ -279,10 +267,6 @@ class Book(models.Model):
 - La propiedad en la clase hija [author = models.OneToOneField(Autor, on_delete=models.CASCADE) ]
 - si lo hacemos por consola impportante 
 
-´´´python
-
-
-´´´
 
 ## Clase 12: Uso de Managers en Django para Consultas de Base de Datos
 > Los managers en Django son una herramienta poderosa que permite realizar diversas acciones dentro de las listas de objetos de un modelo, como contar, traer el primero o el último elemento, crear nuevos registros y mucho más.
@@ -298,25 +282,94 @@ class Book(models.Model):
 -  Autor.objects.filter(nombre='Leonard').delete()-> Podemos concatenar metodos para este caso filtro y elimino
 -  Autor.objects.all().order_by('nombre') -> Podemos ordenarlos 
 
-´´´python
-
-
-´´´
-
-## Clase 13: URLs Dinámicas en Django: Creación y Gestión Eficiente
+## Clase 13 - 14: URLs Dinámicas en Django: Creación y Gestión Eficiente
 > Podemos generar nuestro propio archivo de url para este caso seguiremos los pasos 
 
 ## Paso 
-- Paso 1: 
-- Paso 2: 
-- Paso 3:  
-
+- Paso 1: Podemos generar archivos en nuestras app sin depender del project para este caso podemos crear un urls.py en la ruta raiz -> my_first_app/urls.py
+- Paso 2: Podemos generar la misma estructura del miPrimerDjango5/urls.py en el nuevo archivo my_first_app/urls.py
+- Paso 3: Podemos revisar views para generar las views correspondientes-> 
+    - Claro pasos previos como lo indica debemos tener formadas los Modelos
+    - Tambien tener listo los template -> book_list.html
 ´´´python
 
+def view_autores(request, *args, **kwargs):
+    author = Autor.objects.get(id=kwargs['id'])
+    context = {"autor": author}
+    return render(request, 'my_first_app/autor_list.html', context)
 
+def view_books(request):
+    books = Book.objects.all() 
+    context = {"book_list": books}
+    return render(request, 'my_first_app/book_list.html', context)
 ´´´
 
-## Clase 14: 
+
+
+## Clase 15: Templates y Tags en Django: Creación de Aplicaciones Web
+> Resumen
+
+Exploraremos los templates en Django y sus funcionalidades avanzadas que los diferencian del HTML estándar. Aprenderemos cómo los templates nos permiten mostrar contenido dinámico en el navegador, validar variables, recorrer listas y aplicar filtros para modificar valores antes de mostrarlos. También veremos cómo reutilizar contenido común mediante el archivo base HTML.
+
+## ¿Qué son los templates en Django?
+Los templates en Django son archivos HTML que incluyen funcionalidades adicionales para mostrar contenido dinámico. A diferencia del HTML puro, los Django templates permiten:
+
+Mostrar variables
+Realizar validaciones con if
+Recorrer listas con for
+
+## ¿Cómo se muestran variables en un template?
+Para mostrar variables, se encierran en dobles llaves {{ }}. Por ejemplo, para mostrar una variable llamada var del contexto, se usaría:
+
+{{ var }}
+
+
+## ¿Qué son y cómo se utilizan los filtros en Django?
+Los filtros permiten modificar el valor de una variable antes de mostrarla. Se usan con un pipe | seguido del nombre del filtro. Por ejemplo, para mostrar solo el día y mes de una fecha:
+
+{{ fecha_nacimiento|date:"m/d" }}
+Los filtros pueden concatenarse. Por ejemplo, convertir el resultado en minúsculas:
+
+{{ fecha_nacimiento|date:"m/d"|lower }}
+
+## ¿Qué son los tags en Django y cómo se utilizan?
+Los tags agregan funcionalidades adicionales al código HTML. Se abren con {% %} y pueden incluir:
+
+if: para validaciones
+for: para recorrer listas
+url: para mostrar URLs dinámicas
+Algunos tags requieren una etiqueta de cierre. Por ejemplo, if y for:
+
+{% if condition %}
+    <!-- contenido -->
+{% endif %}
+
+## ¿Qué es el archivo base HTML en Django?
+El archivo base.html permite definir contenido común para ser reutilizado en la aplicación. Se crean bloques que pueden extenderse en otros archivos. Por ejemplo:
+
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+Para reutilizar este contenido:
+
+<!-- new_template.html -->
+{% extends "base.html" %}
+{% block content %}
+    <!-- contenido específico -->
+{% endblock %}
+
+
+## Clase 16: Configuración de Proyecto Django: Entorno, Extensiones y Repositorio
 > 
 
 ´´´python
@@ -324,7 +377,31 @@ class Book(models.Model):
 
 ´´´
 
-## Clase 15: 
+## Clase 17: 
+> 
+
+´´´python
+
+
+´´´
+
+## Clase 18: 
+> 
+
+´´´python
+
+
+´´´
+
+## Clase 19: 
+> 
+
+´´´python
+
+
+´´´
+
+## Clase 20: 
 > 
 
 ´´´python

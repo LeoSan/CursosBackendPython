@@ -1,4 +1,4 @@
-## Curso Python 
+# Curso Python 
 
 > Lugar: Platzi 
 > Fecha: 01 Abril 2025 
