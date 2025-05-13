@@ -3,8 +3,8 @@ from .models import Products
 
 class ProductForm(forms.Form):
     name = forms.CharField(max_length=200, label="Nombre")
-    description = forms.CharField(max_length=500, label="Nombre")
-    price = forms.DecimalField(ax_digits=10, decimal_places=2, label="precio")
+    description = forms.CharField(max_length=500, label="Descripción")
+    price = forms.DecimalField(max_digits=10, decimal_places=2, label="precio")
     available = forms.BooleanField(initial=True, label="Nombre")
     photo = forms.ImageField(label="Foto", required=False)
 

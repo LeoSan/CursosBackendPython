@@ -1,0 +1,9 @@
+from django.urls import path
+from .views import ProductsFormView, ProductsListView
+
+
+urlpatterns = [
+    path('listado/', ProductsListView.as_view(), name="list_product"),
+    path('agregar/', ProductsFormView.as_view(), name="add_product"),
+    
+]

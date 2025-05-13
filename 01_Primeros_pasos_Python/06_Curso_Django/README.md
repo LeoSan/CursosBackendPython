@@ -370,7 +370,11 @@ Para reutilizar este contenido:
 
 
 ## Clase 16: Configuración de Proyecto Django: Entorno, Extensiones y Repositorio
-> 
+> Para este caso vamos a crear una app de coffe_shop 
+
+## Notas mentales 
+- cuando se crea un proyecto en Django se genera un repo con el nombre del proyecto y nuestro desarrollo son las app donde podrá ir el modelo los migrate y entre otras funcionalidades 
+
 
 ´´´python
 
@@ -393,18 +397,141 @@ Para reutilizar este contenido:
 
 ´´´
 
-## Clase 19: 
-> 
+
+
+## Clase 20: Configurar plantillas 
+>
+
+## Pasos 
+- Paso 1: Se debe configurar en en el seeting del proyecto NO en la app DEL PROYECTO de esta manera
 
 ´´´python
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates' )],## Es donde va buscar los templates
+        'APP_DIRS': True, ## hay que activarlo 
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 ´´´
 
-## Clase 20: 
-> 
+- Paso 2: se debe crear un repositorio llamado 'templates' es aqui donde iran nuestras base.html 
+    - de esta forma 
+    - ![imagen](../06_Curso_Django/info/info_009.png)
+    - congiguramos nuestra plantilla base.html de esta manera PLANTILLA PADRE 
+    ´´´python
+        HEAD
+        BODY
+        {% block content %} 
 
+        {% endblock content %}
+        FOOTER
+    ´´´
+
+
+- Paso 3: nuestra plantilla HIJA PARA ESTE ejemplo usamos list_products.html uso usamos las propiedades extend y block  
+
+´´´html
+{% extends "base.html" %}
+
+{% block content %}
+<section class="bg-white p-6 rounded-md shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Listado de Productos</h2>
+    <ul>
+        {% for product in products  %}
+            <li>
+                {{product.name}}
+                <b>${{product.price}}</b>
+                {% if product.photo %}
+                    <img src="{{product.photo.url}}" alt="{{product.name}}" style="max-height:100px" />
+                
+                {% endif %}
+            </li>
+        
+        {% endfor %}
+    </ul>                
+</section>
+{% endblock content %}
+´´´
+- Paso 4: si no funciona por favor valida nombre de plantillas, la configuracion de urls.py y los nombre de las plantillas hijos el cambio es casi instantaneo 
+
+
+
+## Clase 21: Administración de Modelos en Django: Configuración y Uso de Django
+> Explorar la funcionalidad del Django Admin es esencial para aprovechar al máximo el potencial de Django en la gestión de aplicaciones web.
+
+## ¿Cómo accedemos al Django Admin?
+Primero, asegúrate de que el proyecto de Django esté corriendo. Luego, accede a la URL “/admin”. Aparecerá una página de inicio de sesión con el título “Django Administration”.
+
+## ¿Cómo creamos un superusuario?
+Para acceder al admin, necesitas un superusuario. Detén el servidor y ejecuta el comando createsuperuser. Proporciona un nombre de usuario, correo electrónico y contraseña. Reinicia el servidor y usa estas credenciales para iniciar sesión en el admin.
+
+## ¿Cómo registramos un modelo en el Django Admin?
+Abre el archivo admin.py dentro de tu aplicación.
+Crea una nueva clase que herede de admin.ModelAdmin.
+Importa tu modelo con from .models import Product.
+Registra el modelo usando admin.site.register(Product, ProductAdmin).
+
+## ¿Cómo personalizamos la vista de lista en el Django Admin?
+Puedes añadir campos a la lista de visualización usando list_display:
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price')
+Esto muestra los campos name y price en la lista de productos.
+
+## ¿Cómo agregamos funcionalidad de búsqueda?
+Añade el atributo search_fields en la clase del administrador:
+
+class ProductAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+Esto permite buscar productos por nombre.
+
+## ¿Cómo editamos y guardamos productos?
+Desde la lista de productos, haz clic en un producto para abrir el formulario de edición. Realiza los cambios necesarios y selecciona una de las opciones de guardado.
+
+## ¿Cómo añadimos imágenes a los productos?
+Asegúrate de tener un campo de imagen en tu modelo.
+Sube una imagen a través del formulario de edición.
+Configura las URLs para servir archivos estáticos agregando la configuración en urls.py:
+from django.conf.urls.static import static
+from django.conf import settings
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+## ¿Cómo administramos múltiples productos?
+Selecciona varios productos usando los checkboxes y aplica acciones en masa, como eliminar.
+
+## ¿Cómo configuramos la visualización de imágenes en la lista de productos?
+Configura las URLs de los archivos estáticos y media para que Django sepa dónde encontrarlas. Asegúrate de importar y utilizar correctamente static y settings en tu archivo urls.py.
+
+## ¿Cómo agregamos un nuevo campo al modelo?
+Para agregar un nuevo campo, como la fecha de creación, modifica el modelo y actualiza la clase del administrador para mostrarlo en la lista:
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'created_at')
+
+## Notas mentales Comandos 
+- Crear usuario admin -> ´python3 manage.py createsuperuser´ -> Te pide unos pasos para seguir adelante 
+- Podemos generar adminitración de nuestros modelos es se hace de esta manera podemos ingresar al repositorio del proyecto para este caso cofee_shop y buscar el archivo admin.py  
 ´´´python
+from django.contrib import admin
+from .models import Products
 
+# Register your models here.
+# Paso 1: genero la clase que podra administrar el modelo esto se hace para genrar un CRUD
+class ProductAdmin(admin.ModelAdmin):
+    model = Products 
 
+# Paso 2: registramos y relacionamos modelo, con la clase que se genero aqui para el admin del modelo 
+admin.site.register(Products, ProductAdmin)
 ´´´
+

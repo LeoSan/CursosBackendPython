@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Básica con Tailwind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <header class="bg-blue-500 text-white py-4">
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-bold">Mi Sitio Web</h1>
+        </div>
+    </header>
+
+    <div class="container mx-auto py-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <main class="md:col-span-2">
+            <section class="bg-white p-6 rounded-md shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Contenido Principal</h2>
+                <p class="text-gray-700">
+                <form action="{% url "add_product" %}" method="post"> 
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type='submit'>Agregar</button>
+                </form>
+                </p>
+                
+            </section>
+        </main>
+
+        <aside class="bg-white p-6 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold mb-4">Artículo Destacado</h2>
+            <article>
+                <h3 class="text-md font-semibold mb-2">Título del Artículo</h3>
+                <p class="text-gray-600">Este es un artículo que se muestra en la barra lateral derecha. Puedes usarlo para destacar noticias, promociones o información relevante.</p>
+                <a href="#" class="text-blue-500 hover:underline mt-2 inline-block">Leer más</a>
+            </article>
+        </aside>
+    </div>
+
+    <footer class="bg-gray-300 text-gray-700 py-4 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Mi Sitio Web. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
