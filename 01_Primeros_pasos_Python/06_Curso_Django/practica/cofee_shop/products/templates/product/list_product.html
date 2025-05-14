@@ -50,17 +50,19 @@
             <p class="mt-1.5 text-sm text-gray-700">{{product.description}}$</p>
             <p class="mt-1.5 text-sm text-gray-700">{{product.price}}$</p>
 
-            {% comment "" %}
 
-                        <form class="mt-4">
-            <button
-                class="block w-full rounded-sm bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
-            >
-                Add to Cart
-            </button>
-            </form>
+
+                    <form action="{% url 'add_product' %}" class="mt-4" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="product" value="{{product.id}}">
+                    <button
+                        class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
+                    >
+                        Agregar al pedido
+                    </button>
+                    </form>
             
-            {% endcomment %}
+
 
         </div>
         </a>

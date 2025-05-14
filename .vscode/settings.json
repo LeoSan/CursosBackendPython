@@ -1,0 +1,8 @@
+{
+    "editor.accessibilityPageSize": 14,
+    "editor.fontSize": 14,
+    "editor.fontVariations": false,
+    "editor.formatOnPaste": false,
+    "diffEditor.hideUnchangedRegions.contextLineCount": 4,
+    "editor.fontLigatures": false
+}
