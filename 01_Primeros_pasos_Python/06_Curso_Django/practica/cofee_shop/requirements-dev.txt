@@ -1,1 +1,2 @@
 python==8.36.0
+black

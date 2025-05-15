@@ -7,7 +7,11 @@
 - Para entrar al shellDB -> ´python3 manage.py dbshell´
 - Crear super usuario -> ´python3 manage.py createsuperuser´
 - Comando para crear app ->  ´python3 manage.py startapp my_first_app´
-- Debuguear -> {% debug order %} -> Es la forma de debuguer dentro de una plantilla la variable order es los que manejamos en el context_object_name de las viwe.py
+- Debuguear -> {% debug order %} -> Es la forma de debuguer dentro de una plantilla la variable order es los que manejamos en el context_object_name de 
+las viwe.py
+- Instalar django-rest-framework -> ´pip3 install django-rest-framework´
+
+
 
 ## Notas Mentales 
 - El python3 -> es porque mi ambiente instale la version 3 hay que validar eso ya que en los comandos debes hacer el ajuste de quitar python3 en caso que no se tenga instaldo 

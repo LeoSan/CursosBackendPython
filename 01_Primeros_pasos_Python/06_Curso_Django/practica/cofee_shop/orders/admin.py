@@ -10,6 +10,8 @@ dentro del módulo admin.
 TabularInline es una clase de Django que permite mostrar modelos relacionados (en este caso, OrderProduct) 
 directamente dentro de la página de edición de otro modelo (en este caso, Order), presentándolos en un formato de tabla.
 """
+
+
 class OrderProductInlineAdmin(admin.TabularInline):
     model = OrderProduct
     extra = 0
@@ -23,9 +25,13 @@ En este caso, incluye OrderProductInlineAdmin. Esto es lo que permite que los ob
 relacionados del modelo OrderProduct se muestren y se puedan editar directamente dentro 
 de la página de administración del modelo Order
 """
+
+
 class OrderAdmin(admin.ModelAdmin):
     model = Order
-    inlines = [OrderProductInlineAdmin]## Esto permite hacer el macth con los productos 
+    inlines = [
+        OrderProductInlineAdmin
+    ]  ## Esto permite hacer el macth con los productos
 
 
 admin.site.register(Order, OrderAdmin)

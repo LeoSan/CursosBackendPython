@@ -7,19 +7,42 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Products',
+            name="Products",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField(max_length=200, verbose_name='nombre')),
-                ('description', models.TextField(max_length=500, verbose_name='descripción')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='precio')),
-                ('available', models.BooleanField(default=True, verbose_name='Disponibles')),
-                ('photo', models.ImageField(blank=True, null=True, upload_to='logos', verbose_name='Fotos')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.TextField(max_length=200, verbose_name="nombre")),
+                (
+                    "description",
+                    models.TextField(max_length=500, verbose_name="descripción"),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=10, verbose_name="precio"
+                    ),
+                ),
+                (
+                    "available",
+                    models.BooleanField(default=True, verbose_name="Disponibles"),
+                ),
+                (
+                    "photo",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="logos", verbose_name="Fotos"
+                    ),
+                ),
             ],
         ),
     ]

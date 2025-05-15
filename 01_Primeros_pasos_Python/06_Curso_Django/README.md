@@ -117,25 +117,25 @@ La vista envía los datos al template para mostrarlos.
 
 - Paso 5: Debemos ahora trabajar en la app y hacer los ajustes necesarios siguiente el MVT 
     - View 
-    ´´´python
+    ```python
         from django.shortcuts import render
 
         # Create your views here.
         def my_view(request):
             return render(request, "my_first_app/car_list.html")
 
-    ´´´
+    ```
     - model
-    ´´´python
+    ```python
         from django.db import models
 
         # Create your models here.
         class Car(models.Model):
             title = models.TextField(max_length=250)
 
-    ´´´
+    ```
     - template 
-    ´´´html
+    ```html
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -149,7 +149,7 @@ La vista envía los datos al template para mostrarlos.
         </body>
         </html>
 
-    ´´´
+    ```
 - Paso 6: Podemos ejeuctar el runserver ´python3 manage.py runserver´
 
 ## Clase 5: Modelos y Migraciones en Django ORM
@@ -207,7 +207,7 @@ Después de agregar el nuevo campo al modelo, sigue estos pasos:
 ## Clase 9: Relaciones de Tablas Uno a Muchos con Django
 > Manera de crear nuevas clases del modelo y como relacionar de 1 - 1 
 
-´´´python
+```python
 
 class Publisher(models.Model):
     name = models.TextField(max_length=250, null=True, default='n/a')
@@ -223,7 +223,7 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-´´´
+```
 
 ## Clase 10: Relaciones de Muchos a Muchos en Modelos de Base de Datos
 > 
@@ -234,7 +234,7 @@ class Book(models.Model):
     - In [15]: autor_list = [danny, audry2]
     - In [16]: book.authors.set(autor_list)
 
-´´´python
+```python
 
 class Publisher(models.Model):
     name = models.TextField(max_length=250, null=True, default='n/a')
@@ -259,7 +259,7 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-´´´
+```
 ## Clase 11:  Relaciones 1 a 1 en Django: Creación y Gestión de Perfiles de Autor
 
 ## Notas mentales 
@@ -291,7 +291,7 @@ class Book(models.Model):
 - Paso 3: Podemos revisar views para generar las views correspondientes-> 
     - Claro pasos previos como lo indica debemos tener formadas los Modelos
     - Tambien tener listo los template -> book_list.html
-´´´python
+```python
 
 def view_autores(request, *args, **kwargs):
     author = Autor.objects.get(id=kwargs['id'])
@@ -302,7 +302,7 @@ def view_books(request):
     books = Book.objects.all() 
     context = {"book_list": books}
     return render(request, 'my_first_app/book_list.html', context)
-´´´
+```
 
 
 
@@ -376,26 +376,26 @@ Para reutilizar este contenido:
 - cuando se crea un proyecto en Django se genera un repo con el nombre del proyecto y nuestro desarrollo son las app donde podrá ir el modelo los migrate y entre otras funcionalidades 
 
 
-´´´python
+```python
 
 
-´´´
+```
 
 ## Clase 17: 
 > 
 
-´´´python
+```python
 
 
-´´´
+```
 
 ## Clase 18: 
 > 
 
-´´´python
+```python
 
 
-´´´
+```
 
 
 
@@ -405,7 +405,7 @@ Para reutilizar este contenido:
 ## Pasos 
 - Paso 1: Se debe configurar en en el seeting del proyecto NO en la app DEL PROYECTO de esta manera
 
-´´´python
+```python
 
 TEMPLATES = [
     {
@@ -422,25 +422,25 @@ TEMPLATES = [
     },
 ]
 
-´´´
+```
 
 - Paso 2: se debe crear un repositorio llamado 'templates' es aqui donde iran nuestras base.html 
     - de esta forma 
     - ![imagen](../06_Curso_Django/info/info_009.png)
     - congiguramos nuestra plantilla base.html de esta manera PLANTILLA PADRE 
-    ´´´python
+    ```python
         HEAD
         BODY
         {% block content %} 
 
         {% endblock content %}
         FOOTER
-    ´´´
+    ```
 
 
 - Paso 3: nuestra plantilla HIJA PARA ESTE ejemplo usamos list_products.html uso usamos las propiedades extend y block  
 
-´´´html
+```html
 {% extends "base.html" %}
 
 {% block content %}
@@ -461,7 +461,7 @@ TEMPLATES = [
     </ul>                
 </section>
 {% endblock content %}
-´´´
+```
 - Paso 4: si no funciona por favor valida nombre de plantillas, la configuracion de urls.py y los nombre de las plantillas hijos el cambio es casi instantaneo 
 
 
@@ -522,7 +522,7 @@ class ProductAdmin(admin.ModelAdmin):
 ## Notas mentales Comandos 
 - Crear usuario admin -> ´python3 manage.py createsuperuser´ -> Te pide unos pasos para seguir adelante 
 - Podemos generar adminitración de nuestros modelos es se hace de esta manera podemos ingresar al repositorio del proyecto para este caso cofee_shop y buscar el archivo admin.py  
-´´´python
+```python
 from django.contrib import admin
 from .models import Products
 
@@ -533,7 +533,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 # Paso 2: registramos y relacionamos modelo, con la clase que se genero aqui para el admin del modelo 
 admin.site.register(Products, ProductAdmin)
-´´´
+```
 
 ## Clase  23 - 24 : Detalle de Orden y Personalización de Vistas en Django
 
@@ -558,4 +558,360 @@ En este caso, incluye OrderProductInlineAdmin. Esto es lo que permite que los ob
 relacionados del modelo OrderProduct se muestren y se puedan editar directamente dentro 
 de la página de administración del modelo Order
 """
+
+## clase 27: Creación de APIs con Django REST Framework
+> La separación de la lógica de backend y frontend es una práctica común en el desarrollo de software moderno, con el frontend generalmente escrito en JavaScript y la conexión al backend manejada a través de APIs. Django REST es una librería de Python que facilita la creación de estas APIs, permitiendo una integración eficiente entre frontend y backend
+
+# ¿Cómo instalar Django REST Framework?
+Para instalar Django REST Framework, utilizamos el siguiente comando:
+
+- pip install django-rest-framework
+
+## ¿Cómo configurar un Serializer en Django REST?
+Los Serializers en Django REST convierten modelos de Django en JSON. Para crear un nuevo Serializer, sigue estos pasos:
+
+Crea un archivo llamado serializers.py en la aplicación correspondiente.
+Importa ModelSerializer desde rest_framework:
+from rest_framework import serializers
+from .models import Product
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+## ¿Cómo crear una vista en Django REST?
+Para crear una vista que devuelva datos en formato JSON:
+
+Crea una vista heredando de APIView:
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Product
+from .serializers import ProductSerializer
+
+class ProductListAPI(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+Define la URL para esta vista en urls.py:
+
+from django.urls import path
+from .views import ProductListAPI
+
+urlpatterns = [
+    ...
+    path('api/products/', ProductListAPI.as_view(), name='product-list-api'),
+]
+
+## ¿Cómo manejar permisos y autenticación en Django REST?
+Dependiendo de tu caso de uso, puedes configurar permisos y autenticación. Para esta vista, vamos a desactivarlos:
+
+from rest_framework.permissions import AllowAny
+
+class ProductListAPI(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+
+## Implementación de Django REST Framework en un Proyecto Django
+## Pasos 
+
+- Paso 1:  Instalación:**
+
+   Ejecuta el siguiente comando en la terminal dentro del directorio de tu proyecto:
+
+```bash
+    pip install djangorestframework
+```
+
+- Paso 2: Agregar a INSTALLED_APPS:
+
+Edita el archivo settings.py de tu proyecto y agrega 'rest_framework' a la lista INSTALLED_APPS:
+
+```python
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Tus otras aplicaciones
+    'tu_app',
+    'rest_framework',
+]
+```
+
+- Paso 3: Crear Serializadores (tu_app/serializers.py):
+
+Define un serializador para tu modelo. Ejemplo para un modelo Producto:
+
+```python
+
+# tu_app/serializers.py
+from rest_framework import serializers
+from .models import Producto
+
+class ProductoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = '__all__'
+        # O campos específicos:
+        # fields = ('id', 'nombre', 'precio')
+```
+- Paso 4: Crear Vistas de API (tu_app/views.py):
+
+Define las vistas que manejarán las solicitudes. Ejemplo usando vistas basadas en clases:
+
+```python
+
+# tu_app/views.py
+from rest_framework import generics
+from .models import Producto
+from .serializers import ProductoSerializer
+
+class ProductoLista(generics.ListCreateAPIView):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+class ProductoDetalle(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+```
+
+- Paso 5: Configurar URLs (tu_app/urls.py y mi_proyecto/urls.py):
+
+Crea o edita tu_app/urls.py:
+
+```python
+# tu_app/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('productos/', views.ProductoLista.as_view(), name='producto-lista'),
+    path('productos/<int:pk>/', views.ProductoDetalle.as_view(), name='producto-detalle'),
+]
+Incluye las URLs de tu aplicación en el urls.py principal de tu proyecto:
+
+Python
+
+# mi_proyecto/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('tu_app.urls')),
+]
+```
+- Paso 6: Ejecutar el Servidor:
+
+```Bash
+python manage.py runserver
+```
+
+- Paso 7: Probar la API:
+
+Puedes usar herramientas como curl, 1  Postman o tu navegador para interactuar con las siguientes URLs (asumiendo que tu servidor se ejecuta en http://127.0.0.1:8000 y has usado el prefijo /api/
+
+## Clase 28: Configuración de Bases de Datos con Django y AWS RDS
+
+## Pasos 
+- Paso 1: Instalar el Adaptador de PostgreSQL para Python**
+
+Activa tu entorno virtual y ejecuta:
+
+```bash
+pip install psycopg2
+```
+
+- Paso 2: Configurar Django para Usar PostgreSQL
+    - Validar conexion de manera local 
+    - ![Video Tutorial](../06_Curso_Django/info/info_013.png)
+    - Modifica la sección DATABASES en settings.py:
+
+```Python
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '<nombre_basededatos>',
+        'USER': '<nombre_usuario>',
+        'PASSWORD': '<contraseña>',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
+
+- Paso 3: Aplicar las Migraciones de Django
+
+Asegúrate de estar en el directorio de tu proyecto Django y ejecuta:
+
+```Bash
+
+python manage.py makemigrations
+python manage.py migrate
+```
+Paso 4: Crear un Superusuario (Opcional)
+
+```Bash
+python manage.py createsuperuser
+```
+- Paso 5: Ejecutar el Servidor de Desarrollo de Django
+
+```Bash
+
+python manage.py runserver
+```
+
+## Muestra del Logro 
+![Ejemplo](../06_Curso_Django/info/info_010.png)
+
+## Crear una Base de datos en amazon web server 
+
+
+1. Crear una Instancia de Base de Datos PostgreSQL en Amazon RDS:
+2. Accede a la Consola de AWS: Inicia sesión en tu cuenta de AWS y dirígete a la consola de administración.
+3. Busca RDS: En la barra de búsqueda, escribe "RDS" y selecciona el servicio "Relational Database Service".
+4. Crea una Base de Datos: Haz clic en el botón "Crear base de datos".
+    - Elige el Motor de Base de Datos: Selecciona "PostgreSQL".
+    - Selecciona la Plantilla: Elige la plantilla que mejor se adapte a tus necesidades (por ejemplo, "Nivel gratuito" para pruebas o "Producción" para entornos reales).
+5. Configuración:
+    - Nombre de la Instancia de Base de Datos: Elige un nombre único para tu instancia.
+    - Nombre de Usuario Maestro: Define un nombre de usuario para el administrador de la base de datos (por ejemplo, django_user).
+    - Contraseña Maestra: Establece una contraseña segura para el usuario maestro. Confírmala.
+6. Configuración de la Instancia:
+    - Clase de Instancia: Selecciona el tipo de instancia según tus requerimientos de rendimiento.
+    - Almacenamiento: Define el tamaño del almacenamiento.
+    - Tipo de Almacenamiento: Elige el tipo de almacenamiento (por ejemplo, "Propósito general SSD").
+
+7. Conectividad:
+    - Nube Virtual Privada (VPC): Selecciona la VPC donde deseas lanzar la instancia. Si no tienes una, AWS creará una por defecto.
+    - Grupo de Subredes: Elige un grupo de subredes dentro de tu VPC.
+    - Accesibilidad Pública: Decide si quieres que la base de datos sea accesible públicamente (generalmente no se recomienda por seguridad para producción). Si la eliges, deberás configurar los grupos de seguridad adecuadamente.
+    - Grupo de Seguridad de VPC: Configura un nuevo grupo de seguridad o elige uno existente. Es crucial configurar las reglas de entrada para permitir el tráfico desde tu dirección IP o desde la instancia donde se ejecuta tu aplicación Django (si está en AWS EC2 u otro servicio). Asegúrate de permitir el tráfico en el puerto predeterminado de PostgreSQL (5432).
+    - Parámetros Adicionales: Revisa y configura otros parámetros según tus necesidades (copias de seguridad, mantenimiento, etc.).
+    - Revisa y Crea: Revisa la configuración y haz clic en "Crear base de datos".
+
+- [Video Tutorial](https://mega.nz/file/RNNwRb5I#vD5gSXoO0Kw2jg4HZ_h7zY_4ewA6NqDhg78aBrY9Y3E)
+
+## Configuración de redes de AWS 
+> Esto nos permite en el setting de configuración de DJango conectarnos con nuestra base AWS 
+
+- [Video Tutorial](https://mega.nz/file/xMEgEBjR#V1ghgXp2IgZOj06bDm4eo4I1JZqOBFJvuC_YSut82co)
+
+**Importante**
+- De aqui vamos extraer los datos para ingresarlo en el setting.py
+ ![Video Tutorial](../06_Curso_Django/info/info_012.png)
+
+
+## Conectando nuestra base de datos AWS a nuestro proyecto 
+> Es información sensible si no funciona es porque borre la base de datos de AWS 
+
+- Validar Conexion AWS 
+ ![Video Tutorial](../06_Curso_Django/info/info_014.png)
+
+
+## Clase 29: Uso de Django Environ para Manejar Credenciales Seguras
+
+## Pasos 
+- Paso 1: Necesitamos instalar un paquete para crear un archivo .env y poder ocultar nuestras credenciales -> ´pip3 install django-environ´
+- Paso 2: En la seccion suiperior del archivo setting.py realizamos la importacion de nuestra libreria
+ 
+```Python
+
+import os
+from pathlib import Path
+import environ # Paso 1
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env() # Paso 2
+environ.Env.read_env(os.path.join(BASE_DIR, ".env")) # paso 3
+
+```
+- Paso 3: Creamos nuestro archivo en raiz llamado ´.env´ y cramos en mayusculas nuetras variables que vamos usar 
+```Python
+DJANGO_DB_PASSWORD=TUCLAVEES
+```
+- Paso 4: en el archivo setting usamos nuestras variables creadas 
+```Python
+DATABASES = {
+    'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        #"ENGINE": "django.db.backends.postgresql",
+        #"NAME": "mongodb_base",
+        #"USER": "leonard",
+        #"PASSWORD": "admin",
+        #"HOST": "localhost",
+        #"PORT": "5432",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "HOST": "dbdjango.c74aegummz7m.us-east-2.rds.amazonaws.com",
+        "PORT": "5432",
+        "USER": "postgres",
+        "PASSWORD": env.str('DJANGO_DB_PASSWORD'),  
+    }
+}
+```
+- Paso 5: Debemos montar en nuestro entorno la variable de entorno para que funcione -> ´export DJANGO_DB_PASSWORD="tucalve"´
+- Paso 6: ejecutamos comando para volver validar si todo bien -> ´python3 manage.py dbshell´ 
+    - Validar Conexion AWS 
+    - ![Video Tutorial](../06_Curso_Django/info/info_015.png)
+
+## Clase 30: Testing de Aplicaciones Django con Unit Tests
+
+## Pasos 
+- Paso 1: Dentro de nuestras app existe un archivo test.py aqui podemos generar nuestros TDD Usaremos products/test.py para generar una prueba 
+```Python
+from django.test import TestCase
+from django.urls import reverse
+
+from .models import Product
+
+
+class ProductListViewTests(TestCase):
+
+    def test_should_return_200(self):
+        url = reverse("list_product")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["products"].count(), 0)
+
+    def test_should_return_200_with_products(self):
+        url = reverse("list_product")
+        Product.objects.create(
+            name="test", description="test description", price="5", available=True
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["products"].count(), 1)
+```
+
+- Paso 2: Corremos nuestras pruebas ejecutamos el siguiente codigo ´python3 manage.py test´
+    - nos indicará si la prueba fue exitosa 
+
+## Clase 31-32: Despliegue de Proyectos Django en AWS: Configuración y Mejora de
+
+## Pasos 
+- Paso 1: Validamos el requirememnts.txt -> ´pip3 install -r requirements.txt´
+- Paso 2: validamos el formateo de python con black esto nos permite cambiar el ese error comun de comillas dobles en donde no se debe usar realiza el acambio de manera automatica y con las reglas pip8 -> pip3 install black -> luego ejecutar -> black . -> o formatear archivo especificos -> black archivo.py
+- Paso 3: Despliegue 
+
+
+
+
+
+
+
 

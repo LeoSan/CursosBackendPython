@@ -15,7 +15,9 @@ class Order(models.Model):
 
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Products, on_delete=models.PROTECT) ## Si la orden esta lista no borren esos datos es para proteher esos datos 
+    product = models.ForeignKey(
+        Products, on_delete=models.PROTECT
+    )  ## Si la orden esta lista no borren esos datos es para proteher esos datos
     quantity = models.IntegerField()
 
     def __str__(self) -> str:
