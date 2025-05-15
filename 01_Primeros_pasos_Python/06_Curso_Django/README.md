@@ -906,7 +906,135 @@ class ProductListViewTests(TestCase):
 ## Pasos 
 - Paso 1: Validamos el requirememnts.txt -> ´pip3 install -r requirements.txt´
 - Paso 2: validamos el formateo de python con black esto nos permite cambiar el ese error comun de comillas dobles en donde no se debe usar realiza el acambio de manera automatica y con las reglas pip8 -> pip3 install black -> luego ejecutar -> black . -> o formatear archivo especificos -> black archivo.py
-- Paso 3: Despliegue 
+- Paso 3: En AMW Creamos una Persona Para configurar los Acceso  
+    - Accedemos a Amazon [Login](https://us-east-2.console.aws.amazon.com/console/home?nc2=h_m_mc&region=us-east-2)  
+    - Buscamos en el Buscador Superior **AIM** 
+    - De la barra del menu izquierdo buscamos **Personas**
+    - Clic Boton **Crear Persona**
+    - Ingresamos ene el input un **nombre** -> cursodjango -> clic boton siguiente
+    - Escogemos Opciones de permisos -> **Adjuntar politicas directamente** clic aquí y abajo en el check box escogemos **AdministrarAcces**
+    - AWS nos muestra una interfaz para validar los datos y para finalizar boton **Crear Persona**
+    - Nos indica que se creo exitosamente 
+    - Anexo Video-> [Paso 3](https://mega.nz/file/gINAXbZQ#tfGpwQRYanm0dD1QWIaiIGGOmbR1p4g5xYJ_YOIkbvM)
+- Paso 4: Generar credenciales 
+    - Luego de seguir el paso3 podemos continuar 
+    - Accedemos a nuestra persona creada dando clic **cursodjango**
+    - En la parte superior de la pagina ubicamos **Crear clave de acceso** clic aquí
+    - Clic en la opción **Interfaz de línea de comandos (CLI)**
+    - clic  **Entiendo la recomendación anterior y deseo proceder a la creación de una clave de acceso.**
+    - Valor de etiqueta de descripción es opcional para este caso no vamos generar tag 
+    - clic boton **Crear clave de acceso**
+    - Es importante copiar y pegar estas claves ya que no hay manera de volver acceder a ellas 
+    - Anexo Video-> [Paso 4](https://mega.nz/file/QUllyLxJ#hHZGm_EEoQ1tGWcf3R6_jkXNidaI3IM4DEKhdC-fjHs)
+- Paso 5: Debemos instalar **eb** es la manera de como aws se comonica via consola con nuestro proyectos. 
+
+
+https://github.com/aws/aws-elastic-beanstalk-cli-setup?tab=readme-ov-file#2-quick-start
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html
+
+https://github.com/platzi/django/blob/main/coffee_shop/settings.py
+
+
+> La CLI de EB es una interfaz de línea de comandos para AWS Elastic Beanstalk que proporciona comandos interactivos que simplifican la creación, actualización y monitorización de entornos desde un repositorio local. Utilice la CLI de EB como parte de su ciclo diario de desarrollo y pruebas como alternativa a la consola de Elastic Beanstalk.
+
+
+
+
+## Refinar 
+
+
+Resumen
+
+Desplegar una aplicación en AWS puede ser sencillo utilizando Elastic Beanstalk, un servicio que automatiza la infraestructura necesaria.
+
+¿Qué es Elastic Beanstalk y cómo funciona?
+Elastic Beanstalk es un servicio de AWS que permite desplegar y gestionar aplicaciones rápidamente. Basta con enviar el código, y el servicio se encarga de crear y gestionar la infraestructura necesaria.
+
+¿Cómo se configura la CLI de Elastic Beanstalk?
+Con las credenciales listas, sigue estos pasos para configurar la CLI:
+
+Instala Elastic Beanstalk CLI siguiendo el enlace de instalación.
+Ejecuta eb init y responde las preguntas sobre la región, el ID de acceso y la clave secreta.
+Configura el nombre de la aplicación y la versión de Python.
+Indica si utilizarás CodeCommit (en este caso, no, ya que se usa GitHub).
+Configura una llave SSH para conectarte a los servidores.
+¿Cómo se despliega la aplicación?
+Crea un environment de producción con eb create coffee-shop-production.
+El servicio creará la infraestructura necesaria, incluyendo instancias y configuraciones de seguridad.
+Verifica el estado del environment con eb status.
+¿Cómo se solucionan errores comunes durante el despliegue?
+Configuración incorrecta del módulo WSGI: Configura el path correctamente en eb config.
+Variable de entorno faltante: Crea la variable con eb setenv.
+Error en ALLOWED_HOSTS de Django: Agrega el dominio correspondiente en el archivo de configuración de Django.
+¿Cómo se gestionan archivos estáticos en Django?
+Para asegurarte de que los archivos estáticos de Django se sirvan correctamente:
+
+Ejecuta python manage.py collectstatic.
+Configura el directorio de archivos estáticos en el archivo settings.py.
+
+## Preguntas 
+
+1.
+¿Cuál es el comando para aplicar migraciones en Django?
+python manage.py migrate
+
+2.
+¿Cómo defines una URL en Django?
+urlpatterns = [ path('home/', views.home, name='home'), ]
+
+3.
+¿Qué archivo necesitas para definir un formulario en Django?
+forms.py
+
+4.
+¿Cuál es el propósito de la función render en Django?
+Renderizar una plantilla y devolver una respuesta HTTP
+
+5.
+¿Cómo configuras la base de datos en un proyecto Django?
+En el archivo settings.py, en la sección DATABASES
+
+6.
+¿Cómo se crea un superusuario en Django?
+python manage.py createsuperuser
+
+7.
+¿Cuál es el propósito de MEDIA_URL y MEDIA_ROOT en Django?
+Para definir las URLs del proyecto
+Repasar
+
+8.
+¿En qué archivo debes registrar una aplicación nueva un proyecto Django?
+settings.py
+
+9.
+¿Cómo defines una relación Many-to-Many en un modelo de Django?
+class MyModel(models.Model): related_model = models.ForeignKey(RelatedModel, on_delete=models.CASCADE)
+Repasar
+
+10.
+¿Qué comando se utiliza para crear migraciones en Django?
+python manage.py makemigrations
+
+11.
+¿Para proteger una aplicación Django contra ataques de inyección SQL, qué medidas se deben tomar?
+Usar consultas ORM de Django
+
+12.
+¿Cuál es la ventaja de usar vistas basadas en clases en lugar de vistas basadas en funciones en Django?
+Reutilización de código y mayor organización
+
+13.
+¿Para manejar la autenticación de usuarios en Django, qué módulo es adecuado?
+django.contrib.auth
+
+14.
+¿Qué patrón de diseño sigue Django para la separación de lógica y presentación?
+Modelo-Vista-Template (MVT)
+
+15.
+¿Cómo puedes mejorar el rendimiento de una aplicación Django?
+Usar cache y optimizar consultas de base de datos
 
 
 

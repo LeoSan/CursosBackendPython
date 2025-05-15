@@ -14,7 +14,7 @@ class Order(models.Model):
 
 
 class OrderProduct(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE) ## Relacion de 1.. m 
     product = models.ForeignKey(
         Products, on_delete=models.PROTECT
     )  ## Si la orden esta lista no borren esos datos es para proteher esos datos
