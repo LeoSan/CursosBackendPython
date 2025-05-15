@@ -1000,8 +1000,7 @@ python manage.py createsuperuser
 
 7.
 ¿Cuál es el propósito de MEDIA_URL y MEDIA_ROOT en Django?
-Para definir las URLs del proyecto
-Repasar
+Para manejar archivos subidos por usuarios
 
 8.
 ¿En qué archivo debes registrar una aplicación nueva un proyecto Django?
@@ -1009,8 +1008,13 @@ settings.py
 
 9.
 ¿Cómo defines una relación Many-to-Many en un modelo de Django?
+class MyModel(models.Model): related_model = models.ManyToManyField(RelatedModel)
+
+9. ¿Cómo defines una relación Many-to-One en un modelo de Django?
 class MyModel(models.Model): related_model = models.ForeignKey(RelatedModel, on_delete=models.CASCADE)
-Repasar
+
+9. ¿Cómo defines una relación One-to-One en un modelo de Django?
+class MyModel(models.Model): related_model = models.OneToOneField(RelatedModel, on_delete=models.CASCADE)
 
 10.
 ¿Qué comando se utiliza para crear migraciones en Django?
@@ -1035,6 +1039,16 @@ Modelo-Vista-Template (MVT)
 15.
 ¿Cómo puedes mejorar el rendimiento de una aplicación Django?
 Usar cache y optimizar consultas de base de datos
+
+
+16. 
+¿Qué biblioteca se utiliza para trabajar con formularios en Django?
+
+17. 
+Qué archivo debes modificar para registrar un modelo en el panel de administración?
+models.py
+REPASAR 
+
 
 
 
