@@ -30,9 +30,9 @@ SECRET_KEY = "django-insecure-m+$ursal=2%wj&4%i3^+da8@q-204tf%hdb*j(1_tov^(mk-kz
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com",
-    "http://coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com/",
-    "172.31.4.61"
+   # "coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com",
+   # "http://coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com/",
+   # "172.31.4.61"
 ]
 
 

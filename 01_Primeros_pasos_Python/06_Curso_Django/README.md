@@ -969,7 +969,8 @@ class ProductListViewTests(TestCase):
     - Tambien debemos congigurar en el setting el ALLOWED_HOSTS anexando el CNAME -> coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com que podemos extraer usando el ´eb status´ 
     - Como hicimos cambios en el proyecto debemos subirlos 
         - git status
-        - git add .    
+        - git add . 
+        - git commit -am"Ajuste"    
         - eb deploy coffe-shop-production --staged
     - Configuramos los static creando en el setting.py -> STATIC_ROOT = "static"
     - ejecutamos el comando ´python3 manage.py collectstatic´ -> si no funciona valida que tengas el **entorno activo** para este caso el django_one
