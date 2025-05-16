@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-m+$ursal=2%wj&4%i3^+da8@q-204tf%hdb*j(1_tov^(mk-kz
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com'
+    #'coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com'
 ]
 
 
@@ -85,7 +85,7 @@ WSGI_APPLICATION = "cofee_shop.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+"""
 DATABASES = {
     "default": {
         #"ENGINE": "django.db.backends.sqlite3",
@@ -96,14 +96,16 @@ DATABASES = {
         # "PASSWORD": "admin",
         # "HOST": "localhost",
         # "PORT": "5432",
-         "ENGINE": "django.db.backends.postgresql",
-         "NAME": "postgres",
-         "HOST": "dbdjango.c74aegummz7m.us-east-2.rds.amazonaws.com",
-         "PORT": "5432",
-         "USER": "postgres",
-         "PASSWORD": env.str('DJANGO_DB_PASSWORD'),
+        # "ENGINE": "django.db.backends.postgresql",
+        # "NAME": "postgres",
+        # "HOST": "dbdjango.c74aegummz7m.us-east-2.rds.amazonaws.com",
+        # "PORT": "5432",
+        # "USER": "postgres",
+        # "PASSWORD": env.str('DJANGO_DB_PASSWORD'),
     }
 }
+"""
+DATABASES = {"default": env.db("DJANGO_DB_URL")}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -140,6 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

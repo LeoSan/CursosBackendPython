@@ -926,8 +926,56 @@ class ProductListViewTests(TestCase):
     - clic boton **Crear clave de acceso**
     - Es importante copiar y pegar estas claves ya que no hay manera de volver acceder a ellas 
     - Anexo Video-> [Paso 4](https://mega.nz/file/QUllyLxJ#hHZGm_EEoQ1tGWcf3R6_jkXNidaI3IM4DEKhdC-fjHs)
-- Paso 5: Debemos instalar **eb** es la manera de como aws se comonica via consola con nuestro proyectos. 
+- Paso 5: Debemos instalar **eb** es la manera de como aws se comonica via consola con nuestro proyectos.
+    - Para instalar eb en MAC hay que ejecutar el siguiente comando -> ´brew install awsebcli´
+    - Para comprobar la instalacion -> ´eb --version´
+    - ejecutamos el comando -> ´eb init´
+    - debemos escoger las opciones que nos indican: 
+    - la ciudad Ohio : 14 
+    - colocamos la clave secreta -> la que se genero en el paso 4
+    - Colocamos clave secreta -> la que se genero en el paso 4
+    - Decimos que si nombre dle proyecto igual
+    - indicamos que yes Clave SSH 
+    - enter  
+    - enter 
+    - Te genera clave
+    - Dejo evidencia de los pasos en consola: 
+        - ![Evidencia 1](../06_Curso_Django/info/info_016.png)   
+        - ![Evidencia 1](../06_Curso_Django/info/info_017.png)   
 
+- Paso 6: Debemos validar en AWS si se genero la aplicación
+    - Debes loguearte 
+    - Buscar en el budcador superior **Elastic Beanstalk**
+    - La barra de Menu Ixquierdo buscar **Aplicaciones**
+    - Debe salir el nombre de la aplicación que generamos en la línea de comandos
+    - ![Evidencia 1](../06_Curso_Django/info/info_018.png) 
+- Paso 7: Creamos nuestro environment por consola: 
+    - Ejecutamos ´eb create {nombre-environment}´ -> ´eb status coffe-shop-production´ este comando demora unos minutos 
+    - El servicio creará la infraestructura necesaria, incluyendo instancias y configuraciones de seguridad.
+    - ![Evidencia 2](../06_Curso_Django/info/info_019.png) 
+    - Valida como van los parametros de nuestra aplicacion ´eb status {nombre-environment}´ -> ´eb status coffe-shop-production´
+    - Leyendo los estatus hay que validar que el Health: Red -> esto indica que no esta corriendo hay que validar porque no esta corriendo 
+    - Podemos ver los logs ejecutando el siguiente comando ´eb logs {nombre-environment}´ -> ´eb logs coffe-shop-production´
+    - Para este caso tenemos el siguiente error -> ModuloNotfound -> quiere decir que esta buscando el archivo wsgi.py pero no lo encuentra podemos ejecutar un comando para reconfigurar el entorno
+    - Comando de reconfiguración -> ´eb config´
+    - Ubicamos la secci´pn llamada -> aws:elasticbeanstalk:container:python:
+    - Luego la sección WSGIPath: application debemos pasar -> WSGIPath: cofee_shop.wsgi:application
+    - Explicación como el archivo wsgi.py esta dentro de la carpeta cofee_shop esta no lo esta encontrando por lo que le estamos indicando que debe entrar en ese direcctorio, al realizar el ajuste notece que hay que dejar un espacio esto es importante ya que no te permite editar 
+    - "WSGIPath:-coffee_shop.wsgi:application" Indico con guion(-) el espacio que debe tener
+    - Podemos ver los logs tambien en wn AWS checar imagen debemos descargar: 
+    - ![Evidencia 2](../06_Curso_Django/info/info_020.png)
+    - Para el siguiente error debemos configurar la URL_BASE ejecutamos el siguiente comando -> ´postgres://miusuario:micontraseña@mihost.amazonaws.com:5432/mibasededatos´
+    - Ejemplo -> eb setenv DJANGO_DB_URL="postgres://miusuario:micontraseña@mihost.amazonaws.com:5432/mibasededatos"
+    - Tambien debemos congigurar en el setting el ALLOWED_HOSTS anexando el CNAME -> coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com que podemos extraer usando el ´eb status´ 
+    - Como hicimos cambios en el proyecto debemos subirlos 
+        - git status
+        - git add .    
+        - eb deploy coffe-shop-production --staged
+    - Configuramos los static creando en el setting.py -> STATIC_ROOT = "static"
+    - ejecutamos el comando ´python3 manage.py collectstatic´ -> si no funciona valida que tengas el **entorno activo** para este caso el django_one
+    - el comando anterior genera un compilado del front de Django ahora hay que subir esos cambios 
+    -  git add static/
+    - eb deploy coffe-shop-production --staged
 
 https://github.com/aws/aws-elastic-beanstalk-cli-setup?tab=readme-ov-file#2-quick-start
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html
