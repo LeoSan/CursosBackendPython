@@ -29,7 +29,9 @@ SECRET_KEY = "django-insecure-m+$ursal=2%wj&4%i3^+da8@q-204tf%hdb*j(1_tov^(mk-kz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'coffe-shop-production.eba-wbpfxpgp.us-east-2.elasticbeanstalk.com'
+]
 
 
 # Application definition
@@ -102,7 +104,6 @@ DATABASES = {
          "PASSWORD": env.str('DJANGO_DB_PASSWORD'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
