@@ -945,8 +945,8 @@ class ProductListViewTests(TestCase):
 
 - Paso 6: Debemos validar en AWS si se genero la aplicación
     - Debes loguearte 
-    - Buscar en el budcador superior **Elastic Beanstalk**
-    - La barra de Menu Ixquierdo buscar **Aplicaciones**
+    - Buscar en el buscador superior **Elastic Beanstalk**
+    - La barra de Menu Izquierdo buscar **Aplicaciones**
     - Debe salir el nombre de la aplicación que generamos en la línea de comandos
     - ![Evidencia 1](../06_Curso_Django/info/info_018.png) 
 - Paso 7: Creamos nuestro environment por consola: 
