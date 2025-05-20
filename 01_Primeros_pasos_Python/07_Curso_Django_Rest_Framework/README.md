@@ -115,38 +115,104 @@ DRF optimiza varios aspectos del desarrollo de APIs al ofrecer herramientas que 
 - Manejo de vistas más flexible con Viewsets que agrupan múltiples funcionalidades.
 - Continuidad con las funcionalidades de seguridad y administración de Django, sin necesidad de configuraciones adicionales.
 
-Qué añade Django RF para desarrollar API's
+## Qué añade Django RF para desarrollar API's
 
 Django REST agrega funcionalidades clave que hacen más fácil el desarrollo de APIs robustas, escalables y fácil de mantener:
 
-Estructura del Proyecto: Crea una carpeta api/ en tu app para organizar serializers, views y routers.
-Serializers: Usa ModelSerializer para simplificar la creación de serializers y validar datos.
-Vistas y Rutas: Utiliza vistas basadas en clases y routers para manejar operaciones CRUD de manera eficiente.
-Autenticación y Permisos: Configura el sistema de autenticación y establece permisos adecuados para controlar el acceso.
-Throttling: Implementa throttling para proteger tu API y garantizar acceso justo.
-Documentación: Genera documentación interactiva con herramientas como Swagger o Redoc.
-Pruebas: Escribe pruebas automatizadas usando APITestCase para asegurar el correcto funcionamiento de la API.
-Versionado: Considera implementar un esquema de versionado para manejar cambios futuros.
-Manejo de Errores: Utiliza las excepciones de DRF para ofrecer respuestas coherentes en caso de errores.
+- Estructura del Proyecto: Crea una carpeta api/ en tu app para organizar serializers, views y routers.
+- Serializers: Usa ModelSerializer para simplificar la creación de serializers y validar datos.
+- Vistas y Rutas: Utiliza vistas basadas en clases y routers para manejar operaciones CRUD de manera eficiente.
+- Autenticación y Permisos: Configura el sistema de autenticación y establece permisos adecuados para controlar el acceso.
+- Throttling: Implementa throttling para proteger tu API y garantizar acceso justo.
+- Documentación: Genera documentación interactiva con herramientas como Swagger o Redoc.
+- Pruebas: Escribe pruebas automatizadas usando APITestCase para asegurar el correcto funcionamiento de la API.
+- Versionado: Considera implementar un esquema de versionado para manejar cambios futuros.
+- Manejo de Errores: Utiliza las excepciones de DRF para ofrecer respuestas coherentes en caso de errores.
 
 ORM: Permite interactuar con la base de datos utilizando objetos Python en lugar de consultas SQL.
 Serializers: Convierten datos complejos (como objetos de modelos) en formatos como JSON y viceversa.
 ViewSets: Agrupan las operaciones CRUD en una sola clase para simplificar el manejo de vistas en APIs.
 
-## Clase 5: 
-> 
+## Clase 5: Modelos y Serializadores en Django para DoctorApp
+> Pasos para genear modelos en tu APIs
+
+- Paso 01: Generar los comandos para crear los modelos, recueda por cada ajuste debes correr los ultimos dos comandos 
+```Python
+- python3 manage.py startapp patients
+- python3 manage.py startapp doctors
+- python3 manage.py startapp bookings
+- python manage.py makemigrations
+- python manage.py migrate
+```
+
+- Paso 02: Registramos las apps creadas en el ´settings.py´ 
 
 ```Python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'patients',
+    'doctors',
+    'bookings',
+]
+```
+- Paso 03: Este paso es generar el modelo.py 
+
+
+- Paso 04: Este paso es generar el serializers.py => Recuerda los serializadores nos permiten convertir un modelo a Json y viceversa 
+
+- Paso 04:
+
+- Paso 05: 
+
+- Paso 06:
+
+- Paso 07:
+
+```Python
+- python3 manage.py startapp patients
+- python3 manage.py startapp doctors
+- python3 manage.py startapp bookings
+- python manage.py makemigrations
+- python manage.py migrate
+
 
 ```
 
 
-## Clase 6: 
-> 
+## Clase 6: Uso de Serializadores en Vistas con Django REST Framework
+> Pasos para Poblar las tablas 
 
+## Pasos 
+- Paso 1: pip install django-seed psycopg -> Instalar django-seed 
+- Paso 2: 
 ```Python
+    INSTALLED_APPS = [
 
+    ....
+
+    "django_seed",
+
+    ]
 ```
+- Paso 3: ´python manage.py seed patients --number=10´ => 
+- Paso 4: 
+
+{
+"id":11,
+"first_name":"Leonard",
+"last_name":"Cuenca",
+"date_of_birth":"2025-01-20",
+"contact_number":"1",
+"email":"cuenca623@gmail.com",
+"address":"Calle 3434 con Calle 234",
+"medical_history":"Reposo"
+}
 
 ## Clase 7: 
 > 
