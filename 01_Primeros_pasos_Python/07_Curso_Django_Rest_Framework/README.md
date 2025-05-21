@@ -166,7 +166,7 @@ INSTALLED_APPS = [
 
 - Paso 04: Este paso es generar el serializers.py => Recuerda los serializadores nos permiten convertir un modelo a Json y viceversa 
 
-- Paso 04:
+- Paso 04: Este paso Generar las views con sus decorador que va indicando si es GET, POST, UPDATE, DELETE 
 
 - Paso 05: 
 
@@ -200,7 +200,7 @@ INSTALLED_APPS = [
 
     ]
 ```
-- Paso 3: ´python manage.py seed patients --number=10´ => 
+- Paso 3: ´python manage.py seed patients --number=10´ => genera 10 elementos 
 - Paso 4: 
 
 {
@@ -214,51 +214,297 @@ INSTALLED_APPS = [
 "medical_history":"Reposo"
 }
 
-## Clase 7: 
+## Clase 7: Creación y modificación de pacientes en API REST con Django
 > 
 
 ```Python
 
+from .serializers import PatientSerializer
+from .models import Patient
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status 
+
+#GET/api/patients/ => Listar 
+
+@api_view(["GET"])
+def list_patients(request):
+    patients = Patient.objects.all()
+    serializer = PatientSerializer(patients, many=True)
+    return Response(serializer.data)
+
+@api_view(["GET"])
+def detail_patients(request, pk):
+    if request.method == 'GET':
+        try:
+            patient = Patient.objects.get(id=pk)
+            serializer = PatientSerializer(patient)
+            return Response(serializer.data, status=status.HTTP_200_OK)  # Devolver los datos del paciente creado
+        except Patient.DoesNotExist:
+            return Response(status=status.HTTP_204_NO_CONTENT)  # Si hay errores, devolverlos
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Si hay errores, devolverlos
+
+
+@api_view(["POST"])
+def create_patient(request):
+    serializer = PatientSerializer(data=request.data)  # Deserializar los datos enviados por el cliente
+    if serializer.is_valid(raise_exception=True):  # Verificar si los datos son válidos
+        serializer.save()  # Guardar el nuevo paciente en la base de datos
+        return Response(serializer.data, status=status.HTTP_201_CREATED)  # Devolver los datos del paciente creado
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Si hay errores, devolverlos
+
+
+
+@api_view(["PUT"])
+def edit_patient(request, pk):
+    try:
+        patient = Patient.objects.get(id=pk)
+        serializer = PatientSerializer(patient, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()  # Guardar el paciente en la base de datos
+        return Response(serializer.data, status=status.HTTP_201_CREATED)  # Devolver los datos del paciente editados
+    except Patient.DoesNotExist:
+        return Response(status=status.HTTP_204_NO_CONTENT)  # Si hay errores, devolverlos
+
+
+@api_view(["DELETE"])
+def delete_patient(request, pk):
+    try:
+        patient = Patient.objects.get(id=pk)
+        patient.delete()
+        return Response(status=status.HTTP_200_OK)
+    except Patient.DoesNotExist:
+        return Response(status=status.HTTP_204_NO_CONTENT)  # Si hay errores, devolverlos
 ```
 
 
-## Clase 8: 
+## Clase 8 y 9: Pruebas de APIs con Postman y Curl
 > 
+## ¿Cómo se utiliza Postman para probar una API?
+> Postman es una herramienta poderosa para interactuar con APIs. Permite realizar requests, gestionar colecciones y simular comportamientos de usuarios. Para probar nuestra API:
+
+- Descarga e instala Postman desde su página principal.
+- Accede a la interfaz donde puedes crear nuevos requests.
+- Por ejemplo, para listar pacientes en un servidor local, usa la URL: http://localhost:8000/api/patients.
+- Selecciona el método GET y presiona Send. Verás la lista de pacientes como respuesta.
+- Postman también permite guardar cada request en una colección para su uso posterior, ideal para pruebas repetitivas.
+
+## ¿Cómo se pueden manejar los requests en la línea de comandos con Curl?
+Si no necesitas todas las funcionalidades de Postman o estás en un entorno sin ventanas, Curl es la opción adecuada. Curl te permite ejecutar requests directamente desde la consola, útil cuando estás trabajando en servidores.
+
+Abre una terminal y utiliza un comando Curl para hacer un request, por ejemplo, listar pacientes con:
+```Python
+curl -X GET http://localhost:8000/api/patients
+```
+También puedes convertir fácilmente un request de Postman a Curl. En la interfaz de Postman, selecciona el ícono de código, copia el comando Curl generado y ejecútalo en la terminal.
+
+## ¿Cómo crear un paciente nuevo usando Postman?
+Para crear un nuevo recurso en nuestra API, como un paciente:
+
+Selecciona el método POST en Postman.
+Define el cuerpo de la petición en formato JSON, seleccionando Body > Raw > JSON. Por ejemplo:
+{
+  "name": "Oscar Barajas",
+  "age": 30,
+  "email": "oscar@example.com"
+}
+Ejecuta el request y asegúrate de que la respuesta indique que el recurso fue creado correctamente.
+También puedes generar el comando Curl correspondiente desde Postman y ejecutarlo en la consola.
+
+## ¿Cómo combinar Postman y Curl para mejorar las pruebas?
+Ambas herramientas se complementan bien. Postman facilita la creación y prueba de requests con una interfaz gráfica amigable, mientras que Curl te permite ejecutar esos mismos requests en entornos más limitados. Postman incluso puede generar el código Curl de un request, lo que es muy útil para integrar estos comandos en scripts automatizados o suites de pruebas.
+
+## Ventajas de Postman:
+
+- Interfaz gráfica intuitiva.
+- Automatización de pruebas.
+- Facilita la colaboración.
+- Ventajas de cURL:
+
+## VS 
+- Ligero y flexible.
+- Compatible con múltiples sistemas.
+- Fácil integración en scripts.
+
+## Clase 10: Refactorización de Vistas: De Funciones a Clases en Django REST
+> Un aspecto clave de Django Rest Framework es que ofrece herramientas muy útiles que simplifican el desarrollo. A diferencia de otros frameworks donde es necesario implementar muchas funcionalidades manualmente, DRF te permite optar entre hacerlo a mano o aprovechar sus características integradas. Esto facilita la creación de aplicaciones completamente personalizadas y flexibles, adaptadas a las necesidades específicas del proyecto
 
 ```Python
 
+from .serializers import PatientSerializer
+from .models import Patient
+
+
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.generics import ListAPIView, CreateAPIView
+
+class ListPatientsView(ListAPIView, CreateAPIView):
+    allowe_methods = ["GET", "POST"]
+    serializer_class = PatientSerializer
+    queryset = Patient.objects.all()
+
 ```
 
 
-## Clase 9: 
-> 
+## Clase 11:  Vistas Genéricas en Django: Detalle, Actualización y Eliminación
+
+## ¿Cómo evitar la duplicación de código con vistas genéricas?
+Django permite usar vistas genéricas como RetrieveAPIView, UpdateAPIView y DestroyAPIView.
+Sin embargo, es más eficiente usar la clase combinada RetrieveUpdateDestroyAPIView, que integra estas tres funcionalidades.
+Con esta clase podemos obtener, actualizar o eliminar un recurso sin necesidad de importar múltiples vistas.
+
+## ¿Cómo funciona el refactor a las vistas genéricas?
+El código que antes obtenía el objeto y devolvía un error 404 si no se encontraba, ahora es reemplazado por una vista genérica que maneja esa lógica automáticamente.
+Al definir la vista genérica RetrieveUpdateDestroyAPIView, simplemente necesitamos definir las variables correspondientes, como el modelo y los permisos, y se manejan todas las operaciones CRUD (create, read, update, delete).
+Esto nos permite reducir significativamente el código y mantener la funcionalidad.
 
 ```Python
 
+from .serializers import PatientSerializer
+from .models import Patient
+
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView,  DestroyAPIView, RetrieveUpdateDestroyAPIView  
+
+class ListPatientsView(ListAPIView, CreateAPIView):
+    allowe_methods = ["GET", "POST"]
+    serializer_class = PatientSerializer
+    queryset = Patient.objects.all()
+
+class DetailPatientsView(RetrieveUpdateDestroyAPIView):
+    allowe_methods = ["GET", "PUT", "DELETE"]
+    serializer_class = PatientSerializer
+    queryset = Patient.objects.all()
+
 ```
 
 
-## Clase 10: 
+## Clase 12: Documentación de APIs con DRF Spectacular y Swagger en Django
 > 
 
-```Python
+## ¿Cómo documentar una API automáticamente?
+Django y Django REST Framework (DRF) nos ofrecen la posibilidad de usar una librería llamada DRF Spectacular. Esta herramienta sigue el estándar OpenAPI para generar documentación automática.
+Este estándar permite que cualquier cambio en las vistas o en los endpoints de la API se refleje inmediatamente en la documentación, sin necesidad de modificarla manualmente.
 
-```
-
-
-## Clase 11: 
-> 
-
-```Python
-
-```
+## ¿Qué es Swagger y cómo usarlo para la documentación de tu API?
+Swagger es una interfaz visual que muestra la documentación generada por DRF Spectacular. Permite a los desarrolladores interactuar directamente con la API, probar los endpoints y revisar los parámetros y respuestas posibles.
+Además, ofrece la opción de descargar un archivo con el esquema OpenAPI que puede ser utilizado por otras herramientas o interfaces.
 
 
-## Clase 12: 
-> 
+## Pasos 
+- Paso 1: Debemos generar un app para la documentación para este caso usaremos el siguiete comando -> ´ python3 manage.py startapp docs´ OJO: valida que estes en la ruta manage.py y que tengas el entorno activo  
+- Paso 2: Instalamos DRF-Espectaculas con el comando -> ´pip install drf-spectacular´
+- Paso 3: recuerda cada instalcion o cada app creada debemos ajustar el setting.py -> 
 
 ```Python
-
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_spectacular', ## Aqui Espectacular 
+    'django_seed',
+    'patients',
+    'doctors',
+    'bookings',
+    'docs', ## Aqui el Docs 
+]
 ```
 
+- Paso 4: en nuestro seeting debemos configurar el paso inicial para el esptecular debemos anexae el siguiente diccionario
+Explicación [Aqui Enlace](https://drf-spectacular.readthedocs.io/en/latest/readme.html)  
+```Python
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+```
+- Paso 5: crear las url en el **Docs** Explicación [Aqui Enlace ](https://drf-spectacular.readthedocs.io/en/latest/readme.html)
+```Python
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+urlpatterns = [
+    # YOUR PATTERNS
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+]
+```
 
+- Paso 6: configuramos la url master o admin para que consuma la **Docs**
+```Python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('patients.urls')),
+
+    #Documentación
+    path('', include('docs.urls')),
+]
+```
+
+ - Paso 7: Consulta la deocumentación en sus dos versiones swagger-UI ó redoc podemos acceder consultando la url generada 
+
+ ![Ejemplo logrado](../07_Curso_Django_Rest_Framework/info/info_001.png) 
+
+## Clase 13: Uso de Viewsets y Routers en Django REST Framework
+> Los Viewsets en Django REST Framework nos ayudan a simplificar la creación de vistas al reutilizar una clase que agrupa el código necesario para manejar diferentes operaciones sobre un recurso, como listar, crear, actualizar y eliminar. Al integrarlos con los routers, evitamos la necesidad de definir cada URL manualmente, ya que el router se encarga de generar todas las rutas de manera automática.
+
+## ¿Qué son los Viewsets y cómo funcionan?
+- Un Viewset es una clase reutilizable que agrupa todas las operaciones que se suelen realizar con una vista (lista, detalle, creación, actualización, eliminación).
+
+- Al usar Viewsets, reducimos la cantidad de clases y URLs que necesitamos escribir, ya que todas las operaciones se manejan desde un solo lugar.
+- En lugar de crear múltiples clases, un solo Viewset puede manejar todas las acciones requeridas para un recurso.
+
+## ¿Cómo se crea un Viewset?
+Importamos ModelViewSet desde rest_framework.viewsets.
+Definimos una clase que hereda de ModelViewSet, como DoctorViewset.
+Asignamos un QuerySet y un Serializer para definir cómo se gestionará la información y cómo será serializada.
+
+```Python
+from rest_framework import viewsets
+from .serializers import DoctorSerializer
+from .models import Doctor
+
+class DoctorViewset(viewsets.ModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+```
+
+## ¿Cómo se registran los Viewsets con los routers?
+Los routers simplifican la creación de URLs, ya que generan las rutas automáticamente al registrar un Viewset.
+Usamos DefaultRouter de Django REST Framework para registrar el Viewset y generar las rutas correspondientes.
+```Python
+from rest_framework.routers import DefaultRouter
+from .viewsets import DoctorViewset
+
+router = DefaultRouter()
+router.register(r'doctors', DoctorViewset)
+urlpatterns = router.urls
+```
+## ¿Cómo se prueban los Viewsets?
+- Una vez registrado el Viewset, podemos verificar las URLs generadas ejecutando el servidor y accediendo a la API.
+- Las operaciones de creación, actualización y eliminación de un recurso se pueden realizar directamente en las URLs generadas automáticamente.
+
+## ¿Qué ventajas ofrecen los Viewsets y los routers?
+- Evitamos la repetición de código al gestionar varias operaciones con una sola clase.
+- Los routers generan automáticamente las rutas necesarias para cada recurso, lo que facilita su uso y mantenimiento.
+- Las URLs generadas tienen nombres claros, lo que permite su uso programático dentro del código.
+
+```Python
+from rest_framework import viewsets
+
+from .serializers import DoctorSerializer
+from .models import Doctor
+
+
+class DoctorViewSet(viewsets.ModelViewSet):
+    serializer_class = DoctorSerializer
+    queryset = Doctor.objects.all()
+```

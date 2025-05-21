@@ -1,9 +1,6 @@
 from .serializers import PatientSerializer
 from .models import Patient
 
-
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView,  DestroyAPIView, RetrieveUpdateDestroyAPIView  
 
 class ListPatientsView(ListAPIView, CreateAPIView):
