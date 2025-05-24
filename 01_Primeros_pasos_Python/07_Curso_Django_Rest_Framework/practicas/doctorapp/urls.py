@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    ## Admin
+    path('api-auth/', include('rest_framework.urls')), ## esta es la interfaz por defecto del crud de admin 
+    
     path('admin/', admin.site.urls),
     ##Pacientes 
     path('api/', include('patients.urls')),

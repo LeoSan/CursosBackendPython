@@ -160,13 +160,11 @@ print(name * 5)  # Imprime 'CarliCarliCarliCarliCarli'
 
 ## Clasee 6: Enteros, Flotantes y Booleanos
 
-
 **Tipos de datos**
 
 - Enteros: Son todos los números enteros. Se representa con la palabra Integer (INT)
 - Flotantes: Son todos los números decimales. Se representa con la palabra FLOAT
 - Booleanos: Representa verdadero (true) o falso (false).
-
 
 **¿Qué es un tipo de dato en Python?**
 En Python, un tipo de dato se refiere a la clase de datos que una variable puede contener. Esto se puede verificar con la función type(), que devuelve la clase del valor contenido en la variable. Por ejemplo, type('Hello') devuelve class 'str', indicando que el dato es una cadena de texto.
@@ -245,7 +243,7 @@ print("Lista de productos:", *productos, sep=", ", end=".\n¡Gracias!")
 En el mundo de la programación con Python, las operaciones matemáticas básicas como la suma, resta, multiplicación y división son fundamentales. Sin embargo, Python ofrece operaciones adicionales que expanden nuestras posibilidades.
 
 
-PEMDAS es unaregla que indica el orden correcto de operaciones en una expresión matemática. Es una abreviación de las palabras en inglés "Parentheses" (paréntesis), "Exponents" (exponentes), "Multiplication" (multiplicación), "Division" (división), "Addition" (suma) y "Subtraction" (resta).
+PEMDAS es una regla que indica el orden correcto de operaciones en una expresión matemática. Es una abreviación de las palabras en inglés "Parentheses" (paréntesis), "Exponents" (exponentes), "Multiplication" (multiplicación), "Division" (división), "Addition" (suma) y "Subtraction" (resta).
 
 Gente corriganme si estoy mal, pero según yo recuerdo el acrónimo PEMDAS es:
 
@@ -345,7 +343,6 @@ Si el código espera un entero, pero ingresamos un string, se produce un ValueEr
 ## Clase 10: Lista 
 
 Una lista en Python es una colección ordenada de elementos que puede contener elementos de diferentes tipos (enteros, flotantes, cadenas, etc.). Las listas son mutables, lo que significa que sus elementos se pueden cambiar después de que se ha creado la lista.
-
 
 ```python
 

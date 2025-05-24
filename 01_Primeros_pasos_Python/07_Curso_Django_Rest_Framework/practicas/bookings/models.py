@@ -18,7 +18,6 @@ class Appointment(models.Model):
     def __str__(self):
         return f"{self.patient} - {self.doctor} "
 
-
 class MedicalNote(models.Model):
     appointment = models.ForeignKey(
         Appointment, related_name='medical_notes', on_delete=models.CASCADE

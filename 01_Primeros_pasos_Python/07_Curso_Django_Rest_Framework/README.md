@@ -1,6 +1,9 @@
 ## Curso de Django Rest Framework
 > Construye APIs seguras y escalables con Django REST Framework. Crea modelos, serializadores, endpoints, validaciones, autenticación, vistas y pruebas, usando las mejores prácticas del desarrollo web moderno.
 
+- Profesor: Luis Martínez
+- Fecha Inicio: 05/Mayo/2025 
+- Fecha Fin: 23/Mayo/2025 
 
 ## Clase 1: Creación de APIs con Django REST Framework
 > 
@@ -508,3 +511,455 @@ class DoctorViewSet(viewsets.ModelViewSet):
     serializer_class = DoctorSerializer
     queryset = Doctor.objects.all()
 ```
+
+## Clase  14: Creación de acciones personalizadas en Django REST Framework
+> Detro de lso viewsets nos permite generar acciones extras con el proposito de generar tareas extras para un feature en especifico 
+
+```python
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from .serializers import DoctorSerializer
+from .models import Doctor
+
+
+class DoctorViewSet(viewsets.ModelViewSet):
+    serializer_class = DoctorSerializer
+    queryset = Doctor.objects.all()
+
+    @action(['POST'], detail=True, url_path='set-on-vacation')
+    def set_on_vacation(self, requests, pk):
+        doctor = self.get_object()
+        doctor.is_on_vacation = True
+        doctor.save()
+        return Response({"status": "El doctor está en vacaciones"})
+
+    @action(['POST'], detail=True, url_path='set-off-vacation')
+    def set_off_vacation(self, requests, pk):
+        doctor = self.get_object()
+        doctor.is_on_vacation = False
+        doctor.save()
+        return Response({"status": "El doctor NO está en vacaciones"})
+```
+
+## clase 15: Autenticación y Autorización en APIs con Django REST Framework
+> 
+
+## Autenticación: 
+DRF soporta varios métodos de autenticación (Basic, Session, Token, JWT) y puedes configurarlos según las necesidades de tu proyecto.
+## Permisos: 
+DRF proporciona permisos predeterminados como IsAuthenticated, IsAdminUser, pero también permite definir permisos personalizados.
+
+## Gestión de Roles: 
+La gestión de roles en DRF puede hacerse utilizando los permisos predeterminados de Django, como is_staff, o mediante Grupos y permisos personalizados.
+
+## tipos de autenticación utilizados en APIs
+1. Autenticación Básica: Utiliza un nombre de usuario y una contraseña codificados en Base64.
+
+2. Claves API: Emplea una clave única proporcionada a cada usuario para autenticar solicitudes.
+
+3. Tokens JWT (JSON Web Tokens): Utiliza tokens firmados que contienen información del usuario y tienen una duración limitada.
+
+4. OAuth 2.0: Un protocolo de autorización que permite a las aplicaciones acceder a recursos en nombre del usuario sin compartir las credenciales.
+
+5. Autenticación Bearer: Similar a JWT, utiliza tokens que deben ser incluidos en el encabezado de la solicitud.
+
+## Paso 
+
+- Paso 1: Tenemos que ir al setting.py y realizar este ajuste 
+```python
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': ( ## Esta sección 
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}
+
+```
+- Paso 2: Generamos la url que nos permite configurar contraseña 
+    - CursosBackendPython/01_Primeros_pasos_Python/07_Curso_Django_Rest_Framework/practicas/doctorapp/urls.py
+
+```python
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')), ## esta es la interfaz por defecto del crud de admin 
+    path('', include('docs.urls')),
+    path('api/', include('patients.urls')),
+    path('api/', include('doctors.urls')),
+    path('api/', include('bookings.urls')),
+]
+```
+
+- Paso 3: si no hay usuario podemos crearlos por consola ´python3 manage.py createsuperuser ´
+leosan-holamundootravez 
+- Paso 4: podemos acceder entrando en cualquier endpoint nos debe indicar por favor loguearnos 
+- ![Interfaz](../07_Curso_Django_Rest_Framework/info/info_002.png)
+
+## Pasos Ahora validar por permiso 
+- Paso 0: Debemos ubicar el viewsets.py  
+- Paso 1: Debemos importar los permisos de ´from rest_framework.permissions import IsAuthenticated´
+    - IsAuthenticated
+    - IsAuthenticatedOrReadOnly
+- Paso 2: En la clase que pinta el API debemos generar una variable llamada permission_clases = IsAuthenticated
+- Paso 3: ya usando el endpoint nos mostrará si esta logueado para que de acceso en usar el API 
+
+## Grupos 
+- Paso 1: crear los usuarios 
+- Paso 2: usando el admin de Django podemos crear un grupo y asignarlo al usuario 
+    - ![Interfaz](../07_Curso_Django_Rest_Framework/info/info_003.png)
+- Paso 3: creamos ahora un archivo ´permissions.py´ y generamos una nueva clase ojo esto se hace dentro de la app [Modelo] donde se esta programando el endPoint 
+```python
+## Ruta: CursosBackendPython/01_Primeros_pasos_Python/07_Curso_Django_Rest_Framework/practicas/doctors/permissions.py
+
+## Clase 
+## Hay que especificarle el nombre del Grupop creado que se esta validando name=Grupo ver imagen paso 2 
+from rest_framework import permissions
+
+class IsDoctor(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.groups.filter(name='doctors').exists()
+
+```
+
+- Paso 4: en el viewset.py debemos importar el permission 
+
+```python
+## Ruta: CursosBackendPython/01_Primeros_pasos_Python/07_Curso_Django_Rest_Framework/practicas/doctors/viewsets.py
+
+## Importamos 
+from .permissions import IsDoctor
+
+```
+- Paso 5: probamos con un usuario que no tenga el grupo asignado y nos mostrará esto 
+- ![Interfaz](../07_Curso_Django_Rest_Framework/info/info_004.png)
+
+## Clase 16: Validaciones Personalizadas en Serializadores de Django REST
+> Simplemente generar calidaciones en el endpoint con los datos que vamos a guardar en el api
+
+## Pasos 
+- Paso 1: Ubicamos el serializer.py para este ejemplo usamos Doctors 
+- Paso 2: Anexamos el siguiente código 
+
+```python
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = '__all__'
+
+    def validate_email(self, value): ## Aqui para validar un unico campo 
+        if "@example.com" in value:
+            return value
+        raise serializers.ValidationError("El correo debe incluir @example.com")
+
+    def validate(self, attrs): ##  aqui para validar todo los campo o añadir reglas nuevas 
+        if len(attrs['contact_number']) < 10 and attrs['is_on_vacation']:
+            raise serializers.ValidationError(
+                "Por favor, ingrese un nÃºmero vÃ¡lido antes de irte a vacaciones"
+            )
+        return super().validate(attrs)
+```
+
+- Paso 3: ya aplicando los pasos podemos ver en el endpoint los mensajes 
+
+
+## Clase 17: Serializadores Anidados en Django: Implementación y Uso Práctico
+
+## Pasos 
+- Paso 1: Debemos ubica el serializers.py del endpoint que deseamos alterar y anexar una nueva variable con el serializar deseado es algo complejo de explicar pero dejo el código para su maxima ejemplificación 
+
+```python
+from rest_framework import serializers
+
+from .models import Patient, Insurance, MedicalRecord
+from bookings.serializers import AppointmentSerializer ## Paso 1
+
+class PatientSerializer(serializers.ModelSerializer):
+    appointments = AppointmentSerializer(many=True, read_only=True) ## Paso 2
+
+    class Meta:
+        model = Patient
+        #fields = '__all__'
+        fields = [
+            'id',    
+            'first_name', 
+            'last_name' ,
+            'date_of_birth' ,
+            'contact_number' ,
+            'email' ,
+            'address' ,
+            'medical_history',
+            'appointments', ## Paso 3
+        ]
+```
+
+## Clase 18: Cálculo de Edad y Experiencia con Serializer Method Field en Django
+
+**Ejemplo** 
+
+```python
+class PatientSerializer(serializers.ModelSerializer):
+    appointments = AppointmentSerializer(many=True, read_only=True)
+    age = serializers.SerializerMethodField() # Paso 1 
+
+    class Meta:
+        model = Patient
+        fields = [
+            'id',
+            'first_name',
+            'last_name',
+            'age', # Paso 2
+            'date_of_birth',
+            'contact_number',
+            'email',
+            'address',
+            'medical_history',
+            'appointments',
+        ]
+
+    def get_age(self, obj): # Paso 3
+        age_td = date.today() - obj.date_of_birth
+        years = age_td.days // 365
+        return f"{years} años"
+```
+
+
+## Clase 19: Creación y Gestión de Endpoints para Citas Médicas en Django REST
+
+**Ejemplo** 
+
+```python
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from bookings.serializers import AppointmentSerializer
+from bookings.models import Appointment
+from .serializers import DoctorSerializer
+from .models import Doctor
+from .permissions import IsDoctor
+
+class DoctorViewSet(viewsets.ModelViewSet):
+    serializer_class = DoctorSerializer
+    queryset = Doctor.objects.all()
+    permission_clases = [IsAuthenticated]
+
+    @action(['POST'], detail=True, url_path='set-on-vacation')
+    def set_on_vacation(self, requests, pk):
+        doctor = self.get_object()
+        doctor.is_on_vacation = True
+        doctor.save()
+        return Response({"status": "El doctor está en vacaciones"})
+
+    @action(['POST'], detail=True, url_path='set-off-vacation')
+    def set_off_vacation(self, requests, pk):
+        doctor = self.get_object()
+        doctor.is_on_vacation = False
+        doctor.save()
+        return Response({"status": "El doctor NO está en vacaciones"})
+    
+    ## Ejemplo de accion extra para 
+    @action(['POST', 'GET'], detail=True, serializer_class=AppointmentSerializer) ## Paso 1, hay que indicar que sea un detalle, y aplicar serializer_class para que muestre en el formulario del endpoint los datos 
+    def appointments(self, request, pk):
+        doctor = self.get_object()
+
+        if request.method == 'POST':
+            data = request.data.copy()
+            data['doctor'] = doctor.id
+            serializer = AppointmentSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        if request.method == 'GET':
+            appointments = Appointment.objects.filter(doctor=doctor)
+            serializer = AppointmentSerializer(appointments, many=True)
+            return Response(serializer.data)
+        
+
+```
+
+## Clase 20 : Pruebas Unitarias en Django: Validación de API con API Client Test
+
+## ¿Qué es el cliente API y cómo se usa?
+El cliente APIClient es esencial para nuestras pruebas ya que simula requests HTTP, permitiéndonos probar las respuestas de nuestra API sin hacer requests reales. Esto nos ahorra tiempo y recursos. Además, se configura automáticamente para trabajar con datos JSON, simplificando las pruebas.
+
+
+## ¿Cómo se manejan las URLs en las pruebas?
+Para obtener las URLs dinámicamente en nuestras pruebas, utilizamos el método reverse() de Django, que permite construir URLs basadas en sus nombres. Esto es especialmente útil cuando trabajamos con URLs que requieren parámetros, como IDs.
+
+
+```python
+from django.test import TestCase
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APIClient
+from patients.models import Patient
+from doctors.models import Doctor
+
+class DoctorViewSetTests(TestCase):
+
+    def setUp(self):
+        self.patient = Patient.objects.create(
+            first_name='Luis',
+            last_name='Martinez',
+            date_of_birth='1990-12-05',
+            contact_number='12312312',
+            email='example@example.com',
+            address='Dirección de prueba',
+            medical_history='Ninguna',
+        )
+        self.doctor = Doctor.objects.create(
+            first_name='Oscar',
+            last_name='Barajas',
+            qualification='Profesional',
+            contact_number='23412341234',
+            email='example2@example.com',
+            address='Medellín',
+            biography='Sin',
+            is_on_vacation=False,
+        )
+        self.client = APIClient()
+
+    def test_list_should_return_200(self):
+        url = reverse(
+            'doctor-appointments',
+            kwargs={"pk": self.doctor.id},
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+```
+
+## Pasos 
+- Paso 1: Cada app de Django tiene su propio archivo test.py para este caso usaremos la appa de doctor, definimos nuestra clase prueba ´class DoctorViewSetTests(TestCase):´ sinceramente es una maqueta lo fundamental pero cambiará por cada tipo de prueba para este caso vamos emular registros de pacientes 
+
+- Paso 2: debemos instalar ´pip3 install django-extensions´
+- Paso 3: agregamos en setting.py lo instalado 
+
+```python 
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_spectacular',
+    'django_seed',
+    'django-extensions', ## aqui esta 
+    'patients',
+    'doctors',
+    'bookings',
+    'docs',
+]
+```
+
+- Paso 4: gracias a esta extension nos permite ver las urls en consola ejecurtando el siguiente comando ´python3 manage.py show_urls´ 
+    - ![Ejemplo](../07_Curso_Django_Rest_Framework/info/info_005.png)
+
+devuelve el listado de todas la url del proyecto hacemos esto para usar el 
+
+```python
+        url = reverse(
+            'doctor-appointments',
+            kwargs={"pk": self.doctor.id},
+        )
+```
+    - Luego lo importamos ´from django.urls import reverse´
+
+- Paso 5: Ejecutamos nuestras pruebas por consola usando el comando ´python3 manage.py test´
+- PASO 6: aqui ya solo es dedicarse a validar los diferentes resultados 
+
+## clase 21: Limitación de Solicitudes en APIs con Django REST
+> Qué es el Throttling
+
+El throttling es una técnica utilizada en aplicaciones web, especialmente en APIs, para controlar la cantidad de solicitudes que un cliente puede hacer en un período de tiempo específico. Su objetivo principal es prevenir abusos, proteger recursos y garantizar un rendimiento óptimo.
+
+De manera visual, un throttle consiste en bloquear la invocación de funciones hasta que se complete un tiempo determinado o una acción en específico. De esta manera reducimos el número de peticiones a la API. Lo que conlleva reducir costos y prevenir ataque
+
+## Pasos -> https://www.django-rest-framework.org/api-guide/throttling/
+- Paso 1: Debemos ubicar el archivo setting.py y anexar el siguiente diccionario 
+```python
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/day',
+        'user': '1000/day'
+    },
+}
+
+```
+
+- Paso 2: Ya con esto limita la cantidad de veces que se consulta el API es para evitar ataques y que se usen recursos 
+
+
+## Preguntas Mentales 
+
+1.
+¿Cuál método de una API REST usarías para modificar solo un campo específico de un recurso?
+PATCH
+
+2.
+¿Por qué se utiliza JSON en las interacciones entre sistemas a través de APIs?
+Porque permite estructurar datos de forma legible y eficiente.
+
+3.
+¿Qué herramienta automatiza el formato de código en Django conforme al estándar PEP8?
+Black
+
+4.
+Si tienes un modelo en Django, ¿cómo puedes convertir los datos de una instancia de ese modelo en formato JSON usando DRF?
+Usando un Serializador
+
+5.
+¿Cuál es una de las principales funciones de los Serializadores en DRF?
+Transformar objetos Python a JSON
+
+6.
+¿Qué método HTTP usamos para modificar un recurso en una vista de detalle en Django?
+PUT
+
+7.
+Al realizar una eliminación de un recurso con DELETE en Django, ¿qué código de estado HTTP se debe devolver?
+204 No Content
+
+8.
+Si un recurso es modificado con éxito utilizando PUT, ¿qué sucede después en la base de datos?
+Se actualiza el recurso con los nuevos datos usando el método save() del serializador
+
+9.
+¿Cómo aseguramos que los datos de una solicitud PUT sean válidos antes de guardar un recurso modificado en Django?
+Usamos el método is_valid() del serializador
+
+10.
+¿Qué clase de permiso se debe usar en Django REST Framework para asegurar que un usuario esté autenticado antes de acceder a un endpoint?
+IsAuthenticated
+
+11.
+Al probar la autenticación de una API con un usuario no logueado, ¿qué código de error esperarías recibir si intentas acceder a un recurso protegido?
+401 Unauthorized
+
+12.
+¿Qué método usarías para retornar un error de validación en formato JSON cuando se envían datos incorrectos en el API?
+raise serializers.ValidationError
+
+13.
+Al probar una vista protegida por permisos, ¿cómo aseguras que un usuario autenticado tenga acceso en las pruebas?
+Configurando el APIClient con credenciales de usuario.
+
+14.
+¿Qué método de Django se usa para construir URLs dinámicas en pruebas unitarias?
+reverse()
+
+15.
+¿Qué técnica puedes implementar en Django REST para limitar la cantidad de solicitudes que un usuario puede hacer en un período de tiempo?
+Throttling

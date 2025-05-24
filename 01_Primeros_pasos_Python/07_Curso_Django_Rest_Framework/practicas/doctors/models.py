@@ -9,6 +9,7 @@ class Doctor(models.Model):
     email = models.EmailField()
     address = models.TextField()
     biography = models.TextField()
+    is_on_vacation = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.first_name} - {self.last_name} "
