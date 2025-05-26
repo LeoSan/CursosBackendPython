@@ -354,11 +354,84 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep):
 ```
 
 
-## Clase 10: 
+## Clase 10 y 11: Find, Create, Update, Delete Gestión de Endpoints en FastAPI para CRUD de Clientes
+> Dejo la manera de ejemplo de CRUD
+- Archivo de referencia [Enlace](../08_Curso_FastAPI/practica/curso-fastapi-project/app/routers/customers.py)
+
+## Buscar ID
 
 ```Python
+@router.get("/customers/{customer_id}", response_model=Customer, tags=['customers'])
+async def read_customer(customer_id: int, session: SessionDep):
+    """
+        End Point para buscar por id
+    """
+    customer_db = session.get(Customer, customer_id)
+    if not  customer_db:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
+    return customer_db
 
 ```
 
+## Update 
+```Python
+@router.patch("/customers/{customer_id}", response_model=Customer, status_code=status.HTTP_201_CREATED, tags=['customers'])
+async def put_customer(customer_id: int, customer_data: CustomerUpdate, session: SessionDep):  
+    """
+        End Point para modificar cliente por ID 
+    """  
+    customer_db = session.get(Customer, customer_id)
+    if not  customer_db:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
 
+    customer = customer_data.model_dump(exclude_unset=True)
+    customer_db.sqlmodel_update(customer)
+    session.add(customer_db)## Ejecuta la sentencia 
+    session.commit()## Aplica los cambios 
+    session.refresh(customer_db)##refresca el modelo con lo nuevo 
+    return customer_db
+
+```
+
+## Delete 
+```Python
+
+@router.delete("/customers/{customer_id}", tags=['customers'])
+async def delete_customer(customer_id: int, session: SessionDep):
+    """
+        End Point para eliminar cliente por ID
+    """
+    customer_db = session.get(Customer, customer_id)
+    if not  customer_db:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
+    session.delete(customer_db)## Ejecuta la sentencia 
+    session.commit()## Aplica los cambios 
+    return {"detail":"OKI"}
+
+```
+
+## Clase 12: Estructuración de Aplicaciones con FastAPI y API Router
+> Se sugiere una estructura muy baga, aquí un ejemplo practico 
+- Se sugiere aplicar arquitectura Limpia
+- Se sugiere aplicar arquitectura Exagonal 
+- Imagen Muestra ![Ejemplo](../08_Curso_FastAPI/info/info_001.png)
+- Se tomará este proyecto básico como referencia [Enlace Aqui](../08_Curso_FastAPI/practica/curso-fastapi-project/app/main.py)
+- Haciendo esta estructura debemos cambiar la forma de ejeuctar el comando -> ´uvicorn app.main:app --reload´
+- Se implementa la mejora de Router
+
+```python
+
+import arrow
+import zoneinfo
+from datetime import datetime
+import uvicorn
+from fastapi import FastAPI
+from db_postgresql import create_all_tables
+from .routers import customers
+
+app = FastAPI(lifespan=create_all_tables) 
+
+app.include_router(customers.router)
+
+```
 
