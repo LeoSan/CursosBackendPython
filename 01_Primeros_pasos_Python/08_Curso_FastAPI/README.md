@@ -435,3 +435,20 @@ app.include_router(customers.router)
 
 ```
 
+## Clase 13: 
+> 
+```python
+
+```
+
+## Clase 14: 
+> 
+```python
+
+```
+
+## Clase 15: 
+> 
+```python
+
+```
