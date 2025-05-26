@@ -34,49 +34,323 @@ FastAPI está basado en dos frameworks principales:
 
 ```
 
-## Clase 3: 
+## Clase 3: Creación de Entornos Virtuales y Configuración de FastAPI
+
+
+## Pasos 
+- Paso 1: Primero generamos un entorno -> ´python3 -m venv fastapivenv´ -> ´source fastapivenv/bin/activate´
+- Paso 2: Instalamos fastAPI -> 'pip3 install "fastapi[standar]"'
+- Paso 2: Instalamos fastAPI -> 'pip install uvicorn'
+- Paso 4: creamos un repositorio para gestionar el API -> ´mkdir curso-fastapi-project´ -> cd curso-fastapi-project
+- Paso 5: creamos el archivo main.py dentro del repositorio creado del proyecto -> ´touch main.py´
+- Paso 6: este archivo es tu server 
 
 ```Python
+
+## Ejemplo 
+import arrow
+import uvicorn
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/time")
+async def time():
+    return {"curren_time": arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")}
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+```
+- Paso 6: ejecutar el api -> ´uvicorn main:app --reload´
+- Paso 7: podemos acceder de manera local
+    -  swangger ->  http://127.0.0.1:8000/docs 
+    - local     ->  http://127.0.0.1:8000/
+
+
+## Clase 4: Crear un Endpoint Dinámico con FastAPI para Obtener Hora por País y Formato
+> Manera de pasar variables usando el decorador 
+
+
+```Python
+
+import arrow
+import zoneinfo
+from datetime import datetime
+import uvicorn
+from fastapi import FastAPI
+
+app = FastAPI()
+
+country_timezones = {
+    "CO": "America/Bogota",
+    "MX": "America/Mexico_City",
+    "AR": "America/Argentina/Buenos_Aires",
+    "BR": "America/Sao_Paulo",
+    "PE": "America/Lima",
+}
+
+
+@app.get("/time-with-arrow")
+async def time(iso_code:str):
+    return {"curren_time": arrow.utcnow().format("YYYY-MM-DD HH:mm:ss")}
+
+@app.get("/time-with-datetime/{iso_code}")
+async def time(iso_code: str):
+    iso = iso_code.upper()
+    timezone_str = country_timezones.get(iso)
+    tz = zoneinfo.ZoneInfo(timezone_str)
+    return {"time": datetime.now(tz)}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+```
+
+## Clase 5: Validación de datos con Pydantic en FastAPI: Creación de endpoints
+> Para crear un endpoint dinámico y seguro en FastAPI, es fundamental validar la información recibida, especialmente si el contenido se envía en el cuerpo de la solicitud.
+
+## ¿Cómo estructurar un modelo de datos en FastAPI?
+Para definir un modelo de datos, FastAPI emplea Pydantic, que permite usar clases para representar un esquema y validar la información que ingresa. Los pasos iniciales incluyen:
+
+## Importar BaseModel de Pydantic.
+Crear una clase llamada Customer que herede de BaseModel.
+Definir campos dentro de la clase con sus tipos, por ejemplo, name: str para el nombre y age: int para la edad.
+Utilizar typing para permitir múltiples tipos de datos, como en el campo description, que podría ser de tipo str o None (opcional).
+
+En FastAPI, se utiliza async para definir endpoints con el fin de aprovechar la programación asíncrona. Esto permite manejar múltiples solicitudes de manera concurrente sin bloquear el hilo principal. Al realizar operaciones que pueden tardar, como consultas a bases de datos o llamadas a APIs externas, async ayuda a mejorar el rendimiento y la capacidad de respuesta de la aplicación,
+
+```Python
+# main.py
+
+import arrow
+import zoneinfo
+from datetime import datetime
+import uvicorn
+from fastapi import FastAPI
+
+from pydantic import BaseModel 
+
+class Customer(BaseModel):
+    name:str
+    descripcion:str|None
+    email:str 
+    age:int 
+
+@app.post("/customers")
+async def create_customer(customer_data: Customer):
+    """
+        Una forma sencilla para documentar tu método 
+    """
+    return customer_data
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 ```
 
 
-## Clase 4: 
+## Clase 6: Modelado de Datos y Conexión de Modelos en FastAPI
+> Para diseñar una API robusta, es esencial modelar correctamente los datos, especialmente al crear nuevos modelos que organicen y relacionen la información eficientemente. En esta guía, exploraremos cómo crear modelos en FastAPI para estructurar datos, conectar modelos y optimizar la funcionalidad de nuestra API
+
+## Pasos: 
+- Paso 1: Podemos aplicar la estructuración MVC para manejar nuestro FASTAPI iniciamos creando el archivo modelo.py y ahí anexamos nuestros modelos. 
+
+- Paso 2: Creamos nuestro  modelo en nuestro model.py 
 
 ```Python
+from pydantic import BaseModel
+
+
+class Customer(BaseModel):
+    id: int
+    name: str
+    description: str | None
+    email: str
+    age: int
+
+class Transaction(BaseModel):
+    id: int
+    ammount: int
+    description: str
+
+class Invoice(BaseModel):
+    id: int
+    customer: Customer
+    transactions: list[Transaction]
+    total: int
+
+    @property## Visiviliza esta variable como variable de clase 
+    def ammount_total(self):
+        return sum(transaction.ammount for transaction in self.transactions)
+
+```
+- Paso 3: importamos desde main.py los modelos y en nuestros endpoint podemos aplicar y usar nuestro modelo 
+
+```Python
+
+@app.post("/customers")
+async def create_customer(customer_data: Customer):
+    """
+        Una forma sencilla para documentar tu método 
+    """
+    return customer_data
+
+@app.post("/transaction")
+async def create_customer(transaction_data: Transaction):
+    """
+        Una forma sencilla para documentar tu método 
+    """
+    return transaction_data
+
+@app.post("/invoice")
+async def create_customer(invoice_data: Invoice):
+    """
+        Una forma sencilla para documentar tu método 
+    """
+    return invoice_data
 
 ```
 
-## Clase 5: 
+## Clase 7: Validación de Datos y Modelos en Endpoints de FastAPI
+> La validación de datos y la gestión de modelos en FastAPI permite crear endpoints seguros y eficientes. En este ejemplo, mostramos cómo manejar un modelo para recibir y devolver datos sin exponer identificadores innecesarios
+
+## Notas: 
+- Podemos usar el metodo de pydantic para crear validaciones sencillas desde el modelo ´model_validate´
 
 ```Python
+
+db_customers: list[Customer] = []
+
+@app.post("/customers", response_model=Customer)
+async def create_customer(customer_data: CustomerCreate):
+    customer = Customer.model_validate(customer_data.model_dump()) ## Aqui la magia 
+    # Ausmiendo que hace base de datos
+    customer.id = len(db_customers)
+    db_customers.append(customer)
+    return customer
 
 ```
 
 
-## Clase 6: 
+## Clase 8: Conexión de FastAPI con SQLite usando SQLModel
+> Para conectar FastAPI con una base de datos real, primero configuraremos una base de datos SQLite utilizando la librería SQLModel, que facilita la integración sin necesidad de escribir SQL. SQLModel combina Pydantic y SQLAlchemy, permitiendo que nuestros modelos se almacenen directamente en bases de datos con una sintaxis simplificada
 
+## PASOS
+
+## ¿Cómo instalar y configurar SQLModel?
+1. Instalación: Abre la terminal y ejecuta:
+
+    pip install sqlmodel
+
+También es recomendable registrar las dependencias en un archivo requirements.txt, como SQLModel y FastAPI con sus respectivas versiones. Esto ayuda a instalar todas las dependencias en otros entornos fácilmente.
+
+2. Creación del archivo de configuración:
+
+Crea un archivo db.py.
+Importa las clases Session y create_engine de SQLModel para gestionar la conexión.
+Define las variables para la conexión, como la URL de la base de datos, en este caso sqlite:///database_name.db.
+
+3. Creación del engine:
+
+Utiliza create_engine con la URL de la base de datos para crear el motor que gestionará las sesiones.
 ```Python
+
+from fastapi import FastAPI
+from typing import Annotated
+
+from fastapi import Depends
+from sqlmodel import Session, create_engine, SQLModel
+
+sqlite_name = "db.sqlite3"
+sqlite_url = f"sqlite:///{sqlite_name}"
+
+engine = create_engine(sqlite_url)
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+
+SessionDep = Annotated[Session, Depends(get_session)]
 
 ```
 
-## Clase 7: 
+4. Importamos la conexion donde deseamos usarlo 
 
 ```Python
+
+# main.py 
+
+from db import SessionDep ## Paso 1
+
+db_customers: list[Customer] = []
+
+
+@app.post("/customers", response_model=Customer)
+async def create_customer(customer_data: CustomerCreate, session: SessionDep): ## Paso 2
+    customer = Customer.model_validate(customer_data.model_dump())
+    # Ausmiendo que hace base de datos
+    customer.id = len(db_customers)
+    db_customers.append(customer)
+    return customer
+
+```
+4. Debemos usar el SQLModel en nuestro modelo para generar las tablas deseadas 
+## Ejemplo 
+> Como podemos ver usamos la clase SQLModel que permite configurar nuestras clases para generar tablas lo primordial es enviar como parametro tambien table=True para que funcione  ->  Customer(SQLModel, table=True): 
+
+```python
+
+from pydantic import BaseModel
+from sqlmodel import Field, SQLModel 
+
+
+class Customer(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    description: str | None
+    email: str
+    age: int
+
 
 ```
 
+## Clase 9: Integración de SQLModel en FastAPI para Manejo de Bases de Datos
+> 
 
-## Clase 8: 
+## Pasos 
+- Paso 1: Debemos crear el metodo para generar la tablas en la base de datos 
 
 ```Python
+def create_all_tables(app:FastAPI):
+    SQLModel.metadata.create_all(engine)
+    yield ## Indicamos que use esta funcionalidad a otro llamado 
+
+
 
 ```
 
-## Clase 9: 
+- Paso 2: Ubicamos main.py y en la configuración de app restablecemos lo que necesitamos -> lifespan=create_all_tables
 
 ```Python
 
+app = FastAPI(lifespan=create_all_tables) ## lifespan nos permite ejecutar un metodo al comienzo o al final que se inicia el APP (server) para este caso -> create_all_tables() lo definimos en el archivo db_postgresql
+```
+- Paso 3: configuramos nuestro endpoint, notese que agregamos add(), commit(), refresh() esto nos permite interactuar ya con la base de datos 
+```python 
+#main.py 
+
+@app.post("/customers", response_model=Customer)
+async def create_customer(customer_data: CustomerCreate, session: SessionDep):
+    customer = Customer.model_validate(customer_data.model_dump())
+    session.add(customer)## Ejecuta la sentencia 
+    session.commit()## Aplica los cambios 
+    session.refresh(customer)##refresca el modelo con lo nuevo 
+    return customer
 ```
 
 
