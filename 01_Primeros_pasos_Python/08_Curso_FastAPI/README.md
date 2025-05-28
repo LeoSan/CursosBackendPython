@@ -575,22 +575,50 @@ class CustomerBase(SQLModel):
 
 ## Nota Mental 
 - Sin embargo se dejan los ejemplos de hacer un paginador a manita y otro ejemplo usando el plugin [Enlace](../08_Curso_FastAPI/practica/curso-fastapi-project/app/routers/transactions.py)
+- No pude arrancar usando el paginate lo que pude comprender que para hacerlo funcionar se usa sqlalchemi y no estamos usando ese modelo estamos usando SQLModel sin embargo luego haré una practica para validar eso 
 
 
-## Pasos usando pip install fastapi-pagination
-- Paso 1: instalar -> ´pip install fastapi-pagination´
-- Paso 2:  
+
+## Clase 19: Implementación de Middlewares en FastAPI para Medir Tiempos de Request
+> Los middlewares son piezas clave para gestionar tareas comunes antes y después de cada request en FastAPI. Al crear un middleware, modificamos el comportamiento global de nuestras APIs, lo que hace nuestro código más organizado y eficiente.
+
 
 ```python
 
-```
+import uvicorn
+from fastapi import FastAPI, Request
+#from fastapi_pagination.middleware import PaginationMiddleware
+from fastapi_pagination import Page, paginate, add_pagination
+from db_postgresql import create_all_tables
+from .routers import customers, transactions, plan
 
-## Clase 19: 
-> 
-```python
+app = FastAPI(lifespan=create_all_tables)
+
+# 1. Añade el middleware de paginación
+#app.add_middleware(PaginationMiddleware)
+
+# 2. Incluye tus routers
+app.include_router(customers.router)
+app.include_router(plan.router)
+app.include_router(transactions.router)
+
+# 3. Añade el soporte de paginación para SQLAlchemy/SQLModel
+add_pagination(app)
+
+@app.middleware("http") 
+async def log_request_headers(request: Request, call_next):
+    
+    print("Request Headers:")
+    for header, value in request.headers.items():
+        print(f"{header}: {value}")
+    response = await call_next(request) 
+    return response
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 ```
-## Clase 20: 
+## Clase 20: Pruebas unitarias con FastAPI y Pytest: Configuración y Ejecución
 > 
 ```python
 
