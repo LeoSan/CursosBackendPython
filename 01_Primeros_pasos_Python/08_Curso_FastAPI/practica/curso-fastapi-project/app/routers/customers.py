@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from sqlmodel import select
 
 from db_postgresql import SessionDep
@@ -12,6 +13,13 @@ from models import (
 )
 
 router = APIRouter()
+
+security = HTTPBasic() #este lo pasamos como dependencia a la funcion que crearemos
+
+def authenticate(credentials: HTTPBasicCredentials = Depends(security)):
+    if (credentials.username == "lis" and credentials.password == "liss"):
+        return True
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
 @router.get("/customers", response_model=list[Customer], tags=['customers'])
 async def list_customer(session: SessionDep):
@@ -31,8 +39,8 @@ async def read_customer(customer_id: int, session: SessionDep):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente no encontrado")
     return customer_db
 
-@router.post("/customers", response_model=Customer, tags=['customers'])
-async def create_customer(customer_data: CustomerCreate, session: SessionDep):
+@router.post("/customers", response_model=Customer, tags=['customers'], status_code=status.HTTP_201_CREATED)
+async def create_customer(customer_data: CustomerCreate, session: SessionDep, auth: bool = Depends(authenticate)):
     """
         End Point para crear cliente
     """
@@ -42,7 +50,7 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     session.refresh(customer)##refresca el modelo con lo nuevo 
     return customer
 
-@router.delete("/customers/{customer_id}", tags=['customers'])
+@router.delete("/customers/{customer_id}", tags=['customers'], status_code=status.HTTP_204_NO_CONTENT)
 async def delete_customer(customer_id: int, session: SessionDep):
     """
         End Point para eliminar cliente por ID

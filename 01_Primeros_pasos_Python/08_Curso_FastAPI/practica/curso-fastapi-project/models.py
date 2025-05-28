@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel, EmailStr, field_validator
+from pydantic import BaseModel, field_validator
 from sqlmodel import Field, SQLModel, Relationship, Session, select
 from db_postgresql import engine
 from typing import List, Optional
@@ -30,18 +30,18 @@ class Plan(SQLModel, table=True):
 class CustomerBase(SQLModel):  
     name: str = Field(default=None)
     description: str | None = Field(default=None)
-    email: EmailStr = Field(default=None)
+    email: str = Field(default=None)
     age: int = Field(default=None)
 
-    @field_validator("email")
-    @classmethod
-    def validate_email(cls, value):## usamos cls ya que el self es usaod para metodos de instancias para este aso pasamos a cls y aplicamos decorador @classmethod
-        session = Session(engine)
-        query = select(Customer).where(Customer.email == value)
-        result = session.exec(query).first()
-        if result:
-            raise ValueError("Este correo ya esta registrado")
-        return value
+    #@field_validator("email")
+    #@classmethod
+    #def validate_email(cls, value):## usamos cls ya que el self es usaod para metodos de instancias para este aso pasamos a cls y aplicamos decorador @classmethod
+    #    session = Session(engine)
+    #    query = select(Customer).where(Customer.email == value)
+    #    result = session.exec(query).first()
+    #    if result:
+    #        raise ValueError("Este correo ya esta registrado")
+    #    return value
 
 
 class CustomerCreate(CustomerBase):

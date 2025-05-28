@@ -619,19 +619,160 @@ if __name__ == "__main__":
 
 ```
 ## Clase 20: Pruebas unitarias con FastAPI y Pytest: Configuración y Ejecución
-> 
+> Aprender a configurar pruebas unitarias es esencial para desarrollar aplicaciones con FastAPI. Esto asegura que tus desarrollos tengan calidad y que puedas detectar errores rápidamente, agilizando tu flujo de trabajo. FastAPI, combinado con el framework PyTest, permite escribir y ejecutar pruebas automatizadas de manera sencilla y efectiva.
+
+## ¿Qué necesitas para configurar las pruebas de FastAPI?
+Las pruebas en FastAPI requieren configuración local inicial y una base de datos separada específica para testing. Con esto, puedes ejecutar pruebas repetidamente sin afectar tu entorno de producción. Las herramientas principales son:
+
+- PyTest: framework especializado en pruebas unitarias.
+- TestClient de FastAPI: facilita simular solicitudes HTTP (GET, POST) como si las realizara un navegador.
+- SQLAlchemy y SQLModel: para configurar motores y sesiones de base de datos.
+
+## ¿Cómo configurar el entorno local?
+Para poder correr pruebas efectivamente, sigue estos pasos:
+
+1. Crear archivo de configuración para pruebas
+Crea un archivo llamado convTest.py. Aquí estarán todas las configuraciones específicas de pruebas.
+
+2. Ajuste en motor de base de datos
+No se recomienda usar la base de datos de producción para pruebas. En cambio, crea un motor específico para testing:
 ```python
+from sqlalchemy import create_engine
+from sqlalchemy.pool import StaticPool
+
+engine = create_engine(
+    "db_testing_url",
+    connect_args={"check_same_thread": False},
+    poolclass=StaticPool
+)
+```
+La opción check_same_thread en False evita conflictos entre distintos hilos, y StaticPool mantiene la base de datos en memoria para facilitar pruebas rápidas.
+
+3. Manejo de tablas con fixtures de PyTest
+PyTest emplea fixtures, funciones reutilizables entre diferentes pruebas. Utiliza un fixture para crear y luego eliminar tablas automáticamente:
+```python
+import pytest
+from sqlmodel import SQLModel, Session
+
+@pytest.fixture(name="session")
+def session_fixture():
+    SQLModel.metadata.create_all(engine)
+    with Session(engine) as session:
+        yield session
+    SQLModel.metadata.drop_all(engine)
+```
+
+## ¿Cómo sobrescribir funcionalidades para testing correctamente?
+Para aislar las pruebas y usar configuraciones específicas sin afectar producción, utiliza la sobreescritura de dependencias:
+```python
+from fastapi.testclient import TestClient
+from app.main import app
+
+@pytest.fixture(name="client")
+def client_fixture(session: Session):
+    def get_session_override():
+        return session
+
+    app.dependency_overrides[get_session] = get_session_override
+
+    with TestClient(app) as client:
+        yield client
+        app.dependency_overrides.clear()
+```
+Este enfoque te permite probar endpoints especificando comportamientos únicos en ambiente controlado.
+
+## ¿Cómo validar tu configuración correctamente?
+Realiza una prueba simple en un archivo test.py para diagnosticar si la configuración funcionó correctamente:
+
+
+```python
+from fastapi.testclient import TestClient
+
+def test_client(client):
+    assert type(client).__name__ == TestClient.__name__
+```
+4. Para ejecutar podemos realizar el siguiente comando desde nuestro proyecto raiz 'pytest app/test.py'
+- qudando de esta manera -> ![Ejemplo](../08_Curso_FastAPI/info/info_002.png)
+- Recuerda ese punto verde quiere decir que corrio bien :S 
+
+
+## Clase 21: Pruebas Unitarias para CRUD de Clientes en FastAPI
+> 
+
+## notas mentales
+- Debemos crear un directorio test y podemos crear nuestros archivos con nuestra nomeclatura test_nombre_modulo_funcionalidad_.py
+- para ejecutar ahora ´pytest app/test/tests_customers.py´
+- Recuerda previamente debes realizar una arhivo conftest.py ya que desde aqui se conecta a tu base de datos de pruebas 
+- Con este ejemplo podemos validar como se hace y como se usa los assert 
+
+```python
+from fastapi import status
+
+
+def test_create_customer(client):
+    response = client.post(
+        "/customers",
+        json={
+            "name": "Jhon Doe",
+            "email": "jhon@example.com",
+            "age": 33,
+        },
+    )
+    assert response.status_code == status.HTTP_201_CREATED
+
+
+def test_read_customer(client):
+    response = client.post(
+        "/customers",
+        json={
+            "name": "Jhon Doe",
+            "email": "jhon@example.com",
+            "age": 33,
+        },
+    )
+    assert response.status_code == status.HTTP_201_CREATED
+    customer_id: int = response.json()["id"]
+    response_read = client.get(f"/customers/{customer_id}")
+    assert response_read.status_code == status.HTTP_200_OK
+    assert response_read.json()["name"] == "Jhon Doe"
 
 ```
 
-## Clase 21: 
-> 
+## Clase 22 : Autenticación Básica HTTP con FastAPI
+> No me gusto el del profesor 
+
+aplique la de un alumno 
+
+## Paso 1: configuro y uso lo soiguiente 
+- usamos HTTPBasic()         => Función: HTTPBasic() es una dependencia que FastAPI te proporciona para declarar que una ruta o un conjunto de rutas requieren autenticación básica HTTP. Al usar HTTPBasic() como una dependencia en la definición de una ruta, FastAPI automáticamente espera que la petición HTTP entrante incluya el encabezado Authorization con las credenciales codificadas en Base64.
+
+- usamos HTTPBasicCredentials => Función: HTTPBasicCredentials es una clase de datos (dataclass en Python) que FastAPI utiliza para representar las credenciales de autenticación básica HTTP que fueron extraídas del encabezado Authorization por la dependencia HTTPBasic().
+
+## Paso 2: Definimos nuestro modelo basico ojo ya aquí podemos afianzarnos con algun token o una secretkey 
 ```python
+security = HTTPBasic() #este lo pasamos como dependencia a la funcion que crearemos
+
+def authenticate(credentials: HTTPBasicCredentials = Depends(security)):
+    if (credentials.username == "lis" and credentials.password == "liss"):
+        return True
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
 ```
 
-## Clase 22 : 
-> 
+## Paso 3: en nuestros endpoint que deseamos alguna autorización podemos pasale como parametro esta solicitud 
 ```python
-
+@router.post("/customers", response_model=Customer, tags=['customers'], status_code=status.HTTP_201_CREATED)
+async def create_customer(customer_data: CustomerCreate, session: SessionDep, auth: bool = Depends(authenticate)):
+    """
+        End Point para crear cliente
+    """
+    customer = Customer.model_validate(customer_data.model_dump())
+    session.add(customer)## Ejecuta la sentencia 
+    session.commit()## Aplica los cambios 
+    session.refresh(customer)##refresca el modelo con lo nuevo 
+    return customer
 ```
+
+
+## Preguntas Mentales
+ 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status, Query
 from sqlmodel import select
-from fastapi_pagination import Page, paginate
+#from fastapi_pagination import Page, paginate
 from db_postgresql import SessionDep
 
 from models import Customer, PaginatedTransactionsResponse, Transaction, TransactionCreate, TransactionRead
@@ -60,10 +60,12 @@ async def list_transactions(
     )
     return response
 
+"""
 @router.get("/transactions-paginado-plugin", name="Obtiene todas las transacciones", tags=["transactions"], response_model=Page[Transaction])
 def list_transaction_paginado(session: SessionDep):
     query = select(Transaction)
     return paginate(session, query)
+"""
 
 @router.post("/transactions", status_code=status.HTTP_201_CREATED, tags=["transactions"])
 async def create_transation(transaction_data: TransactionCreate, session: SessionDep):
