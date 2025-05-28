@@ -1,11 +1,12 @@
-
-
 from fastapi import FastAPI, Depends
 from typing import Annotated
 from sqlmodel import SQLModel
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+from contextlib import asynccontextmanager
 
 # Define your PostgreSQL database URL
 # Replace with your actual database details

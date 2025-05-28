@@ -435,19 +435,174 @@ app.include_router(customers.router)
 
 ```
 
-## Clase 13: 
+## Clase 13: Relaciones en FastAPI y SQL Model: Creación y Uso Práctico
+> os modelos de datos en bases de datos relacionales permiten organizar y relacionar información sin duplicarla en múltiples tablas, optimizando así la gestión de datos. Al usar FastAPI y SQLModel, es posible configurar estas relaciones en los modelos que luego reflejarán las tablas en la base de datos, permitiendo un acceso eficiente y estructurado a los datos.
+
+## Notas mentales 
+- Para las relaciones podemos importar **Relationship** de nuestra libreria **sqlmodel**
+- Para este ejempli es una relacion de un cliente puede tener muchas transacciones por lo que es 1..m 
+- Como sabemos en la tabla hija va la id del padre como vemos en el ejemplo 
+- foreign_key: Define la clave foránea en el modelo.
+- Relationship: Establece una relación entre tablas.
+- back_populates: Conecta las relaciones en ambas direcciones.
+
+```python
+## Transacciones 
+class TransactionBase(SQLModel):
+    ammount: int
+    description: str
+
+class Transaction(TransactionBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    customer_id: int = Field(foreign_key="customer.id")
+    customer: Customer = Relationship(back_populates="transactions")
+
+
+class TransactionCreate(TransactionBase):
+    customer_id: int = Field(foreign_key="customer.id")
+
+```
+
+## Clase 14: Relaciones Muchos a Muchos en Bases de Datos con SQLModel
+> Las relaciones de muchos a muchos en bases de datos nos permiten asociar múltiples elementos de una tabla con muchos elementos de otra, utilizando una tabla intermedia. Esta tabla de enlace facilita las conexiones entre ambos elementos, permitiendo una mayor flexibilidad en la organización y gestión de los datos
+
+## Notas mentales 
+- Primer paso se genera una tabla pivote ver ejemplo 
+- Segundo en la tabla Padre llevara esta nomeclatura -> customers: list["Customer"] = Relationship(back_populates="plans", link_model=CustomerPlan) ## Relacion de muchos a muchos
+- Tercero la otra tabla Padre llevara la siguiente nomeclatura ->  plans: list[Plan] = Relationship(
+        back_populates="customers", link_model=CustomerPlan
+    )
+- Para este Ejemplo la tabla pivote es CustomerPlan y esta tiene la ids de las tablas padres Plan y  Customer
+
+
+```python
+class CustomerPlan(SQLModel, table=True):## Tabla pivote 
+    id: int = Field(primary_key=True)
+    plan_id: int = Field(foreign_key="plan.id")
+    customer_id: int = Field(foreign_key="customer.id")
+
+
+class Plan(SQLModel, table=True):
+    id: int | None = Field(primary_key=True)
+    name: str = Field(default=None)
+    price: int = Field(default=None)
+    descripcion: str = Field(default=None)
+    customers: list["Customer"] = Relationship(back_populates="plans", link_model=CustomerPlan) ## Relacion de muchos a muchos
+
+class Customer(CustomerBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    transactions: list["Transaction"] = Relationship(back_populates="customer")
+    plans: list[Plan] = Relationship(
+        back_populates="customers", link_model=CustomerPlan
+    )
+
+```
+
+## Clase 15: Creación y Suscripción de Planes y Clientes en FastAPI
+> 
+```python
+from fastapi import APIRouter
+from sqlmodel import select
+
+from db_postgresql import SessionDep
+from models import Plan
+
+router = APIRouter()
+
+
+@router.post("/plans")
+async def create_plan(plan_data: Plan, session: SessionDep):
+    plan_db = Plan.model_validate(plan_data.model_dump())
+    session.add(plan_db)
+    session.commit()
+    session.refresh(plan_db)
+    return plan_db
+
+
+@router.get("/plans", response_model=list[Plan])
+async def list_plan(session: SessionDep):
+    # plans = session.execute(select(Plan)).all()
+    plans =session.execute(select(Plan)).scalars().all()
+    return plans
+```
+
+## Clase 16: Consultas Avanzadas con SQL Model y Filtrado de Estados en FastAPI
+> Uso del Query
+## nota mental
+- from fastapi import  Query -> este hace la magia de enviar valores  por get 
+
+```python
+@router.get("/customers/{customer_id}/plans")
+async def subscribe_customer_to_plan(
+    customer_id: int, session: SessionDep, plan_status: StatusEnum = Query()
+):
+    customer_db = session.get(Customer, customer_id)
+
+    if not customer_db:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    query = (
+        select(CustomerPlan)
+        .where(CustomerPlan.customer_id == customer_id)
+        .where(CustomerPlan.status == plan_status)
+    )
+    plans = session.execute(query).all()
+    return plans
+##{"detail":"OKI"}
+
+```
+
+## Clase 17: Validación de Emails Únicos en Bases de Datos con Pydantic y FastAPI
+> La validación efectiva de datos es crucial en el desarrollo de software, especialmente cuando se habla de correos electrónicos. Con herramientas como FastAPI y Pydantic, puedes asegurar no solo que tus e-mails tengan el formato adecuado, sino también que sean únicos dentro de tu base de datos.
+
+## Notas mentales 
+- from pydantic import EmailStr importar y usar en el modelo 
+- https://docs.pydantic.dev/2.0/usage/types/string_types/#emailstr
+- from pydantic import  field_validator =>  para realizar validaciones personalizadas 
+
+```python
+
+class CustomerBase(SQLModel):  
+    name: str = Field(default=None)
+    description: str | None = Field(default=None)
+    email: EmailStr = Field(default=None)
+    age: int = Field(default=None)
+
+```
+
+## Clase 18: Implementación de Paginación en FastAPI con SQLModel
+> El profesor se paso de maniaco explica hacerlo manual el paginador cosa que ya con un plugin se puede hacer usaremos para este caso pip install fastapi-pagination
+
+## Nota Mental 
+- Sin embargo se dejan los ejemplos de hacer un paginador a manita y otro ejemplo usando el plugin [Enlace](../08_Curso_FastAPI/practica/curso-fastapi-project/app/routers/transactions.py)
+
+
+## Pasos usando pip install fastapi-pagination
+- Paso 1: instalar -> ´pip install fastapi-pagination´
+- Paso 2:  
+
+```python
+
+```
+
+## Clase 19: 
+> 
+```python
+
+```
+## Clase 20: 
 > 
 ```python
 
 ```
 
-## Clase 14: 
+## Clase 21: 
 > 
 ```python
 
 ```
 
-## Clase 15: 
+## Clase 22 : 
 > 
 ```python
 

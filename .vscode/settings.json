@@ -4,5 +4,8 @@
     "editor.fontVariations": false,
     "editor.formatOnPaste": false,
     "diffEditor.hideUnchangedRegions.contextLineCount": 4,
-    "editor.fontLigatures": false
+    "editor.fontLigatures": false,
+    "python.analysis.extraPaths": [
+        "./01_Primeros_pasos_Python/08_Curso_FastAPI/practica/fastapivenv/lib/python3.10/site-packages"
+    ]
 }
