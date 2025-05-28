@@ -774,5 +774,65 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep, au
 ```
 
 
+Explicación:
+
+- Celery: Es un broker de tareas asíncronas. En una aplicación FastAPI, se utiliza para delegar tareas que no necesitan una respuesta inmediata al usuario (como el procesamiento de datos pesados, envío de correos electrónicos, etc.) a procesos en segundo plano. Esto evita bloquear la solicitud del usuario y mejora la capacidad de respuesta de la API.
+
+- Sistema de caché externo (como Redis o Memcached): Se utiliza para almacenar en memoria los resultados de operaciones costosas (como consultas a la base de datos o cálculos complejos). Cuando la misma información se solicita nuevamente, se puede servir directamente desde la caché, evitando tener que realizar la operación costosa de nuevo y mejorando significativamente el rendimiento.
+
+- Ambos, Celery y un sistema de caché externo, abordan problemas relacionados con la gestión de tareas que consumen tiempo y la optimización del rendimiento en una aplicación FastAPI.
+
+
+- A: Si bien los ORM ayudan con las relaciones de bases de datos, Celery y los sistemas de caché no están directamente enfocados en simplificar la creación de estas relaciones.
+- C: La gestión de dependencias y la consistencia del entorno de desarrollo son abordadas por herramientas como pip y entornos virtuales, no por Celery o sistemas de caché.
+- D: La definición de modelos de datos complejos y validaciones avanzadas es la función principal de Pydantic, que se integra muy bien con FastAPI, pero no es el problema que resuelven Celery o los sistemas de caché.
+
+
 ## Preguntas Mentales
- 
+
+1.
+¿Cuál es el propósito de utilizar entornos virtuales al trabajar con FastAPI?
+Permiten mantener las dependencias del proyecto separadas de otros proyectos.
+2.
+¿Cuál es la ventaja de utilizar un archivo separado como models.py para definir los modelos en una aplicación FastAPI?
+Permite organizar mejor el código y evitar el código espagueti.
+3.
+¿Qué técnica podrías usar para asegurar que los datos ingresados por el usuario sean válidos antes de almacenarlos en FastAPI?
+Utilizar un modelo de validación que verifique los datos antes de procesarlos.
+4.
+¿Qué se debe hacer para que un nuevo customer se guarde en la base de datos al crearlo en FastAPI?
+Agregar el customer a la sesión y ejecutar session.commit.
+5.
+¿Cuál es el método HTTP más adecuado para actualizar parcialmente un recurso en FastAPI?
+PATCH
+6.
+Al modificar el modelo de datos en FastAPI y agregar un nuevo campo, ¿cuál es la mejor práctica para reflejar estos cambios en la base de datos?
+Utilizar migraciones
+7.
+En una app FastAPI, ¿qué problema resuelve el uso de Celery o un sistema de cache externo?
+Permite manejar tareas asíncronas y mejorar el rendimiento al evitar recalcular información repetidamente.
+8.
+En un middleware para registrar el tiempo de procesamiento, ¿qué es esencial para el cálculo?
+Guardar la hora de inicio y finalización del procesamiento para calcular la duración total.
+9.
+En pruebas unitarias con FastAPI, ¿qué propósito tiene `dependency_overrides`?
+Reemplazar la sesión de base de datos productiva por una sesión de pruebas.
+10.
+Al agregar un campo 'Status' a un modelo, ¿cómo asegurar que tenga un valor por defecto?
+Definiendo el valor por defecto directamente en el campo al crear el modelo (ej: Status=Campo(default=Active)).
+11.
+En una API que usa paginación, ¿cómo se controla qué porción de datos se recibe en cada solicitud?
+A través de parámetros en la URL que indican qué registros omitir y cuántos mostrar.
+12.
+Después de crear una prueba, ¿qué paso es crucial antes de considerarla completa y confiable?
+Asegurarse de usar 'assert' para verificar que el resultado obtenido coincide con el esperado.
+13.
+¿Qué propósito tiene la tabla intermedia 'customer_plan' en una relación de muchos a muchos?
+Conecta múltiples clientes con múltiples planes, gestionando las relaciones entre ambas entidades.
+14.
+¿Cómo protege FastAPI los datos en las APIs?
+Implementa mecanismos en los endpoints, como autenticación básica con usuario y contraseña, según necesidad y lógica del negocio.
+15.
+¿Qué indica el uso de un decorador 'validator' tachado en el código?
+Que el decorador ha sido reemplazado por una nueva herramienta (field validator) y no debería usarse.
+
