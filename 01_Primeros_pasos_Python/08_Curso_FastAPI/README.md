@@ -3,7 +3,7 @@
 
 - Profesor: Luis Martínez
 - Fecha Inicio: 23/Mayo/2025  
-- Fecha Fin: 
+- Fecha Fin: 28/Mayo/2025
 
 ## Clase 1: Creación de APIs rápidas y eficientes con FastAPI
 
