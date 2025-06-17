@@ -432,15 +432,32 @@ def delete_note(id):
 ```
 
 ## Clase 10: Refactorización y Organización de Proyectos en Flask
-> 
+>a refactorización de código es una práctica esencial para cualquier desarrollador que busque mantener sus proyectos escalables y fáciles de mantener. Cuando trabajamos con frameworks como Flask, organizar adecuadamente nuestro código no solo mejora la legibilidad, sino que también facilita el trabajo en equipo y la implementación de pruebas unitarias. En este artículo, exploraremos cómo transformar una aplicación Flask básica en una estructura más profesional y mantenible.
+
+
+
 
 ```Python
 
 ```
 
 
-## Clase 11: Creación de una Aplicación de Notas con Flask Paso a Paso
+## Clase 11: Refactorización de Rutas y Blueprints en Flask
 > 
+
+**¿Cómo preparar nuestro repositorio para un desarrollo profesional?**
+Antes de comenzar a refactorizar nuestro código, es importante asegurarnos de que nuestro repositorio esté correctamente configurado. Uno de los primeros pasos es crear un archivo .gitignore para evitar subir archivos innecesarios al repositorio. 
+
+
+**¿Qué son los blueprints en Flask y por qué son importantes?**
+Los blueprints en Flask son una forma de organizar aplicaciones a gran escala, permitiéndonos agrupar endpoints o URLs de acuerdo a su dominio o funcionalidad. Esta modularización facilita enormemente el mantenimiento del código y permite una mejor separación de responsabilidades dentro de nuestra aplicación.
+
+Cuando trabajamos con aplicaciones Flask que crecen en complejidad, mantener todas las rutas en un solo archivo se vuelve inmanejable. Los blueprints nos permiten:
+
+Organizar el código en módulos lógicos.
+Reutilizar componentes en diferentes partes de la aplicación.
+Facilitar la migración de funcionalidades a nuevas aplicaciones.
+Mejorar la colaboración en equipos de desarrollo.
 
 ```Python
 
