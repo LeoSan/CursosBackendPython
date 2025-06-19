@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Notas - Inicio{% endblock %}
+
+{% block content %}
+{% if notes %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for note in notes %}
+    <div class="bg-white shadow-lg rounded-lg p-5">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ note.title }}</h2>
+        <p class="text-sm text-gray-500 mb-3">Creado el {{ note.created_at.strftime('%d de %B') }}</p>
+        <p class="text-gray-700 mb-4">
+            {{ note.content[:140] }}{% if note.content|length > 140 %}...{% endif %}
+        </p>
+        <div class="flex justify-end space-x-2">
+            <a href="{{ url_for('notes.edit_note', id=note.id) }}"
+                class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" title="Editar Nota">Editar</a>
+            <form method="POST" action="{{ url_for('notes.delete_note', id=note.id) }}"
+                onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta nota?');">
+                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    title="Eliminar Nota">Eliminar</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-gray-500">No hay notas disponibles. ¡Comienza creando una!</p>
+{% endif %}
+
+{% endblock %}

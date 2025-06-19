@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Notas App{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="{{ url_for('notes.home') }}" class="text-xl font-bold text-gray-800">Notas App</a>
+            <a href="{{ url_for('notes.create_note') }}"
+                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Crear Nota</a>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container mx-auto my-4 px-4">
+        {% for category, message in messages %}
+        <div
+            class="p-3 mb-2 rounded-lg
+                {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'error' %}bg-red-100 text-red-800{% elif category == 'warning' %}bg-yellow-100 text-yellow-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto py-6 px-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner text-center p-4 mt-6 text-sm text-gray-500">
+        Este proyecto fue creado como parte del <a href="https://platzi.com/cursos/flask/"
+            class="text-blue-500 hover:underline" target="_blank">Curso de Flask en Platzi</a>, donde aprenderás a
+        desarrollar aplicaciones web con buenas prácticas.
+    </footer>
+</body>
+
+</html>

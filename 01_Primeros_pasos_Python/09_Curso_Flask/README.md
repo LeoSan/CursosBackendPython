@@ -301,7 +301,7 @@ db.create_all()   -> 3
 
 ## Validar en SQLite3
 - Para validar en sqlite podemos ejecutar el siguiente comando 
-- sqlite3 notes.sqlite => no abre un entorno para ejeuctar comando sql para tener nuestra data 
+- sqlite3 notes.sqlite => nos abre un entorno para ejecuctar comando sql para tener nuestra data 
 - .schema
 
 ## Clase 7: Creación y Gestión de Notas con SQLAlchemy y Vistas en Python
@@ -463,56 +463,430 @@ Mejorar la colaboración en equipos de desarrollo.
 
 ```
 
-## Clase 12: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
+## Clase 12: Implementación de Flash Messages en Aplicaciones Web con Flask
+> ¿Qué son los Flash Messages y por qué son importantes?
+Los Flash Messages son mensajes temporales que se muestran al usuario después de realizar una acción específica. Estos mensajes viajan entre solicitudes (requests) a través de sesiones, permitiendo mostrar información relevante sobre acciones completadas o errores ocurridos.
+
+Características principales:
+
+Persisten entre solicitudes para el mismo usuario
+Se almacenan en cookies encriptadas
+Desaparecen después de ser mostrados una vez
+Pueden categorizarse (éxito, error, advertencia)
+La importancia de estos mensajes radica en que proporcionan retroalimentación inmediata al usuario, mejorando la usabilidad de la aplicación y reduciendo la confusión sobre si una acción se completó correctamente.
+
+¿Cómo implementar Flash Messages en una aplicación Flask?
+La implementación de mensajes flash en Flask es relativamente sencilla gracias a que esta funcionalidad viene integrada en el framework. Veamos paso a paso cómo hacerlo:
+
+Configuración inicial
+Primero, necesitamos configurar una clave secreta para encriptar las cookies que transportarán nuestros mensajes:
+
+# Configuración de la clave secreta para encriptar cookies
+app.secret_key = "cualquier_valor_secreto"
+Esta clave es fundamental para la seguridad, ya que sin ella Flask no podrá manejar la información de sesión de forma segura.
+
+Importación y uso de Flash
+Para utilizar los mensajes flash, necesitamos importar la función correspondiente:
+
+from flask import flash
+Luego, podemos crear mensajes flash en cualquier punto de nuestro código, especialmente después de acciones importantes:
+
+# Después de crear una nota exitosamente
+flash("Nota creada", "success")
+El primer parámetro es el mensaje que queremos mostrar, y el segundo es la categoría. Las categorías son útiles para aplicar diferentes estilos según el tipo de mensaje (éxito, error, advertencia).
+
+Mostrando los mensajes en la plantilla
+Para mostrar los mensajes en nuestra plantilla HTML, utilizamos la función get_flashed_messages() de Jinja2:
+
+
+
+```Python
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+```
+
+
+## Clase 13: Plantillas Jinja en Flask: Reutilización de Código HTML
+> ¿Qué es Jinja y cómo mejora nuestro desarrollo frontend?
+Jinja es el manejador de plantillas integrado en Flask que ofrece grandes ventajas para el desarrollo frontend. Su principal beneficio es evitar la duplicación de código HTML, permitiéndonos mantener nuestro código organizado en diferentes archivos y reutilizarlo según sea necesario.
+
+Para trabajar con Jinja de manera más eficiente, podemos instalar la extensión "Better Jinja" en nuestro editor de código, lo que facilita la escritura y el autocompletado de código Jinja.
+
+Creando una plantilla base con Jinja
+El primer paso para implementar Jinja en nuestra aplicación es crear una plantilla base que contendrá la estructura común a todas nuestras páginas:
+
+Creamos un archivo llamado base.html en la carpeta templates
+Definimos la estructura básica de HTML5
+Agregamos bloques que serán redefinidos en las plantillas hijas
+<!-- Seleccionamos Jinja HTML como lenguaje -->
+{% block app_notas %}{% endblock %}
+
+<body style="background-color: aqua;">
+    {% block content %}{% endblock %}
+</body>
+Los bloques ({% block nombre %}{% endblock %}) son áreas que pueden ser sobrescritas por las plantillas que extiendan de esta base.
+
+Extendiendo la plantilla base
+Para utilizar nuestra plantilla base en otras vistas, usamos la directiva {% extends %}:
+
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    Lorem ipsum dolor sit amet...
+</div>
+{% endblock %}
+Es importante entender que solo el contenido dentro de los bloques definidos será visible en la página final. Todo el contenido que no esté dentro de un bloque redefinido será ignorado.
+
+¿Cómo implementar elementos comunes en todas las páginas?
+Una de las ventajas de usar plantillas base es la capacidad de definir elementos que aparecerán en todas las páginas de nuestra aplicación, como barras de navegación, pies de página o sistemas de mensajes.
+
+Sistema de mensajes flash
+Para implementar un sistema de mensajes que aparezca en todas las páginas, podemos colocar el código correspondiente en la plantilla base:
+```Python
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+```
+
+De esta manera, los mensajes flash se mostrarán en cualquier página que extienda de nuestra plantilla base.
+
+Mejorando la apariencia con Tailwind CSS
+Para mejorar la apariencia de nuestra aplicación, podemos utilizar frameworks CSS como Tailwind. En nuestra plantilla base mejorada, incluimos:
+
+La integración de Tailwind CSS mediante un script
+Fuentes personalizadas desde Google Fonts
+Una barra de navegación (navbar)
+Un sistema de mensajes con colores según la categoría (success, error, warning)
+Un contenedor principal con márgenes y padding adecuados
+Un pie de página
+
+
+Procedimiento para usar Flask Migrate:
+
+1. Ejecuta:
+
+pip install Flask-Migrate
+
+2. En app.py añadir:
+
+from flask_migrate import Migrate
+
+migrate = Migrate(app, db) # <--- Añade esta línea
+
+3. Ejecuta:
+
+flask db init (Inicializa una vez por proyecto)
+
+4. Agrega el campos al modelo
+
+created_at = db.Column(db.DateTime, default=db.func.now(), nullable=True) # tiene que aceptar nulo pq existen registros
+
+5. Ejecuta el comando:
+
+flask db migrate -m "Add created_at column to Note"
+
+6. Ejecuta:
+
+flask db upgrade
+
+
+## Clase 14: Sistema Básico de Autenticación con Sesiones en Flask
+> ¿Cómo funcionan las sesiones en Flask?
+Las sesiones en Flask nos permiten almacenar información específica del usuario en cookies del navegador. Esto es particularmente útil cuando necesitamos mantener el estado de autenticación de un usuario mientras navega por nuestra aplicación.
+
+Las sesiones funcionan de la siguiente manera:
+
+Almacenan datos en cookies del navegador del cliente
+La información se encripta utilizando una clave secreta
+Permiten acceder a los datos del usuario en diferentes rutas de la aplicación
+Mantienen la persistencia de la información entre solicitudes HTTP
+Es importante destacar que Flask implementa un mecanismo de seguridad mediante la secret_key, que encripta la información almacenada en las cookies. Esto previene que, si alguien intercepta estas cookies, no pueda utilizarlas en otro navegador para suplantar la identidad del usuario original.
+
+¿Por qué es importante la secret_key?
+La secret_key es un componente crítico en la seguridad de las sesiones de Flask. Esta clave se utiliza para:
+
+Encriptar la información almacenada en las cookies
+Prevenir ataques de suplantación de identidad
+Asegurar que las cookies solo funcionen en el navegador del usuario legítimo
+Proteger datos sensibles que se comparten entre el cliente y el servidor
+Sin una secret_key adecuada, cualquier persona con acceso a las cookies podría manipular la información y potencialmente acceder a recursos protegidos de la aplicación.
+
+Implementando un sistema de autenticación básico
+Para implementar nuestro sistema de autenticación, crearemos un nuevo Blueprint en Flask que manejará las rutas de login y logout. Este enfoque nos permite organizar mejor nuestro código y separar la lógica de autenticación del resto de la aplicación.
+
+Creación del Blueprint de autenticación
+Primero, debemos crear una nueva carpeta para nuestro Blueprint:
+
+from flask import Blueprint
+
+auth_bp = Blueprint('auth', __name__)
+Luego, definimos la ruta de login que aceptará tanto solicitudes GET (para mostrar el formulario) como POST (para procesar la información del usuario):
+
+from flask import Blueprint, request, render_template, redirect, url_for, flash, session
+
+auth_bp = Blueprint('auth', __name__)
+
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        
+        if username == 'admin':
+            session['user'] = username
+            return redirect(url_for('notes.home'))
+        else:
+            flash('Usuario no permitido', 'error')
+    
+    return render_template('login.html')
+En este código:
+
+Verificamos si la solicitud es POST (envío del formulario)
+Obtenemos el nombre de usuario del formulario
+Validamos si el usuario es válido (en este caso, solo 'admin')
+Si es válido, almacenamos el nombre de usuario en la sesión
+Redirigimos al usuario a la página principal de notas
+Si no es válido, mostramos un mensaje de error
 
 ```Python
 
 ```
 
+## Clase 15: Implementación de Login y Logout con Validación de Sesiones
+> ¿Cómo proteger rutas con autenticación en Flask?
+Después de implementar un sistema de login básico, el siguiente paso lógico es proteger ciertas rutas para que solo sean accesibles por usuarios autenticados. En nuestro caso, queremos asegurarnos de que solo los usuarios que han iniciado sesión puedan ver el listado de notas.
 
-## Clase 13: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
-
-```Python
-
-```
-
-## Clase 14: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
+Para lograr esto, necesitamos verificar si existe un usuario en la sesión actual. Si el usuario está presente, permitimos el acceso a la vista de notas; de lo contrario, redirigimos al usuario a la página de login con un mensaje informativo.
 
 ```Python
+from flask import session, flash, redirect, url_for
 
+@app.route('/notes')
+def notes():
+    if 'usuario' in session:
+        # El usuario está autenticado, mostrar las notas
+        return render_template('notes.html')
+    else:
+        # El usuario no está autenticado, redirigir al login
+        flash('Para poder ver las notas debes iniciar sesión', 'error')
+        return redirect(url_for('auth.login'))
 ```
 
-## Clase 15: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
+¿Cómo implementar la funcionalidad de logout?
+El logout es una funcionalidad esencial en cualquier sistema de autenticación. Permite a los usuarios cerrar su sesión de forma segura cuando terminan de usar la aplicación. En Flask, podemos implementar esta funcionalidad de manera sencilla utilizando el método pop() del objeto de sesión.
+
+@app.route('/logout')
+def logout():
+    session.pop('usuario', None)
+    flash('Se ha deslogueado correctamente')
+    return redirect(url_for('auth.login'))
+
+¿Qué extensiones de Flask puedo usar para mejorar la seguridad?
+Flask cuenta con varias extensiones que facilitan la implementación de sistemas de autenticación robustos:
+
+Flask-Login: Maneja sesiones de usuario, incluyendo login, logout y recordar sesiones.
+Flask-Security: Proporciona funcionalidades como registro de usuarios, confirmación de email, y restablecimiento de contraseñas.
+Flask-User: Similar a Flask-Security pero con más opciones de personalización.
+Flask-JWT-Extended: Para autenticación basada en tokens JWT, ideal para APIs.
+
+## Clase 16: Validación de Formularios en Flask: Mensajes de Error y Reglas Básicas
+> ¿Cómo validar información del lado del cliente en Flask?
+Cuando desarrollamos aplicaciones web, es común que los usuarios ingresen información que puede no cumplir con nuestros criterios de validez. Por ejemplo, títulos demasiado cortos o contenidos sin suficiente información. La validación en el lado del servidor es esencial para garantizar que solo se procesen datos que cumplan con nuestros requisitos.
+
+En Flask, podemos implementar validaciones manuales de manera relativamente sencilla. Estas validaciones se realizan antes de que los datos se guarden en la base de datos, lo que nos permite mostrar mensajes de error apropiados al usuario y evitar el procesamiento de información inválida.
+
+Implementación de validaciones básicas en rutas de Flask
+Para implementar validaciones básicas en nuestras rutas de Flask, podemos verificar las condiciones directamente en el código de la ruta. Veamos un ejemplo práctico:
 
 ```Python
-
+@app.route('/notes/create', methods=['POST'])
+def create_note():
+    title = request.form['title']
+    content = request.form['content']
+    
+    # Validación del título
+    if len(title.strip()) > 10:
+        # El título es válido, continuamos
+        
+        # Validación del contenido
+        if len(content.strip()) > 300:
+            # El contenido es válido, guardamos la nota
+            # Código para guardar la nota en la base de datos
+            flash('La nota fue creada correctamente', 'success')
+            return redirect(url_for('notes'))
+        else:
+            flash('El contenido es muy corto, mínimo 300 caracteres', 'error')
+    else:
+        flash('El título es muy corto, mínimo 10 caracteres', 'error')
+    
+    # Si llegamos aquí, hubo un error de validación
+    return render_template('create_note.html')
 ```
 
-## Clase 16: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
 
-```Python
+## Clase 17: Pruebas Unitarias en Flask: Creación y Configuración
+¿Qué son las pruebas unitarias y por qué son importantes?
+Las pruebas unitarias son una práctica esencial en el desarrollo de software que consiste en validar que cada componente individual de nuestro código funciona como esperamos. Esto es particularmente importante cuando nuestro código incluye lógica de negocio compleja.
 
-```
+Existen varios beneficios clave al implementar pruebas unitarias:
+
+Validación constante: Nos permiten verificar que el código hace exactamente lo que esperamos.
+Seguridad al realizar cambios: Podemos modificar nuestro código con la confianza de que no estamos rompiendo funcionalidades existentes.
+Integración continua: Las pruebas pueden ejecutarse automáticamente en procesos de CI/CD (Integración Continua/Despliegue Continuo).
+Documentación viva: Las pruebas sirven como documentación ejecutable de cómo debe comportarse nuestro código.
+En Flask, tenemos herramientas específicas que nos facilitan la creación de pruebas para validar tanto nuestros modelos como nuestras vistas.
+
+¿Cómo configurar un entorno de pruebas en Flask?
+Para implementar pruebas unitarias en Flask, necesitamos configurar adecuadamente nuestro entorno. Esto implica varios pasos importantes:
+
+Creación de una configuración específica para pruebas
+Lo primero que debemos hacer es crear una configuración específica para nuestras pruebas:
+
+class TestConfig:
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test_notes.db'
+    SECRET_KEY = 'test_secret_key'
+    TESTING = True
+Esta configuración es similar a la de producción, pero con algunas diferencias clave:
+
+Utilizamos una base de datos diferente (test_notes.db) para no afectar los datos de producción.
+Establecemos TESTING = True para que Flask sepa que estamos en modo de prueba.
+Podemos definir una clave secreta específica para pruebas.
+Implementación del patrón Application Factory
+Para poder cambiar la configuración durante las pruebas, necesitamos implementar el patrón Application Factory:
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+    
+    # Aquí va el resto de la configuración de la app
+    # ...
+    
+    return app
+Este patrón nos permite crear instancias de nuestra aplicación con diferentes configuraciones, lo que es esencial para las pruebas. En lugar de inicializar la aplicación directamente, creamos una función que la inicializa y la devuelve.
+
+¿Cómo crear y ejecutar pruebas unitarias en Flask?
+Una vez configurado nuestro entorno, podemos comenzar a escribir pruebas unitarias para nuestros modelos y vistas.
+
+Creación de una clase de prueba
+Creamos un archivo test_models.py con una clase que hereda de unittest.TestCase:
+
+import unittest
+from app import create_app
+from config import TestConfig
+from models import db, Note
+
+class NoteModelTest(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app(TestConfig)
+        self.client = self.app.test_client()
+        
+        with self.app.app_context():
+            db.create_all()
+    
+    def test_create_note(self):
+        with self.app.app_context():
+            note = Note(title="Título", content="Contenido")
+            db.session.add(note)
+            db.session.commit()
+            
+            saved_note = Note.query.first()
+            
+            self.assertEqual(saved_note.title, "Título")
+            self.assertEqual(saved_note.content, "Contenido")
+En este ejemplo:
+
+El método setUp se ejecuta antes de cada prueba y configura el entorno necesario.
+Creamos una instancia de nuestra aplicación con la configuración de prueba.
+Inicializamos un cliente de prueba que nos permitirá simular solicitudes HTTP.
+Creamos la estructura de la base de datos dentro del contexto de la aplicación.
+En test_create_note, probamos que podemos crear una nota y que se guarda correctamente en la base de datos.
+Uso del contexto de aplicación
+Un aspecto crucial al trabajar con pruebas en Flask es el uso del contexto de aplicación. Muchas operaciones, como las interacciones con la base de datos, requieren este contexto:
+
+with self.app.app_context():
+    # Código que requiere el contexto de la aplicación
+    db.create_all()
+    # ...
+Sin este contexto, recibiremos errores al intentar acceder a la base de datos u otros recursos de la aplicación.
+
+Uso de assertions para validar resultados
+Las assertions son el corazón de las pruebas unitarias. Nos permiten verificar que los resultados son los esperados:
+
+self.assertEqual(saved_note.title, "Título")
+Existen muchos tipos de assertions disponibles:
+
+assertEqual: Verifica que dos valores son iguales
+assertTrue/assertFalse: Verifica que un valor es verdadero o falso
+assertIn: Verifica que un elemento está en una colección
+assertRaises: Verifica que se lanza una excepción específica
+Ejecución de las pruebas
+Para ejecutar nuestras pruebas, utilizamos el módulo unittest de Python:
+
+python -m unittest test_models.py
+Si la prueba es exitosa, veremos un punto por cada prueba que pase. Si falla, veremos un mensaje de error detallado que nos ayudará a identificar el problema.
 
 
-## Clase 17: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
 
-```Python
-
-```
-
-## Clase 18: Creación de una Aplicación de Notas con Flask Paso a Paso
-> 
-
-```Python
-
-```
+## Respuestas mentales 
 
 
 
+1.
+¿Cuál es la principal ventaja de usar Flask como framework web en Python?
+Es un microframework ligero y flexible
+2.
+¿Qué comando necesitas ejecutar para iniciar un servidor de desarrollo Flask?
+flask run
+3.
+¿Cómo defines una ruta en Flask que responda tanto a GET como a POST?
+@app.route(’/’ , methods=[“POST”, “GET”])
+
+4.
+¿Qué método de SQLAlchemy se usa para crear todas las tablas en la base de datos?
+create_all()
+5.
+¿Qué método se usa para obtener todos los registros de una tabla en SQLAlchemy?
+query.all()
+6.
+¿Qué método HTTP se usa para actualizar datos existentes en una aplicación RESTful?
+PUT
+7.
+¿Qué método de SQLAlchemy se usa para eliminar un registro de la base de datos?
+db.session.delete()
+8.
+¿Cuál es la mejor práctica para organizar una aplicación Flask de mediano tamaño?
+Usar una estructura modular con blueprints
+9.
+¿Qué método se usa para registrar un Blueprint en una aplicación Flask?
+app.register_blueprint()
+10.
+¿Qué función de Flask se usa para mostrar mensajes flash al usuario?
+flash()
+11.
+¿Dónde se debe incluir el CDN de TailwindCSS en una aplicación Flask?
+En el template base HTML
+12.
+¿Qué configuración es necesaria para usar sesiones en Flask?
+SECRET_KEY
+13.
+¿Qué método se usa para cerrar la sesión de un usuario en Flask?
+session.clear()
+14.
+¿Qué método se usa para validar datos de un formulario en Flask?
+request.form.get()
+15.
+¿Qué clase base se usa para crear pruebas en Flask?
+unittest.TestCase
