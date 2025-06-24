@@ -3,7 +3,7 @@
 
 - Profesor: Luis Martínez
 - Fecha Inicio: 28/Mayo/2025  
-- Fecha Fin: 
+- Fecha Fin: 19/Junio/2025
 - Guia : https://github.com/platzi/curso-flask/ 
 - Curso Viejo -> https://platzi.com/clases/old/flask-19/ -> flask viejo curso 
 

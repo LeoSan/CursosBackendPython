@@ -35,3 +35,26 @@ Como parte de mis primeros pasos de conocer todo el entorno de Python estamos de
     ├── templates   - template .html usando jinja 
     ├── 
     └── 
+
+    notes_app/ 
+    │ 
+    ├── app/ 
+    │ 
+    ├── 
+    __init__.py 
+    │ 
+    ├── routes.py 
+    │ 
+    ├── models.py 
+    │ 
+    └── forms.py 
+    │ 
+    ├── tests/ 
+    │ 
+    ├── __init__.py 
+    │ 
+    └── test_basic.py 
+    │ 
+    ├── config.py 
+    ├── run.py 
+    └── requirements.txt
