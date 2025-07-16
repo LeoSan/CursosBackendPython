@@ -4,13 +4,12 @@ Curso de Complejidad Algorítmica con Python
 ¿Cuál es una característica distintiva del ordenamiento por inserción comparada con otros algoritmos de ordenamiento?
 
 Utiliza un mecanismo de comparación y fusión para ordenar los elementos.
+Requiere una cantidad significativa de memoria adicional para ordenar la lista.
 Repasar
 
 2.
 ¿Cuál de las siguientes oraciones describe el significado de abstracción?
-Un diagrama que concentra toda la información de un programa y lo describe para entender su funcionamiento.
-Repasar
-
+Una interfaz para interactuar con un objeto sin preocuparnos cómo funciona internamente.
 3.
 ¿Qué es la complejidad algorítmica?
 Es la evaluación de recursos que toma un algoritmo para resolver un problema.
@@ -23,13 +22,12 @@ def my_func(x):
     for i in range(2000):
         respuesta += 1
     return respuesta
-1999
-Repasar
+
+2000
 
 5.
 ¿Qué es el crecimiento asintótico?
-Es el crecimiento acelerado que se da en una función.
-Repasar
+Es el crecimiento de una función al infinito.
 
 6.
 ¿Cuál de las siguientes es una complejidad lineal?
@@ -37,6 +35,4 @@ O(n)
 
 7.
 ¿Qué herramienta nos permite analizar la complejidad espacial y/o temporal en un algoritmo?
-
-Búsqueda binaria
-Repasar
+Big O Notation
