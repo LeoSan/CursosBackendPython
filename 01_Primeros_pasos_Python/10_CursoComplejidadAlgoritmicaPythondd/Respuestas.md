@@ -5,6 +5,7 @@ Curso de Complejidad Algorítmica con Python
 
 Utiliza un mecanismo de comparación y fusión para ordenar los elementos.
 Requiere una cantidad significativa de memoria adicional para ordenar la lista.
+Es el algoritmo más eficiente para ordenar listas de cualquier tamaño.
 Repasar
 
 2.
@@ -36,3 +37,8 @@ O(n)
 7.
 ¿Qué herramienta nos permite analizar la complejidad espacial y/o temporal en un algoritmo?
 Big O Notation
+
+
+8. En el contexto del ordenamiento por inserción, ¿cuál de las siguientes afirmaciones describe correctamente el proceso de inserción de un nuevo elemento en la sublista ordenada?
+
+Los elementos menores al elemento que se está evaluando se mueven un lugar a la izquierda.
