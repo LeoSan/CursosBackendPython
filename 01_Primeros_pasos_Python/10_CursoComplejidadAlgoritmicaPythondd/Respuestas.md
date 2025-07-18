@@ -1,16 +1,13 @@
-Curso de Complejidad Algorítmica con Python
+# Curso de Complejidad Algorítmica con Python
 
 1.
 ¿Cuál es una característica distintiva del ordenamiento por inserción comparada con otros algoritmos de ordenamiento?
-
-Utiliza un mecanismo de comparación y fusión para ordenar los elementos.
-Requiere una cantidad significativa de memoria adicional para ordenar la lista.
-Es el algoritmo más eficiente para ordenar listas de cualquier tamaño.
-Repasar
+Ordena los elementos de la lista en su lugar, sin necesidad de memoria adicional.
 
 2.
 ¿Cuál de las siguientes oraciones describe el significado de abstracción?
 Una interfaz para interactuar con un objeto sin preocuparnos cómo funciona internamente.
+
 3.
 ¿Qué es la complejidad algorítmica?
 Es la evaluación de recursos que toma un algoritmo para resolver un problema.
@@ -42,3 +39,4 @@ Big O Notation
 8. En el contexto del ordenamiento por inserción, ¿cuál de las siguientes afirmaciones describe correctamente el proceso de inserción de un nuevo elemento en la sublista ordenada?
 
 Los elementos menores al elemento que se está evaluando se mueven un lugar a la izquierda.
+repasar
