@@ -39,4 +39,5 @@ Big O Notation
 8. En el contexto del ordenamiento por inserción, ¿cuál de las siguientes afirmaciones describe correctamente el proceso de inserción de un nuevo elemento en la sublista ordenada?
 
 Los elementos menores al elemento que se está evaluando se mueven un lugar a la izquierda.
+El elemento se coloca en la primera posición disponible, sin importar su valor.
 repasar
