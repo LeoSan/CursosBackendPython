@@ -40,4 +40,5 @@ Big O Notation
 
 Los elementos menores al elemento que se está evaluando se mueven un lugar a la izquierda.
 El elemento se coloca en la primera posición disponible, sin importar su valor.
+El elemento se inserta al final de la sublista ordenada, y luego la sublista se reordena.
 repasar
