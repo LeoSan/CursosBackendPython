@@ -61,6 +61,7 @@ FIFO (First-In, First-Out).
 15.
 Son métodos básicos de los queues para añadir y remover elementos:
 push() y pop()
+append() y remove()
 Repasar
 
 16. 
@@ -69,7 +70,7 @@ FALSO
 
 17. 
 Solo se pueden crear stacks con nodos". Esta afirmación
-verdadero
+FALSO
 
 18. Cuál es la principal diferencia entre un array y una lista en Python
 Los arrays tienen un tamaño definido que no cambia y las listas tienen un tamaño dinámico.
@@ -77,3 +78,6 @@ Los arrays tienen un tamaño definido que no cambia y las listas tienen un tama�
 19. 
 A dónde apunta el último nodo de una singly linked list circular
 head
+
+20. Qué escenarios debemos considerar en los métodos para añadir y/o eliminar nodos en una linked list
+Qué pueden haber 0 o "n" cantidad de nodos, lo cual altera la posición y punteros de los demás nodos.
