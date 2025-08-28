@@ -44,6 +44,7 @@ Nos permite tener un orden de sus datos, recorrerlos y agruparlos según nuestra
 En general, ¿qué se necesita para realizar operaciones como insertar o eliminar nodos de una linked list?
 Apoyándonos de un array para conocer de antemano los elementos en los nodos.
 Implementar ciclos while ya que el ciclo for no funciona para estos casos.
+Indispensable utilizar una variable auxiliar.
 Repasar
 
 12.
@@ -62,6 +63,7 @@ FIFO (First-In, First-Out).
 Son métodos básicos de los queues para añadir y remover elementos:
 push() y pop()
 append() y remove()
+insert() y pop()
 Repasar
 
 16. 
@@ -81,3 +83,7 @@ head
 
 20. Qué escenarios debemos considerar en los métodos para añadir y/o eliminar nodos en una linked list
 Qué pueden haber 0 o "n" cantidad de nodos, lo cual altera la posición y punteros de los demás nodos.
+
+21 . Son métodos básicos de los stacks para añadir y remover elementos
+
+append() y remove()
