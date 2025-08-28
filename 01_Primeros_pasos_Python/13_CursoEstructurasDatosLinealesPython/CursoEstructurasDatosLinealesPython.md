@@ -61,10 +61,7 @@ FIFO (First-In, First-Out).
 
 15.
 Son métodos básicos de los queues para añadir y remover elementos:
-push() y pop()
-append() y remove()
-insert() y pop()
-Repasar
+enqueue() y dequeue()
 
 16. 
 ¿Un dato con valor None es equivalente a cero (0)?
@@ -85,5 +82,7 @@ head
 Qué pueden haber 0 o "n" cantidad de nodos, lo cual altera la posición y punteros de los demás nodos.
 
 21 . Son métodos básicos de los stacks para añadir y remover elementos
-
 append() y remove()
+
+22. Qué es una colección de datos
+Un grupo de cero o más elementos que pueden tratarse como una unidad conceptual.
