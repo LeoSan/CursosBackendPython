@@ -261,7 +261,37 @@ El último paso es lanzar y asegurar el acceso.
 
 ## Clase 9: Conexión a Servidor mediante SSH y Llave .pem en Terminal Linux
 
-## Clase 10: 
+> Podemos usar el comando ssh para acceder a la consola del servidor  
+
+**Pasos**
+- Paso 1: Podemos ejecutar ´ssh´ nos despliega las opciones 
+![alt text](image.png)
+
+- Paso 2: Podemos indentificarnos de la siguiente manera 
+    - ´ssh -i [Nombre del archivo] [usuario]@[IP pública del servidor]´
+    - Ejemplo ´ssh -i Python_server_Key.pem ubutun@34.202.113.209´ -> Este es del profesor
+    - PD1: el PEM te lo genera al crear un servidor virtual 
+    - PD2: ubutun@IP => lo podras ver en tu consonla web cuando generaste el servidor virtual  
+![alt text](image-1.png)
+
+
+- Paso 3: confirmamos la conexion 
+![alt text](image-2.png)
+
+- Paso 4: Regresamos al Paso 2 
+
+- Paso 5: validar si estamos logueados 
+
+![alt text](image-3.png)
+
+- paso 6: podemos ver los procesos con htop
+
+- paso 7: nos muestrad e amera logica los dorectorios df -h
+
+- paso 8: who para indicar quien 
+
+
+## Clase 10: Gestion de paquetes y configuraciones de servidores ubuntu 
 
 ## Clase 11: 
 
