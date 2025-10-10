@@ -61,7 +61,7 @@
     - Main: Producción 
     - develop: Version estable para desarrollo 
     - feature/login: Requerimientos 
-    - hotfix: en caso de un sissue 
+    - hotfix: en caso de un issue 
 
 ## Clase 4: Comando especiales para despliegue y configuración 
 
@@ -292,8 +292,102 @@ El último paso es lanzar y asegurar el acceso.
 
 
 ## Clase 10: Gestion de paquetes y configuraciones de servidores ubuntu 
+**¿Qué es APT y cómo usarlo en Ubuntu?**
+> APT es una herramienta esencial en cualquier servidor que corra sobre Ubuntu, ya que es el manejador predeterminado para la instalación y desinstalación de paquetes.
 
-## Clase 11: 
+**Comandos Básicos Debian/Ubuntu** 
+Ya te proporcioné una tabla en Markdown en mi respuesta anterior, pero ¡entiendo que quieres el formato más limpio posible!
+
+Aquí tienes la misma información de validación y complemento de comandos en una tabla Markdown concisa, lista para copiar y pegar:
+
+---
+
+## Comandos Esenciales de Linux y Desarrollo
+
+| Comando | Propósito Validado y Complementado |
+| :--- | :--- |
+| `sudo apt update` | **Actualiza el índice local de paquetes disponibles** (el catálogo de software), **no instala** software. |
+| `apt list --upgradable` | Muestra una lista de todos los **paquetes instalados** que tienen una versión más reciente disponible para ser descargada. |
+| `sudo apt upgrade` | **Descarga e instala** las versiones más recientes de los paquetes listados, aplicando mejoras y correcciones. |
+| `sudo apt install nginx` | Instala **NGINX**, un servidor web. En desarrollo, actúa como **proxy inverso** o servidor de archivos estáticos delante de tu aplicación Python. |
+| `sudo service nginx status` | Verifica el **estado actual del servicio NGINX** (activo, inactivo, fallido). *Alternativa moderna:* `sudo systemctl status nginx`. |
+| `sudo service nginx restart` | **Reinicia el servicio NGINX.** Necesario después de modificar su configuración. *Alternativa moderna:* `sudo systemctl restart nginx`. |
+| `sudo apt install git` | Instala **Git**, el sistema de **control de versiones distribuido** fundamental para el desarrollo de software y la colaboración. |
+| `sudo nginx -t` | Valida cambios en nginx |
+| `ls -lah` | valida link simbolicos  |
+
+
+## Clase 11: Configuración de DNS y NginX para aplicaciones web en Django 
+
+> NginX: Nos permite configurar nuestro propio servidor seguiremos algunas buenas practicas pero antes se debe explicar los directorios para un mejor entendimiento: 
+**Conceptos**
+- En Ubuntu al instalar ngix encontraremos los files system en el Directorio ´/etc/ngix´
+![Directorio Nginx ](image-4.png)
+
+- Dicho directorio se divide en: 
+
+/etc/nginx/
+├── conf.d/             # Fragmentos de configuración incluidos automáticamente (ej. proxy, caché)
+├── fastcgi.conf        # Archivo principal de configuración de FastCGI
+├── fastcgi_params      # Parámetros estándar para FastCGI (usado con PHP)
+├── mime.types          # Definiciones de tipos MIME para el manejo de archivos
+├── nginx.conf          # Archivo de configuración global y principal de Nginx
+├── proxy_params        # Parámetros estándar para configuraciones de proxy inverso
+├── scgi_params         # Parámetros para el protocolo SCGI
+├── sites-available/    # Configuraciones completas de sitios web disponibles (inactivos por defecto)
+├── sites-enabled/      # Enlaces simbólicos a sitios activos en sites-available/
+├── snippets/           # Bloques de configuración reutilizables (ej. ajustes SSL)
+├── uwsgi_params        # Parámetros para el protocolo uWSGI (usado con Python)
+├── modules-available/  # Módulos dinámicos disponibles para cargar
+└── modules-enabled/    # Enlaces simbólicos a los módulos dinámicos activos
+
+
+
+| Archivo/Directorio | Propósito Principal |
+| :--- | :--- |
+| **`nginx.conf`** | **Archivo de Configuración Principal.** Contiene las directivas globales que definen el funcionamiento de Nginx (configuración de *worker processes*, módulos, la ruta a los archivos de log, y la inclusión de otros archivos). |
+| **`conf.d`** | **Fragmentos de Configuración Adicionales.** Directorio utilizado para alojar pequeños archivos de configuración (`.conf`) que son automáticamente incluidos por el archivo principal `nginx.conf`. Se usa comúnmente para configuraciones de proxy, caché o *snippets* específicos. |
+| **`sites-available`** | **Configuraciones de Sitios Web Disponibles.** Contiene los archivos de configuración completos para cada sitio web o aplicación que podrías alojar. Estos archivos *no están activos* hasta que se crea un enlace simbólico en `sites-enabled`. |
+| **`sites-enabled`** | **Configuraciones de Sitios Web Activas.** Contiene **enlaces simbólicos** que apuntan a los archivos dentro de `sites-available`. Solo las configuraciones listadas aquí son cargadas por Nginx y están activas. |
+| **`snippets`** | **Fragmentos Reutilizables.** Directorio para guardar pequeños bloques de configuración que se repiten y pueden ser incluidos fácilmente en múltiples archivos de configuración de sitios (ej. ajustes de SSL, configuración de *caching* común, etc.). |
+| **`fastcgi_params`** | **Parámetros de FastCGI.** Contiene un conjunto de parámetros que se pasan al proceso *backend* FastCGI (típicamente usado para ejecutar PHP). |
+| **`fastcgi.conf`** | **Configuración de FastCGI.** Archivo que incluye los `fastcgi_params` y añade directivas específicas de FastCGI. |
+| **`proxy_params`** | **Parámetros de Proxy.** Contiene directivas (generalmente encabezados HTTP) que se pasan a un servidor *backend* cuando Nginx actúa como un proxy inverso (que es su uso más común). |
+| **`scgi_params`** | **Parámetros de SCGI.** Similar a FastCGI, contiene parámetros para el protocolo SCGI, menos común que FastCGI. |
+| **`uwsgi_params`** | **Parámetros de uWSGI.** Similar a FastCGI, contiene parámetros para el protocolo uWSGI, comúnmente usado para aplicaciones Python. |
+| **`mime.types`** | **Tipos MIME.** Define la correlación entre las extensiones de archivos y su correspondiente tipo MIME para que Nginx sepa cómo servir correctamente cada tipo de archivo al navegador. |
+| **`modules-available`** | **Módulos Dinámicos Disponibles.** Directorio que contiene módulos de Nginx que están disponibles para ser cargados, pero no están activos por defecto. |
+| **`modules-enabled`** | **Módulos Dinámicos Activos.** Contiene enlaces simbólicos a los módulos en `modules-available` que han sido activados para su uso en la configuración actual. |
+| **`koi-utf`, `koi-win`, `win-utf`** | **Mapas de Codificación de Caracteres.** Archivos de soporte para la conversión de codificación de caracteres, principalmente relacionados con idiomas del este de Europa. |
+
+**Pasos**
+- Paso 1: Debemos ingresar al directorio ´sites-available´ como lo indica la explicación aqui podremos crear todos los config que necesitamos por cada proyecto para este caso de la clase creamos un ejemplo llamado deployment paso 2. 
+- Paso 2: podemos crear el archivo: 'sudo vim deploywithpython.com.conf' 
+- Paso 3: En el archivo creado podemos generar las especificaciones del servicio [Aqui me toca investigar ya que esto es basico]
+
+```batch
+
+server {
+    listen 80;
+    server_name deployewithpython.com;
+    location / {
+        return 200 'Hola desde el archivo the conf';
+        add_header Content-Type text/plain;
+    }
+}
+
+```
+    - Queda de esta manera
+![alt text](image-5.png)
+
+- Paso 4: luego de crear el conf, debemos habilitar esa configuracion para eso nos recorremos al siguiente directorio que se llama ´sites-enabled´ = cd sites-enabled
+    - Debemos crear un link simbolico lo podemos crear de la siguiente manera: 
+    - ´sudo ln -s ../sites-available/deploywithpython.com.conf .´ link simbolico funciona de la siguiente manera ´sudo ln -s [Lugar Origen] [Lugar Destino]´ en este caso el [.] es root
+    - Validar si quedo de manera correcta ls -lah
+
+- Paso 5: Podemos usar el comando para validar si los cambios estan correctos 
+    - ´sudo nginx -t´
+    - ´sudo service nginx restart´ cada vez que hacemos cambios hay que reiniciar
 
 ## Clase 12: 
 
