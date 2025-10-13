@@ -389,13 +389,256 @@ server {
     - ´sudo nginx -t´
     - ´sudo service nginx restart´ cada vez que hacemos cambios hay que reiniciar
 
-## Clase 12: 
+## Clase 12: Configuración de Certificados SSL con Certbot y Nginx
 
-## Clase 13: 
+**¿Por qué es importante usar un certificado SSL?**
 
-## Clase 14: 
+En la actualidad, mantener la seguridad al visitar sitios web es fundamental. Utilizar el puerto 80 con el protocolo HTTP ya no es seguro, razón por la cual la mayoría de los sitios han migrado al puerto 443 usando un certificado SSL. Esto permite una conexión encriptada entre el navegador del usuario y el servidor, protegiendo la información contra posibles interceptaciones. Aquí te enseñaremos a configurar un certificado con Let's Encrypt en tu servidor usando Servbot.
 
-## Clase 15: 
+
+**¿Cómo instalar Servbot y sus dependencias?**
+
+1. Abre la terminal de tu servidor.
+
+2. Ejecuta el siguiente comando para instalar Servbot y Python 3:
+
+´sudo apt install certbot python3-certbot-nginx´
+
+3. Una vez instalados, toma nota de todos los paquetes que se hayan instalado para futuras referencias.
+
+**¿Cuál es el proceso para generar un certificado SSL?**
+
+1. Ejecutamos el comando =>  ´sudo certbot --nginx´
+
+2. Introduce un correo electrónico válido. Este se usará para notificaciones sobre la expiración del certificado o problemas de seguridad.
+
+3. Acepta los términos y condiciones.
+
+4. Decide si quieres notificar a Servbot una vez que tu certificado sea creado correctamente, lo cual es útil para estadísticas.
+
+> PD: Es importante seleccionar el dominio correcto al que deseas aplicar el certificado. Si en tu servidor hay varios configurados, deberás elegir el adecuado. El sistema te mostrará los dominios disponibles para que selecciones el tuyo.
+
+## Clase 13: Configuración de Servidor para Despliegue de Aplicaciones Django 
+
+**¿Cómo configurar un servidor para clonar un repositorio de Python?**
+
+Configurar un servidor para clonar un repositorio de Python es un paso crucial para el despliegue de aplicaciones web. Aquí te guiamos en la preparación de tu servidor para trabajar con proyectos en Python utilizando un repositorio alojado en una plataforma como GitHub, garantizando que tengas todo listo para ejecutar tu aplicación.
+
+
+
+**Enlaces**
+- https://platzi.com/cursos/deploying-python/72368-configuracion-de-servidores-web-y-aplicacion
+
+
+**¿Qué pasos seguir para preparar el servidor?**
+
+1. Clonación y Configuración de Carpetas:
+
+    - Conéctate al servidor utilizando SSH con la llave generada previamente.
+    - Crea un directorio seguro dentro del servidor para tus aplicaciones:
+        ´sudo mkdir /srv/apps´
+    - Asegúrate de que el usuario correcto tenga permisos sobre estas carpetas:
+        ´sudo chown ubuntu:ubuntu /srv/apps´
+
+**2. Clonar el Repositorio de Git:**
+    - Usa el comando git clone para traer el repositorio al servidor. Recuerda especificar un nombre para la carpeta clonada:
+        ´git clone <URL-del-repositorio> Django-basic-production´
+
+    - Soluciona permisos si es necesario ajustando la propiedad de las carpetas.
+
+**¿Cómo configurar un entorno virtual y dependencias?**
+    
+    1. Crear un entorno virtual y manejar las dependencias es clave para aislar el entorno de desarrollo y evitar conflictos entre proyectos.
+
+    - Crear un entorno virtual:
+
+    - Crea una carpeta para tus entornos virtuales y un entorno nuevo:
+        - mkdir .envs
+        - python3 -m venv .envs/Django-basic-production
+
+    2. Instalar Dependencias:
+
+    - Activa el entorno virtual:
+    - source .envs/Django-basic-production/bin/activate
+
+    3 Instala las dependencias listadas en requirements.txt:
+    - pip install -r requirements.txt
+
+
+**¿Cómo ejecutar y servir la aplicación de Django?**
+
+    > Finalmente, una vez que la aplicación está configurada, es hora de servirla para que sea accesible.
+
+    1. Configura el servidor de aplicaciones:
+
+        - Instala y usa Gunicorn para servir tu aplicación:
+            - pip install gunicorn
+
+        - Ejecuta el servidor de aplicaciones:
+            - gunicorn --bind 0.0.0.0:8000 config.wsgi:application
+
+    2. Ajusta Grupos de Seguridad y Configura Host Permitidos:
+
+    - Agrega las IPs en el archivo de configuración de Django (ALLOWED_HOSTS) y ajusta las reglas de seguridad de AWS para aceptar el puerto 8000.
+
+## Clase 14: Configuración de UWSGI para Despliegue de Aplicaciones Python
+
+**¿Cómo configurar nuestra aplicación Python utilizando UWSGI?**
+
+Configurar una aplicación Python utilizando UWSGI es un proceso que te permitirá mejorar el manejo de recursos y asegurar la ejecución eficiente de tu servidor. Veamos cómo puedes realizar esta configuración.
+
+**¿Qué debemos instalar para comenzar?**
+Primero, necesitamos conectarnos al servidor e instalar UWSGI. Ejecuta el siguiente comando en tu terminal para instalar UWSGI, junto con su plugin para Python:
+
+
+```batch
+sudo apt install uwsgi
+sudo apt install uwsgi-plugin-python3
+```
+Este plugin es crucial ya que UWSGI admite múltiples tipos de aplicaciones, pero necesitamos especificar que vamos a trabajar con aplicaciones de Python.
+
+**¿Cómo validar la instalación de UWSGI?**
+
+Una vez instalado, valida que UWSGI esté funcionando correctamente ejecutando:
+```batch
+uwsgi
+```
+
+En este punto, debes ver todos los parámetros configurados por defecto, como el tamaño de memoria y el número de procesos que pueden ejecutarse.
+
+
+**¿Cómo crear el archivo de configuración de UWSGI?**
+
+- Dirígete al directorio de configuraciones de UWSGI ubicado generalmente en /etc/uwsgi. 
+- Debes crear un archivo de configuración para tu aplicación:
+- Crea el archivo de configuración en la carpeta apps-available usando vim o tu editor preferido:
+- ´sudo vim /etc/uwsgi/apps-available/nombre-aplicacion-production.ini´
+- En el archivo .ini, define las siguientes configuraciones:
+
+```batch
+[uwsgi]
+module = config.wsgi:application
+plugins = python3
+socket = /tmp/nombre-aplicacion-production.sock
+chdir = Ruta/absoluta/a/tu/proyecto
+home = Ruta/entorno/virtual
+env = DJANGO_SETTINGS_MODULE=configuracion.settings
+master = true
+processes = 4
+module: Especifica el módulo Python que debe ejecutarse.
+plugins: Indica que se usará el plugin de Python3.
+socket: Define la comunicación entre UWSGI y Nginx.
+chdir y home: Establecen el directorio de trabajo y el entorno virtual para tu aplicación.
+env: Configura las variables de entorno necesarias para ejecutar la aplicación.
+master: Habilita el proceso máster que supervisa otros procesos.
+processes: Configura la cantidad de procesos que deseas ejecutar.
+
+```
+
+```batch
+module = config.wsgi:application
+
+plugins = python3
+
+socket = /tmp/deployment-produccion.sock
+
+chdir = /home/ubuntu/srv/apps/deployment-produccion
+
+home = ../.envs/deployment-produccion
+
+env = DJANGO\_SETTINGS\_MODULE=config.settings
+
+master = true
+
+processes = 4
+
+```
+
+**¿Cómo habilitar y validar que tu aplicación está en ejecución?**
+
+- Para activar tu aplicación, crea un enlace simbólico en la carpeta apps-enabled:
+
+´sudo ln -s /etc/uwsgi/apps-available/nombre-aplicacion-production.ini /etc/uwsgi/apps-enabled/´
+
+- Verifica que tu aplicación esté corriendo correctamente:
+
+- Reinicia UWSGI:
+- ´sudo service uwsgi restart´
+
+- Usa htop para monitorear los procesos:
+- ´htop´
+
+- Presiona F4 y filtra por uwsgi para ver los procesos activos. Deberías ver varios procesos, incluyendo el proceso máster.
+
+- Confirma que el socket funciona verificando su existencia en /tmp:
+
+´ls /tmp/´
+
+- Y ahí lo tienes. Una vez que tu archivo de configuración esté activado y los enlaces simbólicos correctos, tu aplicación estará lista para manejar solicitudes mediante UWSGI y Nginx.
+
+**¿Qué hacer si encuentras problemas?**
+Si no ves los procesos en ejecución, puedes verificar con:
+
+´sudo service uwsgi status´
+- Asegúrate que no haya errores en los enlaces simbólicos o configuraciones incorrectas dentro del archivo .ini.
+
+
+
+**Comandos**
+- ´history | grep ln´ => Permite ver tu historial de los comando ejecutados 
+
+
+## Clase 15: Configuración de Proxy Reverso con Nginx y UWSGI en Python
+
+¿Cómo conectar un socket UWSGI con Nginx?
+Conectar un socket de UWSGI con Nginx es un paso clave en el proceso de despliegue de aplicaciones en Python. UWSGI crea un archivo de socket que será utilizado por servicios como Nginx para mostrar la aplicación en un navegador web. Sin esta conexión, la aplicación no es accesible para los usuarios.
+
+¿Qué es un proxy reverso?
+El concepto de proxy reverso juega un papel fundamental aquí. Un proxy reverso es un servidor que se coloca delante de servidores web para dirigir las peticiones de los usuarios al servidor adecuado. En este caso, Nginx actúa como proxy reverso conectándose al socket y redirigiendo las solicitudes a UWSGI.
+
+¿Cómo configurar Nginx?
+Para conectar Nginx con UWSGI, sigue estos pasos:
+
+Accede a la configuración de Nginx:
+
+Usa la terminal para navegar a la carpeta de configuración de Nginx (/etc/nginx).
+Ejecuta ls para listar los archivos y busca sites-available y sites-enabled.
+Editar el archivo de configuración:
+
+Con el comando cat, revisa el archivo en sites-available que corresponde a tu dominio.
+Para hacer cambios, utiliza un editor como vim con privilegios de superusuario (sudo).
+Modificar las configuraciones:
+
+Borra las líneas temporales con el comando que duplica la tecla D (DD) en vim.
+Incluye las nuevas configuraciones, como include y las configuraciones de UWSGI.
+Usa uwsgi_pass con el protocolo unix para pasar el socket correcto a Nginx.
+Asegúrate de finalizar cada línea con un punto y coma ;.
+Validar y reiniciar Nginx:
+
+Antes de reiniciar Nginx, valida los cambios con nginx -t para comprobar que la sintaxis es correcta.
+Si es así, reinicia el servicio con sudo service nginx restart.
+Con estos pasos, habrás conectado exitosamente tu dominio con la aplicación Python usando Nginx y UWSGI.
+
+¿Cómo añadir salud de verificación con Nginx?
+Un elemento crucial del despliegue es comprobar la salud del sistema. Aprende a crear un endpoint de verificación en Nginx para asegurar que los sistemas funcionan correctamente.
+
+¿Por qué es importante un estado de verificación?
+Cuando tienes varios procesos ejecutándose, como Nginx y UWSGI, uno de ellos puede fallar y causar un error 500 en tu sitio. Un endpoint de verificación te permitirá monitorizar y validar si al menos uno de los servicios está funcionando.
+
+¿Cómo configurarlo?
+Abre el archivo de configuración de Nginx:
+
+Sigue los mismos pasos anteriores para acceder y editar el archivo de configuración.
+Agrega una nueva locación:
+
+Añade una sección location que apunte a un nuevo endpoint, por ejemplo, /status.
+Configura lo que se mostrará cuando se acceda a este endpoint.
+Revisa y reinicia:
+
+Una vez configurado, guarda los cambios.
+Valida la configuración de nuevo con nginx -t.
+Si todo está correcto, reinicia el servicio de Nginx.
+
 
 ## Clase 16: 
 
