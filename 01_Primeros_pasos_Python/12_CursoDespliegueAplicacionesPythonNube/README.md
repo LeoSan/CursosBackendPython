@@ -393,7 +393,9 @@ server {
 
 **¿Por qué es importante usar un certificado SSL?**
 
-En la actualidad, mantener la seguridad al visitar sitios web es fundamental. Utilizar el puerto 80 con el protocolo HTTP ya no es seguro, razón por la cual la mayoría de los sitios han migrado al puerto 443 usando un certificado SSL. Esto permite una conexión encriptada entre el navegador del usuario y el servidor, protegiendo la información contra posibles interceptaciones. Aquí te enseñaremos a configurar un certificado con Let's Encrypt en tu servidor usando Servbot.
+- En la actualidad, mantener la seguridad al visitar sitios web es fundamental. 
+- Utilizar el puerto 80 con el protocolo HTTP ya no es seguro, razón por la cual la mayoría de los sitios han migrado al puerto 443 usando un certificado SSL. 
+- Esto permite una conexión encriptada entre el navegador del usuario y el servidor, protegiendo la información contra posibles interceptaciones. 
 
 
 **¿Cómo instalar Servbot y sus dependencias?**
@@ -845,16 +847,17 @@ Configurar la URL de la base de datos:
 ## Clase 20: Configuración de Instancias RDS en AWS para Bases de Datos
 
 
-¿Cómo configurar una instancia de base de datos en AWS?
+**¿Cómo configurar una instancia de base de datos en AWS?**
 Configurar una instancia de base de datos en Amazon Web Services (AWS) es esencial para desplegar aplicaciones en producción sin preocuparse por las tareas manuales que normalmente implicarían mucho esfuerzo, como los backups y las actualizaciones. AWS proporciona un servicio llamado RDS (Relational Database Service), el cual facilita estos procesos. A continuación, te guiaré paso a paso por la configuración de una instancia de base de datos en AWS.
 
-¿Qué es el servicio RDS de AWS?
+**¿Qué es el servicio RDS de AWS?**
 RDS es un servicio de base de datos administrada que ayuda a las aplicaciones a operar sin la sobrecarga de gestionar datacenters, servidores, y servicios de actualización. Algunas funcionalidades claves de RDS incluyen:
 
-Automatización de copias de seguridad y actualizaciones: Reduce el trabajo manual y asegura que la base de datos esté al día.
-Escalabilidad: Permite ajustar los recursos según las necesidades de tu aplicación.
-Alta disponibilidad: Proporciona replicación de datos y failover automático en distintas zonas de disponibilidad.
-¿Cómo acceder y crear una instancia en RDS?
+- Automatización de copias de seguridad y actualizaciones: Reduce el trabajo manual y asegura que la base de datos esté al día.
+- Escalabilidad: Permite ajustar los recursos según las necesidades de tu aplicación.
+- Alta disponibilidad: Proporciona replicación de datos y failover automático en distintas zonas de disponibilidad.
+
+**¿Cómo acceder y crear una instancia en RDS?**
 Para comenzar, primero inicia sesión en la consola de AWS y sigue estos pasos:
 
 En el dashboard de servicios de AWS, busca "RDS" y haz clic en él.
@@ -865,13 +868,15 @@ Aquí se pueden seleccionar diferentes motores de base de datos, como PostgreSQL
 - Selecciona: Estándar create.
 - Elige el motor: PostgreSQL.
 - Versión: Deja la versión por defecto.
-¿Qué configuración inicial es necesaria para la instancia?
+
+**¿Qué configuración inicial es necesaria para la instancia?**
 A continuación, decide el entorno y los recursos para tu base de datos:
 
 Entorno Productivo vs. Dev/Test: Escoge el entorno basado en el tráfico y el rendimiento esperado. Las instancias productivas son más robustas y garantizan alta disponibilidad.
 Nombre del DB: Asigna un nombre significativo, como "platzi_database".
 Usuario y llaves de encriptación: Utiliza "Postgres" como usuario por defecto y opta por dejar las llaves de encriptación predeterminadas para proteger los datos.
-¿Cómo configurar almacenamiento y seguridad?
+
+**¿Cómo configurar almacenamiento y seguridad?**
 La optimización de E/S es vital para el rendimiento:
 
 Almacenamiento: Elige "EO optimized" si buscas mejorar la entrada-salida (I/O).
@@ -884,7 +889,7 @@ Tras completar la configuración inicial y una vez que la base de datos esté di
 psql -h <host_endpoint> -U Postgres -d Postgres
 Para obtener el <host_endpoint>, dirígete al detalle de la base de datos en el dashboard de AWS RDS. A continuación, ingresar la contraseña solicitada.
 
-¿Cuáles son los próximos pasos?
+**¿Cuáles son los próximos pasos?**
 Una vez conectado, es posible crear estructuras adicionales en la base de datos o ejecutar migraciones:
 
 Crear una nueva base de datos:
@@ -909,8 +914,10 @@ Asegúrate de que tu aplicación no está intentando utilizar un servicio de alm
 En el código de configuración, revisa la sección relacionada con STATIC_URL y STATIC_ROOT. Estos deben estar dirigidos correctamente a las carpetas en el servidor.
 Generar archivos estáticos:
 
-Utiliza el comando collectstatic de Django para recopilar todos los archivos estáticos en la carpeta configurada:
-python manage.py collectstatic
+**Utiliza el comando collectstatic de Django para recopilar todos los archivos estáticos en la carpeta configurada:**
+
+- ´python manage.py collectstatic´
+
 Asegúrate de que la carpeta generada es accesible por tu servidor web.
 
 **¿Cómo configurar Nginx para servir archivos estáticos?**
@@ -993,3 +1000,145 @@ Ansible te da la flexibilidad de hacer tareas más complejas, como instalar paqu
     key_file: '~/.ssh/my_ssh_key'
 
 Cuando ejecutas el playbook nuevamente, Ansible verifica si los paquetes están presentes. Si no lo están, los instala. Además, clona el repositorio en la versión especificada, asegurándose de que tu aplicación esté siempre actualizada.
+
+
+**RESUMEN DEL CURSO** 
+1.
+¿Cuál protocolo deberías usar para manejar múltiples solicitudes simultáneas en una aplicación Python moderna?
+ASGI
+
+2.
+¿Cuál es la mejor práctica para manejar un error crítico en producción utilizando Git?
+Crear una rama hotfix desde la rama master para corregir el error y luego fusionar los cambios de vuelta a master y develop.
+
+3.
+¿Cómo se debe incrementar la versión de una aplicación en Git si se han agregado nuevas funcionalidades sin romper la compatibilidad?
+Incrementar el número menor en el versionamiento semántico.
+
+4.
+Si deseas editar un archivo de configuración en un servidor sin interfaz gráfica, ¿qué editor de texto deberías usar?
+Vim
+
+5.
+¿Cuál es la mejor manera de manejar variables sensibles en una aplicación Python para evitar que se suban al repositorio?
+Usar un archivo .env y no subirlo al repositorio
+
+6.
+¿Qué tipo de almacenamiento deberías elegir para mejorar la velocidad de acceso a los archivos de tu aplicación en un servidor?
+Un SSD de tipo gp3.
+
+7.
+¿Cuál es el primer paso para crear una instancia virtual en AWS?
+Seleccionar el sistema operativo de la instancia.
+**REPASAR**
+
+8.
+Si deseas minimizar costos al usar instancias en AWS, ¿qué deberías hacer?
+Utilizar el plan Free Tier y monitorear el uso.
+
+9.
+Si necesitas instalar un nuevo paquete en un servidor Ubuntu, ¿qué herramienta deberías utilizar?
+apt
+
+10.
+¿Qué comando deberías usar para actualizar la lista de paquetes disponibles en un servidor Ubuntu?
+sudo apt upgrade
+**REPASAR**
+
+11.
+Si deseas verificar si un servicio está corriendo en tu servidor, ¿qué comando deberías ejecutar?
+sudo service nginx status
+
+12.
+¿Qué puerto deberías usar para asegurar que tu sitio web esté utilizando HTTPS?
+443
+
+
+13.
+Si necesitas verificar que tu aplicación Python está corriendo correctamente en el servidor, ¿qué comando podrías usar?
+Htop para ver la lista de procesos en ejecución.
+
+
+14.
+¿Qué paso es crucial para asegurar que uWSGI pueda ejecutar una aplicación Python correctamente en un servidor?
+Crear un link simbólico correcto desde apps available a apps enabled.
+
+
+15.
+¿Cuál es el propósito de usar un Proxy Reverso en Nginx al desplegar una aplicación WSGI?
+Permitir que las solicitudes web se redirijan al socket de la aplicación.
+
+
+16.
+¿Cuál es la mejor práctica para manejar errores en una aplicación Python desplegada en producción?
+Configurar logs separados para cada aplicación
+
+
+17.
+¿Por qué es importante no habilitar el modo debug en producción en una aplicación Django?
+Porque expone información sensible del servidor
+
+
+18.
+¿Cuál es la ventaja principal de integrar Sentry en un proyecto de Python?
+Permite detectar y notificar errores automáticamente sin revisar manualmente los logs.
+
+
+19.
+Si deseas recibir alertas de errores en tiempo real, ¿qué configuración adicional podrías implementar con Sentry?
+Configurar alertas para que lleguen a un sistema de mensajería.
+
+
+20.
+¿Qué método es más eficiente para organizar los logs de una aplicación web?
+Agrupar los logs por aplicación y fecha.
+
+
+21.
+¿Cuál es la mejor práctica para manejar las claves secretas en un proyecto Django en un entorno de producción?
+Utilizar variables de entorno para almacenar las claves secretas.
+
+
+22.
+¿Qué comando se debe usar para aplicar los cambios realizados en el archivo de configuración de variables de entorno en el servidor?
+python manage.py runserver
+**REPASAR**
+
+23.
+Si deseas crear un nuevo usuario en PostgreSQL, ¿qué comando deberías usar?
+CREATE USER nombre_usuario WITH PASSWORD 'contraseña';
+
+
+24.
+¿Cuál es la principal ventaja de utilizar Amazon RDS para gestionar bases de datos en producción?
+Automatización de copias de seguridad y actualizaciones.
+
+
+25.
+Al crear una base de datos en Amazon RDS, ¿qué opción deberías elegir para un entorno de pruebas con bajo costo?
+Seleccionar el Free Tier con una instancia de 2 CPUs y 1 GB de RAM.
+
+
+26.
+¿Cuál es la mejor práctica para manejar archivos estáticos en una aplicación Django en producción?
+Utilizar un servicio como S3 para almacenar y servir los archivos estáticos.
+
+
+27.
+¿Qué comando de Django se utiliza para recopilar archivos estáticos en un solo lugar?
+collectstatic
+
+
+28.
+¿Qué configuración en Nginx permite servir archivos estáticos correctamente en Django?
+Configurar una location con alias apuntando a la carpeta de archivos estáticos.
+
+
+29.
+¿Cuál es la ventaja principal de usar Ansible para el despliegue de aplicaciones en múltiples servidores?
+Automatiza el proceso de despliegue, reduciendo errores humanos.
+
+
+30.
+Si necesitas actualizar paquetes en un servidor usando Ansible, ¿qué módulo deberías utilizar?
+El módulo 'apt' para sistemas basados en Debian.
