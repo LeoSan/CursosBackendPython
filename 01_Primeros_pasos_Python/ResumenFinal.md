@@ -113,3 +113,128 @@ POST
 30.
 ¿Qué configuración asegura que las pruebas no modifiquen la base de datos de producción?
 Usar una base de datos en memoria temporal y limpiar las tablas después de cada prueba.
+
+
+------------------------------------------------------------------------------------------------------
+
+1.
+¿Cuál de las siguientes afirmaciones lograría explicar que es un Framework?
+Un Framework de backend te da buenas prácticas y arquitectura base para construir un producto.
+
+2.
+¿Cuál es la responsabilidad del método PATCH dentro de una arquitectura REST API?
+Editar
+
+3.
+¿Las cookies se pueden usar para almacenar información tanto en los navegadores como en apps móviles?
+FALSE
+
+4.
+¿Cuál puede soportar alta disponibilidad: escalamiento horizontal o escalaminto vertical?
+Escalamiento horizontal
+
+5.
+¿Cuál de las siguientes afirmaciones lograría explicar mejor el concepto de colas de tareas?
+Las colas de tareas pueden delegar carga de procesamiento para evitar cuellos de botella al tratar de atender todas las solicitudes al tiempo.
+
+6.
+¿Qué archivo debes modificar para registrar un modelo en el panel de administración?
+admin.py
+
+7.
+¿Cuál es el archivo de configuración principal en Django?
+settings.py
+
+8.
+¿Cómo se crea un superusuario en Django?
+python manage.py createsuperuser
+
+9.
+¿Cómo defines una relación Many-to-Many en un modelo de Django?
+class MyModel(models.Model): related_model = models.ManyToManyField(RelatedModel)
+
+10.
+¿Cómo defines una relación One-to-One en un modelo de Django?
+class MyModel(models.Model): related_model = models.OneToOneField(RelatedModel, on_delete=models.CASCADE)
+
+11.
+¿Para proteger una aplicación Django contra ataques de inyección SQL, qué medidas se deben tomar?
+Usar consultas ORM de Django
+
+12.
+¿Qué patrón de diseño sigue Django para la separación de lógica y presentación?
+Modelo-Vista-Template (MVT)
+
+13.
+¿Cómo puedes mejorar el rendimiento de una aplicación Django?
+Usar cache y optimizar consultas de base de datos
+
+14.
+¿Qué función en Django se utiliza para redireccionar a otra URL?
+redirect
+
+15.
+¿Qué middleware en Django se utiliza para habilitar la protección CSRF?
+django.middleware.csrf.CsrfViewMiddleware
+
+16.
+¿Cuál método de una API REST usarías para modificar solo un campo específico de un recurso?
+PATCH
+
+17.
+Si un recurso es modificado con éxito utilizando PUT, ¿qué sucede después en la base de datos?
+Se actualiza el recurso con los nuevos datos usando el método save() del serializador
+
+18.
+¿Cuál es el método HTTP más adecuado para actualizar parcialmente un recurso en FastAPI?
+PATCH
+
+19.
+¿Cuál es la ventaja principal de usar un StaticPool en la configuración de pruebas de una base de datos?
+Permite crear una base de datos temporal en memoria, evitando múltiples archivos.
+
+20.
+¿Cuál es la ventaja de usar una IP elástica en AWS para tu instancia?
+Mejora la seguridad de la instancia.
+**REPASAR**
+
+21.
+Si necesitas validar que los cambios en la configuración de Nginx son correctos, ¿qué comando deberías usar?
+nginx -t
+
+22.
+¿Cuál es la mejor práctica para manejar archivos estáticos en una aplicación Django en producción?
+Utilizar un servicio como S3 para almacenar y servir los archivos estáticos.
+
+23.
+¿Qué comando necesitas ejecutar para iniciar un servidor de desarrollo Flask?
+flask run
+
+24.
+¿Qué método de SQLAlchemy se usa para eliminar un registro de la base de datos?
+db.session.delete()
+
+25.
+¿Qué característica hace que Flask sea considerado un microframework?
+Su simplicidad y flexibilidad
+
+26.
+¿Cómo se define una ruta con parámetros dinámicos en Flask?
+@app.route('/user/{id}')
+**REPASAR**
+
+27.
+¿Qué directiva se usa para heredar de una plantilla base en Jinja?
+{% extends %}
+
+28.
+¿Qué problema soluciona principalmente la paginación al trabajar con APIs y grandes volúmenes de datos?
+Reduce el tiempo de respuesta del servidor al mostrar solo una parte de los datos.
+
+29.
+Tras modificar el modelo de datos, ¿qué acción soluciona el error de campo inexistente al crear un plan?
+Borrar la base de datos y ejecutar la aplicación nuevamente para regenerar el esquema.
+
+30.
+Al crear una prueba para un endpoint que crea un nuevo recurso, ¿qué código de estado HTTP se espera comúnmente?
+201 (Created), que indica que el recurso se creado exitosamente en el servidor.

@@ -440,7 +440,7 @@ app.include_router(customers.router)
 
 ## Notas mentales 
 - Para las relaciones podemos importar **Relationship** de nuestra libreria **sqlmodel**
-- Para este ejempli es una relacion de un cliente puede tener muchas transacciones por lo que es 1..m 
+- Para este ejemplo es una relacion de un cliente puede tener muchas transacciones por lo que es 1..m 
 - Como sabemos en la tabla hija va la id del padre como vemos en el ejemplo 
 - foreign_key: Define la clave foránea en el modelo.
 - Relationship: Establece una relación entre tablas.
