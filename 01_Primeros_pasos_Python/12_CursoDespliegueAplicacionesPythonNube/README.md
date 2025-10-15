@@ -640,12 +640,356 @@ Valida la configuración de nuevo con nginx -t.
 Si todo está correcto, reinicia el servicio de Nginx.
 
 
-## Clase 16: 
+## Clase 16: Configuración de Logs en Nginx y UWSGI para Aplicaciones Python
 
-## Clase 17: 
+**¿Por qué es crucial configurar logs en tus aplicaciones Python?**
+Al desplegar nuestras aplicaciones Python, es normal que funcionen correctamente en un principio. Sin embargo, a medida que se realizan cambios o se presentan escenarios específicos, pueden surgir errores. Configurar logs detallados es esencial no solo para detectar fallas más fácilmente, sino también para agruparlos de acuerdo a la aplicación en ejecución, simplificando el proceso de diagnóstico y corrección. Los logs permiten identificar y resolver problemas de manera eficiente al proveer registros históricos de los eventos y errores que se presentan.
 
-## Clase 18: 
+**¿Cómo estructurar logs en aplicaciones Django con Nginx y UWSGI?**
+Para optimizar la gestión de logs, es importante agruparlos dentro de tus aplicaciones Django, alineados con servidores web como Nginx y gestores de aplicaciones como UWSGI. A continuación, se describe la metodología para alcanzar este objetivo:
 
-## Clase 19: 
+1. Ramas Git y cambios en código:
 
-## Clase 20: 
+	- Utiliza ramas como develop para crear y probar cambios antes de fusionarlos a main o producción.
+	- Verifica y aplica migraciones o actualizaciones según los cambios realizados.
+
+2. Revisar e instalar nuevas dependencias:
+
+	- Activa el entorno virtual y ejecuta:
+	- pip install -r requirements.txt
+	- Reinicia el servicio de aplicación con:
+	- sudo service uwsgi restart
+
+3. Comprender la importancia de los logs:
+
+	- Los logs fijan la base para identificar errores, especialmente detectando códigos de respuesta HTTP (como 400, 500, etc.) y sus causas subyacentes.
+
+4. Estrategia para depuración y logs de seguridad:
+
+	- Temporalmente habilita el modo de depuración en Django, pero ten cuidado de no dejarlo activo en producción, ya que expone información sensible como direcciones IP y detalles de configuración.
+	- Al resolver el problema, desactiva el debug y verifica que las configuraciones vuelvan a su estado original para mantener la seguridad.
+
+5. Agrupar y estructurar logs en Nginx:
+
+	- Edita el archivo de configuración de Nginx (e.g., en /etc/nginx/sites-enabled/) para especificar ubicaciones de logs separados:
+	- access_log /var/log/nginx/deploy_with_python_access.log;
+	- error_log /var/log/nginx/deploy_with_python_error.log;
+	- Verifica la configuración con:
+	- sudo nginx -t
+	- Reinicia Nginx para aplicar los cambios:
+	- sudo service nginx restart
+
+**¿Cómo supervisar los logs para un análisis eficaz?**
+- Después de configurar los logs correctamente, es hora de realizar un seguimiento proactivo:
+
+
+	1. Supervisión de logs dinámicos:
+	- Puedes usar el comando tail para seguir los cambios en tiempo real en tus archivos de logs:
+	- sudo tail -f /var/log/nginx/deploy_with_python_access.log
+
+	2. Identificar y verificar peticiones y errores:
+	- Usa los logs para ver las peticiones recibidas y verifica códigos de respuesta HTTP para detectar incidentes o confirmar una operación normal.
+
+## Clase 17: Monitoreo de Errores en Django con Centry y Configuración de Logs
+
+**¿Por qué es importante monitorear los errores en aplicaciones?**
+Imagina tener que revisar constantemente los registros de errores para asegurarte de que tu aplicación esté funcionando correctamente. Sería una tarea ardua y poco práctica, ¿verdad? Por suerte, existen herramientas que automatizan este proceso, enviándonos alertas cuando algo anda mal. En esta guía, exploraremos cómo Centry, una herramienta poderosa y eficiente, nos ayuda a lograrlo.
+
+**¿Cómo integrar Centry con un proyecto de Python?**
+1. Creación de una cuenta en Centry
+	- Para comenzar, necesitas crear una cuenta en Centry, la plataforma que nos permitirá monitorear automáticamente los errores de nuestra aplicación. Sigue estos pasos:
+	- Visita la página web de Centry (centry.io).
+	- Haz clic en el botón "Get Started".
+	- Completa tus datos personales.
+	- Selecciona la región donde deseas guardar tus datos (Europa o Estados Unidos, según prefieras).
+	- Opcionalmente, suscríbete para recibir actualizaciones por correo y acepta los términos y condiciones.
+
+2. Configuración de Centry en Django
+	- Una vez que hayas creado tu cuenta, selecciona el framework de tu proyecto. En este caso, usaremos Django. Sigue los pasos descritos a continuación para configurar Centry:
+	Configura el SDK: Esto te mostrará cómo instalar las dependencias necesarias.
+	- Instala las dependencias en tu máquina local (o directamente en el servidor, si prefieres).
+	- Activa el entorno virtual de tu proyecto.
+	- Agrega la siguiente información al archivo settings.py al final del archivo:
+```python 
+	# Configuración de Centry
+	SENTRY_DSN = 'tu_dsn_aquí' #esto lo podemos extraer de la pagina 
+
+```	
+	- Modifica el archivo urls.py para introducir un error intencionado que te permita comprobar la integración:
+```python 
+# Código en urls.py con error intencionado
+def error_view(request):
+    return 1 / 0
+```	
+
+
+**¿Cómo identificar y resolver errores usando Centry?**
+- Después de configurar Centry, es momento de probar su eficacia. Intenta acceder a la URL que desencadenará el error intencionado. Deberías recibir un error de respuesta al cargar la página. Ahora, veamos los detalles del error en la plataforma de Centry.
+
+1. Revisión y corrección de errores
+	- Al acceder a Centry, verás que se registró el error recibido.
+	- Haz clic en el error específico para ver detalles: URL, transacción, código de estado HTTP, entre otros.
+	- Localiza el archivo y la línea donde ocurrió el error.
+	- Corrige el error. En este caso, asegúrate de agregar una coma que falta en el archivo problemático.
+	
+	Gracias a Centry, no necesitas navegar por registros extensos para encontrar errores. La herramienta te ayudará a mantener la operatividad de tu aplicación de una manera simplificada.
+
+**¿Cómo configurar alertas y administrar logs?**
+	- Además de su capacidad para capturar errores, Centry ofrece funcionalidades de alerta y administración de logs que optimizan aún más la eficiencia del monitoreo de aplicaciones.
+
+**Configuración de alertas**
+	- Las alertas se pueden configurar para que se envíen directamente a tu correo electrónico.
+	- Alternativamente, es posible integrarlas con sistemas de mensajería como Slack, garantizando que te mantengas informado en tiempo real.
+	- Organización y gestión de logs
+
+**Para evitar que los registros sean abrumadores, es conveniente organizarlos:**
+
+Configura tu sistema de logs para agrupar registros por aplicación, fecha o día.
+Edita el archivo de configuración de tu aplicación para incluir parámetros como log sucx y Demon Eyes. Esto permitirá que los archivos de log incluyan un número con cada cambio de día y se inicien con una marca de tiempo.
+
+**ENLACE**
+- https://sentry.io/welcome
+
+## Clase 18: Configuración de Variables de Entorno en Servidor Django
+
+**¿Cómo se configura el servidor y los archivos de aplicación de forma óptima?**
+> Al configurar un servidor y modificar los archivos de una aplicación, es crucial asegurarse de que los cambios realizados cumplen con los estándares necesarios para la correcta operación en un entorno de producción. Esto implica gestionar modificaciones de manera estructurada, evitando prácticas poco recomendables, como cambiar archivos directamente en el servidor. Aprenderemos a manejar estos aspectos aprovechando herramientas como Git y archivos de entorno.
+
+**¿Cómo utilizamos Git para gestionar los cambios?**
+> Al realizar cambios en un servidor, es vital utilizar una herramienta de control de versiones como Git para mantener un seguimiento de las modificaciones. Para esto se puede:
+
+Realizar un git status para verificar los archivos modificados.
+Utilizar git diff para observar específicamente qué partes del archivo han cambiado, por ejemplo, cambios en allow host o instalación de sentry.
+Trabajar siempre desde una rama de desarrollo (por ejemplo, develop) para gestionar cambios y pruebas.
+
+**¿Qué son y cómo manejamos las variables de entorno?**
+Las variables de entorno son claves fundamentales para la configuración de una aplicación. En proyectos como los realizados con Django, algunos ejemplos cruciales incluyen:
+
+SECRET_KEY: Clave utilizada para encriptar datos.
+DEBUG: Para mostrar detalles de errores en el navegador.
+SENTRY_DSN: Clave para configurar Sentry, herramienta de monitoreo de errores.
+ALLOWED_HOSTS: Lista de dominios permitidos para la aplicación.
+DATABASE_URL: URL para la configuración de la base de datos.
+
+**¿Cómo configuro las variables de entorno adecuadamente?**
+Configurar las variables de entorno es un paso esencial para asegurar que la aplicación sea segura y funcione correctamente. Sigamos estos pasos:
+
+Creación de un archivo .env: Utilizando un editor como Vim, crea un archivo .env donde añadirás las variables de entorno.
+vim .env
+Copiar y pegar valores: Añade valores como SENTRY_DSN desde tu cuenta Sentry, el host permitido desde la documentación, y otros valores necesarios:
+SENTRY_DSN=<tu_valor_dsn_aquí>
+ALLOWED_HOSTS=deploymentbit.python.local
+Reinicio del servidor: Para que los cambios surtan efecto, reinicia el servidor UWSGI con:
+sudo service uwsgi restart
+
+## Clase 19: Instalación y Configuración de PostgreSQL en Ubuntu para Django
+
+**¿Cómo instalar y configurar PostgreSQL en un servidor Ubuntu?**
+
+Instalar y configurar PostgreSQL en un servidor Ubuntu es una habilidad esencial para desarrolladores que desean manejar bases de datos de manera eficaz y segura. El proceso no solo implica la instalación del motor de bases de datos, sino también la creación de usuarios y bases de datos, así como la conexión de estas a un proyecto Django. Aprende a hacerlo siguiendo estos pasos detallados.
+
+**¿Cuáles son los pasos para instalar PostgreSQL?**
+Actualizar la lista de paquetes:
+
+Conéctate a tu servidor usando el comando SSH y la clave de identificación.
+Ejecuta el siguiente comando para actualizar la lista de paquetes disponibles:
+sudo apt update
+Instalar PostgreSQL:
+
+Después de actualizar la lista de paquetes, instala PostgreSQL usando:
+sudo apt install postgresql
+Asegúrate de verificar que el servicio esté activo:
+sudo service postgresql status
+
+
+**¿Cómo crear un usuario y una base de datos en PostgreSQL?**
+
+Una vez instalado PostgreSQL, es crucial crear un usuario y una base de datos que puedas conectar a tu aplicación.
+
+1. Conectar a la consola de PostgreSQL:
+
+- Cambia al usuario postgres para gestionar la base de datos:
+- ´sudo -i -u postgres´
+- Ingresa al gestor de bases de datos:
+- ´psql´
+
+2. Crear un nuevo usuario:
+
+- Ejecuta el comando para crear un usuario:
+- CREATE USER usuario_platzi WITH PASSWORD 'paz';
+
+3. Crear una base de datos:
+
+- Crea una nueva base de datos y establece al usuario como propietario:
+- CREATE DATABASE dv_platzi OWNER usuario_platzi;
+- Lista todas las bases de datos para verificar la creación:
+- ´\l´
+
+**¿Cómo conectar Django a PostgreSQL?**
+
+Para conectar tu proyecto de Django con la base de datos PostgreSQL, es necesario revisar y ajustar la configuración del archivo .env.
+
+Configurar la URL de la base de datos:
+
+- Abre el archivo .env de tu aplicación y especifica la variable DATABASE_URL como sigue:
+- DATABASE_URL=postgresql://usuario_platzi:paz@localhost:5432/dv_platzi
+
+- Activar el entorno virtual y migrar:
+
+- Activa el entorno virtual de tu proyecto:
+- source venv/bin/activate
+- Ejecuta las migraciones de Django para confirmar que todo está configurado correctamente:
+- python manage.py migrate
+- Las tablas deben crearse correctamente en la base de datos.
+
+## Clase 20: Configuración de Instancias RDS en AWS para Bases de Datos
+
+
+¿Cómo configurar una instancia de base de datos en AWS?
+Configurar una instancia de base de datos en Amazon Web Services (AWS) es esencial para desplegar aplicaciones en producción sin preocuparse por las tareas manuales que normalmente implicarían mucho esfuerzo, como los backups y las actualizaciones. AWS proporciona un servicio llamado RDS (Relational Database Service), el cual facilita estos procesos. A continuación, te guiaré paso a paso por la configuración de una instancia de base de datos en AWS.
+
+¿Qué es el servicio RDS de AWS?
+RDS es un servicio de base de datos administrada que ayuda a las aplicaciones a operar sin la sobrecarga de gestionar datacenters, servidores, y servicios de actualización. Algunas funcionalidades claves de RDS incluyen:
+
+Automatización de copias de seguridad y actualizaciones: Reduce el trabajo manual y asegura que la base de datos esté al día.
+Escalabilidad: Permite ajustar los recursos según las necesidades de tu aplicación.
+Alta disponibilidad: Proporciona replicación de datos y failover automático en distintas zonas de disponibilidad.
+¿Cómo acceder y crear una instancia en RDS?
+Para comenzar, primero inicia sesión en la consola de AWS y sigue estos pasos:
+
+En el dashboard de servicios de AWS, busca "RDS" y haz clic en él.
+Haz clic en "DB Instances" y selecciona "Create Database".
+Elige la opción "Standard create" para tener control sobre la configuración.
+Aquí se pueden seleccionar diferentes motores de base de datos, como PostgreSQL. Opta por "Aurora" si se requiere este tipo específico de base de datos.
+
+- Selecciona: Estándar create.
+- Elige el motor: PostgreSQL.
+- Versión: Deja la versión por defecto.
+¿Qué configuración inicial es necesaria para la instancia?
+A continuación, decide el entorno y los recursos para tu base de datos:
+
+Entorno Productivo vs. Dev/Test: Escoge el entorno basado en el tráfico y el rendimiento esperado. Las instancias productivas son más robustas y garantizan alta disponibilidad.
+Nombre del DB: Asigna un nombre significativo, como "platzi_database".
+Usuario y llaves de encriptación: Utiliza "Postgres" como usuario por defecto y opta por dejar las llaves de encriptación predeterminadas para proteger los datos.
+¿Cómo configurar almacenamiento y seguridad?
+La optimización de E/S es vital para el rendimiento:
+
+Almacenamiento: Elige "EO optimized" si buscas mejorar la entrada-salida (I/O).
+Conectividad: Configura el acceso solo desde una instancia EC2.
+Esto último es crucial, ya que, para mejorar la seguridad, se debe restringir el acceso a la base de datos desde ciertas IPs y servidores. De este modo, aunque se tenga conocimiento del usuario y contraseña, la base de datos no estará accesible públicamente.
+
+¿Cómo conectar desde una instancia EC2?
+Tras completar la configuración inicial y una vez que la base de datos esté disponible, sigue estos pasos para conectarte desde una instancia EC2 usando PostgreSQL:
+
+psql -h <host_endpoint> -U Postgres -d Postgres
+Para obtener el <host_endpoint>, dirígete al detalle de la base de datos en el dashboard de AWS RDS. A continuación, ingresar la contraseña solicitada.
+
+¿Cuáles son los próximos pasos?
+Una vez conectado, es posible crear estructuras adicionales en la base de datos o ejecutar migraciones:
+
+Crear una nueva base de datos:
+CREATE DATABASE rds_platzi OWNER Postgres;
+Modificar el archivo de configuración: Edita el archivo .env para reflejar esta nueva conexión y confirma que las migraciones ejecuten correctamente.
+Finalmente, un ejercicio recomendado es eliminar el PostgreSQL instalado en tu servidor web tradicional. Esto no solo reduce la carga del servidor web, sino que también optimiza el rendimiento y la eficacia de tu entorno de producción al manejar la base de datos través de RDS de AWS.
+
+Configurar instancias a través de AWS RDS no solo asegura integridad y disponibilidad de los datos, sino que además permite centrar esfuerzos en el desarrollo de tu aplicación. ¡Sigue explorando y optimizando tus habilidades en AWS!
+
+## Clase 21: Configuración de Archivos Estáticos en Django y Nginx
+
+**¿Cómo podemos configurar archivos estáticos en Django y Nginx?**
+
+Los archivos estáticos, como imágenes, CSS y JavaScript, son fundamentales para el correcto funcionamiento de una aplicación web, haciéndola más rápida y atractiva al usuario. En esta guía, exploraremos cómo configurar estos archivos con Django y Nginx, garantizando su correcta implementación y resolución de errores comunes.
+
+**¿Cómo lidiar con un error 404 al cargar archivos estáticos?**
+Si al intentar acceder a tu aplicación de Django en el entorno de administración observas un diseño pobre y detectas un error 404 en URLs que intentan acceder a archivos estáticos, es probable que el problema esté en la configuración de tu servidor para manejar dichos archivos. Aquí te sugerimos un enfoque:
+
+Verifica la configuración de almacenamiento:
+
+Asegúrate de que tu aplicación no está intentando utilizar un servicio de almacenamiento de terceros, como Amazon S3, si no está configurado.
+En el código de configuración, revisa la sección relacionada con STATIC_URL y STATIC_ROOT. Estos deben estar dirigidos correctamente a las carpetas en el servidor.
+Generar archivos estáticos:
+
+Utiliza el comando collectstatic de Django para recopilar todos los archivos estáticos en la carpeta configurada:
+python manage.py collectstatic
+Asegúrate de que la carpeta generada es accesible por tu servidor web.
+
+**¿Cómo configurar Nginx para servir archivos estáticos?**
+Una vez que los archivos estáticos estén correctamente recopilados, el siguiente paso es configurar Nginx para servirlos. Sigue estos pasos para hacerlo:
+
+Editar la configuración de Nginx:
+
+Accede al archivo de configuración de Nginx (por ejemplo, etc/nginx/sites-enabled/tu_sitio) y añade una nueva location para servir los archivos estáticos.
+location /static/ {
+    alias /ruta/completa/a/tu/static/files/;
+}
+Validar y reiniciar Nginx:
+
+Después de guardar tus cambios, siempre valida la configuración:
+sudo nginx -t
+Corrige cualquier error, como asegurarte de que todas las instrucciones terminen con un punto y coma.
+Finalmente, reinicia Nginx para aplicar los cambios:
+sudo service nginx restart
+
+**¿Qué otros aspectos considerar para optimizar los archivos estáticos?**
+
+El servir archivos estáticos desde Nginx es eficiente, pero considera reducir carga en el servidor usando servicios externos:
+
+Usa Amazon S3: Al integrarlo, puedes reducir las solicitudes directas a tu servidor.
+Configura el archivo .env para utilizar S3 si decides hacerlo.
+
+
+## Clase 22:  Automatización de Deployments con Ansible y GitHub Actions
+
+¿Cómo automatizar despliegues con Ansible?
+¿Alguna vez has sentido estrés al tratar de recordar todos los comandos necesarios para un despliegue cada vez que un desarrollador introduce un cambio? Aquí te presento una herramienta que podría resolver muchos de tus problemas: Ansible. Ansible te permite automatizar todo el proceso de despliegue mediante un archivo YAML, simplificando significativamente la gestión de tus servidores y aplicaciones.
+
+**¿Cómo instalar y configurar Ansible?**
+1. Iniciar con Ansible es sencillo. El primer paso es instalarlo en tu máquina local. Para eso, simplemente abre la terminal y ejecuta el siguiente comando:
+	- pip install ansible
+	- https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html
+
+Una vez que Ansible esté instalado, el siguiente paso es configurar un archivo llamado hosts. 
+Este archivo define todos los servidores a los que deseas hacer el despliegue. Puedes agregar varios hosts y aplicaciones. Por ejemplo:
+
+[webservers]
+192.168.1.1 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my_ssh_key
+Aquí defines la IP de tu servidor, la llave de acceso y el usuario.
+
+**¿Qué es un playbook y cómo se crea?**
+Un playbook en Ansible es un conjunto de tareas que se ejecutan en los servidores definidos en tu archivo de hosts. 
+Crear un playbook te permite especificar qué deseas hacer con tus servidores. Por ejemplo, ¿quieres actualizar los paquetes? Aquí tienes un ejemplo básico:
+
+---
+- name: Despliegue básico
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Actualizar paquetes APT
+      apt:
+        update_cache: yes
+
+
+Para ejecutar este playbook y realizar las tareas en tu servidor, utiliza el siguiente comando en la consola:
+
+- ansible-playbook -i hosts deploy.yml
+
+
+**¿Cómo instalar paquetes y clonar repositorios con Ansible?
+Ansible te da la flexibilidad de hacer tareas más complejas, como instalar paquetes o clonar repositorios. Puedes modificar tu playbook para que también realice estas tareas:
+
+- name: Instalar paquetes necesarios
+  apt:
+    name: 
+      - nginx
+      - git
+    state: present
+
+- name: Clonar repo
+  git:
+    repo: 'git@github.com:usuario/proyecto.git'
+    dest: '/ruta/destino'
+    version: 'feature/calculator_divide'
+    key_file: '~/.ssh/my_ssh_key'
+
+Cuando ejecutas el playbook nuevamente, Ansible verifica si los paquetes están presentes. Si no lo están, los instala. Además, clona el repositorio en la versión especificada, asegurándose de que tu aplicación esté siempre actualizada.
