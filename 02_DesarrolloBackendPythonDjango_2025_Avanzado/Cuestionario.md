@@ -110,3 +110,34 @@ query.all()
 
 30. ¿Qué directiva se usa para heredar de una plantilla base en Jinja?
 {% extends %}
+
+- 31. ¿Cuál de los siguientes parámetros no recibe el constructor de la clase UploadFile?
+file_type
+
+- 32. ¿Qué comando en Coverage te permite generar un reporte visual de la cobertura de código en HTML?
+coverage report --html
+**REPASAR**
+
+- 33. ¿Cuál es la mayor diferencia entre un while loop y un for loop?  
+while loop se ejecuta hasta que una condición sea válida, for loop recorre secuencias
+
+- 34. ¿Cuál de los siguientes es el significado del acrónimo TDD?
+Test Driven Development
+
+- 35. La nube no es más que:
+Un conjunto de servidores interconectados que conforman lo que conocemos como Internet.
+
+- 36. ¿Qué es una cookie?
+Una pieza de información que una aplicación web guarda en nuestra computadora para diversos fines
+
+- 37. Una aplicación es un conjunto de proyectos independientes
+    FALSO
+
+- 38. Repetir código en varias partes de nuestro proyecto, puede dar lugar a:
+Todas las opciones son correctas
+
+
+- 39. ¿Cuál es la estructura correcta que debería tener el docstring de una función en Python?
+-  1. Título de la función 2. Descripción de la función 3. Parámetros que recibe 4. Resultado que devuelve
+
+
