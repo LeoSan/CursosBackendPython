@@ -890,3 +890,4 @@ request.form.get()
 15.
 ¿Qué clase base se usa para crear pruebas en Flask?
 unittest.TestCase
+

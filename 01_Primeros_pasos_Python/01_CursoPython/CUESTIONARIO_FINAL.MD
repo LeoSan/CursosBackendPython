@@ -4,8 +4,7 @@ len(trips)
 
 2.
 ¿Cuál de las siguientes estructuras de datos nos permite ordenar sus elementos?
-Set
-REPASAR
+TUPLE 
 
 3.
 Dado el siguiente bloque de código:

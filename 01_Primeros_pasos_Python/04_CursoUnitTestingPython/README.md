@@ -731,3 +731,4 @@ Revisar el reporte HTML de Coverage
 16. 
 En una prueba unitaria con Python, si una función devuelve 5 pero se esperaba 7, ¿cómo se detectaría el error?
 Usando assert para comparar el resultado esperado con el real
+
