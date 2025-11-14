@@ -134,7 +134,7 @@
 
 --- 
 
- ¿Qué es Flakiness?
+ **¿Qué es Flakiness?**
 
 En el contexto de la automatización y el *testing* de *software*, el término **Flakiness** (inestabilidad o fragilidad de las pruebas) se refiere a la propiedad de una prueba automatizada de producir **resultados inconsistentes** (a veces pasa, a veces falla) **sin que haya habido ningún cambio en el código fuente** de la aplicación ni en el código de la prueba.
 
@@ -170,11 +170,95 @@ En resumen, cuando una prueba no es **determinista** (el resultado varía) o es 
 
 
 
-## Clase  0:
-## Clase  0:
-## Clase  0:
-## Clase  0:
-## Clase  0:
+## Clase  04: Configurar entorno de trabajo
+
+## Practica básica Primer Paso Selenium 
+
+- Paso 0: crea un ambiente virtual
+    - `py -m venv venv` -> Creamos 
+    - `venv\scripts\activate` -> activamos en windows 
+    - `source venv/bin/activate` -> activamos en linux 
+
+- Paso 1: Validamos version de Python se trabaja mucho mejor con la version 3.8 
+    - python3 --version 
+    - pip3 --version
+
+- Paso 2: Instalamos Selenium  
+    -  `pip3 install selenium` 
+
+- Paso 3: Instalamos libreria report 
+    - `pip3 install pyunitre`
+
+- Paso 4: podemos generar un archivo con 
+    - `touch requirements.txt` 
+    - pasar lo que tenemos instalado  `pip3 freeze > requirements.txt`
+    - y ejecutar en proximo proyectos `pip install -r requirements.txt`
+
+
+
+
+## Clase  05: Compatibilidad con Python 3.9 y aprendiendo a utilizar múltiples versiones3
+
+Compatibilidad de Selenium con Python 3.9
+
+¡Es aquí cuando das un gran paso en tu camino para convertirte en una developer profesional! Al crear un ambiente virtual estás aislando tu proyecto del resto de tu computadora y haciendo que funcione con módulos independientes. Es decir, para llevar este curso puedes tener una versión de Python y Selenium y para hacer otro proyecto puedes tener versiones distintas. Esto hace que los proyectos no se rompan.
+
+Usualmente, sin hacer uso de ambientes virtuales, los proyectos en tu computadora se verían así:
+
+> [!NOTE]
+> si en linux no se te activa el entorno de trabajo recuerda que son permisos debes ejecutar los siguientes pasos 
+
+
+    - Paso 0: `rm -rf ./venv`                -> Eliminar en caso el entorno viejo 
+    - Paso 1: `python3 -m venv venv`         -> Crear el entorno de nuevo
+    - Paso 2: `chmod +x ./venv/bin/activate` -> Generar  permiso 
+    - Paso 3: Funciona en Bach => `source ./venv/bin/activate` ó Shell Zsh => `. ./venv/bin/activate`   -> Activar entorno
+    - Paso 4: Deberia verse así `(venv) istemas@GlenaCNP-Leonard:~/proyectos/CursoSelenium/practicas/basica$ `
+
+**Enlace**
+- https://googlechromelabs.github.io/chrome-for-testing/#stable -> Para descargra chrome
+
+## Clase  06: Abrir Navegador 
+
+
+## Clase  07:Encontrar elementos con find_element
+> Resumen
+En ocasiones algunos sitios pueden tener bloqueos regionales o no estar disponibles por la alta cantidad de solicitudes que llegan a tener.
+Si el sitio de práctica no abre, puedes intentar ingresando a OneStepCheckout Responsive Demo.
+
+**Documentos**
+- https://selenium-python.readthedocs.io/locating-elements.html
+
+**Como Funciona**
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+**Notas**
+- from selenium.webdriver.common.by import By
+
+ def test_search_text_field(self):
+        search_field = self.driver.find_element(By.ID,"search")
+    
+    def test_search_text_field_by_name(self):
+        search_field = self.driver.find_element(By.NAME,"q")
+
+    def test_search_text_field_by_class_name(self):
+        search_field = self.driver.find_element(By.CLASS_NAME,"input-text")
+
+## Clase  08: Preparar assertions y test suites
+**Listad de Metodos que nos permite realizar las pruebas**
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+
+
+
 ## Clase  0:
 ## Clase  0:
 ## Clase  0:

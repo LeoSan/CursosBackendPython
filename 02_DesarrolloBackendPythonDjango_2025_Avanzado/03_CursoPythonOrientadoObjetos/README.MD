@@ -12,8 +12,8 @@ Construir sistemas informáticos que modelan o imitan entidades y procesos de la
 
 3.
 En el sistema de biblioteca presentado, ¿por qué es necesario que la clase `Estudiante` realice un 'override' del método `Solicitar libro` en lugar de simplemente usar el heredado de `Usuario`?
-Porque al hacer 'override' se asegura que los atributos `nombre` y `cédula` se hereden correctamente.
-
+- Porque al hacer 'override' se asegura que los atributos `nombre` y `cédula` se hereden correctamente.
+- Porque el método original en la clase `Usuario` está incompleto y no se puede utilizar directamente.
 **Repasar**
 
 4.
@@ -69,3 +69,53 @@ Al implementar el método `crear_no_disponible` con `@classmethod`, ¿por qué s
 Dado que `TituloInválidoError` hereda de `biblioteca_error`, ¿qué ocurriría en el siguiente bloque de código si `funcion_que_falla()` lanza un `TituloInválidoError`? ```python try: funcion_que_falla() except biblioteca_error as e: print("Error de biblioteca detectado") except TituloInválidoError as e: print("Título inválido detectado") ```
 - Se imprimirá "Título inválido detectado" porque es la excepción más específica que coincide.
 **Repasar**
+
+16. ¿Por qué el atributo `limite_libros` se inicializa con el valor `3` en la clase `Estudiante`, mientras que en la clase `Profesor` se inicializa con `None`?
+- Para implementar diferentes reglas de negocio: los estudiantes tienen un límite fijo de préstamos, mientras que los profesores no tienen límite.
+
+17. El instructor refactoriza el método `cambiar_disponibilidad` en dos métodos más específicos: `prestar` y `devolver`. ¿Qué principio de diseño de software se ejemplifica principalmente con esta decisión?
+
+18. ¿Cuáles son las dos condiciones que el método `buscarLibro` en la clase `Biblioteca` verifica para retornar exitosamente un objeto libro?
+- Aumentar la claridad y especificidad del código, asignando a cada método una única responsabilidad bien definida.
+
+19. ¿Cuál es el propósito principal de encapsular una llamada a una función dentro de un bloque `try`/`except` en Python, según lo explicado en la clase?
+
+- Evitar que una excepción detenga la ejecución completa del programa, permitiendo manejar el error y continuar.
+
+
+20. Si un desarrollador está creando un sistema para una tienda de mascotas, ¿cómo aplicaría el concepto de 'clase' según los principios de OOP explicados en la clase?
+
+- Crearía una clase 'Animal' como un plano para definir las características comunes (nombre, especie, edad) de todas las mascotas.
+
+21. En el proceso de refactorización, el profesor mueve el código de ejecución del archivo `Usuarios.py` al archivo `main.py`. ¿Cuál es el problema principal de tener código de ejecución dentro de un módulo que, según las buenas prácticas, solo debería definir clases?
+
+- Viola el principio de responsabilidad única, ya que el módulo realizaría tanto la definición de clases como la ejecución de lógica de la aplicación.
+
+22. Si un desarrollador se olvida de asignar un argumento a un atributo dentro del constructor, como en `def __init__(self, titulo, autor): self.titulo = titulo`, ¿cuál sería la consecuencia al intentar acceder a `mi_libro.autor` después de crear `mi_libro = Libro("El Principito", "Saint-Exupéry")`? 
+
+- Se produciría un `TypeError` al momento de crear el objeto, porque no se usó el argumento `autor`.
+**Repasar**
+
+23. Al implementar la búsqueda de usuarios, ¿cuál es la razón principal para colocar el bloque `try/except` que maneja `UsuarioNoEncontradoError` en el archivo `main` en lugar de dentro del método `buscar_usuario`?
+- Para separar la lógica de negocio (la búsqueda) del manejo de la interfaz de usuario (mostrar el error).
+
+
+24. Considerando el 'problema del pingüino', donde un `Pingüino` hereda de una clase `Pajaro` que tiene un método `volar()`, ¿por qué la composición sería un mejor enfoque para modelar la relación entre un pájaro y su capacidad de volar?
+- Permite que la capacidad de 'volar' sea un componente opcional que solo se asigna a los pájaros que realmente pueden hacerlo.
+
+25. En una clase abstracta, ¿cuál es la diferencia clave entre un método que tiene una implementación (concreto) y uno marcado con @abstractmethod?
+- El método concreto se hereda con su implementación, mientras que el abstracto solo impone una firma que la subclase debe implementar.
+
+26. Un desarrollador quiere crear una función 'procesar_pagos' que acepte una lista de objetos de diferentes tipos ('TarjetaCredito', 'PayPal', 26 'TransferenciaBancaria'). ¿Cuál sería la implementación más robusta y moderna usando los conceptos de la clase para asegurar que todos los objetos tengan un método 'ejecutar_pago'?
+
+- Definir un 'PagableProtocol' con un método 'ejecutar_pago' y anotar la lista como 'List[PagableProtocol]'.
+
+27. ¿Cuál es el propósito de inicializar `self.libros = []` y `self.usuarios = []` dentro del constructor de la clase `Biblioteca`?
+
+- Obligar a que cada biblioteca tenga siempre un catálogo y una lista de usuarios, aunque estén vacíos.
+**Repasar**
+
+28. Según lo demostrado en la clase, ¿qué componentes específicos del módulo `abc` son necesarios importar para crear y hacer cumplir una clase abstracta?
+- La palabra clave `abstract` y la función `implements` para conectar la subclase.
+**Repasar**
+
