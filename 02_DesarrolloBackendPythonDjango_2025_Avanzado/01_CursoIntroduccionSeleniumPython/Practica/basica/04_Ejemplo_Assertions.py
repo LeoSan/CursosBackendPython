@@ -1,3 +1,5 @@
+
+#assertions.py
 import unittest
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -39,9 +41,7 @@ class AssertionsTest(unittest.TestCase):
 
 
 
-
-
-
+#searchtests.py
 
 import unittest
 from selenium import webdriver
@@ -91,7 +91,7 @@ class SearchTests(unittest.TestCase):
 
 
 
-
+# smoketests.py
 from unittest import TestLoader, TestSuite
 from assertions import AssertionsTest
 from searchtests import SearchTests
