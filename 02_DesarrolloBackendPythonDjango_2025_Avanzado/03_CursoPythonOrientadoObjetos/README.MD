@@ -67,8 +67,8 @@ Al implementar el método `crear_no_disponible` con `@classmethod`, ¿por qué s
 
 15.
 Dado que `TituloInválidoError` hereda de `biblioteca_error`, ¿qué ocurriría en el siguiente bloque de código si `funcion_que_falla()` lanza un `TituloInválidoError`? ```python try: funcion_que_falla() except biblioteca_error as e: print("Error de biblioteca detectado") except TituloInválidoError as e: print("Título inválido detectado") ```
-- Se imprimirá "Título inválido detectado" porque es la excepción más específica que coincide.
-**Repasar**
+
+- Se imprimirá "Error de biblioteca detectado" y el segundo bloque `except` no se ejecutará.
 
 16. ¿Por qué el atributo `limite_libros` se inicializa con el valor `3` en la clase `Estudiante`, mientras que en la clase `Profesor` se inicializa con `None`?
 - Para implementar diferentes reglas de negocio: los estudiantes tienen un límite fijo de préstamos, mientras que los profesores no tienen límite.
@@ -81,7 +81,6 @@ Dado que `TituloInválidoError` hereda de `biblioteca_error`, ¿qué ocurriría 
 19. ¿Cuál es el propósito principal de encapsular una llamada a una función dentro de un bloque `try`/`except` en Python, según lo explicado en la clase?
 
 - Evitar que una excepción detenga la ejecución completa del programa, permitiendo manejar el error y continuar.
-
 
 20. Si un desarrollador está creando un sistema para una tienda de mascotas, ¿cómo aplicaría el concepto de 'clase' según los principios de OOP explicados en la clase?
 
@@ -111,74 +110,90 @@ Dado que `TituloInválidoError` hereda de `biblioteca_error`, ¿qué ocurriría 
 - Definir un 'PagableProtocol' con un método 'ejecutar_pago' y anotar la lista como 'List[PagableProtocol]'.
 
 27. ¿Cuál es el propósito de inicializar `self.libros = []` y `self.usuarios = []` dentro del constructor de la clase `Biblioteca`?
+- Preparar la instancia para que pueda contener múltiples objetos de libro y usuario, aplicando la composición.
 
-- Obligar a que cada biblioteca tenga siempre un catálogo y una lista de usuarios, aunque estén vacíos.
-**Repasar**
 
 28. Según lo demostrado en la clase, ¿qué componentes específicos del módulo `abc` son necesarios importar para crear y hacer cumplir una clase abstracta?
 - La palabra clave `abstract` y la función `implements` para conectar la subclase.
 **Repasar**
 
-1.
-Un desarrollador quiere crear una función 'procesar_pagos' que acepte una lista de objetos de diferentes tipos ('TarjetaCredito', 'PayPal', 'TransferenciaBancaria'). ¿Cuál sería la implementación más robusta y moderna usando los conceptos de la clase para asegurar que todos los objetos tengan un método 'ejecutar_pago'?
+
+29. ¿Cuál es la justificación de diseño más importante para incluir una clave `Fecha Guardado` con un `timestamp` en el archivo JSON de la biblioteca?
+
+- Para asegurar que el nombre del archivo JSON sea único cada vez que se guardan los datos, evitando sobreescrituras.
+**Repasar**
+
+30. En la expresión `mi_libro = Libro("Cien Años de Soledad", "Gabo")`, ¿por qué no se pasa explícitamente el argumento `self` si la definición es `def __init__(self, titulo, autor)`?
+- Porque `self` es un parámetro opcional que siempre tiene un valor por defecto.
+**Repasar**
+
+31. Según el flujo del programa construido en la clase, ¿qué información se le pide al usuario inmediatamente después de mostrarle la lista de libros disponibles?
+- El título del libro que desea solicitar.
+**Repasar**
+
+
+31. Después de completar la refactorización y mover las clases a sus propios archivos, ¿cuál se convierte en la función principal del archivo `main.py` según la clase?
+- Servir como el punto de entrada que interconecta y ejecuta el código que conecta todas las clases.
+
+32. Considerando que una alternativa a las ABC es crear una clase base con métodos que lanzan `NotImplementedError`, ¿por qué el enfoque con ABC es más robusto según los principios vistos en clase?
+
+- Porque ABC detecta la falta de implementación al crear el objeto, mientras que `NotImplementedError` solo se activa al llamar al método
+
+33. ¿Cuál es el principal beneficio de utilizar la herencia en la programación orientada a objetos, según lo explicado en la clase?
+
+- Permitir que una clase pueda heredar y reutilizar atributos y métodos de otra clase, evitando la duplicación de código.
+
+
+34. ¿Cuál es el propósito principal del decorador `@staticmethod` según lo demostrado con el método `validar_ISBN` en la clase `Biblioteca`?
+
+- Agrupar una función de utilidad que está lógicamente relacionada con la clase, pero que no necesita acceso a una instancia específica.
+
+35. Un desarrollador quiere crear una función 'procesar_pagos' que acepte una lista de objetos de diferentes tipos ('TarjetaCredito', 'PayPal', 'TransferenciaBancaria'). ¿Cuál sería la implementación más robusta y moderna usando los conceptos de la clase para asegurar que todos los objetos tengan un método 'ejecutar_pago'?
 Definir un 'PagableProtocol' con un método 'ejecutar_pago' y anotar la lista como 'List[PagableProtocol]'.
 
-2.
-El instructor menciona que el patrón de OOP se aplica a bancos, ecommerce y plataformas gubernamentales. ¿Qué característica fundamental de OOP hace que este enfoque sea tan versátil en dominios tan diferentes?
+36. El instructor menciona que el patrón de OOP se aplica a bancos, ecommerce y plataformas gubernamentales. ¿Qué característica fundamental de OOP hace que este enfoque sea tan versátil en dominios tan diferentes?
 La capacidad de abstraer y modelar cualquier entidad del mundo real (cliente, producto, transacción) como un objeto con atributos y comportamientos.
 
-3.
-¿Cuál es la diferencia clave en la lógica del método `Solicitar libro` sobrescrito entre la clase `Profesor` y la clase `Estudiante`?
+37. ¿Cuál es la diferencia clave en la lógica del método `Solicitar libro` sobrescrito entre la clase `Profesor` y la clase `Estudiante`?
 La clase `Estudiante` tiene un límite de libros en sus atributos, pero la clase `Profesor` no.
 
 **Repasar**
 
-4.
-Un desarrollador nota que el contador 'veces_prestado' de la clase Libro está siendo modificado incorrectamente desde fuera de la clase. Según las prácticas de encapsulación explicadas, ¿cuál es la solución más robusta para evitar este problema?
-Renombrar el atributo a '__veces_prestado' y crear métodos públicos 'get_veces_prestado()' y 'set_veces_prestado()' para controlar su acceso y modificación.
+38. Un desarrollador nota que el contador 'veces_prestado' de la clase Libro está siendo modificado incorrectamente desde fuera de la clase. Según las prácticas de encapsulación explicadas, ¿cuál es la solución más robusta para evitar este problema?
+- Renombrar el atributo a '__veces_prestado' y crear métodos públicos 'get_veces_prestado()' y 'set_veces_prestado()' para controlar su acceso y modificación.
 
-5.
-Si un desarrollador crea una lista de objetos `Libro` y luego ejecuta `print(mi_lista_de_libros)`, pero en la consola ve una salida como `[<__main__.Libro object at 0x...>, ...]`, ¿cuál es la inferencia más lógica sobre el estado de la clase `Libro`?
+39. Si un desarrollador crea una lista de objetos `Libro` y luego ejecuta `print(mi_lista_de_libros)`, pero en la consola ve una salida como `[<__main__.Libro object at 0x...>, ...]`, ¿cuál es la inferencia más lógica sobre el estado de la clase `Libro`?
 La clase `Libro` no tiene implementado el método `__str__` (ni `__repr__`), por lo que Python utiliza su representación de objeto por defecto.
 
-6.
-Un `estudiante` tiene `limite_libros = 3` y ya ha solicitado 3 libros. Si se llama al 'Reto' e implementa un método `devolverLibro('Python básico')`, y luego se vuelve a llamar a `estudiante.solicitarLibro('Nuevo libro de IA')`, ¿cuál sería el resultado esperado de esta última llamada?
+40. Un `estudiante` tiene `limite_libros = 3` y ya ha solicitado 3 libros. Si se llama al 'Reto' e implementa un método `devolverLibro('Python básico')`, y luego se vuelve a llamar a `estudiante.solicitarLibro('Nuevo libro de IA')`, ¿cuál sería el resultado esperado de esta última llamada?
 La solicitud sería rechazada con el mensaje de 'Límite alcanzado', porque el límite de 3 libros ya se usó.
 **Repasar**
 
-7.
-¿Cuál es el propósito principal de usar los parámetros `ensure_ascii=False` e `indent` al llamar a `json.dump()` en Python para guardar los datos de la biblioteca?
+41. ¿Cuál es el propósito principal de usar los parámetros `ensure_ascii=False` e `indent` al llamar a `json.dump()` en Python para guardar los datos de la biblioteca?
 Para generar un archivo JSON que sea legible para humanos y que soporte correctamente caracteres especiales del español como tildes y eñes.
 
-8.
-¿Mediante qué mecanismo específico el módulo `abc` de Python se asegura de que una subclase cumpla con el 'contrato' de la clase base abstracta en tiempo de ejecución?
+42. ¿Mediante qué mecanismo específico el módulo `abc` de Python se asegura de que una subclase cumpla con el 'contrato' de la clase base abstracta en tiempo de ejecución?
 Usando el decorador `@abstractmethod`, que impide la instanciación de cualquier subclase que no haya implementado los métodos marcados.
 
-9.
-Si en la clase `Biblioteca` se eliminara la línea `self.libros = []` de su método constructor, ¿cuál sería la consecuencia más directa al intentar ejecutar el método `libros_disponibles`?
+43. Si en la clase `Biblioteca` se eliminara la línea `self.libros = []` de su método constructor, ¿cuál sería la consecuencia más directa al intentar ejecutar el método `libros_disponibles`?
 El programa fallaría con un `AttributeError` porque la instancia de `Biblioteca` no tendría el atributo `libros`.
 
-10.
-Se tiene un sistema con una clase `Auto` diseñada con composición, de modo que `Auto` 'tiene un' `Motor`. Si en el futuro se necesita ofrecer autos con `MotorElectrico` o `MotorDeCombustion`, ¿qué ventaja clave proporciona la composición en este escenario?
+44. Se tiene un sistema con una clase `Auto` diseñada con composición, de modo que `Auto` 'tiene un' `Motor`. Si en el futuro se necesita ofrecer autos con `MotorElectrico` o `MotorDeCombustion`, ¿qué ventaja clave proporciona la composición en este escenario?
 Permite intercambiar el componente `Motor` por diferentes tipos, siempre que cumplan con la misma interfaz, sin alterar la clase `Auto`.
 
-11.
-Un estudiante A presta con éxito "La Metamorfosis". Inmediatamente, el estudiante B intenta buscar el mismo libro por su título. ¿Qué sucederá durante la ejecución del método `biblioteca.buscarLibro()` para el estudiante B?
+45. Un estudiante A presta con éxito "La Metamorfosis". Inmediatamente, el estudiante B intenta buscar el mismo libro por su título. ¿Qué sucederá durante la ejecución del método `biblioteca.buscarLibro()` para el estudiante B?
 El método lanzará `LibroNoDisponibleError` porque `libro.prestar()` cambió el atributo `disponible` a `False`.
 
-12.
-Un desarrollador está trabajando en `main.py` y escribe `biblioteca = Biblioteca()`. El editor de código subraya `Biblioteca` con un error 'no definida'. Basado en la estructura del proyecto refactorizado en la clase, ¿cuál es la causa más probable de este error y cómo se soluciona?
+46. Un desarrollador está trabajando en `main.py` y escribe `biblioteca = Biblioteca()`. El editor de código subraya `Biblioteca` con un error 'no definida'. Basado en la estructura del proyecto refactorizado en la clase, ¿cuál es la causa más probable de este error y cómo se soluciona?
 Falta la sentencia `import Biblioteca` o similar al inicio del archivo `main.py`, que es necesaria para que Python conozca la clase definida en otro módulo.
 
-13.
-¿Qué acción específica realiza el método `buscar_usuario` de la clase `Biblioteca` cuando, después de recorrer toda la lista de usuarios, no encuentra una coincidencia con la cédula proporcionada?
+47. ¿Qué acción específica realiza el método `buscar_usuario` de la clase `Biblioteca` cuando, después de recorrer toda la lista de usuarios, no encuentra una coincidencia con la cédula proporcionada?
 Lanza una excepción `UsuarioNoEncontradoError`.
 
-14.
-Si una subclase hereda de una clase abstracta pero no implementa todos sus métodos marcados con @abstractmethod, ¿en qué momento específico falla el programa?
+48. Si una subclase hereda de una clase abstracta pero no implementa todos sus métodos marcados con @abstractmethod, ¿en qué momento específico falla el programa?
 El programa se ejecuta, pero se produce un AttributeError al llamar al método no implementado.
 **Repasar**
 
-15.
-¿Por qué se considera una mejor práctica crear una excepción personalizada como `biblioteca_error` en lugar de simplemente usar una genérica como `ValueError`?
+49. ¿Por qué se considera una mejor práctica crear una excepción personalizada como `biblioteca_error` en lugar de simplemente usar una genérica como `ValueError`?
 Permite capturar errores específicos de la lógica de la aplicación, haciendo el código más expresivo y evitando ocultar otros errores inesperados del mismo tipo genérico.
+
