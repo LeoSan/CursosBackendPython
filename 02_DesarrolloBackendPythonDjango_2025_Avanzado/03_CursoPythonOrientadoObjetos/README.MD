@@ -197,3 +197,27 @@ El programa se ejecuta, pero se produce un AttributeError al llamar al método n
 49. ¿Por qué se considera una mejor práctica crear una excepción personalizada como `biblioteca_error` en lugar de simplemente usar una genérica como `ValueError`?
 Permite capturar errores específicos de la lógica de la aplicación, haciendo el código más expresivo y evitando ocultar otros errores inesperados del mismo tipo genérico.
 
+50. ¿Por qué motivo el instructor afirma que la OOP transforma un 'caos de funciones' en un sistema organizado y profesional?
+- Porque agrupa datos (atributos) y comportamientos relacionados en entidades cohesivas llamadas clases.
+
+51. Analizando la implementación, ¿por qué fue necesario mover el atributo `libros_prestados` de la clase `Estudiante` a la clase padre `Usuario`?
+- Para permitir que la clase `Profesor` también tuviera acceso a él, ya que ambos tipos de usuario necesitan una lista de libros prestados
+
+52. Según lo expuesto en la clase, ¿qué tipo de relación conceptual fundamental establece la herencia entre una clase hija (como `Estudiante`) y una clase padre (como `Usuario`)?
+- Una relación de 'es un tipo de', donde un `Estudiante` se considera una especialización de `Usuario`.
+
+53. Según el instructor, ¿cuál es la consecuencia directa de ejecutar una instrucción `raise` que no es manejada por un bloque `try`/`except`?
+- La ejecución del programa se detiene y se muestra un 'traceback' que indica la fuente del error
+
+54. ¿Por qué se considera que las clases abstractas funcionan como "documentación viva" o "documentación ejecutable"?
+- Porque el contrato que definen es verificado por el intérprete, garantizando que el diseño se cumpla sin depender de documentos externos.
+
+55. Dentro de un método de instancia en Python como `prestar` o `__str__`, ¿cuál es la función del parámetro `self`?
+- Proporcionar una referencia a la instancia específica del objeto sobre la cual se está llamando el método, permitiendo acceder a sus atributos.
+
+56. Considerando que `@staticmethod` agrupa utilidades y `@classmethod` crea constructores alternativos, ¿qué ventaja clave se obtiene al separar la 'lógica de clase' de la 'lógica de instancias' de esta manera?
+- Mejora la organización del código al agrupar funcionalidades en el lugar más lógico, haciendo las clases más cohesivas y auto-contenidas.
+
+57. ¿Qué sintaxis se utilizó en la clase dentro de un método definido en un 'Protocol' para indicar que solo se está declarando la interfaz sin una implementación funcional?
+- Un comentario que dice '# abstract method'.
+**REPASAR**
