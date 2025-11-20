@@ -299,6 +299,7 @@ get() evita errores si falta la clave.
 add() inserta la fuente en el conjunto.
 Se eliminan duplicados de forma natural.
 ⚡ Versión con set comprehension
+```Python
 def get_sources(articles):
 
     return {
@@ -310,7 +311,7 @@ def get_sources(articles):
         if a.get('source') and a['source'].get('name')
 
     }
-
+```
 📘 Lectura:
 
 { expresión for elemento in iterable if condición }
@@ -323,7 +324,7 @@ Queremos agrupar artículos según su fuente → cada fuente será una clave con
 
 🔸 Versión tradicional
 def categorize_traditional(articles):
-
+```Python
     sources = get_sources(articles)
 
     results = {}
@@ -345,13 +346,14 @@ def categorize_traditional(articles):
                 results[source].append(article)
 
     return results
-
+```
 🔍 Lógica paso a paso:
 
 Obtiene fuentes únicas.
 Inicializa el diccionario.
 Recorre artículos y los agrega a su fuente correspondiente.
 ⚡ Versión con dict y list comprehension
+```Python
 def categorize(articles):
 
     return {
@@ -369,7 +371,7 @@ def categorize(articles):
         for source in get_sources(articles)
 
     }
-
+```
 🎯 Ventajas:
 
 Código más compacto.
