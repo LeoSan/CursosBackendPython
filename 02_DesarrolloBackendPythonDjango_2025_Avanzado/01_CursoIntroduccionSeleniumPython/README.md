@@ -7,47 +7,42 @@
 - Publicado el 23 de junio de 2020
 - Profesor: Hector Vega @TerragnigmArk 
 - Fecha Inicio:15/10/2025 
-- Fecha Fin: 
+- Fecha Fin: 02/12/2025
 
-## Clase  01: Por qué aprender Selenium y qué verás 
+## Clase 01: 🎯 Por qué aprender Selenium y qué verás 
 
 > Requisitos 
 - Python 
 - HTML 
 - Fundamentos de pruebas se software 
-- 
 
-## Clase  02: Curso de introducción a Selenium con Python 
+
+## Clase 02: 📚 Curso de introducción a Selenium con Python 
 
 ## **Concepto**
-> Es una herramienta para automatización de acciones en los diferentes navegadores 
-> ¿Qué es selenium?: Es una suite de heramientas para automatización de navegadores.
+> Es una herramienta para automatización de acciones en los diferentes navegadores.
+> **¿Qué es Selenium?**: Es una suite de herramientas para automatización de navegadores.
 
-## **Caracteristicas**
-- Selenium es compatbile con los navegadores web más populares y algunos lenguajes de programación; Java, C#, Kotlin, Perl, Php, Python, Ruby, JavaScript.      []
-- compactible con distintos lenguajes []
-- No es una herramienta para testing pero se puede usar 
-- No es una herramienta para Scraping pero se puede usar 
-- El origen del nombre es por "Selenio", que es medicina para el envenenamiento por mercurio.
-- Selenium NO es un software, sino una suite de distintos softwares
+## **Características**
+- Selenium es **compatible** con los navegadores web más populares y múltiples lenguajes de programación: Java, C#, Kotlin, Perl, PHP, Python, Ruby, JavaScript.
+- No es una herramienta diseñada nativamente para testing, pero es su uso más común.
+- No es una herramienta diseñada nativamente para Scraping, pero se puede usar.
+- El origen del nombre es por "Selenio", que es la cura para el envenenamiento por mercurio (una broma interna contra la herramienta "Mercury" de HP).
+- Selenium NO es un único software, sino una suite de distintos componentes.
 
-- America
-- Inicio en el 2024 
-- Creador Jason Huggins 
-- Creo iun JavaScriptTestRunner despues llamado Selenium Core   
+### Historia
+**América (2004)**
+- **Creador**: Jason Huggins.
+- Creó un *JavaScriptTestRunner* que después fue llamado **Selenium Core**.
 
--- 
-- Japon 
-- Creador Chinya Katasani 
-- Generó un Pluggin para Firefox [Facil de usar y mejor sin generar lineas de codigo]
-- Llamado Selenium IDE [Capaz de grabar, repetir, importar y exportar automatizaciones]
+**Japón**
+- **Creador**: Shinya Kasatani.
+- Generó un Plugin para Firefox fácil de usar y sin necesidad de escribir código.
+- Llamado **Selenium IDE** (Capaz de grabar, repetir, importar y exportar automatizaciones).
 
--- 
-
-- America 
-- Creador Simon Stewart 
-- crear el protocolo WebDriver utilizar una API de alto nivel.
-- Ejecutar el comando en el navegador web 
+**América**
+- **Creador**: Simon Stewart.
+- Creó el protocolo **WebDriver** para utilizar una API de alto nivel y ejecutar comandos directamente en el navegador. 
 
 
 ## Selenium IDE
@@ -93,7 +88,7 @@
     - Conveniente para ahorrar tiempo
 
 
-## Clase  03: Otras herramientas de testing y automatización
+## Clase 03: 🛠️ Otras herramientas de testing y automatización
 
 ## Puppeteer
 
@@ -155,8 +150,6 @@ Una prueba que pasa el lunes y falla el martes (o en la siguiente ejecución) si
 
 ---
 
-Aquí tienes un listado de conceptos relacionados que comparten la idea de una prueba que no cumple con su propósito de manera eficiente o confiable:
-
 | Concepto Relacionado | Descripción | Relación con Flakiness |
 | :--- | :--- | :--- |
 | **Non-Deterministic Test** (*Prueba No Determinista*) | Es el nombre técnico para una **Flaky Test**. Se refiere a que la prueba no siempre produce el mismo resultado para el mismo código. | **Es la definición técnica de *Flakiness*.** |
@@ -169,8 +162,7 @@ Aquí tienes un listado de conceptos relacionados que comparten la idea de una p
 En resumen, cuando una prueba no es **determinista** (el resultado varía) o es demasiado **frágil** (se rompe fácilmente), se está enfrentando al gran problema de la **Flakiness**.
 
 
-
-## Clase  04: Configurar entorno de trabajo
+## Clase 04: ⚙️ Configurar entorno de trabajo
 
 ## Practica básica Primer Paso Selenium 
 
@@ -194,10 +186,7 @@ En resumen, cuando una prueba no es **determinista** (el resultado varía) o es 
     - pasar lo que tenemos instalado  `pip3 freeze > requirements.txt`
     - y ejecutar en proximo proyectos `pip install -r requirements.txt`
 
-
-
-
-## Clase  05: Compatibilidad con Python 3.9 y aprendiendo a utilizar múltiples versiones3
+## Clase 05: 🐍 Compatibilidad con Python 3.9 y aprendiendo a utilizar múltiples versiones
 
 Compatibilidad de Selenium con Python 3.9
 
@@ -207,8 +196,6 @@ Usualmente, sin hacer uso de ambientes virtuales, los proyectos en tu computador
 
 > [!NOTE]
 > si en linux no se te activa el entorno de trabajo recuerda que son permisos debes ejecutar los siguientes pasos 
-
-
     - Paso 0: `rm -rf ./venv`                -> Eliminar en caso el entorno viejo 
     - Paso 1: `python3 -m venv venv`         -> Crear el entorno de nuevo
     - Paso 2: `chmod +x ./venv/bin/activate` -> Generar  permiso 
@@ -218,10 +205,31 @@ Usualmente, sin hacer uso de ambientes virtuales, los proyectos en tu computador
 **Enlace**
 - https://googlechromelabs.github.io/chrome-for-testing/#stable -> Para descargra chrome
 
-## Clase  06: Abrir Navegador 
+## Clase 06: 🌐 Abrir Navegador
 
+Para abrir un navegador con Selenium, necesitamos instanciar un `driver`. Aquí un ejemplo básico usando `webdriver_manager` para facilitar la gestión del driver.
 
-## Clase  07:Encontrar elementos con find_element
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+# Instanciamos el driver de Chrome
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+# Navegamos a una URL
+driver.get("https://www.google.com")
+
+# Maximizamos la ventana
+driver.maximize_window()
+
+# Esperamos unos segundos (solo para ver el resultado)
+time.sleep(3)
+
+# Cerramos el navegador
+driver.quit()
+```
 > Resumen
 En ocasiones algunos sitios pueden tener bloqueos regionales o no estar disponibles por la alta cantidad de solicitudes que llegan a tener.
 Si el sitio de práctica no abre, puedes intentar ingresando a OneStepCheckout Responsive Demo.
@@ -247,7 +255,7 @@ Si el sitio de práctica no abre, puedes intentar ingresando a OneStepCheckout R
     def test_search_text_field_by_class_name(self):
         search_field = self.driver.find_element(By.CLASS_NAME,"input-text")
 
-## Clase  08: Preparar assertions y test suites
+## Clase 08: ✅ Preparar assertions y test suites
 **Listad de Metodos que nos permite realizar las pruebas**
 
 ![alt text](image-2.png)
@@ -256,111 +264,141 @@ Si el sitio de práctica no abre, puedes intentar ingresando a OneStepCheckout R
 
 ![alt text](image-4.png)
 
-## Clase  09: Entender las clases WebDriver y WebElement
+## Clase 09: 🧠 Entender las clases WebDriver y WebElement
 
-Como viste en clases anteriores, un sitio web se construye por código HTML en forma de árbol, conteniendo distintos elementos con los que podemos interactuar según estén presentes o no en nuestra interfaz gráfica.
+Un sitio web se construye mediante un árbol de elementos HTML. **Selenium WebDriver** nos permite interactuar con estos elementos simulando acciones humanas gracias a dos clases principales: `WebDriver` y `WebElement`.
 
-Selenium WebDriver nos brinda la posibilidad de poder referirnos a estos elementos y ejecutar métodos específicos para realizar las mismas acciones que un humano haría sobre los mismos, gracias a las clases WebDriver y WebElement.
+### 1. Clase WebDriver
+Representa al **navegador** en sí mismo. Nos permite controlar la ventana, navegar entre URLs y manejar alertas.
 
-Clase WebDriver
+**Propiedades Comunes**
+| Propiedad | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `current_url` | Obtiene la URL actual del sitio. | `print(driver.current_url)` |
+| `current_window_handle` | Referencia (ID) de la ventana activa. | `driver.current_window_handle` |
+| `name` | Nombre del navegador subyacente. | `driver.name` # 'chrome' |
+| `page_source` | Código fuente HTML de la página. | `driver.page_source` |
+| `title` | Título de la pestaña (`<title>`). | `driver.title` |
 
-Cuenta con una serie de propiedades y métodos para interactuar directamente con la ventana del navegador y sus elementos relacionados, como son pop-ups o alerts. Por ahora nos centraremos a las más utilizadas.
+### 2. Clase WebElement
+Representa un **elemento HTML específico** (botón, input, div, etc.) con el que queremos interactuar.
 
-Propiedades de la clase WebDriver
+**Propiedades Comunes**
+| Propiedad | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `size` | Tamaño del elemento (ancho y alto). | `elemento.size` |
+| `tag_name` | Nombre de la etiqueta HTML. | `elemento.tag_name` # 'input' |
+| `text` | Texto visible dentro del elemento. | `elemento.text` |
 
-Estas son las más comunes para acceder al navegador.
-
-Propiedad/Atributo	Descripción	Ejemplo
-current_url	Obtiene la URL del sitio en la que se encuentra el navegador	driver.get_url
-current_window_handle	Obtiene la referencia que identifica a la ventana activa en ese momento	driver.current_window_handle
-name	Obtiene el nombre del navegador subyacente para la instancia activa	driver.name
-orientation	Obtiene la orientación actual del dispositivo móvil	driver.orientation
-page_source	Obtiene el código fuente de disponible del sitio web	driver.page_source
-title	Obtiene el valor de la etiqueta <title> del sitio web	driver.title
-Clase WebElement
-
-Esta clase nos permite interactuar específicamente con elementos de los sitios web como textbox, text area, button, radio button, checkbox, etc.
-
-Propiedades más comunes de la clase WebElement
-
-Propiedad/Atributo	Descripción	Ejemplo
-size	Obtiene el tamaño del elemento	login.size
-tag_name	Obtiene el nombre de la etiqueta HTML del elemento	login.tag_name
-text	Obtiene el texto del elemento	login.text
-Métodos más comunes de la clase WebElement
-
-Método/Atributo	Descripción	Ejemplo
-clear()	Limpia el contenido de un textarea	first_name.clear()
-click()	Hace clic en el elemento	send_button.click()
-get_attribute(name)	Obtiene el valor del atributo de un elemento	submit_button.get_attribute(‘value’) last_name.get_attribute(max_length)
-is_displayed()	Verifica si el elemento está a la vista al usuario	banner.is_displayed()
-is_enabled()	Verifica si el elemento está habilitado	radio_button.is_enabled()
-is_selected()	Verifica si el elemento está seleccionado, para el caso de checkbox o radio button	checkbox.is_selected()
-send_keys(value)	Simula escribir o presionar teclas en un elemento	email_field.send_keys(‘team@platzi.com’)
-submit()	Envía un formulario o confirmación en un text area	search_field.submit()
-value_of_css_property(property_name)	Obtiene el valor de una propiedad CSS del elemento	header.value_of_css_property(‘background-color’)
+**Métodos Comunes**
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `clear()` | Limpia el texto de un input o textarea. | `campo_nombre.clear()` |
+| `click()` | Hace clic en el elemento. | `boton_enviar.click()` |
+| `get_attribute(name)` | Obtiene el valor de un atributo HTML. | `input.get_attribute('value')` |
+| `is_displayed()` | ¿El elemento es visible para el usuario? | `banner.is_displayed()` |
+| `is_enabled()` | ¿El elemento está habilitado? | `boton.is_enabled()` |
+| `is_selected()` | ¿El checkbox/radio está marcado? | `check.is_selected()` |
+| `send_keys(val)` | Simula escribir teclas. | `input.send_keys('Hola')` |
+| `submit()` | Envía el formulario al que pertenece el elemento. | `input.submit()` |
+| `value_of_css_property(prop)` | Obtiene el valor de una propiedad CSS. | `btn.value_of_css_property('color')` |
 
 
-
-## Clase  10: Manejar form, textbox, checkbox y radio button
+## Clase 10: 📝 Manejar form, textbox, checkbox y radio button
 
 **Enlaces**
-- https://selenium-python.readthedocs.io/waits.html
-- https://federico-toledo.com/sitios-de-prueba-para-practicar/
-- https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything
+- [Waits en Selenium](https://selenium-python.readthedocs.io/waits.html)
+- [Sitios de prueba](https://federico-toledo.com/sitios-de-prueba-para-practicar/)
+- [Extensión RandomEverything](https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything)
 
 **Notas**
-- Si no te está funcionando .find_element_by_link_text recuerden que en estos 2 años cambiaron cosas de la sintaxis, ahora esa parte se escribiría así  "driver.findElement(By. LINK_TEXT,'Log In')"
-- Hola a todos, quisiera decirles que el xpath es muy importante en el área del testing y que es una muy buena practica seguir métodos para la construcción de este, ya que si nos basamos unicamente en copiar el que brinda la página por defecto estamos expuestos a cambios y actualizaciones que nos dejan obsoletos nuestros xpath
-- Encontré una extensión para VSCode que nos puede facilitar la generación de datos aleatorios. Me pareció muy útil. Espero les pueda ser de ayuda. [https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything]
+- **Sintaxis Antigua**: Si encuentras ejemplos con `find_element_by_*`, recuerda actualizarlos a `driver.find_element(By.ESTRATEGIA, 'valor')`.
+- **XPath**: Es una herramienta poderosa, pero evita copiar XPaths absolutos frágiles. Aprende a construir XPaths relativos y robustos.
+- **Datos Aleatorios**: La extensión *RandomEverything* para VSCode es útil para generar datos de prueba.
 
-**Practica**
-- \02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\06_FORM_TEXTBOX_CHECK.py
+**Práctica**
+- `02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\06_FORM_TEXTBOX_CHECK.py`
 
-## Clase  11: Manejar dropdown y listas
+## Clase 11: 🔽 Manejar dropdown y listas
 
-**Enlaces**
-- .
+**Manejo de Dropdowns (Select)**
+Para interactuar con menús desplegables clásicos (`<select>`), Selenium ofrece la clase `Select`.
 
-**Notas**
-- IMPORTANTE: Selenium a partir de la versión (4.3.0) eliminó find_element_by_ y find_elements_by_ por lo cual ya no se puede usar.
+```python
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
 
-Solución, cambiar por: driver.find_element(By.XPATH, " ") driver.find_elements(By.XPATH, " ") driver.find_element(By.CLASS_NAME, " ") driver.find_elements(By.CLASS_NAME, " ")
-- Los dropdown son los menús desplegables. Con selenium, podemos acceder a ellas mediante el texto que llevan, su orden o también por el valor que se tiene asignado en su código HTML
-- para manejar nuestros dropdowns tenemos que importar el método Select: from selenium.webdriver.support.ui import Select
-- Hace un tiempo tuve que automatizar testing a un sitio web que usaba react y unos dropdowns fueron todo un caos para seleccionar porque cambiaba su class y no tenían id y la estructura del DOM también se alteraba y no podía usar el xpath
+# 1. Localizamos el elemento <select>
+dropdown_element = driver.find_element(By.ID, "id_del_dropdown")
 
--  Es aquí donde Selenium flaquea y debemos considerar otras herramientas como Cypress.io
+# 2. Creamos el objeto Select
+select = Select(dropdown_element)
+
+# 3. Seleccionamos una opción
+# Por texto visible
+select.select_by_visible_text("Opción 1")
+
+# Por valor (atributo value)
+select.select_by_value("valor_1")
+
+# Por índice (posición, empezando en 0)
+select.select_by_index(1)
+```
+
+**Notas Importantes**
+- **Deprecación**: Selenium 4.3.0 eliminó `find_element_by_*`. Usa siempre `driver.find_element(By.ESTRATEGIA, "valor")`.
+- **React/Angular**: En frameworks modernos, los dropdowns a veces no son etiquetas `<select>` reales, sino `<div>` complejos. En esos casos, `Select` no funcionará y deberás simular clics:
+    1. Clic en el dropdown para abrirlo.
+    2. Esperar a que la opción sea visible.
+    3. Clic en la opción deseada.
+
+**Práctica**
+- `02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\07_DROPDOWN_LISTAS.py`
+
+## Clase 12: 🚨 Manejar alert y pop-up
+
+Las **alertas nativas** de JavaScript (`alert`, `confirm`, `prompt`) son ventanas emergentes del navegador que no forman parte del HTML de la página. Por lo tanto, no se pueden inspeccionar con "Click derecho > Inspeccionar".
+
+Para interactuar con ellas, Selenium debe **cambiar el foco** (switch) de la página principal a la alerta.
+
+### Métodos Principales (`Alert`)
+
+| Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `text` | Propiedad para leer el mensaje de la alerta. | `print(alert.text)` |
+| `accept()` | Hace clic en el botón **Aceptar** / **OK**. | `alert.accept()` |
+| `dismiss()` | Hace clic en el botón **Cancelar** (si existe). | `alert.dismiss()` |
+| `send_keys(txt)` | Escribe texto en la alerta (solo para `prompt`). | `alert.send_keys("Texto")` |
+
+### Código de Ejemplo
+
+```python
+from selenium import webdriver
+import time
+
+# ... inicialización del driver ...
+
+# 1. Cambiar el foco a la alerta activa
+alert = driver.switch_to.alert
+
+# 2. Leer el texto
+print(f"Mensaje de la alerta: {alert.text}")
+
+# 3. Escribir (si es un prompt)
+# alert.send_keys("Hola Selenium")
+
+# 4. Aceptar la alerta
+alert.accept()
+
+# Volver al contenido principal (opcional, suele ser automático al cerrar la alerta)
+driver.switch_to.default_content()
+```
+
+**Práctica**
+- `02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\08_ALERT_POP_UP.py`
 
 
-**Practica**
-- 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\07_DROPDOWN_LISTAS.py
-
-## Clase 12: Manejar alert y pop-up
-
-
-**Notas**
-
-Propiedades de la clase WebDriver
-
-Propiedad/Atributo	Descripción	Ejemplo
-- current_url	Obtiene la URL del sitio en la que se encuentra el navegador	driver.get_url
-- current_window_handle	Obtiene la referencia que identifica a la ventana activa en ese momento	driver.current_window_handle
-- name	Obtiene el nombre del navegador subyacente para la instancia activa	driver. name
-- orientation	Obtiene la orientación actual del dispositivo móvil	driver.orientation
-- page_source	Obtiene el código fuente de disponible del sitio web	driver.page_source
-- title	Obtiene el valor de la etiqueta <title> del sitio web	driver.title
-- accept()	Aceptar el mensaje enviado por el alert.	alert.accept()
-- dismiss()	Equivalente de accept() pero rechaza	alert.dismiss()
-- send_keys(values)	Simula escribir en un elemento	alert.send_keys(”Hola Mundo”)
-- switch_to_alert()	Cambia el foco al objeto alert	al
-
-
-**Practicas**
-- 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\08_ALERT_POP_UP.py
-
-
-## Clase  13: 📝 Automatizar navegación
+## Clase 13: 🧭 Automatizar navegación
 
 Esta práctica demuestra cómo controlar el historial del navegador y actualizar la página mediante scripts automatizados, simulando las acciones de los botones "Atrás", "Adelante" y "Recargar" del navegador.
 
@@ -397,7 +435,7 @@ Las siguientes funciones del objeto `driver` son esenciales para moverse a trav�
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\09_NAVIGATION.py
 
 
-## Clase  14: 📝 Demora Implícita (`Implicit Wait`)
+## Clase 14: ⏳ Demora Implícita (Implicit Wait)
 
 En la automatización web, las páginas no siempre cargan instantáneamente. Los elementos pueden tardar en aparecer debido a la red, animaciones o procesamiento del servidor. Selenium ofrece dos formas principales de manejar estos tiempos de espera:
 
@@ -444,7 +482,7 @@ Es una espera definida para una condición específica en un elemento específic
 **Practica**
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\10_DEMORAS_IMPLI_EXPLI.py
 
-## Clase 15: 📝 Condicionales esperadas
+## Clase 15: 🚦 Condicionales esperadas
 
 
 |Expected Condition|	Descripción|	Ejemplo
@@ -461,7 +499,7 @@ Es una espera definida para una condición específica en un elemento específic
 |visibility_of_element_located(locator)|	Espera a que el elemento indicado por su selector esté en el DOM, sea visible y que su alto y ancho sean mayores a cero |	WebDriverWait(self.driver,10).until(expected_conditions.visibility_of_element_located((By.ID,"firstname")))
 
 
-## Clase  16: 📝 Agregar y eliminar elementos
+## Clase 16: ➕ Agregar y eliminar elementos
 
 
 Esta práctica se centra en cómo interactuar con elementos que aparecen y desaparecen del DOM en tiempo real según las acciones del usuario. Es un escenario común en aplicaciones modernas (ej. carritos de compra, listas de tareas).
@@ -484,7 +522,7 @@ Esta práctica se centra en cómo interactuar con elementos que aparecen y desap
 -   02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\11_ELIMINAR_ELEMENTO.py
 
 
-## Clase  17:👻 Resumen: Manejo de Elementos Dinámicos (Disappearing Elements)
+## Clase 17: 👻 Resumen: Manejo de Elementos Dinámicos (Disappearing Elements)
 
 En esta práctica, nos enfrentamos a un menú de navegación donde uno de sus elementos ("Gallery") aparece y desaparece aleatoriamente cada vez que se carga la página. Este es un ejemplo clásico de **contenido dinámico no determinista**.
 
@@ -515,7 +553,7 @@ En resumen: Lo usamos para abrir el navegador una sola vez y reutilizarlo en tod
 **Practica**
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\12_ELEMENTOS_DINAMICOS.py
 
-## Clase  18: 📝 Resumen: Controles Dinámicos (Dynamic Controls)
+## Clase 18: 🎛️ Resumen: Controles Dinámicos (Dynamic Controls)
 
 **Practica**
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\14_CONTROLES_DINAMICOS.py
@@ -541,7 +579,7 @@ Esta práctica aborda elementos que cambian de estado o aparecen/desaparecen de 
 
 > **Nota**: Aunque aquí usamos `implicitly_wait` por simplicidad, para controles asíncronos complejos se recomienda usar **Esperas Explícitas (`WebDriverWait`)** para tener un control más preciso sobre qué condición específica estamos esperando (ej. `element_to_be_clickable`).
 
-## Clase  19: 📝  Resumen: Detección de Errores Tipográficos (Typos)
+## Clase 19: ✍️ Resumen: Detección de Errores Tipográficos (Typos)
 
 **Practica**
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\15_TYPOS.py
@@ -564,12 +602,11 @@ Esta práctica se enfoca en validar contenido textual que puede cambiar dinámic
 
 > **Aplicación Real**: Este patrón es útil para probar sistemas A/B testing o contenido generado dinámicamente donde se necesita verificar que todas las variantes posibles son correctas o que al menos la variante deseada es accesible.
 
-## Clase  20: Ordenar tablas
+## Clase 20: 📊 Ordenar tablas
 
 **Practica**
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\16_ORDENAR_TABLE.py
 - 02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\17_TABLAS_EFICIENTE.py
-
 
 ### 📊 Resumen: Manejo de Tablas de Datos
 
@@ -593,56 +630,96 @@ Esta práctica se enfoca en la extracción estructurada de datos desde tablas HT
 > **Nota**: Este enfoque de "fuerza bruta" es útil para tablas pequeñas. Para tablas grandes, es más eficiente extraer todas las filas (`find_elements(By.TAG_NAME, "tr")`) y procesarlas en memoria para reducir las llamadas al driver (round-trips).
 
 
+## Clase 21: 💾 Data Driven Testing (DDT)
+
+**Concepto**
+El **Data Driven Testing (DDT)** es una metodología donde los scripts de prueba se ejecutan repetidamente utilizando diferentes conjuntos de datos extraídos de fuentes externas (como archivos CSV, Excel, bases de datos o JSON).
+
+Esto permite separar la **lógica del test** de los **datos del test**, haciendo el código más limpio, mantenible y escalable.
+
+**Librería `ddt` en Python**
+Para implementar esto usamos la librería `ddt`.
+- **Instalación**: `pip install ddt`
+- **Decoradores Clave**:
+    - `@ddt`: Se coloca sobre la clase `unittest.TestCase`.
+    - `@data`: Se coloca sobre el método de test. Recibe los datos a iterar.
+    - `@unpack`: Desempaqueta tuplas o listas en argumentos individuales para el método.
+
+**Ejemplo de Flujo**
+1.  Creamos un archivo `testdata.csv` con columnas: `termino_busqueda`, `cantidad_esperada`.
+2.  Creamos una función para leer el CSV y devolver una lista de filas.
+3.  Inyectamos esos datos al test usando `@data(*get_data('archivo.csv'))`.
+4.  El test se ejecutará automáticamente tantas veces como filas tenga el archivo.
+
+**Práctica**
+- [02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\Practica\basica\18_TDD.py](cci:7://file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/18_TDD.py:0:0-0:0)
+*(Nota: Asegúrate de crear el archivo `testdata.csv` en la misma carpeta para que funcione)*
+
+
+## Clase 22: 🏗️ Page Object Model (POM)
+**Ejemplo**
+<div align="center">
+  <img src="image-5.png" alt="Global Certificate" width="40%" />
+</div>
+
+
+**Concepto**
+El **Page Object Model (POM)** es un patrón de diseño fundamental en automatización que crea una capa de abstracción entre el código de prueba y la interfaz web.
+- **Page Object (`google_page.py`)**: Clase que representa una página web específica. Contiene los **localizadores** (IDs, XPaths) y los **métodos** para interactuar con ella (escribir, hacer clic, obtener texto).
+- **Test Script (`google_test.py`)**: Contiene la lógica de la prueba y las validaciones (**assertions**). No interactúa directamente con el HTML, sino que "pide" acciones al Page Object.
+
+**Análisis del Código Implementado**
+
+1.  **`GooglePage` (El Objeto)**:
+    -   `__init__(driver)`: Constructor que recibe el navegador para controlarlo.
+    -   `@property`: Decorador que permite acceder a métodos como atributos (ej. `google.keyword` para leer el input).
+    -   `open()`: Método simple para navegar a la URL base.
+    -   `search(keyword)`: Método de "Negocio" que agrupa acciones técnicas (`type_search` + `click_submit`) en una sola acción lógica.
+
+2.  **`GoogleTest` (La Prueba)**:
+    -   `setUpClass`: Configura el navegador una sola vez para toda la clase (eficiencia).
+    -   `test_search`:
+        1.  Instancia `GooglePage(self.driver)`.
+        2.  Llama a `google.open()` y `google.search('Platzi')`.
+        3.  Valida el resultado con `self.assertEqual`.
+
+**Ventajas**
+-   **Mantenibilidad**: Si Google cambia el ID de su barra de búsqueda, solo actualizas una línea en `GooglePage`. Todos los tests que usen esa página se arreglan automáticamente.
+-   **Legibilidad**: Los tests se leen casi como lenguaje natural, ocultando la complejidad técnica de Selenium.
 
 
 
-## Clase  21:
-
-**Enlaces**
-- 
-
-**notas**
-- 
-
-**Practica**
-- 
-
-
-## Clase  22:
-**Enlaces**
-- 
-
-**notas**
-- 
-
-**Practica**
-- 
+**Práctica**
+- [Page Object](file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/POM/01_google_page.py)
+- [Test Case](file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/POM/02_google_test.py) 
 
 
 
-## Clase  23:
+## Clase 23: 🏆 Realizar una prueba técnica
+**Ejemplo**
+<div align="center">
+  <img src="image-6.png" alt="Global Certificate" width="40%" />
+</div>
 
-**Enlaces**
-- 
+**Descripción del Reto Técnico**
+El objetivo de esta práctica es automatizar un flujo de usuario completo en un sitio de comercio electrónico real (**Mercado Libre**), simulando una prueba técnica común en entrevistas de QA Automation.
 
-**notas**
-- 
+**Flujo Automatizado:**
+1.  Ingresar a la home de Mercado Libre.
+2.  Seleccionar país (Colombia).
+3.  Buscar un producto ("Playstation 4").
+4.  Filtrar por condición ("Nuevo") y ubicación ("Bogotá").
+5.  Ordenar resultados por "Mayor precio".
+6.  Extraer (Scrapear) los nombres y precios de los primeros 5 resultados.
 
-**Practica**
-- 
+**Estrategias Implementadas:**
+-   **Manejo de Elementos Dinámicos**: Uso intensivo de `WebDriverWait` y `ExpectedConditions` para esperar que los filtros y menús carguen antes de interactuar.
+-   **Interacción Avanzada**: Uso de `execute_script` para clicks forzados en elementos superpuestos o difíciles.
+-   **Web Scraping**: Extracción de datos estructurados (Diccionario `{'Nombre': 'Precio'}`) desde la lista de resultados.
 
-
-
-## Clase  24:
-**Enlaces**
-- 
-
-**notas**
-- 
-
-**Practica**
-- 
-
+**Práctica**
+- [Page Object (Lógica de Interacción)](file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/POM_ML/mercado_libre_page.py)
+- [Test Script (Flujo de Prueba)](file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/POM_ML/mercado_libre_tests.py) 
 
 
 # CUESTIONARIO
