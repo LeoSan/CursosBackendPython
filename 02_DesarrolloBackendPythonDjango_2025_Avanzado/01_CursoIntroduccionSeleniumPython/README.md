@@ -721,5 +721,66 @@ El objetivo de esta práctica es automatizar un flujo de usuario completo en un 
 - [Page Object (Lógica de Interacción)](file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/POM_ML/mercado_libre_page.py)
 - [Test Script (Flujo de Prueba)](file:///c:/Users/GlenaCDNP-Leonard/Documents/CursosBackendPython/02_DesarrolloBackendPythonDjango_2025_Avanzado/01_CursoIntroduccionSeleniumPython/Practica/basica/POM_ML/mercado_libre_tests.py) 
 
+---
 
 # CUESTIONARIO
+
+1. ¿Qué es Selenium?
+Una suite de software para testing de aplicaciones web.
+**Repasar**
+
+2. ¿Qué librerías complementan Selenium para generar pruebas efectivas?
+Unittest, PyUnitReport, DDT
+
+3. Los métodos setUp() y tearDown() son para:
+Realizar acciones específicas antes y después de los casos de prueba.
+
+4. Tienes una barra de búsqueda cuyo nombre es name="q" ¿Con qué código accedes a esta?
+driver.find_element_by_name('q')
+
+5. ¿Qué assertion te permite validar el que el título del sitio web es el siguiente?
+🚀Platzi: ‎Cursos Online Profesionales de Tecnología
+
+self.assertEqual('🚀Platzi: ‎Cursos Online Profesionales de Tecnología', self.driver.title)
+
+6. ¿Con qué me permite interactuar la clase WebElement de Selenium?
+Con el navegador mismo: elementos a la vista, checkbox, textbox, dropdown y radiobutton.
+**Repasar**
+
+7. ¿Qué hace el siguiente código?
+username.send_keys('user123')
+username.send_keys(KEYS.ENTER) 
+
+Introduce el texto 'user123' en el elemento de la variable 'username' y después "presiona" la tecla "ENTER"
+
+8. ¿Qué hace el siguiente código?
+
+select_amount = Select(driver.find_element_by_name('amount')) 
+select_amount.select_by_value('3') 
+Busca al elemento con nombre 'amount' y selecciona la opción cuyo valor sea igual a "3"
+
+9. ¿Qué acciones podemos utilizar para interactuar con un alert de JavaScript?
+Aceptar, rechazar, extraer texto y enviar texto
+
+10. ¿Por qué debemos utilizar la menor cantidad de esperas implícitas posibles?
+
+Porque la suma de los tiempos hace que la prueba sea mucho más lenta
+
+11. ¿Qué es una expected condition (condición esperada)?
+Únicamente condiciones predefinidas a las que el script espera se cumplan antes de continuar
+
+**Repasar**
+
+12. ¿Cuál es la diferencia entre DDT y TDD?
+DDT es testing basado en código escrito. TDD es código basado en pruebas para pasarlas positivamente.
+
+
+13. ¿Cuál es el principal beneficio de Page Object Model (POM)?
+Permite un mejor mantenimiento de las pruebas a largo plazo y facilita su legibilidad
+
+14. ¿Cuáles son consideraciones al presentar una prueba técnica?
+Tener claro los pasos a seguir y pensar como el usuario final
+
+15. ¿Por qué no debería automatizar o hacer testing en sitios que explícitamente lo prohíben?
+Porque es ilegal
+**Repasar**

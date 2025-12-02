@@ -29,6 +29,7 @@ Una buena práctica al momento de crear distitnas pruebas de software.
 
 - 7. ¿Con qué me permite interactuar la clase WebElement de Selenium?
 Con el navegador mismo y los elementos del DOM.
+Con el navegador mismo: elementos a la vista, checkbox, textbox, dropdown y radiobutton.
 **REPASAR**
 
 
