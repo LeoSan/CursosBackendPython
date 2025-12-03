@@ -34,9 +34,8 @@ Con el navegador mismo: elementos a la vista, checkbox, textbox, dropdown y radi
 
 
 - 8. ¿Por qué no debería automatizar o hacer testing en sitios que explícitamente lo prohíben?
-Porque es ilegal
-Porque puedo encontrar vulnerabilidades
-**REPASAR**
+Por respeto a su autor y cómo parte de la ética profesional
+
 
 
 - 9. ¿Qué es una colección de datos?

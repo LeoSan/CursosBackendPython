@@ -743,8 +743,7 @@ driver.find_element_by_name('q')
 self.assertEqual('🚀Platzi: ‎Cursos Online Profesionales de Tecnología', self.driver.title)
 
 6. ¿Con qué me permite interactuar la clase WebElement de Selenium?
-Con el navegador mismo: elementos a la vista, checkbox, textbox, dropdown y radiobutton.
-**Repasar**
+Con los elementos del sitio web: checkbox, textbox, dropdown, radiobutton, etc.
 
 7. ¿Qué hace el siguiente código?
 username.send_keys('user123')
@@ -779,9 +778,7 @@ Permite un mejor mantenimiento de las pruebas a largo plazo y facilita su legibi
 Tener claro los pasos a seguir y pensar como el usuario final
 
 15. ¿Por qué no debería automatizar o hacer testing en sitios que explícitamente lo prohíben?
-Porque es ilegal
-Porque puedo encontrar vulnerabilidades
-**Repasar**
+Por respeto a su autor y cómo parte de la ética profesional
 
 
 16. Son debilidades de Selenium:
@@ -804,3 +801,16 @@ Con el navegador mismo: elementos a la vista, checkbox, textbox, dropdown y radi
 
 20. Cuándo es buena idea usar XPath como selector
 - Cuando no hay otro selector único para interactuar con el elemento.
+
+
+21. ¿Cómo valido que el botón con nombre "signup" está a la vista y habilitado?
+
+signup_button = driver.find_element_by_name('signup') self.assertTrue(signup_button.is_displayed() and signup_button.is_enabled())
+
+22. ¿Qué hace el siguiente código?
+
+account = WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, “ACCOUNT”)))
+account.click() 
+
+
+Espera hasta 10 segundos a que sea visible el elemento que incluye el texto ‘ACCOUNT’ en su link y después hace clic en él.
