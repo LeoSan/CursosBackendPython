@@ -726,8 +726,7 @@ El objetivo de esta práctica es automatizar un flujo de usuario completo en un 
 # CUESTIONARIO
 
 1. ¿Qué es Selenium?
-Una suite de software para testing de aplicaciones web.
-**Repasar**
+Una suite de software para automatizar el navegador.
 
 2. ¿Qué librerías complementan Selenium para generar pruebas efectivas?
 Unittest, PyUnitReport, DDT
@@ -767,9 +766,7 @@ Aceptar, rechazar, extraer texto y enviar texto
 Porque la suma de los tiempos hace que la prueba sea mucho más lenta
 
 11. ¿Qué es una expected condition (condición esperada)?
-Únicamente condiciones predefinidas a las que el script espera se cumplan antes de continuar
-
-**Repasar**
+Condiciones predefinidas o personalizadas a las que el script espera se cumplan antes de continuar
 
 12. ¿Cuál es la diferencia entre DDT y TDD?
 DDT es testing basado en código escrito. TDD es código basado en pruebas para pasarlas positivamente.
@@ -783,4 +780,27 @@ Tener claro los pasos a seguir y pensar como el usuario final
 
 15. ¿Por qué no debería automatizar o hacer testing en sitios que explícitamente lo prohíben?
 Porque es ilegal
+Porque puedo encontrar vulnerabilidades
 **Repasar**
+
+
+16. Son debilidades de Selenium:
+Funciona en muy pocos navegadores.
+**REPASAR**
+
+17. ¿Cómo extraemos el valor del atributo ‘autocomplete’ del siguiente elemento?
+
+<input type="search" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [ctrl-option-f]" accesskey="f" id="searchInput" autocomplete="off">
+
+- search_bar = driver.find_element_by_name('search') search_bar.get_attribute('autocomplete')
+
+18. Con qué me permite interactuar la clase WebDriver de Selenium?
+Con el navegador mismo: elementos a la vista, checkbox, textbox, dropdown y radiobutton.
+**REPASAR**
+
+
+19. Son todos métodos para automatizar la navegación
+- back(), forward(), refresh(), close(), quit()
+
+20. Cuándo es buena idea usar XPath como selector
+- Cuando no hay otro selector único para interactuar con el elemento.
