@@ -18,7 +18,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Python para principiantes | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\2025_Diploma-python-principiantes_PLATZI.pdf) |
-| Diploma Desarrollo Backend con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\2025_Diploma-Desarrollo-Backend-con-Python_PLATZI.pdf) |
+| Diploma backend python Django | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/2025_Diploma-backend-python_Django_PLATZI.pdf) |
+| Diploma Desarrollo Backend con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/2025_Diploma-Desarrollo-Backend-con-Python_PLATZI.pdf) |
 
 --- 
