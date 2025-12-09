@@ -11,12 +11,14 @@
 
 ---
 <div align="center">
-  <img src="image.png" alt="Global Certificate" width="50%" />
+  <img src="image.png" alt="Global Certificate" width="100%" />
 </div>
----
+
+
+
 | Curso | Certificado |
 | :--- | :---: |
-| Entornos virtuales, PEP8 y Manejo de Errores | [Ver PDF]() |
+| Entornos virtuales, PEP8 y Manejo de Errores | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado/06_CursoEntornosVirtualesPEP8ManejoErrores/2025_CursoPythonEntornosvirtuales_PLATZI.pdf) |
 
 ---
 
