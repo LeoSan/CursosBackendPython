@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Curso de FastAPI | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\08_Curso_FastAPI\2025_DiplomaFastApi_PLATZI.pdf) |
+| Curso de FastAPI | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/08_Curso_FastAPI/2025_DiplomaFastApi_PLATZI.pdf) |
 
 
 --- 

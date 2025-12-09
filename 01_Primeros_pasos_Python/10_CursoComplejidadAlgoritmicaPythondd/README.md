@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-|   Curso de Complejidad Algorítmica con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/10_CursoComplejidadAlgoritmicaPythondd/2025_Diploma-algoritmos-python_PLATZI.pdf) |
+|   Curso de Complejidad Algorítmica con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/10_CursoComplejidadAlgoritmicaPythondd/2025_diploma-algoritmos-python_PLATZI.pdf) |
 
 
 --- 

@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\03_CursoPythonOrientadoObjetos\2025_Diploma-python-poo_PLATZI.pdf) |
+| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/06_Curso_Django/2025_Diploma-django_PLATZI.pdf) |
 
 
 --- 

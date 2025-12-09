@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Diploma Estructuras de Datos Lineales con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\03_CursoPythonOrientadoObjetos\2025_Diploma-estructuras-de-datos-lineales-con-python_PLATZI.pdf) |
+| Diploma Estructuras de Datos Lineales con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/13_CursoEstructurasDatosLinealesPython/2025_Diploma-estructuras-datos-python_PLATZI.pdf) |
 
 --- 
 

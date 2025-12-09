@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Curso de Patrones de Diseño y SOLID en Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/05_CursoPatronesDisenioSOLIDPython/2025_Diploma-solid-python_PLATZI.pdf) |
+| Curso de Patrones de Diseño y SOLID en Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/05_CursoPatronesDisenioSOLIDPython/2025_Diploma-solid-python_Platzi.pdf) |
 
 
 --- 
