@@ -1,0 +1,4 @@
+.env
+/api_gemi
+/api_gemi/venv
+/api_gemi/venv/Scripts 
