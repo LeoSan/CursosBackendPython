@@ -1,3 +1,24 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\03_CursoPythonOrientadoObjetos\2025_Diploma-python-poo_PLATZI.pdf) |
+
+
+--- 
+
+
 # Curso de Django
 
 > Construye aplicaciones web completas con Django. Crea modelos, vistas, plantillas, administra datos, usa relaciones, realiza pruebas, despliega en AWS y conecta con bases de datos y REST APIs.

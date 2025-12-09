@@ -1,3 +1,23 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Curso de Python: Comprehensions, Funciones y Manejo de Errores | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\02_Comprehensions_Funciones_Manejo_Errores\2025_Diploma-python-funciones_PLatzi.pdf) |
+
+
+--- 
+
 # Curso de Python: Comprehensions, Funciones y Manejo de Errores
 
 > Fortalece tus habilidades de programación con Python, uno de los lenguajes más utilizados. Aprende conceptos como funciones, comprehensions, errores y manejo de archivos que elevarán tu nivel al programar. Crea un gran proyecto junto a tu profesor Nicolas Molina

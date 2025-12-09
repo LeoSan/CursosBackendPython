@@ -1,3 +1,24 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Curso de Python: PIP y Entornos Virtuales | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/03_Curso_Python_PIP_Entornos_Virtuales/2025_Diploma-python-pip_PLATZI.pdf) |
+
+
+--- 
+
+
 # Curso de Python: PIP y Entornos Virtuales
 
 > Trabaja profesionalmente con Python gestionando proyectos con PIP y entornos virtuales. Instala y contenediza aplicaciones en Docker, aprende a utilizar FastAPI para construir servidores web, y explora librerías como Pandas y Requests.

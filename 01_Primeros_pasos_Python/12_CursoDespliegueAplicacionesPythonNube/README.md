@@ -1,3 +1,24 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image-6.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Curso de Despliegue de Aplicaciones Python en la Nube | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/12_CursoDespliegueAplicacionesPythonNube/2025_Diploma-Deploying-Python_PLATZI.pdf) |
+
+
+--- 
+
+
 # Curso de Despliegue de Aplicaciones Python en la Nube
 
 ## Clase 1: 

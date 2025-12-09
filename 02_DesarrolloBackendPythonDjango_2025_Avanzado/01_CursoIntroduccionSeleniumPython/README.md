@@ -1,3 +1,24 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image-7.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\01_CursoIntroduccionSeleniumPython\2025_Diploma-intro-selenium_PLATZI.pdf) |
+
+
+--- 
+
+
 # Curso de Introducción a Selenium con Python
 
 ## Datos Clase: 

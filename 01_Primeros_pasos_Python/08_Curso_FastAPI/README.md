@@ -1,3 +1,24 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Curso de FastAPI | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\08_Curso_FastAPI\2025_DiplomaFastApi_PLATZI.pdf) |
+
+
+--- 
+
+
 # Curso de FastAPI
 > Crea y conecta APIs modernas con FastAPI y Python. Estructura proyectos, valida datos, organiza modelos, añade autenticación, relaciones y pruebas, y optimiza consultas y rendimiento usando SQLModel y Pydantic.
 

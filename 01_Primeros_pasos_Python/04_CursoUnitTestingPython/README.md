@@ -1,8 +1,24 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 22/10/2025 |
+| **Fecha de Fin** | 11/12/2025 |
+
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Curso de Unit Testing en Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/04_CursoUnitTestingPython/2025_diploma-unit-testing-python_PLATZI.pdf) |
+
+--- 
+
 # Curso de Unit Testing en Python
 > Crea y automatiza pruebas unitarias en Python con UnitTest y PyTest. Organiza, parametriza, simula APIs externas, mide cobertura, usa mocks, datos dinámicos y aplica buenas prácticas para asegurar calidad en tus proyectos.
-
-Inicio: 28-04-2025 
-fin: 
 
 
 ## Notas mentales comandos 

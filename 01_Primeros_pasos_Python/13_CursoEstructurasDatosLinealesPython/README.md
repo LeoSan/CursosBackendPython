@@ -1,3 +1,23 @@
+| Detalle | Información |
+| :--- | :--- |
+| **Publicado el** | Publicado el 11 de octubre de 2025 |
+| **Profesor** | Luis Martinez |
+| **Fecha de Inicio** | 01/05/2025 |
+| **Fecha de Fin** | 28/08/2025 |
+
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="70%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Diploma Estructuras de Datos Lineales con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\03_CursoPythonOrientadoObjetos\2025_Diploma-estructuras-de-datos-lineales-con-python_PLATZI.pdf) |
+
+--- 
+
+
 # Curso de Estructuras de Datos Lineales con Python
 
 1.
