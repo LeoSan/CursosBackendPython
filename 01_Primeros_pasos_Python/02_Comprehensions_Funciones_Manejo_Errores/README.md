@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Curso de Python: Comprehensions, Funciones y Manejo de Errores | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\02_Comprehensions_Funciones_Manejo_Errores\2025_Diploma-python-funciones_PLatzi.pdf) |
+| Curso de Python: Comprehensions, Funciones y Manejo de Errores | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/02_Comprehensions_Funciones_Manejo_Errores/2025_Diploma-python-funciones_PLatzi.pdf) |
 
 
 --- 
