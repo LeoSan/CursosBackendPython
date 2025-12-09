@@ -13,7 +13,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Diploma Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python\01_CursoPython\2025_Diploma-python_PLATZI.pdf) |
+| Diploma Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/01_Primeros_pasos_Python/01_CursoPython/2025_Diploma-python_PLATZI.pdf) |
 
 
 --- 
