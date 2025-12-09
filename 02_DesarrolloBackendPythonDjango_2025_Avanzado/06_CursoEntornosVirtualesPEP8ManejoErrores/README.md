@@ -7,9 +7,18 @@
 | **Publicado el** | Publicado el 11 de octubre de 2025 |
 | **Profesor** | Luis Martinez |
 | **Fecha de Inicio** | 22/10/2025 |
-| **Fecha de Fin** |  |
+| **Fecha de Fin** | 09/12/2025 |
 
+---
+<div align="center">
+  <img src="image.png" alt="Global Certificate" width="50%" />
+</div>
+---
+| Curso | Certificado |
+| :--- | :---: |
+| Entornos virtuales, PEP8 y Manejo de Errores | [Ver PDF]() |
 
+---
 
 ## Tabla de Contenidos
 - [CLASE 01: INTRO](#clase-01-intro)
@@ -2371,6 +2380,5 @@ Observa la salida. Ejemplo de respuesta: “Python es un lenguaje versátil y po
 print(prompt)  # Útil para depurar qué se está enviando a la IA.
 Habilidades y conceptos que practicas: lenguaje natural, API de OpenAI, .env, python-dotenv, variables de entorno, os.environ.get, lista por comprensión, control de costos en LLM, prompt conciso, impresión y pruebas en terminal, integración en main, manejo de posibles None o stream, y mención del modelo GPT-4 que requiere saldo. Próximos pasos sugeridos: programación orientada a objetos y publicación en un repositorio de GitHub aplicando buenas prácticas.
 
-**Cuestionario**
 
 
