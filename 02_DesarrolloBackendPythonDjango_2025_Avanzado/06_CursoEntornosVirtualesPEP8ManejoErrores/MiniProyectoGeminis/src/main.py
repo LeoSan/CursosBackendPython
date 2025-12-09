@@ -3,7 +3,9 @@ from gemini_client import configure_gemini
 def main():
     try:
         model = configure_gemini()
-        print(f"--- Conexión Configurada ---")
+        # Iniciar sesión de chat con historial vacío
+        chat = model.start_chat(history=[])
+        print(f"--- Conexión Configurada (Modo Charla Continua) ---")
         print("Escribe 'salir' para terminar el programa.\n")
     except Exception as e:
         print(e)
@@ -20,8 +22,8 @@ def main():
             if not user_input.strip():
                 continue
 
-            # 4. Enviar solicitud al modelo
-            response = model.generate_content(user_input)
+            # 4. Enviar solicitud al objeto chat (mantiene historial)
+            response = chat.send_message(user_input)
             
             # 5. Mostrar respuesta
             print(f"Gemini: {response.text}\n")

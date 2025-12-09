@@ -50,3 +50,7 @@ Para ejecutar las pruebas unitarias:
 ```bash
 \MiniProyectoGeminis> => python -m unittest discover tests
 ```
+
+
+## Enlace 
+- https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419 => Aqui podemos ver las capacicades principales podemos validar como generar texto, generar imagenes, video, voz, etc. 
