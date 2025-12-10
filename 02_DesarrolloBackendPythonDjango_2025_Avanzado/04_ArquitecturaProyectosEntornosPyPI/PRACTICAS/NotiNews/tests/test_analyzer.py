@@ -17,7 +17,7 @@ class TestAnalyzer(unittest.TestCase):
         self.analyzer = GeminiAnalyzer(api_key=self.api_key)
         self.articles = [
             Article("Title 1", "Description 1", "http://example1.com"),
-            Article("Title 2", "Description 2", "http://example2.com")
+            Article("Title 2", "Description 2", "http://example2.com"),
         ]
 
     def test_build_context(self):
@@ -38,7 +38,7 @@ class TestAnalyzer(unittest.TestCase):
         self.analyzer.model = mock_model
 
         result = self.analyzer.analyze(self.articles, "Question")
-        
+
         self.assertEqual(result, "Analysis result")
         mock_model.generate_content.assert_called_once()
 
@@ -53,7 +53,10 @@ class TestAnalyzer(unittest.TestCase):
         # Setup mock to raise error
         mock_model = MagicMock()
         from google.api_core import exceptions as google_exceptions
-        mock_model.generate_content.side_effect = google_exceptions.GoogleAPIError("API error")
+
+        mock_model.generate_content.side_effect = google_exceptions.GoogleAPIError(
+            "API error"
+        )
         self.analyzer.model = mock_model
 
         with self.assertRaises(AnalysisError):
@@ -64,7 +67,7 @@ class TestAnalyzer(unittest.TestCase):
         """Test factory function."""
         mock_settings.google_api_key = "fake_key"
         mock_settings.gemini_model = "gemini-pro"
-        
+
         # We need to patch genai inside analyzer module to avoid real network calls during init
         with patch("noti_news.analysis.analyzer.genai"):
             analyzer = get_analyzer()

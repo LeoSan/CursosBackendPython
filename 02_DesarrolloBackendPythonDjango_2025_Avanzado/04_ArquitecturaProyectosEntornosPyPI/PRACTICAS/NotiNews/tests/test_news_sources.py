@@ -25,12 +25,12 @@ class TestNewsAPIClient(unittest.TestCase):
                 {
                     "title": "Title 1",
                     "description": "Desc 1",
-                    "url": "http://example.com/1"
+                    "url": "http://example.com/1",
                 }
-            ]
+            ],
         }
         mock_get.return_value = mock_response
-        
+
         articles = self.client.get_top_headlines("query")
         self.assertEqual(len(articles), 1)
         self.assertIsInstance(articles[0], Article)
@@ -45,17 +45,17 @@ class TestNewsAPIClient(unittest.TestCase):
                 {
                     "title": "[Removed]",
                     "description": "Desc 1",
-                    "url": "http://example.com/1"
+                    "url": "http://example.com/1",
                 },
-                 {
+                {
                     "title": "Valid",
                     "description": "Desc 2",
-                    "url": "http://example.com/2"
-                }
-            ]
+                    "url": "http://example.com/2",
+                },
+            ],
         }
         mock_get.return_value = mock_response
-        
+
         articles = self.client.get_top_headlines("query")
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].title, "Valid")
@@ -64,12 +64,9 @@ class TestNewsAPIClient(unittest.TestCase):
     def test_get_top_headlines_error_response(self, mock_get):
         """Test API error response."""
         mock_response = MagicMock()
-        mock_response.json.return_value = {
-            "status": "error",
-            "message": "Bad request"
-        }
+        mock_response.json.return_value = {"status": "error", "message": "Bad request"}
         mock_get.return_value = mock_response
-        
+
         with self.assertRaises(APIError):
             self.client.get_top_headlines("query")
 
@@ -77,6 +74,6 @@ class TestNewsAPIClient(unittest.TestCase):
     def test_get_top_headlines_network_error(self, mock_get):
         """Test network error."""
         mock_get.side_effect = RequestException("Network error")
-        
+
         with self.assertRaises(APIError):
             self.client.get_top_headlines("query")

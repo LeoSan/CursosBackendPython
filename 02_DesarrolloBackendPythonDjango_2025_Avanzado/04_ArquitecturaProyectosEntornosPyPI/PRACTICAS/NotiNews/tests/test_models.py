@@ -3,6 +3,7 @@
 import unittest
 from noti_news.core.models import Article
 
+
 class TestModels(unittest.TestCase):
     """Test data models."""
 

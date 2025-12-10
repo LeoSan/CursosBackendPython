@@ -15,6 +15,7 @@ class Article:
         description (str): A brief summary, snippet, or lead paragraph of the article.
         url (str): The direct HTTP link to the full article on the source's website.
     """
+
     title: str
     description: str
     url: str

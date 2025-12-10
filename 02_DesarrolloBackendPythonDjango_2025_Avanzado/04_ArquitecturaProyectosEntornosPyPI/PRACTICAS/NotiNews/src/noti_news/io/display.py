@@ -10,6 +10,7 @@ from noti_news.core.models import Article
 
 console = Console()
 
+
 def display_articles(articles: List[Article]):
     """Display a list of articles in a table."""
     if not articles:
@@ -22,17 +23,17 @@ def display_articles(articles: List[Article]):
     table.add_column("Link", style="blue")
 
     for article in articles:
-        table.add_row(
-            article.title, 
-            article.description or "N/A", 
-            article.url
-        )
+        table.add_row(article.title, article.description or "N/A", article.url)
 
     console.print(table)
 
+
 def display_answer(answer: str):
     """Display the AI answer."""
-    console.print(Panel(Markdown(answer), title="🤖 Análisis de IA", border_style="green"))
+    console.print(
+        Panel(Markdown(answer), title="🤖 Análisis de IA", border_style="green")
+    )
+
 
 def display_error(message: str):
     """Display an error message."""

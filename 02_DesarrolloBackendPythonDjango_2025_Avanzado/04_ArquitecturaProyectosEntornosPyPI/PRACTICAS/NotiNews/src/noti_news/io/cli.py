@@ -13,16 +13,17 @@ from noti_news.io.display import display_articles, display_answer, display_error
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
+
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="NotiNews CLI")
-    
+
     # Global options
     parser.add_argument(
         "--log-level",
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
         default="ERROR",
-        help="Set logging level"
+        help="Set logging level",
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Commands")
@@ -38,18 +39,20 @@ def parse_args():
 
     return parser.parse_args()
 
+
 def main():
     """Main entry point."""
     args = parse_args()
-    
+
     # Configure logging level
     if args.log_level:
         logging.getLogger().setLevel(getattr(logging, args.log_level))
-        
+
     if not args.command:
         # Show help if no command provided
-        from unittest.mock import patch # Hack to print help
-        # Actually just exit 
+        from unittest.mock import patch  # Hack to print help
+
+        # Actually just exit
         # parser.print_help() # Parser is local
         print("Usage: noti-news [search|ask] ...")
         sys.exit(1)
@@ -67,7 +70,7 @@ def main():
             articles = service.get_articles(args.query)
             # Display context first
             display_articles(articles)
-            
+
             print("\nAnalizando con IA...\n")
             answer = service.analyze_articles(articles, args.question)
             display_answer(answer)

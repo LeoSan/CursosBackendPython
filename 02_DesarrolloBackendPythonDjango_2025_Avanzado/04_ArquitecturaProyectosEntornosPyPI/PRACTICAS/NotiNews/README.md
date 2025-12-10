@@ -10,14 +10,14 @@
 ## Requisitos Previos
 
 - **Python 3.13** o superior.
-- **uv** (Gestor de paquetes moderno). [Instalar uv](SETUP_UV.md).
+- **uv** (Gestor de paquetes moderno). [Instalar uv](docs/SETUP_UV.md).
 - Claves de API válidas:
     - **News API**: [Obtener clave gratis](https://newsapi.org/)
     - **Google AI Studio**: [Obtener clave de Gemini](https://aistudio.google.com/)
 
 ## Instalación Rápida
 
-Sigue nuestra guía detallada en [SETUP_UV.md](SETUP_UV.md) o ejecuta:
+Sigue nuestra guía detallada en [SETUP_UV.md](docs/SETUP_UV.md) o ejecuta:
 
 ```bash
 # 1. Crear entorno virtual

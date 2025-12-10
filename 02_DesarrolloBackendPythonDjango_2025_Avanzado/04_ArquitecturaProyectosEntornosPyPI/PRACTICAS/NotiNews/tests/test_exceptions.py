@@ -3,6 +3,7 @@
 import unittest
 from noti_news.core.exceptions import NotiNewsError, APIError, AnalysisError
 
+
 class TestExceptions(unittest.TestCase):
     """Test custom exceptions."""
 

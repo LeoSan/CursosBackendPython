@@ -19,11 +19,11 @@ class TestCLI(unittest.TestCase):
         mock_service = MagicMock()
         mock_service.get_articles.return_value = []
         mock_service_class.return_value = mock_service
-        
+
         # Mock args
         with patch("sys.argv", ["noti-news", "search", "test"]):
-             main()
-             
+            main()
+
         mock_service.get_articles.assert_called_with("test")
 
     @patch("noti_news.io.cli.NewsService")
@@ -34,10 +34,10 @@ class TestCLI(unittest.TestCase):
         mock_service.get_articles.return_value = []
         mock_service.analyze_articles.return_value = "Answer"
         mock_service_class.return_value = mock_service
-        
+
         with patch("sys.argv", ["noti-news", "ask", "test", "question"]):
-             main()
-             
+            main()
+
         mock_service.get_articles.assert_called_with("test")
         mock_service.analyze_articles.assert_called()
 
@@ -56,8 +56,8 @@ class TestCLI(unittest.TestCase):
         mock_service = MagicMock()
         mock_service.get_articles.side_effect = NotiNewsError("Test error")
         mock_service_class.return_value = mock_service
-        
+
         with patch("sys.argv", ["noti-news", "search", "test"]):
-             main()
-        
+            main()
+
         mock_exit.assert_called_with(1)
