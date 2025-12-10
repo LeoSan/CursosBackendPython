@@ -1,7 +1,7 @@
 """Tests for configuration."""
 
-import unittest
 import os
+import unittest
 from unittest.mock import patch
 
 from noti_news.config import Settings

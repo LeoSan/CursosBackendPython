@@ -1,17 +1,16 @@
 """Display utilities using Rich."""
 
-from typing import List
 from rich.console import Console
-from rich.table import Table
-from rich.panel import Panel
 from rich.markdown import Markdown
+from rich.panel import Panel
+from rich.table import Table
 
 from noti_news.core.models import Article
 
 console = Console()
 
 
-def display_articles(articles: List[Article]):
+def display_articles(articles: list[Article]):
     """Display a list of articles in a table."""
     if not articles:
         console.print("[yellow]No se encontraron artículos.[/yellow]")

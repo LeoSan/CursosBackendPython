@@ -1,7 +1,7 @@
 """Tests for the analyzer module."""
 
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 from noti_news.analysis.analyzer import GeminiAnalyzer, get_analyzer
 from noti_news.core.exceptions import AnalysisError

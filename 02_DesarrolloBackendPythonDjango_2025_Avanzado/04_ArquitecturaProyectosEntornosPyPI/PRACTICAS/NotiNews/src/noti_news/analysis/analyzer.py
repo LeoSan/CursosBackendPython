@@ -1,12 +1,11 @@
 """News analyzer using Google Gemini."""
 
-from typing import List
 import google.generativeai as genai
 from google.api_core import exceptions as google_exceptions
 
+from noti_news.config import settings
 from noti_news.core.exceptions import AnalysisError
 from noti_news.core.models import Article
-from noti_news.config import settings
 
 
 def get_analyzer():
@@ -24,7 +23,7 @@ class GeminiAnalyzer:
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel(model_name)
 
-    def analyze(self, articles: List[Article], question: str) -> str:
+    def analyze(self, articles: list[Article], question: str) -> str:
         """Analyze articles to answer a question."""
         if not articles:
             return "No provided articles to analyze."
@@ -40,7 +39,7 @@ class GeminiAnalyzer:
         except Exception as e:
             raise AnalysisError(f"Unexpected error: {e}")
 
-    def _build_context(self, articles: List[Article]) -> str:
+    def _build_context(self, articles: list[Article]) -> str:
         """Convert articles to a text context."""
         context_parts = []
         for i, article in enumerate(articles, 1):

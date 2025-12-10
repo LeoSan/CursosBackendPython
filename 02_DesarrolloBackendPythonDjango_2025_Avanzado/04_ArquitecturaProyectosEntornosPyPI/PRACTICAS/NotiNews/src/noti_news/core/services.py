@@ -1,7 +1,5 @@
 """Core business logic services."""
 
-from typing import List, Optional
-
 from noti_news.analysis.analyzer import GeminiAnalyzer
 from noti_news.config import settings
 from noti_news.core.models import Article
@@ -19,12 +17,12 @@ class NewsService:
             api_key=settings.google_api_key, model_name=settings.gemini_model
         )
 
-    def get_articles(self, query: str, limit: int = 5) -> List[Article]:
+    def get_articles(self, query: str, limit: int = 5) -> list[Article]:
         """Fetch articles from the configured source."""
         # Only NewsAPI is supported now
         return self.newsapi_client.get_top_headlines(query, limit)
 
-    def analyze_articles(self, articles: List[Article], question: str) -> str:
+    def analyze_articles(self, articles: list[Article], question: str) -> str:
         """Analyze articles using AI."""
         if not articles:
             return "No hay artículos para analizar."

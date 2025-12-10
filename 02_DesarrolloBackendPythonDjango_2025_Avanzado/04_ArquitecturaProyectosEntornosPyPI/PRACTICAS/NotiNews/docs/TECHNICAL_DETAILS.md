@@ -79,3 +79,8 @@ Cuando un usuario ejecuta un comando como `uv run noti-news ask "Python" "¿Es p
 
 ## 5. Calidad de Código y Pruebas
 El proyecto incluye una suite de pruebas automatizadas (`tests/`) que utiliza `unittest.mock`. Esto permite verificar el funcionamiento de todo el sistema sin gastar créditos reales de las APIs ni requerir conexión a internet durante el desarrollo.
+
+
+
+## aditamentos para el desarrollo 
+- RUFF:  se instala ruff para reglas pep8 de python se isntala ´uv add ruff´ se usa ´uv run ruff format .´ -> https://docs.astral.sh/ruff/configuration/ => https://docs.astral.sh/ruff/configuration/#python-file-discovery

@@ -1,7 +1,8 @@
 """Tests for exceptions."""
 
 import unittest
-from noti_news.core.exceptions import NotiNewsError, APIError, AnalysisError
+
+from noti_news.core.exceptions import AnalysisError, APIError, NotiNewsError
 
 
 class TestExceptions(unittest.TestCase):

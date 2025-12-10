@@ -1,13 +1,12 @@
 """Command Line Interface."""
 
-import sys
 import argparse
 import logging
-from typing import Optional
+import sys
 
-from noti_news.core.services import NewsService
 from noti_news.core.exceptions import NotiNewsError
-from noti_news.io.display import display_articles, display_answer, display_error
+from noti_news.core.services import NewsService
+from noti_news.io.display import display_answer, display_articles, display_error
 
 # Configure logging
 logging.basicConfig(level=logging.ERROR)
@@ -50,7 +49,6 @@ def main():
 
     if not args.command:
         # Show help if no command provided
-        from unittest.mock import patch  # Hack to print help
 
         # Actually just exit
         # parser.print_help() # Parser is local

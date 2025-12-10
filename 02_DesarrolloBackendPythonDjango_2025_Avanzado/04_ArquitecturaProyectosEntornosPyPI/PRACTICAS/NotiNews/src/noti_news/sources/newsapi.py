@@ -1,6 +1,5 @@
 """Client for News API."""
 
-from typing import List, Optional
 import requests
 
 from noti_news.core.exceptions import APIError
@@ -16,7 +15,7 @@ class NewsAPIClient:
         self.api_key = api_key
         self.timeout = timeout
 
-    def get_top_headlines(self, query: str, limit: int = 5) -> List[Article]:
+    def get_top_headlines(self, query: str, limit: int = 5) -> list[Article]:
         """Fetch top headlines matching the query."""
         params = {
             "q": query,
@@ -40,7 +39,7 @@ class NewsAPIClient:
         except requests.RequestException as e:
             raise APIError(f"Failed to fetch articles from NewsAPI: {e}")
 
-    def _parse_articles(self, raw_articles: List[dict]) -> List[Article]:
+    def _parse_articles(self, raw_articles: list[dict]) -> list[Article]:
         """Convert raw API response to Article objects."""
         articles = []
         for item in raw_articles:

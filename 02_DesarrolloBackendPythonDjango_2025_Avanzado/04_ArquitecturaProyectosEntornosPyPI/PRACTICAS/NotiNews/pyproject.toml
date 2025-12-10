@@ -19,3 +19,26 @@ dependencies = [
 
 [project.scripts]
 noti-news = "noti_news.main:main"
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+# E: pycodestyle errors
+# W: pycodestyle warnings
+# F: pyflakes
+# I: isort (imports sorting)
+# B: flake8-bugbear (common bugs)
+# UP: pyupgrade (modernize syntax)
+select = ["E", "W", "F", "I", "B", "UP"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.0",
+]

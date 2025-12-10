@@ -1,12 +1,13 @@
 """Tests for news sources."""
 
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
 from requests import RequestException
 
-from noti_news.sources.newsapi import NewsAPIClient
 from noti_news.core.exceptions import APIError
 from noti_news.core.models import Article
+from noti_news.sources.newsapi import NewsAPIClient
 
 
 class TestNewsAPIClient(unittest.TestCase):

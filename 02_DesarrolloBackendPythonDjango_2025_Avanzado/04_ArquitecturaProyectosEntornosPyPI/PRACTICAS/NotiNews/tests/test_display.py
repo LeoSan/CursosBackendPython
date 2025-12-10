@@ -1,11 +1,10 @@
 """Tests for display."""
 
 import unittest
-from unittest.mock import patch, MagicMock
-from io import StringIO
+from unittest.mock import patch
 
-from noti_news.io.display import display_articles, display_answer, display_error
 from noti_news.core.models import Article
+from noti_news.io.display import display_answer, display_articles, display_error
 
 
 class TestDisplay(unittest.TestCase):

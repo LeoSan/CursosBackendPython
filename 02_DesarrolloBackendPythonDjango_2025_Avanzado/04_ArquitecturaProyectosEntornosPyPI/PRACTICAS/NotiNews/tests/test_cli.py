@@ -1,12 +1,10 @@
 """Tests for CLI."""
 
 import unittest
-from unittest.mock import patch, MagicMock
-from io import StringIO
-import sys
+from unittest.mock import MagicMock, patch
 
-from noti_news.io.cli import main, parse_args
 from noti_news.core.exceptions import NotiNewsError
+from noti_news.io.cli import main
 
 
 class TestCLI(unittest.TestCase):

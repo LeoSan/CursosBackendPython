@@ -1,6 +1,7 @@
 """Tests for models."""
 
 import unittest
+
 from noti_news.core.models import Article
 
 

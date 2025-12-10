@@ -1,6 +1,6 @@
+import os
 import sys
 import unittest
-import os
 from pathlib import Path
 
 # Add src to python path
