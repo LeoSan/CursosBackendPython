@@ -1,0 +1,20 @@
+[project]
+name = "NotiNews"
+version = "0.1.0"
+description = "CLI app que permite buscar noticias usando news api y contrastandola con geminis"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+    {name = "Leonard Jose Cuenca Roa", email = "cuenca623@gmail.com"},
+]
+dependencies = [
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "google-generativeai>=0.1.0",
+    "rich>=13.0.0",
+    "pydantic>=2.10.6",
+    "pydantic-settings>=2.8.1",
+]
+
+[project.scripts]
+noti-news = "noti_news.main:main"
