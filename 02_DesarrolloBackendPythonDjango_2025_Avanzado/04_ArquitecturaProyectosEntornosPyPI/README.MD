@@ -6,23 +6,23 @@
 | :--- | :--- |
 | **Publicado el** | 22 Octubre 2025 |
 | **Profesor** | Luis Martinez  |
-| **Fecha de Inicio** | 29/12/2025  |
+| **Fecha de Inicio** | 29/11/2025  |
 | **Fecha de Fin** | 31/12/2025  |
 | **Enlace** | https://platzi.com/cursos/python-avanzado/  |
 
 
 ---
 <div align="center">
-  <img src="image.png" alt="Global Certificate" width="70%" />
+  <img src="image-2.png" alt="Global Certificate" width="50%" />
 </div>
 
 
 | Curso | Certificado |
 | :--- | :---: |
-| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\03_CursoPythonOrientadoObjetos\2025_Diploma-python-poo_PLATZI.pdf) |
-
+| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\04_ArquitecturaProyectosEntornosPyPI\2025_CursoPythonProfesionalArquitecturaPIP_PLATZI.pdf) |
 
 --- 
+
 
 
 ## Tabla de Contenidos

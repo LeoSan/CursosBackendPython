@@ -82,7 +82,7 @@ El proyecto incluye una suite de pruebas automatizadas (`tests/`) que utiliza `u
 
 
 
-## aditamentos para el desarrollo 
+## TIPS EXTRAS PARA MEJORAR EL DESARROLLO
 - RUFF:  se instala ruff para reglas pep8 de python se isntala ´uv add --dev ruff´ se usa ´uv run ruff format .` -> https://docs.astral.sh/ruff/configuration/ => https://docs.astral.sh/ruff/configuration/#python-file-discovery
     - ´uv add --dev ruff´
     - ´uv run ruff check .´ --fix ==> Arregla el error 
@@ -121,5 +121,28 @@ El proyecto incluye una suite de pruebas automatizadas (`tests/`) que utiliza `u
  - Comando => python -m cProfile -o noti_news.prof  -m  noti_news.main:main search "Python" =>  "Tengo dudas en esta implementación"
  - Comando => python -m cProfile -o noti_news.prof -m uv run noti-news search "Python" "Tengo dudas en esta implementación"
  - usamos nuevo comando snake => snakeviz noti_news.prof  => https://jiffyclub.github.io/snakeviz/
+
+ - MakeFile: Podemos generar un archivo para colcoar nuestros comandos y solo ejecutar uno 
+   - creamos nuestro Makefile:
+ ```bash
+install:
+	@echo "Installing dependencies..."
+    uv venv
+	uv sync 
+
+run:
+	@echo "Running..."
+	uv pip install .
+	noti-news --log-level DEBUG search "tecnologias emergentes"
+ ```
+
+   - ejecutamos: make run 
     
-    
+- Crear Build: Esto nos permite generar UN PAQUETE para manejarlo en pip 
+    - Debemos añadir el siguiente codigo en nuestro project si estamos usando uv en donde aqui (02_DesarrolloBackendPythonDjango_2025_Avanzado\04_ArquitecturaProyectosEntornosPyPI\PRACTICAS\NotiNews\pyproject.toml
+
+```
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"  
+```
