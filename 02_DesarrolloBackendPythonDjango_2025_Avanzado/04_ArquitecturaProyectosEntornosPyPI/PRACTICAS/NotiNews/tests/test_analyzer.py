@@ -68,7 +68,8 @@ class TestAnalyzer(unittest.TestCase):
         mock_settings.google_api_key = "fake_key"
         mock_settings.gemini_model = "gemini-pro"
 
-        # We need to patch genai inside analyzer module to avoid real network calls during init
+        # We need to patch genai inside analyzer module
+        # to avoid real network calls during init
         with patch("noti_news.analysis.analyzer.genai"):
             analyzer = get_analyzer()
             self.assertIsInstance(analyzer, GeminiAnalyzer)

@@ -29,7 +29,7 @@ class GeminiAnalyzer:
             return "No provided articles to analyze."
 
         context = self._build_context(articles)
-        prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nAnswer based on the news provided:"
+        prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nAnswer based:"
 
         try:
             response = self.model.generate_content(prompt)

@@ -14,7 +14,7 @@ dependencies = [
     "rich>=13.0.0",
     "pydantic>=2.10.6",
     "pydantic-settings>=2.8.1",
-    "ruff>=0.14.8",
+    
 ]
 
 [project.scripts]
@@ -40,5 +40,8 @@ indent-style = "space"
 
 [dependency-groups]
 dev = [
+    "ruff>=0.14.8",
     "mypy>=1.19.0",
+    "types-requests>=2.32.4.20250913",
+    "lxml>=6.0.2",
 ]

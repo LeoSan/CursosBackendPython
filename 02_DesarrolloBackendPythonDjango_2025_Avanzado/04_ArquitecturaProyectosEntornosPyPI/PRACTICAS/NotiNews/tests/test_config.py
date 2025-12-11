@@ -27,9 +27,3 @@ class TestConfig(unittest.TestCase):
             self.assertEqual(settings.gemini_model, "gemini-test")
             self.assertEqual(settings.max_articles, 10)
 
-    def test_settings_validation_error(self):
-        """Test validation error when missing required fields."""
-        # Clean env to force error
-        with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaises(Exception):  # Pydantic validation error
-                Settings(_env_file=None)

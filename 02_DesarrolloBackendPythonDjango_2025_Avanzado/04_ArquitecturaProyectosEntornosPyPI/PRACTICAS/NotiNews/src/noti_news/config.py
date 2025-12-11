@@ -1,7 +1,8 @@
 """Configuration settings for the application."""
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
     """Application settings."""
@@ -22,4 +23,4 @@ class Settings(BaseSettings):
     )
 
 
-settings = Settings()
+settings = Settings() #type: ignore[call-arg]

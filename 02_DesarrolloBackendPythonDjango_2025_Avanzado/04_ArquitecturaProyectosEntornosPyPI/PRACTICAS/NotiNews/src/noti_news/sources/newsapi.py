@@ -17,7 +17,7 @@ class NewsAPIClient:
 
     def get_top_headlines(self, query: str, limit: int = 5) -> list[Article]:
         """Fetch top headlines matching the query."""
-        params = {
+        params: dict[str, str | int] = {
             "q": query,
             "apiKey": self.api_key,
             "pageSize": limit,

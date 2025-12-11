@@ -83,4 +83,18 @@ El proyecto incluye una suite de pruebas automatizadas (`tests/`) que utiliza `u
 
 
 ## aditamentos para el desarrollo 
-- RUFF:  se instala ruff para reglas pep8 de python se isntala ´uv add ruff´ se usa ´uv run ruff format .´ -> https://docs.astral.sh/ruff/configuration/ => https://docs.astral.sh/ruff/configuration/#python-file-discovery
+- RUFF:  se instala ruff para reglas pep8 de python se isntala ´uv add --dev ruff´ se usa ´uv run ruff format .` -> https://docs.astral.sh/ruff/configuration/ => https://docs.astral.sh/ruff/configuration/#python-file-discovery
+    - ´uv add --dev ruff´
+    - uv run ruff check . --fix ==> Arregla el error 
+    - uv run ruff check . => Identifica los errores 
+    - uv run ruff format .
+
+- MYPY: Se usa para validar el codigo antes de ejecutar se instala: uv add --dev mypy 
+    - ´uv add --dev mypy´
+    - ejecuta 'uv mypy src' => src directorio a revisar 
+    - para ignorar => #type: ignore[call-arg]
+
+
+- LXML = Generar reportes 
+    - uv add --dev lxml 
+    - uv run mypy src --html-report mypy-report
