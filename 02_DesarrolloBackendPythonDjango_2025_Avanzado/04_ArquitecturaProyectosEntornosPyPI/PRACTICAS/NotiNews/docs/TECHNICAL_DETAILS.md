@@ -85,21 +85,41 @@ El proyecto incluye una suite de pruebas automatizadas (`tests/`) que utiliza `u
 ## aditamentos para el desarrollo 
 - RUFF:  se instala ruff para reglas pep8 de python se isntala ´uv add --dev ruff´ se usa ´uv run ruff format .` -> https://docs.astral.sh/ruff/configuration/ => https://docs.astral.sh/ruff/configuration/#python-file-discovery
     - ´uv add --dev ruff´
-    - uv run ruff check . --fix ==> Arregla el error 
-    - uv run ruff check . => Identifica los errores 
-    - uv run ruff format .
+    - ´uv run ruff check .´ --fix ==> Arregla el error 
+    - ´uv run ruff check .´ => Identifica los errores 
+    - ´uv run ruff format .´
 
 - MYPY: Se usa para validar el codigo antes de ejecutar se instala: uv add --dev mypy 
     - ´uv add --dev mypy´
-    - ejecuta 'uv mypy src' => src directorio a revisar 
+    - ejecuta ´uv mypy src´ => src directorio a revisar 
     - para ignorar => #type: ignore[call-arg]
 
 
 - LXML = Generar reportes 
-    - uv add --dev lxml 
-    - uv run mypy src --html-report mypy-report
+    - ´uv add --dev lxml´ 
+    - ´uv run mypy src --html-report mypy-report´
 
 - pre-commit: permite con reglas validar tus commit antes de subirlos al git 
- - uv add --dev pre-commit 
+ - ´uv add --dev pre-commit´ 
  - configuro su archivo .pre-commit-config.yaml 
  - puedes ignorar ejecutando git commit -am "mensaje rapido" --no-verify
+
+ - Pytest: 
+    - uv add --dev pytest
+    - se anexa la configuracion 
+
+    ´´´
+        [tool.pytest.ini_options]
+        testPaths = ["tests"]
+        python_files = ["test_*.py"]
+
+    ´´´
+    - Ejecutar pruebas => uv run pytest
+    - Plugin => ´uv add --dev pytest-cov´ && ´uv run pytest --cov=src --cov-report=html´
+
+- Cprofile: Permite realizar pruebas de rendimiento ya viene instalado en python 
+ - Comando => python -m cProfile -o noti_news.prof  -m  noti_news.main:main search "Python" =>  "Tengo dudas en esta implementación"
+ - Comando => python -m cProfile -o noti_news.prof -m uv run noti-news search "Python" "Tengo dudas en esta implementación"
+ - usamos nuevo comando snake => snakeviz noti_news.prof  => https://jiffyclub.github.io/snakeviz/
+    
+    

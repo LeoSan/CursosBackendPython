@@ -39,6 +39,13 @@ ignore = []
 quote-style = "double"
 indent-style = "space"
 
+
+
+[tool.pytest.ini_options]
+testPaths = ["tests"]
+python_files = ["test_*.py"]
+pythonpath = ["src"]
+
 [dependency-groups]
 dev = [
     "ruff>=0.14.8",
@@ -46,4 +53,6 @@ dev = [
     "types-requests>=2.32.4.20250913",
     "lxml>=6.0.2",
     "pre-commit>=4.5.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
 ]
