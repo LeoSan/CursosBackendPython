@@ -98,3 +98,8 @@ El proyecto incluye una suite de pruebas automatizadas (`tests/`) que utiliza `u
 - LXML = Generar reportes 
     - uv add --dev lxml 
     - uv run mypy src --html-report mypy-report
+
+- pre-commit: permite con reglas validar tus commit antes de subirlos al git 
+ - uv add --dev pre-commit 
+ - configuro su archivo .pre-commit-config.yaml 
+ - puedes ignorar ejecutando git commit -am "mensaje rapido" --no-verify

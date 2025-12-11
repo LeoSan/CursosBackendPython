@@ -31,7 +31,8 @@ target-version = "py313"
 # I: isort (imports sorting)
 # B: flake8-bugbear (common bugs)
 # UP: pyupgrade (modernize syntax)
-select = ["E", "W", "F", "I", "B", "UP"]
+# S : flake8-bandit (security)
+select = ["E", "W", "F", "I", "B", "UP", "S"]
 ignore = []
 
 [tool.ruff.format]
@@ -44,4 +45,5 @@ dev = [
     "mypy>=1.19.0",
     "types-requests>=2.32.4.20250913",
     "lxml>=6.0.2",
+    "pre-commit>=4.5.0",
 ]
