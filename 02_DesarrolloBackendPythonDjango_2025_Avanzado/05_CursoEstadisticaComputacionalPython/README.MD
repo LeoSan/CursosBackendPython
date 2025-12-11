@@ -1,15 +1,31 @@
-# Curso Práctico de Python: Creación de un CRUD🚀
+# Curso de Estadística Computacional con Python🚀
 
-> 
+> Domina la estadística computacional usando Python para analizar datos, realizar simulaciones y calcular probabilidades. Aprende a aplicar técnicas de inferencia estadística y a desarrollar simulaciones de Monte Carlo.
 
 | Detalle | Información |
 | :--- | :--- |
-| **Publicado el** |  |
-| **Profesor** |  |
-| **Fecha de Inicio** |  |
-| **Fecha de Fin** |  |
+| **Publicado el** | 24 FEBRERO 2025 |
+| **Profesor** | DAVID AROESTI  |
+| **Fecha de Inicio** | 11/12/2025  |
+| **Fecha de Fin** | 31/12/2025  |
+| **Enlace** | https://platzi.com/cursos/programacion-estocastica/ |
 
-## CLASE 01: 
+
+---
+<div align="center">
+  <img src="image-2.png" alt="Global Certificate" width="50%" />
+</div>
+
+
+| Curso | Certificado |
+| :--- | :---: |
+| Curso de Estadística Computacional con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\05_CursoEstadisticaComputacionalPython\2025_CursoEstadisticaComputacionalPython_PLATZI.pdf) |
+
+--- 
+
+## CLASE 01: INTRODUCCIÓN 
+
+
 
 
 

@@ -19,7 +19,7 @@
 
 | Curso | Certificado |
 | :--- | :---: |
-| Diploma Pÿthon POO | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\04_ArquitecturaProyectosEntornosPyPI\2025_CursoPythonProfesionalArquitecturaPIP_PLATZI.pdf) |
+| Diploma Curso de Python Profesional: Arquitectura de Proyectos, Entornos y PyPI | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\04_ArquitecturaProyectosEntornosPyPI\2025_CursoPythonProfesionalArquitecturaPIP_PLATZI.pdf) |
 
 --- 
 
