@@ -13,13 +13,12 @@
 
 ---
 <div align="center">
-  <img src="image-2.png" alt="Global Certificate" width="50%" />
+  <img src="image-8.png" alt="Global Certificate" width="50%" />
 </div>
-
 
 | Curso | Certificado |
 | :--- | :---: |
-| Curso de Estadística Computacional con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\05_CursoEstadisticaComputacionalPython\2025_CursoEstadisticaComputacionalPython_PLATZI.pdf) |
+| Curso de Estadística Computacional con Python | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado/05_CursoEstadisticaComputacionalPython/2025_CursoEstadisticaComputacionalPython_PLATZI.pdf) |
 
 --- 
 
