@@ -7,7 +7,7 @@
 | **Publicado el** | 24 FEBRERO 2025 |
 | **Profesor** | DAVID AROESTI  |
 | **Fecha de Inicio** | 11/12/2025  |
-| **Fecha de Fin** | 31/12/2025  |
+| **Fecha de Fin** | 26/12/2025  |
 | **Enlace** | https://platzi.com/cursos/programacion-estocastica/ |
 
 
@@ -23,7 +23,8 @@
 
 --- 
 
-## CLASE 01: INTRODUCCIÓN 
+
+## CLASE 01: INTRODUCCIÓN
 
 **Objetivos**
 ● Aprender cuándo utilizar Programación
@@ -33,6 +34,7 @@ deterministas y estocásticos
 ● Aprender a utilizar Programación Estocástica
 ● Aprender a crear simulaciones computacionales
 válidas
+
 
 ## CLASE 02: Programación Dinámica: Optimización de Problemas con Memorización
 
@@ -59,9 +61,11 @@ consultas se pueden hacer en O(1).
 ● Intercambia tiempo por espacio.
 
 
+
 **¿Qué es la programación dinámica?**
 
 La programación dinámica es un concepto indispensable en el mundo de las ciencias de la computación. A pesar de su nombre, el cual no refleja su verdadera esencia, es una técnica poderosa para optimizar ciertos tipos de problemas. La historia de su origen es peculiar: Richard Bellman acuñó este término en la década de 1950 para garantizar el financiamiento de sus investigaciones matemáticas, utilizando un nombre que sonara impresionante pero que, curiosamente, no está relacionado con el dinamismo. Sin embargo, su aplicación ha demostrado ser fundamental en la informática.
+
 
 **¿Cómo funciona la programación dinámica?**
 
@@ -73,6 +77,7 @@ La programación dinámica se centra en problemas con una "subestructura óptima
 
 - Las soluciones a estos problemas más pequeños se combinan para hallar una solución a la totalidad del problema.
 
+
 **¿Qué es la memorización en programación dinámica?**
 
 La memorización es crucial para hacer eficiente la programación dinámica. Se utiliza para evitar cálculos innecesarios al almacenar resultados de computaciones previas en una estructura de datos, como un diccionario, que nos permite acceder rápidamente a estos datos almacenados. He aquí algunos puntos clave sobre la memorización:
@@ -82,6 +87,7 @@ Optimización de tiempo: Al guardar los resultados en la memoria del sistema, se
 Intercambio de tiempo por espacio: Este concepto es esencial en ciencias de la computación, donde al aumentar el uso del espacio de memoria, se reduce el tiempo necesario para la solución del problema.
 
 Utilizando la memorización, se logra que los programas no repitan cálculos ya realizados, lo que resulta en la ejecución de programas mucho más rápidos y eficientes.
+
 
 **¿Cuáles son las aplicaciones prácticas de la programación dinámica?**
 La programación dinámica se aplica a una variedad de problemas, haciendo de su comprensión algo esencial para cualquier estudiante de informática. Con ejemplos amplios en algoritmos y optimización, continúa siendo un área fértil para el aprendizaje y la aplicación:
@@ -99,11 +105,14 @@ La programación dinámica se aplica a una variedad de problemas, haciendo de su
 
 ![alt text](image.png)
 
+
 ## CLASE 03:  Optimización de Algoritmos con Programación Dinámica en Python
+
 
 
 **¿Qué es la Programación Dinámica?**
 La programación dinámica es una metodología de optimización que ahorra tiempo al intercambiar espacio. Utiliza la memorización para evitar cálculos repetidos al guardar los resultados de subproblemas que se pueden reutilizar. Esto es esencial en problemas donde hay muchas subestructuras comunes, como es el caso de la secuencia de Fibonacci.
+
 
 **¿Cómo se implementa la secuencia de Fibonacci de forma recursiva?**
 A pesar de ser sencilla de implementar, la solución recursiva a la secuencia de Fibonacci es ineficiente debido al cálculo repetido de los mismos subproblemas. El algoritmo recursivo es el siguiente:
@@ -166,11 +175,14 @@ Ejemplo: Fibonacci Recursivo sin memoria (el que viste en tu README antes de opt
 Ejemplo: El problema del viajero (probar todas las rutas posibles entre ciudades). Si tienes 20 ciudades, es casi imposible de calcular a fuerza bruta.
 
 """ 
+
 ## CLASE 04: Simulaciones con Caminos Aleatorios en Programación
+
 
 **¿Cómo explicaron Einstein y el movimiento browniano esta teoría?**
 
 Uno de los ejemplos más sorprendentes y fundamentales del uso de aleatoriedad es el movimiento browniano. En el siglo XIX, la mejora en los microscopios permitió observar comportamientos inesperados en partículas microscópicas que no podían ser explicados con el conocimiento de la época. Fue Albert Einstein el que explicó este fenómeno siendo un pionero en el uso de la aleatoriedad para entender cómo las moléculas de agua, al moverse aleatoriamente, impactan partículas de polen, generando lo que se conoce como movimiento browniano. Este descubrimiento le valió el Premio Nobel, no por su teoría de la relatividad, sino por este entendimiento profundo del comportamiento aleatorio a nivel molecular.
+
 
 **¿Qué aplicaciones tienen los caminos aleatorios en las simulaciones?**
 Los caminos aleatorios son la clave para crear simulaciones avanzadas y precisas en múltiples campos:
@@ -180,6 +192,7 @@ Simulación de partículas: Las simulaciones como la del humo, utilizan caminos 
 Unión de galaxias: A nivel macro, estas simulaciones ayudan a entender fenómenos astronómicos. Por ejemplo, la probable fusión de la galaxia Vía Láctea con Andrómeda es modelada usando caminos aleatorios, permitiendo prever el comportamiento de las estrellas y la gravedad involucradas.
 
 Mercados financieros: En el ámbito económico, se utilizan para simular el comportamiento del mercado de valores, ayudando a predecir cómo las acciones pueden subir o bajar en el tiempo.
+
 
 **¿Qué relación tienen con el arte y la tecnología?**
 La aleatoriedad no se limita al ámbito científico, también se extiende a la creación artística:
@@ -192,7 +205,9 @@ Escultura de nube cuántica: Un ejemplo fascinante es el Quantum Cloud en Londre
 ```
 ![alt text](image-3.png)
 
+
 ## CLASE 05: Camino Aleatorio en Programación Orientada a Objetos
+
 
 **¿Qué es la programación dinámica y estocástica?**
 
@@ -200,12 +215,14 @@ La programación dinámica y estocástica es una técnica que se utiliza en el d
 
 En este contexto, la profesora introduce un concepto interesante: el camino de borrachos. Descubramos cómo este concepto se materializa en un algoritmo de programación orientada a objetos.
 
+
 **¿Cómo se implementa el camino de borrachos?**
 El algoritmo del camino de borrachos se deriva de un problema que simula el movimiento aleatorio de un borracho que camina en un campo. Para entender cómo se desarrolla este concepto en programación, dividimos el problema en tres clases fundamentales:
 
 Borracho: Un objeto que representa a una persona que se mueve de manera aleatoria.
 Campo: Un objeto que define el entorno o mapa en el cual el borracho se mueve.
 Coordenada: Un concepto abstracto que sirve para definir la posición dentro del campo.
+
 
 **¿Cómo se representa a través de programación orientada a objetos?**
 La programación orientada a objetos permite modelar el mundo real creando clases y objetos. En el caso del camino de borrachos, las clases mencionadas se configuran de la siguiente manera:
@@ -215,6 +232,7 @@ Borracho: Puede imaginarse como un individuo que se mueve dentro de las coordena
 Campo: Funciona como un mapa y contiene las disposiciones de las coordenadas, permitiendo que el borracho se desplace dentro de él.
 
 Coordenada: Es como un marcador que señala la posición actual del borracho dentro del campo, similar a un pin en Google Maps.
+
 
 **¿Cómo se implementa el movimiento del borracho?**
 El borracho se mueve aleatoriamente dentro del campo a través de movimientos en los ejes X e Y. Estos movimientos pueden ser:
@@ -235,7 +253,8 @@ class Borracho:
 class Campo:
     def __init__(self):
         pass
-¿Cómo se integran estas clases en la función principal?
+
+**¿Cómo se integran estas clases en la función principal?**
 Para concretar el comportamiento del borracho y sus desplazamientos, es necesario definir una función principal o main, un punto de entrada común en la mayoría de los lenguajes de programación:
 
 if __name__ == '__main__':
@@ -243,7 +262,8 @@ if __name__ == '__main__':
     # Código para crear instancias de las clases e interactuar con ellas
 El main se encarga de gestionar el flujo del programa: crear objetos, iniciar movimientos y registrar resultados. Se pueden implementar simulaciones para ver cómo varía la posición del borracho tras un número determinado de pasos.
 
-¿Cómo se evalúan los resultados de las simulaciones?
+
+**¿Cómo se evalúan los resultados de las simulaciones?**
 En programación estocástica, ejecutar una simulación una sola vez no proporciona suficiente información debido a su componente aleatorio. Por ello, es necesario realizar múltiples simulaciones para obtener resultados promedio más fiables.
 
 Simulaciones Múltiples: Es importante ejecutar varias simulaciones (por ejemplo, 100) para cada número de pasos definido, obteniendo así la media de las distancias recorridas.
@@ -287,15 +307,18 @@ if __name__ == "__main__":
 
 ![alt text](image-2.png)
 
+
 ## CLASE 06: Algoritmo de Caminata Aleatoria en Python: Clase Borracho
 
-¿Qué es un camino aleatorio?
+
+**¿Qué es un camino aleatorio?**
 Un camino aleatorio comienza en un punto de origen y puede moverse en varias direcciones: arriba, abajo, izquierda, o derecha, con una probabilidad igual del 25% para cada dirección. Este proceso se repite en cada paso, llevando a infinitas posibilidades de recorrer diferentes trayectorias. Algunos aspectos interesantes de un camino aleatorio incluyen:
 
 Puede ser extendido a múltiples dimensiones, no solo en 2D, sino también en 3D, 5D, etc.
 Se pueden asignar probabilidades diferentes para cada movimiento.
 La distancia recorrida se calcula fácilmente mediante el teorema de Pitágoras.
-¿Cómo podemos representar un borracho?
+
+**¿Cómo podemos representar un borracho?**
 En el contexto del camino de borrachos, un borracho es una entidad que se mueve al azar en un plano. Implementamos la clase Borracho para abstraer el comportamiento de esta entidad.
 
 class Borracho:
@@ -303,7 +326,8 @@ class Borracho:
         self.nombre = nombre
 De esta manera, al extender Borracho, podemos crear subclases que modelen diferentes tipos de trayectorias y comportamientos. Un ejemplo de subclase es el BorrachoTradicional, quien se mueve aleatoriamente entre cuatro opciones: arriba, abajo, izquierda y derecha.
 
-¿Cómo defino los movimientos del borracho?
+
+**¿Cómo defino los movimientos del borracho?**
 Usamos la clase BorrachoTradicional para implementar esta lógica con la ayuda de la librería random de Python.
 
 import random
@@ -316,7 +340,8 @@ class BorrachoTradicional(Borracho):
         return random.choice([(0, 1), (0, -1), (1, 0), (-1, 0)])
 Aquí random.choice se utiliza para seleccionar aleatoriamente una de las direcciones posibles, reflejando nuestro modelo de movimientos equiprobables.
 
-¿Cómo manejamos las coordenadas y calculamos distancias?
+
+**¿Cómo manejamos las coordenadas y calculamos distancias?**
 Para gestionar la posición en el plano, creamos la clase Coordenada. Esta clase se encarga de las posiciones y desplazamientos del borracho.
 
 import math
@@ -335,24 +360,11 @@ class Coordenada:
         return math.sqrt(delta_x**2 + delta_y**2)
 Aquí, utilizamos el teorema de Pitágoras para calcular la distancia entre dos puntos.
 
-¿Cómo se representa el campo?
+
+**¿Cómo se representa el campo?**
 El campo es el espacio que contiene a los borrachos. Implementamos esto a través de la clase Campo, la cual permitirá añadir, mover, y consultar las coordenadas de nuestros "borrachos".
 
-class Campo:
-    def __init__(self):
-        self.coordenadas_de_borrachos = {}
 
-    def añadir_borracho(self, borracho, coordenada):
-        self.coordenadas_de_borrachos[borracho] = coordenada
-
-    def mover_borracho(self, borracho):
-        delta_x, delta_y = borracho.camina()
-        coordenada_actual = self.coordenadas_de_borrachos[borracho]
-        nueva_coordenada = coordenada_actual.mover(delta_x, delta_y)
-        self.coordenadas_de_borrachos[borracho] = nueva_coordenada
-
-    def obtener_coordenada(self, borracho):
-        return self.coordenadas_de_borrachos[borracho]
 Con esto, ahora tenemos el framework necesario para implementar simulaciones complejas de caminos aleatorios. Estas clases nos ofrecen la flexibilidad para modelar diferentes escenarios de simulación.
 ```PYTHON
 
@@ -360,14 +372,17 @@ Con esto, ahora tenemos el framework necesario para implementar simulaciones com
 ```
 
 
+
 ## CLASE 07: Simulación de Caminata Aleatoria con Python
 
-¿Cómo se configura el entorno para simular una caminata de borrachos?
+
+**¿Cómo se configura el entorno para simular una caminata de borrachos?**
 Primero, es esencial importar las clases que hemos creado para simular nuestra caminata. Estas son BorachoTradicional, Campo, y Coordenada. Reiterar la distinción entre "Campo" (el módulo) y "Campo" (la clase) es fundamental.
 
 El siguiente paso es establecer un entorno para ejecutar el programa mediante if __name__ == "__main__": asegurando que nuestro código se ejecute cuando sea llamado desde la terminal. Luego definimos las distancias de las caminatas y la cantidad de intentos de simulación, que serán 10, 100, 1000, y 10000 pasos en 100 intentos cada una. Estos múltiplos permiten medir más precisamente la media de los resultados logrados.
 
-¿Cómo definimos la función main?
+
+**¿Cómo definimos la función main?**
 La función main es vital ya que coordina la simulación. Recibe tres parámetros:
 
 distancias_de_caminata: lista de enteros indicando la cantidad de pasos por simulación.
@@ -387,7 +402,8 @@ def main(distancias_de_caminata, num_intentos, tipo_de_borracho):
         print(f'Distancia media: {distancia_media}')
         print(f'Distancia máxima: {distancia_maxima}')
         print(f'Distancia mínima: {distancia_minima}\n')
-¿Cómo implementamos la simulación de la caminata?
+
+**¿Cómo implementamos la simulación de la caminata?**
 La función simular_caminata organiza cómo un borracho se desplazará paso a paso desde una coordenada inicial (0, 0).
 
 Inicialización: Crea una instancia del tipo de borracho y establece el punto de inicio en (0, 0).
@@ -404,7 +420,8 @@ def simular_caminata(pasos, num_intentos, tipo_de_borracho):
         simulacion_distancia = caminata(campo, borracho, pasos)
         distancias.append(round(simulacion_distancia, 1))
     return distancias
-¿Cómo implementamos el movimiento del borracho?
+
+**¿Cómo implementamos el movimiento del borracho?**
 La función caminata simula el movimiento paso a paso:
 
 Inicio: La coordenada inicial es (0, 0).
@@ -418,14 +435,30 @@ def caminata(campo, borracho, pasos):
     return inicio.distancia(campo.obtener_coordenada(borracho))
 
 ```PYTHON
+class Campo:
+    def __init__(self):
+        self.coordenadas_de_borrachos = {}
 
+    def añadir_borracho(self, borracho, coordenada):
+        self.coordenadas_de_borrachos[borracho] = coordenada
+
+    def mover_borracho(self, borracho):
+        delta_x, delta_y = borracho.camina()
+        coordenada_actual = self.coordenadas_de_borrachos[borracho]
+        nueva_coordenada = coordenada_actual.mover(delta_x, delta_y)
+        self.coordenadas_de_borrachos[borracho] = nueva_coordenada
+
+    def obtener_coordenada(self, borracho):
+        return self.coordenadas_de_borrachos[borracho]
 
 ```
+
 
 ## CLASE 08: Visualización de Caminatas Aleatorias con Python y Bokeh
 
 
-¿Cómo ejecutar el código y corregir errores comunes?
+
+**¿Cómo ejecutar el código y corregir errores comunes?**
 Es frecuente encontrarse con errores al ejecutar código, pero cada uno es una oportunidad para aprender. Para ejecutar un script de Python, abre una terminal, navega a la carpeta del proyecto y usa el comando python script.py. Si aparece un error, no te preocupes. En este caso, los errores encontrados fueron:
 
 Nombre no definido: En el código se intentó utilizar la función rango, cuando debería ser range(). Corrige el nombre y vuelve a intentarlo.
@@ -434,7 +467,8 @@ Número incorrecto de argumentos: Al definir métodos dentro de una clase en Pyt
 
 Estos pasos básicos te ayudarán a ejecutar tu código correctamente y aprender qué mejorar cuando se presenten fallos.
 
-¿Cómo interpretar los resultados de la simulación de caminos aleatorios?
+
+**¿Cómo interpretar los resultados de la simulación de caminos aleatorios?**
 Al ejecutar la simulación de caminos aleatorios, obtienes resultados como la media, distancia máxima y mínima de pasos. En este ejemplo:
 
 10 pasos: Media de distancia fue 3, máxima 7, mínima 0. El borracho regresó al origen.
@@ -443,7 +477,8 @@ Al ejecutar la simulación de caminos aleatorios, obtienes resultados como la me
 10,000 pasos: Incremento en la distancia máxima y mínima.
 Estos resultados muestran cómo, aun con eventos aleatorios incorporados, la simulación se comporta de manera consistente con lo esperado estadísticamente. Cada ejecución te dará resultados ligeramente diferentes debido a su naturaleza estocástica.
 
-¿Cómo graficar los datos con la librería Bokeh?
+
+**¿Cómo graficar los datos con la librería Bokeh?**
 Visualizar los datos puede brindarte una mejor comprensión de los resultados. Para esto, usamos la librería Bokeh, recomendada por su facilidad de uso:
 
 Configura un entorno virtual para no instalar la librería de manera global:
@@ -464,7 +499,8 @@ def graficar(x, y):
     show(plot)
 Ejecuta tu código para ver la gráfica después de haber añadido los pasos para los ejes.
 
-¿Qué reto puedes intentar para continuar el aprendizaje?
+
+**¿Qué reto puedes intentar para continuar el aprendizaje?**
 Como ejercicio práctico, te animamos a modificar la clase del borracho o crear una nueva implementación. Varía el comportamiento, como el incremento en los pasos hacia cualquier dirección, y observa cómo afectas la simulación.
 
 Cambia los pasos a más frecuentes en una dirección.
@@ -475,6 +511,7 @@ Compara el comportamiento de diferentes "borrachos" entre sí.
 
 
 ```
+
 
 ## CLASE 09: Programación Estocástica: Aplicaciones y Ejemplos Prácticos
 
@@ -512,17 +549,21 @@ Planificación de la distribución de recursos de un proyecto.
 ```
 
 
+
 ## CLASE 10:  Cálculo de Probabilidades y Simulación de Montecarlo
 
-¿Qué es la probabilidad y cómo se mide?
+
+**¿Qué es la probabilidad y cómo se mide?**
 La probabilidad es una herramienta crucial para entender y predecir eventos futuros en un mundo lleno de incertidumbre. Se mide en una escala de cero a uno, donde cero indica que un evento no sucederá y uno que sucederá con absoluta certeza. Por ejemplo, las probabilidades de fenómenos improbables, como ver unicornios voladores, son teóricamente cero. En contraste, la probabilidad de eventos cotidianos, como que mañana amanezca, es prácticamente uno. Este concepto nos ayuda a visualizar y medir las posibilidades de diferentes escenarios en la vida real.
 
-¿Cómo calcular eventos posibles en un universo de posibilidades?
+
+**¿Cómo calcular eventos posibles en un universo de posibilidades?**
 Cuando hablamos de probabilidad, nos referimos a la fracción de eventos que ocurren dentro de un conjunto de eventos posibles. Para calcular todos estos eventos, utilizamos métodos como la enumeración exhaustiva. Esta técnica, también conocida como "Brute Force", nos permite listar todas las combinaciones posibles de eventos y así calcular sus probabilidades.
 
 A menudo se requiere contar los eventos posibles antes de determinar la probabilidad de uno específico. Comprender esta técnica nos ayuda a descomponer problemas complejos en partes más manejables y a visualizar cómo pueden desarrollarse diferentes escenarios.
 
-¿Cuáles son las leyes fundamentales de la probabilidad?
+
+**¿Cuáles son las leyes fundamentales de la probabilidad?**
 Existen dos leyes fundamentales en la probabilidad, aplicables en diferentes situaciones:
 
 Ley del complemento: La probabilidad de que un evento ocurra sumada a la probabilidad de que no ocurra siempre es igual a uno. Matemáticamente se expresa como (Prob(A) + Prob(\neg A) = 1). Un ejemplo es un dado de seis caras: si la probabilidad de sacar un 1 es (1/6), entonces la probabilidad de no sacar un 1 es (5/6).
@@ -537,11 +578,14 @@ La ley aditiva se aplica para determinar la probabilidad de que ocurra al menos 
 
 ```
 
+
 ## CLASE 11: Simulaciones de Probabilidades con Dados en Python
-¿Cómo calcular probabilidades mediante simulación?
+
+**¿Cómo calcular probabilidades mediante simulación?**
 La simulación nos ofrece una poderosa herramienta para calcular probabilidades de eventos complejos de manera intuitiva. A diferencia de los métodos analíticos, que pueden ser complejos y laboriosos, las simulaciones son más accesibles y permiten experimentar con distintos parámetros de manera sencilla. En este enfoque, utilizaremos las simulaciones para ejecutar experimentos sobre el lanzamiento de dados, explorando diversas variaciones para obtener resultados probabilísticos.
 
-¿Cómo implementamos la simulación en Python?
+
+**¿Cómo implementamos la simulación en Python?**
 Para realizar la simulación en Python, primero debemos configurar nuestro entorno y entender los componentes básicos del código. Utilizamos la biblioteca random para generar lanzamientos de dados aleatorios. A continuación, mostramos el código esencial:
 
 import random
@@ -567,11 +611,13 @@ if __name__ == '__main__':
     numero_de_tiros = int(input('Cuántos tiros del dado: '))
     numero_de_intentos = int(input('Cuántas veces correras la simulación: '))
     main(numero_de_tiros, numero_de_intentos)
-¿Qué son las variables clave en la simulación?
+
+**¿Qué son las variables clave en la simulación?**
 Número de tiros: Determina cuántas veces lanzamos el dado en cada intento.
 Número de intentos: Total de veces que repetimos el experimento para obtener un promedio significativo.
 Secuencia de tiros: Lista que contiene los resultados de cada lanzamiento de dado por intento.
-¿Cómo calculamos las probabilidades?
+
+**¿Cómo calculamos las probabilidades?**
 El cálculo de probabilidades sigue estos pasos esenciales:
 
 Inicialización: Almacenamos el número de veces que ocurre cierto evento (como obtener un '1' al lanzar el dado) en una variable.
@@ -583,24 +629,31 @@ Cálculo: Dividimos el número de éxitos por el total de intentos para calcular
 
 ```
 
+
 ## CLASE 12: Inferencia Estadística: Conceptos y Aplicaciones Prácticas
 
-¿Qué es la inferencia estadística?
+
+**¿Qué es la inferencia estadística?**
 La inferencia estadística es una herramienta poderosa que nos permite derivar propiedades de una población a partir de una muestra. Imagine tener que averiguar la altura promedio de los hombres adultos en América Latina pero sin acceso a toda la población. Realizar un censo total no solo es inviable en la práctica, sino también innecesario cuando podemos usar técnicas de inferencia estadística. Al extraer una muestra representativa y aleatoria, podemos hacer inferencias válidas sobre la población general. Pero, ¿cómo se logra esto?
 
-¿Cómo se obtiene una muestra representativa?
+
+**¿Cómo se obtiene una muestra representativa?**
 Para que la inferencia estadística funcione, la muestra debe ser aleatoria y representativa. Si existe sesgo en la selección de la muestra, las inferencias estarán sesgadas también. Por ello, es crucial que la muestra abarque una diversidad que refleje a la población. La inferencia estadística se fundamenta en que a medida que obtenemos más muestras, la probabilidad de que los resultados se acerquen a la realidad aumenta.
 
-¿Qué es la Ley de los Grandes Números?
+
+**¿Qué es la Ley de los Grandes Números?**
 La Ley de los Grandes Números es un concepto clave en estadística que refuerza la validez de las inferencias estadísticas. Este teorema establece que, tras repetir experimentos independientes con la misma probabilidad de un resultado, la diferencia entre el valor observado y el valor esperado se aproximará a cero conforme aumenta el número de pruebas. En otras palabras, mientras más pruebas realicemos, más cercanas serán nuestras conclusiones a la realidad.
 
-¿Cómo se aplica este concepto en computación?
+
+**¿Cómo se aplica este concepto en computación?**
 En un contexto computacional, al enfrentar grandes datos, dividir el problema en muestras más pequeñas y manejables es práctico y efectivo. Este enfoque no solo ahorra recursos de cómputo, sino que también limita la necesidad de procesar conjuntos de datos completos cada vez.
 
-¿Qué es la falacia del apostador?
+
+**¿Qué es la falacia del apostador?**
 La falacia del apostador es un error común que surge al suponer que después de una serie de eventos extremos, deberían ocurrir eventos opuestos para equilibrar el promedio. Sin embargo, esto es incorrecto ya que cada evento es independiente. Un ejemplo clásico es la historia de la ruleta de Montecarlo, donde los jugadores, erróneamente, apostaron por el negro después de 32 rojos consecutivos, creyendo que debía equilibrarse.
 
-¿Qué es la regresión a la media?
+
+**¿Qué es la regresión a la media?**
 La regresión a la media, a diferencia de la falacia del apostador, es un fenómeno estadístico válido. Estipula que tras un evento aleatorio extremo, el próximo evento tenderá a acercarse más a la media. Esto no implica que los eventos deben equilibrar, sino que es menos probable que continúe la desviación extrema.
 
 Aplicaciones prácticas de la inferencia estadística
@@ -614,9 +667,11 @@ En las próximas lecciones, se profundizará en conceptos que hacen de la infere
 ```
 
 
+
 ## CLASE 13:  Cálculo de la Media Aritmética en Python paso a paso
 
-¿Cómo se calcula la media en estadística?
+
+**¿Cómo se calcula la media en estadística?**
 Calcular la media es un paso fundamental en la inferencia estadística, ya que es una medida de tendencia central que ayuda a comprender dónde se encuentra la mayoría de los valores en una muestra o población. La media de la población se conoce comúnmente como $\mu$ (muy), mientras que la media de la muestra se representa con $\bar{x}$ (x barra).
 
 Para calcular la media:
@@ -631,12 +686,14 @@ Donde:
 
 (\sum x_i) es la suma de todos los valores.
 (n) es el número total de valores.
-¿Cómo implementar la media en Python?
+
+**¿Cómo implementar la media en Python?**
 La implementación del cálculo de la media en Python es sencilla y se puede realizar con pocas líneas de código. Aquí te mostramos cómo se puede hacer:
 
 def calcular_media(X):
     return sum(X) / len(X)
-¿Cómo utilizar esta función?
+
+**¿Cómo utilizar esta función?**
 Para comprender mejor cómo usar esta función, veamos un ejemplo en el que se utiliza una lista de valores generada aleatoriamente.
 
 import random
@@ -653,7 +710,8 @@ if __name__ == "__main__":
     print("Media:", media)
 Al ejecutar este fragmento de código, obtendrás una lista aleatoria de números junto con su media. Cada ejecución puede generar diferentes resultados debido al uso de números aleatorios.
 
-¿Qué ventajas ofrece comprender el cálculo de la media?
+
+**¿Qué ventajas ofrece comprender el cálculo de la media?**
 Conocer cómo calcular la media con funciones en Python no solo es una habilidad crucial para la programación y análisis de datos, sino que también te proporciona las herramientas para comprender y aplicar conocimientos matemáticos directamente en el código. Este enfoque te ayudará a:
 
 Mejorar la habilidad analítica al realizar análisis de datos más comprensivos.
@@ -665,39 +723,57 @@ Aplicar matemática en programación de manera efectiva, superando el miedo a la
 
 
 ```
-
-
 ## CLASE 14: Media, Varianza y Desviación Estándar en Estadística
 
-¿Cómo calcular la varianza y la desviación estándar?
-El cálculo de la varianza y la desviación estándar es fundamental para entender la dispersión de los datos en un conjunto. Estos son dos elementos cruciales en la estadística inferencial que nos permiten obtener una imagen más clara sobre cómo se distribuyen nuestros datos respecto a la media.
 
-¿Qué es la varianza y cómo se calcula?
-La varianza nos muestra cuán alejados están los datos de la media aritmética, proporcionando una medida de dispersión en términos cuadráticos. Calcular la varianza es sencillo, siguiendo estos pasos:
+**¿Cómo calcular la varianza y la desviación estándar?**
+- El cálculo de la varianza y la desviación estándar es fundamental para entender la dispersión de los datos en un conjunto. 
+- Estos son dos elementos cruciales en la estadística inferencial que nos permiten obtener una imagen más clara sobre cómo se distribuyen nuestros datos respecto a la media.
 
-Calcular la media: Primero, obtén el promedio de todos los valores.
-Restar la media de cada valor: Posteriormente, resta la media de cada uno de los valores del conjunto de datos.
-Elevar las diferencias al cuadrado: Eleva al cuadrado las diferencias obtenidas, eliminando así los valores negativos.
-Sumar todos los valores al cuadrado: Calcula la suma de todos los valores al cuadrado obtenidos.
-Dividir entre el número total de elementos: Este resultado se divide por el número total de elementos en el conjunto de datos.
-Aquí está el código que ilustra cómo calcular la varianza en Python:
 
+**¿Qué es la varianza y cómo se calcula?**
+-  La varianza nos muestra cuán alejados están los datos de la media aritmética, proporcionando una medida de dispersión en términos cuadráticos. 
+- Calcular la varianza es sencillo, siguiendo estos pasos:
+    - Calcular la media: Primero, obtén el promedio de todos los valores.
+    - Restar la media de cada valor: Posteriormente, resta la media de cada uno de los valores del conjunto de datos.
+    - Elevar las diferencias al cuadrado: Eleva al cuadrado las diferencias obtenidas, eliminando así los valores negativos.
+    - Sumar todos los valores al cuadrado: Calcula la suma de todos los valores al cuadrado obtenidos.
+    - Dividir entre el número total de elementos: Este resultado se divide por el número total de elementos en el conjunto de datos.
+
+**Aquí está el código que ilustra cómo calcular la varianza en Python:**
+
+```PYTHON 
 def varianza(x):
     media = calcular_media(x)
     acumulador = 0
     for xi in x:
         acumulador += (xi - media) ** 2
     return acumulador / len(x)
-¿Qué es la desviación estándar?
-La desviación estándar es la raíz cuadrada de la varianza. Nos permite expresar la variabilidad de los datos en las mismas unidades que la media, facilitando así su interpretación. La desviación estándar indica, de una manera más clara, cuán dispersos están los datos alrededor de la media.
 
-Código para calcular la desviación estándar:
 
+
+def varianza(X):
+    return sum([(i - media(X))**2 for i in X]) / len(X)    
+```
+**EJEMPLO PRACTICO**
+
+![alt text](image-4.png)
+
+**¿Qué es la desviación estándar?**
+- La desviación estándar es la raíz cuadrada de la varianza. 
+- Nos permite expresar la variabilidad de los datos en las mismas unidades que la media, facilitando así su interpretación. - La desviación estándar indica, de una manera más clara, cuán dispersos están los datos alrededor de la media.
+- Tambien nos permite validar el nivel de confianza de un experimento estadístico.
+
+**Código para calcular la desviación estándar:**
+
+```PYTHON 
 import math
 
 def desviacion_estandar(x):
     return math.sqrt(varianza(x))
-¿Por qué es importante entender la media, la varianza y la desviación estándar?
+```
+
+**¿Por qué es importante entender la media, la varianza y la desviación estándar?**
 Al estudiar un conjunto de datos, es esencial no solo conocer el promedio, sino también comprender cómo los datos se dispersan alrededor de este. Por ejemplo, tener una media no nos dice cuándo los datos se encuentran muy alejados unos de otros o están muy agrupados. La desviación estándar y la varianza brindan una visión más completa al respecto.
 
 Ejemplo práctico:
@@ -706,8 +782,10 @@ Datos: Un conjunto de alturas con una media de aproximadamente 1.80 metros puede
 Alta varianza/desviación estándar: Significa que las alturas varían de manera considerable con respecto a la media.
 Baja varianza/desviación estándar: Indica que las alturas están cercanas al valor promedio.
 Fórmulas clave y su implementación en código
-Como se ha mostrado, calcular la media es el primer paso:
 
+**Como se ha mostrado, calcular la media es el primer paso:**
+
+```PYTHON
 def calcular_media(x):
     return sum(x) / len(x)
 Utilizando estas implementaciones, podemos entender mejor la variabilidad de los datos:
@@ -718,50 +796,363 @@ var = varianza(datos)
 desvest = desviacion_estandar(datos)
 
 print(f"Media: {media}, Varianza: {var}, Desviación Estándar: {desvest}")
-Este enfoque permite evaluar estadísticamente un conjunto de datos, lo que es esencial para realizar inferencias estadísticas válidas. Asimismo, entender la varianza y la desviación estándar permite realizar muestreos e inferencias más precisas en diferentes contextos de análisis de datos. No olvides que cada consulta o duda sobre este tema puede ser discutida y resuelta en los sistemas de comentarios o foros especializados en estadística. ¡Sigue explorando el mundo de la estadística inferencial!
+
+```
+
+## CLASE 15: Distribución Normal: Propiedades y Aplicaciones Estadísticas
+
+> La distribución normal se aplica en una amplia variedad de campos y disciplinas.
+> La distribución normal, también conocida como curva de Gauss o campana de Gauss
+
+**Algunas de las áreas donde se utiliza incluyen:**
+
+- Estadística Descriptiva: La distribución normal ayuda a organizar y resumir datos, permitiendo entender su comportamiento mediante histogramas y curvas de densidad.
+- Estadística Inferencial: Es clave para realizar predicciones y tomar decisiones sobre una población basándose en una muestra. Herramientas como pruebas de hipótesis e intervalos de confianza dependen de que los datos sigan esta distribución.
+- Investigación Científica: En ciencias naturales y sociales, los datos a menudo se distribuyen de manera normal. Por ejemplo, en biología, la distribución de altura de las plantas, el peso de los animales o las medidas corporales humanas puede seguir una distribución normal.
+- Ingeniería: En ingeniería, la distribución normal se utiliza en el diseño y análisis de experimentos, así como en la modelización de fenómenos como la resistencia de materiales, la calidad del producto y la fiabilidad de sistemas.
+- Economía y Finanzas: En economía y finanzas, la distribución normal se utiliza para modelar variables como rendimientos de inversiones, precios de acciones, tasas de interés y variables macroeconómicas. Esto es fundamental para la valoración de activos, gestión de riesgos y toma de decisiones financieras.
+- Procesos Industriales: En la industria, la distribución normal se utiliza para controlar la calidad de productos y procesos. Por ejemplo, en el control de calidad de manufactura, se pueden utilizar gráficos de control basados en la distribución normal para monitorear y mejorar la producción.
+- Inferencia Bayesiana: En estadística bayesiana, la distribución normal es una de las distribuciones previas más comunes debido a sus propiedades matemáticas convenientes. Se utiliza para modelar la incertidumbre sobre parámetros desconocidos en un modelo estadístico.
+
+
+![alt text](image-6.png)
+
+
+**¿Por qué la distribución normal es tan común?**
+
+Simetría y simplicidad: La distribución normal es simétrica respecto a su media, lo que la hace visualmente similar a una campana, facilitando su entendimiento.
+Propiedades estadísticas: Es capaz de describir de manera precisa muchos fenómenos naturales, motivando su uso en estadística inferencial.
+
+**¿Cómo se utilizan la media y la desviación estándar?**
+
+La media mide el centro de la distribución, mientras que la desviación estándar indica la dispersión o variabilidad de los datos. Dos distribuciones pueden tener la misma media, pero una con menor desviación estándar tendrá datos más concentrados alrededor de la media. Esto es crucial en campos como las finanzas para medir el riesgo de inversiones.
+
+**¿Qué es la regla empírica y cómo se aplica?**
+
+La regla empírica, conocida también como el 68-95-99.7, permite predecir con qué frecuencia ocurren los eventos en una distribución normal. Esta regla establece:
+
+- 68% de los datos se encuentran a una desviación estándar de la media.
+- 95% de los datos están dentro de dos desviaciones estándar.
+- 99.7% de los datos se ubican dentro de tres desviaciones estándar.
+
+**¿Cómo se emplea la regla empírica en diferentes campos?**
+
+Ciencias Sociales: Se conforman generalmente con intervalos de confianza basados en dos o tres desviaciones estándar.
+Física de Partículas: Exige más precisión, comúnmente cinco desviaciones estándar, para garantizar la certeza de las observaciones.
+
+**¿Cómo ha influido la distribución normal en el avance científico y tecnológico?**
+El uso de técnicas que manejan la distribución normal ha sido fundamental para el desarrollo de múltiples disciplinas científicas:
+
+Electrónica y Física Cuántica: Estas áreas han sido significativamente impactadas por la capacidad de medir y predecir fenómenos con gran precisión, contribuyendo a avances tecnológicos como las computadoras cuánticas y la detección de ondas gravitacionales.
+
+
+![alt text](image-5.png)
+
+**Ejemplo Práctico: Descriptiva vs Inferencial**
+
+Aquí podemos ver en código cómo la estadística descriptiva nos resume los datos que tenemos, mientras que la inferencial nos ayuda a estimar valores reales de la población con un margen de error.
+
+```PYTHON
+import random
+import math
+import statistics
+
+def ejemplo_estadistica():
+    # --- ESTADÍSTICA DESCRIPTIVA ---
+    # Generamos una muestra de datos (ej. alturas en cm)
+    # Suponemos una distribución normal con media 170 y desviación 10
+    datos = [random.gauss(170, 10) for _ in range(100)]
+    
+    # Describimos la muestra que tenemos
+    media_muestra = statistics.mean(datos)
+    desviacion_muestra = statistics.stdev(datos)
+    
+    print(f"--- Estadística Descriptiva (Análisis de la Muestra) ---")
+    print(f"Muestra de {len(datos)} datos.")
+    print(f"Media observada: {media_muestra:.2f}")
+    print(f"Desviación estándar observada: {desviacion_muestra:.2f}")
+    
+    # --- ESTADÍSTICA INFERENCIAL ---
+    # Inferir el rango donde probablemente esté la media real de la población
+    # Intervalo de confianza del 95% (Z ≈ 1.96)
+    error_estandar = desviacion_muestra / math.sqrt(len(datos))
+    margen_error = 1.96 * error_estandar 
+    
+    limite_inferior = media_muestra - margen_error
+    limite_superior = media_muestra + margen_error
+    
+    print(f"\n--- Estadística Inferencial (Conclusiones sobre la Población) ---")
+    print(f"Con un 95% de confianza, la media real de la población está entre:")
+    print(f"[{limite_inferior:.2f}, {limite_superior:.2f}]")
+
+if __name__ == "__main__":
+    ejemplo_estadistica()
+```
+
+## CLASE 16: Simulaciones de Montecarlo: Historia y Aplicaciones Prácticas
+
+**¿Cuál es el origen de las simulaciones de Montecarlo?**
+Las simulaciones de Montecarlo son una de las herramientas más fascinantes en el mundo de las matemáticas y la estadística. Nacieron de la curiosidad de Stanislaw Ulam, un matemático que, mientras estaba enfermo y aburrido en su casa, decidió jugar al solitario. Ulam quería calcular la probabilidad de ganar en el juego, pero se encontró con dificultades al tratar de generar todas las combinaciones posibles de partidas. Buscando una solución más eficiente, recurrió a su amigo John von Neumann, quien tenía acceso a una de las primeras computadoras digitales: el ENIAC. Juntos, ingenuamente, empezaron a simular el juego de solitario en la computadora.
+
+Lo que comenzó como un proyecto lúdico se convirtió en una revolucionaria herramienta, no solo para modelar el solitario, sino también para simular varios juegos de azar de los casinos de Montecarlo. Este enfoque se bautizó como simulaciones de Montecarlo, ya que originalmente se aplicó a juegos de azar típicos de dicho lugar.
+
+**¿Cómo se aplicaron las simulaciones en otros campos?**
+Lo interesante de las simulaciones de Montecarlo es que su utilidad trascendió el ámbito lúdico. Ulam y von Neumann aplicaron estas simulaciones a problemas complejos como el Proyecto Manhattan, donde simularon explosiones nucleares para predecir sus efectos sin necesidad de llevar a cabo pruebas reales destructivas. Esto resultó inestimable para calcular con precisión el comportamiento de las bombas que estaban desarrollando.
+
+**¿Qué características presentan las simulaciones de Montecarlo?**
+Las simulaciones de Montecarlo destacan por utilizar la aleatoriedad para resolver problemas, transformando problemas deterministas en situaciones estocásticas. Esto permite:
+
+- Calcular áreas de figuras geométricas, como un círculo.
+- Estimar constantes matemáticas, como el número pi.
+- Analizar el comportamiento de medicamentos en el organismo.
+- Evaluar el impacto de cambios legales en sistemas jurídicos.
+
+**¿Por qué las simulaciones de Montecarlo son poderosas herramientas computacionales?**
+Las simulaciones de Montecarlo habilitan la generación de experimentos computacionales utilizando conceptos de estadística y probabilidad. Son fundamentales para lograr simular escenarios que de otro modo serían complejos de analizar analíticamente. Al integrar técnicas estocásticas, estas simulaciones no solo permiten calcular probabilidades, sino también realizar análisis más profundos como medias, varianzas y tendencias.
 
 ```PYTHON
 
 
 ```
 
-## CLASE 15: 
+## CLASE 17: Simulación de Montecarlo para Probabilidades en Juegos de Cartas
+
+```PYTHON
+
+import random
+import collections
+
+PALOS = ['espada', 'corazon', 'rombo', 'trebol']
+VALORES = ['as', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jota', 'reina', 'rey']
+
+def crear_baraja():
+    barajas = []
+    for palo in PALOS:
+        for valor in VALORES:
+            barajas.append((palo, valor))
+
+    return barajas
+
+def obtener_mano(barajas, tamano_mano):
+    mano = random.sample(barajas, tamano_mano)
+    
+    return mano
+
+def main(tamano_mano, intentos):
+    barajas = crear_baraja()
+
+    manos = []
+    for _ in range(intentos):
+        mano = obtener_mano(barajas, tamano_mano)
+        manos.append(mano)
+
+    pares = 0
+    for mano in manos:
+        valores = []
+        for carta in mano:
+            valores.append(carta[1])
+
+        counter = dict(collections.Counter(valores))
+        for val in counter.values():
+            if val == 3:
+                pares += 1
+                break
+
+    probabilidad_par = pares / intentos
+    print(f'La probabilidad de obtener un par en una mano de {tamano_mano} barajas es {probabilidad_par}')
+
+
+if __name__ == '__main__':
+    tamano_mano = int(input('De cuantas barajas sera la mano: '))
+    intentos = int(input('Cuantos intentos para calcular la probabilidad: '))
+
+    main(tamano_mano, intentos)
+```
+
+
+
+## CLASE 18 - 19 : Simulaciones de Montecarlo para Aproximar Pi - Estimación de Pi mediante Monte Carlo y Simulación Estadística
+
+```PYTHON
+
+import random
+import math
+from estadisticas import desviacion_estandar, media
+
+def aventar_agujas(numero_de_agujas):
+    adentro_del_circulo = 0
+
+    for _ in range(numero_de_agujas):
+        x = random.random() * random.choice([-1, 1])
+        y = random.random() * random.choice([-1, 1])
+        distancia_desde_el_centro = math.sqrt(x**2 + y**2)
+
+        if distancia_desde_el_centro <= 1:
+            adentro_del_circulo += 1
+
+    return (2 * adentro_del_circulo) / numero_de_agujas
+
+
+def estimacion(numero_de_agujas, numero_de_intentos):
+    estimados = []
+    for _ in range(numero_de_intentos):
+        estimacion_pi = aventar_agujas(numero_de_agujas)
+        estimados.append(estimacion_pi)
+
+    media_estimados = media(estimados)
+    sigma = desviacion_estandar(estimados)
+    print(f'Est={round(media_estimados, 5)}, sigma={round(sigma, 5)}, agujas={numero_de_agujas}')
+
+    return (media_estimados, sigma)
+
+def estimar_pi(precision, numero_de_intentos):
+    numero_de_agujas = 1000
+    sigma = precision
+
+    while sigma >= precision / 1.96:
+        media, sigma = estimacion(numero_de_agujas, numero_de_intentos)
+        numero_de_agujas *= 2
+
+    return media
+
+if __name__ == '__main__':
+    estimar_pi(0.01, 1000)
+
+
+```
+
+
+## CLASE 20: Muestreo Estadístico: Aleatorio y Estratificado
+
+¿Qué es el muestreo y por qué es importante?
+El muestreo es una técnica estadística fundamental que nos permite realizar análisis de datos de manera eficiente cuando no es posible computar toda la población debido a limitaciones de capacidad computacional. A través del muestreo, obtenemos y analizamos una pequeña parte representativa del conjunto de datos completo. Esta práctica es esencial en diversos campos, como las ciencias y problemas computacionales a gran escala, y nos permite generar conclusiones válidas incluso sin examinar la totalidad de los datos.
+
+Existen dos tipos principales de muestreo probabilístico:
+
+Muestreo aleatorio: Este enfoque selecciona muestras al azar de la población, garantizando que cada miembro tenga la misma probabilidad de ser elegido. Ha sido utilizado a lo largo del curso mencionado en el transcript y es efectivo cuando la población tiene características homogéneas.
+
+Muestreo estratificado: Ideal cuando hay subgrupos relevantes dentro de la población. Permite dividir la población en subgrupos estadísticamente significativos antes de tomar muestras aleatorias de cada uno, asegurando que las diferencias dentro de la población sean adecuadamente reflejadas en las conclusiones.
+
+¿Cuándo y cómo usar el muestreo estratificado?
+El muestreo estratificado es especialmente útil cuando dentro de una población hay subgrupos con características distintas que podrían influir en los resultados del análisis. Por ejemplo, si deseamos evaluar cuántos estudiantes saben programar dentro de una plataforma educativa como Platzi, podríamos ser propensos a sesgos si solo extrajésemos una muestra aleatoria de toda la población, ya que muchas de las carreras son en áreas técnicas.
+
+Para evitar esto:
+
+Identificar subgrupos: Primero, segmentamos la población en subgrupos claramente definidos que reflejen diferencias programáticas significativas, como carreras o áreas de especialización.
+
+Selección aleatoria de subgrupos: Dentro de cada subgrupo, seleccionamos muestras aleatorias. Este método asegura que cada subgrupo esté representado proporcionalmente en el análisis.
+
+Conclusiones más precisas: Con estos pasos, las conclusiones obtenidas son más consistentes y reflejan mejor la realidad de la población total, eliminando sesgos que podrían surgir de un análisis aleatorio directo.
+
+Aplicaciones del muestreo en la vida diaria
+Las técnicas de muestreo no solo son aplicables en campos académicos o financieros, sino también en situaciones cotidianas. El transcript sugiere maneras prácticas de aplicar el muestreo:
+
+Tecnología: Determinar cuántos dispositivos móviles son Android o cuántas cámaras son de una marca específica.
+
+Automóviles: Calcular qué porcentaje de coches son de colores específicos, como rojo, o cuántos son deportivos.
+
+Arquitectura: Analizar cuántos edificios superan cierto número de pisos.
+
+![alt text](image-7.png)
 
 ```PYTHON
 
 
 ```
 
-## CLASE 16: 
+## CLASE 21: Teorema del Límite Central: Transformación de Distribuciones
+
+¿Qué es el Teorema del Límite Central y por qué es fundamental?
+El Teorema del Límite Central (TLC) es uno de los pilares fundamentales en el campo de las matemáticas, especialmente dentro de la estadística. Nos permite convertir cualquier tipo de distribución de probabilidad en una distribución normal. Esta transformación es crucial ya que la distribución normal tiene propiedades bien definidas, regidas por su media y su desviación estándar, lo que facilita enormemente el análisis de datos y la aplicación de técnicas estadísticas.
+
+¿Cómo funciona el Teorema del Límite Central?
+El TLC establece que si se toma cualquier distribución y se obtiene una muestra, al calcular la media de esta muestra, la distribución de esas medias tenderá a ser normal. Con el aumento del tamaño de la muestra, la distribución de las medias se vuelve aún más cercana a una distribución normal. Este fenómeno se explica porque, en una muestra aleatoria, los datos extremos se compensan al promediarse con el resto, acercando así la media de las muestras sucesivas a una distribución normal.
+
+Código de Ejemplo para ilustrar el TLC
+Puedes realizar una simulación programática para comprobar empíricamente el TLC. Un ejercicio simple es simular el lanzamiento de dados y observar cómo la media de la sumatoria de sucesivos lanzamientos empieza a formar una distribución normal al incrementarse el número de tiradas:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulación del lanzamiento de dados
+def simulate_dice_throws(num_throws, num_trials):
+    np.random.seed(42)
+    dices = np.random.randint(1, 7, size=(num_throws, num_trials))
+    dice_means = dices.mean(axis=0)
+    return dice_means
+
+# Visualización
+num_throws = 1000
+num_trials = 3000
+dice_means = simulate_dice_throws(num_throws, num_trials)
+
+plt.hist(dice_means, bins=50, density=True, alpha=0.6, color='g')
+plt.title('Distribución de la Media de Lanzamiento de Dados')
+plt.xlabel('Media de Resultados')
+plt.ylabel('Frecuencia')
+plt.show()
+¿Por qué es práctico aplicar el Teorema del Límite Central?
+Aplicar el TLC trae muchas ventajas:
+
+Facilita el Análisis de Datos: Al poder tratar cualquier distribución como normal, podemos aplicar técnicas estadísticas estándar que son bien comprendidas y ampliamente utilizadas.
+
+Reducción de Incertidumbres: Con un aumento en el tamaño de la muestra, la desviación estándar disminuye, incrementando así la precisión de nuestras estimaciones y conclusiones.
+
+Aplicación Universal: Cualquier distribución, sin importar su forma original, puede ser normalizada para análisis simplificados.
+
+Impacto del Teorema del Límite Central en el mundo moderno
+Este teorema no solo es fundamental en contextos académicos, sino que ha permitido avances significativos en diversos campos como la física, la biología, y más. Al comprender y manejar distribuciones normales, la ciencia ha logrado simplificar modelos complejos y obtener resultados más precisos, impulsando así descubrimientos y avances cruciales.
+
+Anímate a profundizar en este tema a través de la literatura especializada y a experimentar con códigos y simulaciones propias. El dominio del Teorema del Límite Central es una habilidad valiosa que enriquecerá tu capacidad para analizar datos y te abrirá puertas a nuevas oportunidades en el mundo de la ciencia y la tecnología.
 
 
-```PYTHON
+## CLASE 22:Validación de teorías científicas con datos experimentales
 
+El método científico y la hipótesis
+¿Cómo se vinculan la teoría y la experimentación en el método científico? El punto de partida es siempre una hipótesis o teoría, posibilitando la creación de experimentos diseñados objetivamente para su comprobación. En este proceso, es fundamental abordar la experimentación sin prejuicios, buscando la verdad de la hipótesis sin intentar forzar los resultados a favor de nuestras creencias iniciales.
 
+Diseño y ejecución de experimentos
+¿Cuál es la importancia del diseño y ejecución de experimentos? Una vez formulada la hipótesis, se procede a diseñar un experimento que permita confirmarla o refutarla. La ejecución de dicho experimento proporciona datos que, al compararlos con las predicciones teóricas, nos indican si la teoría se sostiene ante la evidencia empírica o si, por el contrario, debe ser cuestionada o incluso descartada.
+
+Comparación entre teoría y datos experimentales
+¿Qué sucede cuando se comparan los datos experimentales con las teorías? A lo largo de la historia, muchas teorías han sido confirmadas a través de experimentos, como es el caso de la mecánica cuántica y la teoría general de la relatividad. Sin embargo, el hecho de que estas teorías sean incompatibles entre sí, plantea desafíos significativos e invita a profundizar en el conocimiento y la investigación científica.
+
+Leyes de Hooke y de Joule, y verificación experimental
+¿Cómo se verifica experimentalmente la ley de Hooke y la ley de Joule? Tomemos como ejemplo la ley de Hooke y la ley de plasticidad de Joule. Estas nos permiten saber la fuerza necesaria para estirar un resorte y la fuerza que este ejercerá para volver a su forma original. Para validar estas leyes se realizan experimentos objetivos, estirando un resorte con diferentes pesos y observando su comportamiento lineal.
+
+Uso de regresiones lineales para validar teorías
+¿Cómo pueden las regresiones lineales ayudarnos a validar teorías científicas? En la próxima clase, exploraremos cómo las regresiones lineales se utilizan para determinar si los datos experimentales se alinean con una teoría. Además, veremos cómo esta técnica estadística también es útil para desarrollar descripciones matemáticas cuando no existe una teoría previa.
+
+Recuerda que el camino del conocimiento está lleno de descubrimientos fascinantes, y tú también puedes contribuir con ejemplos de experimentos que consideres relevantes. No dudes en compartir tus ideas o propuestas que podamos revisar juntos para seguir aprendiendo sobre la maravillosa interacción entre la teoría y la experimentación. ¡Te espero en la próxima clase para continuar este viaje de descubrimiento científico!
+
+## CLASE 23: Regresión Lineal con NumPy y Matplotlib en Google Colab
+
+```python
+# -*- coding: utf-8 -*-
+"""ejemplo_regresion_lineal
+
+Automatically generated by Colab.
+
+Original file is located at
+    https://colab.research.google.com/drive/1c0Lx0xQyxuoZsnVKZzMFcANykA5VWN5F
+"""
+
+import numpy as np
+x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8])
+y = np.array([1, 2, 3, 5, 4, 6, 8, 7, 9])
+
+coeffs = np.polyfit(x, y, 1)
+print(coeffs)
+
+m = coeffs[0]
+b = coeffs[1]
+est_y = (m * x) + b
+
+import matplotlib.pyplot as plt
+plt.plot(x, est_y)
+plt.scatter(x, y)
+plt.show()
 ```
-## CLASE 17: 
-```PYTHON
 
 
-```
-
-
-## CLASE 18: 
-
-```PYTHON
-
-
-```
-
-## CLASE 19: 
-
-```PYTHON
-
-
-```
-
-## CLASE 20: 
-```PYTHON
-
-
-```
+## CLASE 24: 
