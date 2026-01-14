@@ -8,8 +8,8 @@ src_path = Path(__file__).parent / "src"
 sys.path.append(str(src_path))
 
 # Mock env vars to prevent config errors during discovery
-os.environ["GOOGLE_API_KEY"] = "AIzaSyDgvt951Qy1Lf5e-_O1Y5FwFkgVndZS9cQ"
-os.environ["NEWSAPI_API_KEY"] = "fdaefbb239274dfc871349611971e9d9"
+os.environ["GOOGLE_API_KEY"] = ""
+os.environ["NEWSAPI_API_KEY"] = ""
 
 if __name__ == "__main__":
     loader = unittest.TestLoader()
