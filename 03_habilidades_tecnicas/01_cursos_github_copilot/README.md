@@ -326,3 +326,157 @@ Crear una API utilizando lenguajes como Go o .NET puede presentar diversos error
 ## CLASE 10: Creación de un script Bash para automatizar proyectos .NET con Docker
 
 Automatizar tareas repetitivas en el desarrollo de software agiliza el flujo de trabajo considerablemente. Precisamente con .NET y Docker, puedes crear scripts que faciliten la generación automática de proyectos completos, integrando pruebas unitarias y contenedores listos para desplegar. Esto, además, aprovecha la asistencia de herramientas como GitHub Copilot, ahorrando tiempo valioso para enfocarte en mejorar y perfeccionar tu proyecto.
+
+## CLASE 11: Automatización de Proyectos .NET con Copilot y Dockerfile
+
+Optimizar y sistematizar la creación de proyectos puede ser considerablemente más sencillo con la tecnología apropiada. Copilot simplifica esta tarea utilizando archivos Bash, comentarios claros y scripts automatizados que permiten generar proyectos minimal API en .NET, incluyendo pruebas unitarias con XUnit, integración con Docker y organización mediante archivos de solución.
+
+¿Cómo ayuda Copilot a generar proyectos minimal API en .NET?
+
+Copilot reconoce instrucciones específicas en comentarios dentro de un archivo Bash, facilitando la creación de tareas automatizadas:
+
+Genera un proyecto minimal API en .NET con un comando simple como:
+
+.NET new web -n minimalAPI
+Crea un proyecto de pruebas unitarias vinculado directamente al principal:
+
+.NET new xunit -n minimalAPI.test
+Asocia ambos proyectos para que las pruebas unitarias recuerden el contexto adecuado:
+
+.NET add minimalAPI.test/minimalAPI.test.csproj reference minimalAPI/minimalAPI.csproj
+Configura una solución que agrupa ambos proyectos eficazmente:
+
+.NET new sln -n minimalAPI
+.NET sln minimalAPI.sln add minimalAPI minimalAPI.test
+¿Qué paquetes son necesarios para trabajar con minimal API y pruebas en .NET?
+
+Para mejorar la funcionalidad de tus proyectos de prueba, Copilot sugiere utilizar paquetes específicos:
+
+Microsoft ASP.NET Core MVC Testing
+MiniValidation
+Estos paquetes proporcionan herramientas útiles para verificar y asegurar la calidad del código generado automáticamente por el asistente de Copilot.
+
+¿Cómo utilizar Docker para proyectos minimal API en .NET con Copilot?
+
+Copilot permite la incorporación eficiente de Docker en tu flujo de trabajo mediante scripts específicos:
+
+
+cat <<EOL > Dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY ./out ./
+ENTRYPOINT ["dotnet", "minimalAPI.dll"]
+EOL
+Con esta estrategia, se automatiza la creación de un Dockerfile configurado para desplegar rápidamente tu proyecto minimal API.
+
+## CLASE 12: Documentación de Proyectos con Markdown y GitHub Copilot
+
+La documentación clara y detallada es imprescindible para mejorar la reutilización y el mantenimiento de cualquier proyecto de desarrollo. Actualmente, herramientas como GitHub Copilot pueden facilitar significativamente este proceso, generando archivos Markdown claros y organizados directamente desde tu entorno de trabajo.
+
+## CLASE 13: Cómo Crear y Gestionar un Pull Request en GitHub
+
+Integrar GitHub Copilot en tu flujo de trabajo puede facilitar significativamente la creación y revisión de pull requests. Al realizar cambios o añadir nuevas funcionalidades, es vital respetar las buenas prácticas utilizando ramas diferentes a la principal o main, y optimizar el proceso con herramientas inteligentes como Copilot.
+
+## CLASE 14: Configuración y políticas de GitHub Copilot Enterprise
+GitHub Copilot Enterprise se está consolidando como una solución interesante para empresas que necesitan acelerar su productividad sin comprometer la privacidad de su código fuente. A través de distintas configuraciones y políticas claras, permite gestionar específicamente quién puede acceder al código generado o utilizado.
+
+¿Qué diferencias existen entre GitHub Copilot gratuito y Enterprise?
+
+La principal ventaja de GitHub Copilot Enterprise frente a las versiones gratuitas o Pro está en la privacidad y protección del código. Cuando usas una cuenta estándar o Pro en GitHub, todo código alojado en repositorios públicos es susceptible de ser utilizado para entrenar modelos de inteligencia artificial.
+
+En cambio, GitHub Copilot Enterprise protege el código almacenado en repositorios privados o empresariales, evitando que sea empleado para este fin. Este beneficio es clave para empresas que necesitan mayor seguridad y control sobre los derechos de autor e información clasificada.
+
+¿Qué controles específicos ofrece GitHub Copilot Enterprise?
+
+La administración de GitHub Copilot Enterprise permite distintas opciones configurables para cada usuario según las necesidades corporativas, como:
+
+Utilizar Copilot desde diferentes plataformas como github.com, línea de comandos, IDES específicos y GitHub Mobile.
+Acceso controlado a códigos públicos para recibir sugerencias.
+Integración con Bing para consultas específicas y actualizaciones.
+Posibilidad de habilitar o deshabilitar modelos adicionales de inteligencia artificial, como el modelo O1 de OpenAI.
+Estos ajustes dan a cada empresa la tranquilidad de saber exactamente cómo y dónde se utiliza GitHub Copilot, aumentando la seguridad y gobernanza informática interna.
+
+¿Cómo influye Copilot Enterprise en las organizaciones?
+
+GitHub Copilot Enterprise facilita la gestión individualizada del acceso según las organizaciones donde participa cada usuario. Algunas ventajas destacadas incluyen:
+
+Definir claramente en qué organizaciones o repositorios se permite el acceso a Copilot.
+Verificar fácilmente los permisos asignados a cada miembro de la organización.
+Establecer controles específicos y precisos que delimitan las acciones permitidas dentro del ámbito empresarial.
+
+## CLASE 15: Uso de Github Copilot para Gestión de Tareas y Issues
+
+GitHub Copilot es una herramienta versátil que te permite ampliar significativamente tus capacidades como desarrollador. Desde github.com puedes gestionar fácilmente tus tareas, revisar actividades pendientes y avanzar rápidamente en tus proyectos.
+
+¿Qué información muestra la página inicial de GitHub?
+
+Cuando ingresas a github.com, inmediatamente observas un panel que muestra tanto la actividad reciente de las personas que sigues como la de los repositorios que marcaste con estrella. En el panel lateral, encuentras rápidamente aquellos repositorios que utilizas con mayor frecuencia o que creaste recientemente, ayudándote a acceder fácilmente al trabajo cotidiano.
+
+¿Cómo utilizar Copilot directamente desde github.com?
+
+Una de las funciones destacadas es la interacción con GitHub Copilot directamente desde esta plataforma. En la sección para "chatear con Copilot", se encuentran disponibles las siguientes opciones:
+
+Abrir Copilot con herramientas específicas: Aquí seleccionas con qué aplicaciones puedes integrar Copilot.
+Configuración general: Donde estableces tus preferencias de uso.
+Modo inmersivo: Esta opción activa un chat directo para consultas que agiliza tu productividad.
+
+## CLASE 16: Funcionalidad edit en Copilot para desarrollo ágil de aplicaciones Go
+
+Usar herramientas tecnológicas avanzadas, como Copilot en el modo edit, facilita significativamente la creación rápida de aplicaciones en Go. Esta funcionalidad es especialmente útil cuando ya conoces la estructura básica del proyecto y deseas acelerar el proceso de desarrollo generando automáticamente código.
+
+¿En qué consiste el modo edit en Copilot?
+
+El modo edit ofrece una dinámica interactiva que permite crear proyectos específicos a partir de indicaciones claras. Este modo genera una estructura completa de archivos y código según el prompt que insertes.
+
+## CLASE 17: Configuración de Swagger en APIs de Go con Copilot Agent
+
+Agregar Swagger a una API escrita en Go puede facilitar significativamente el trabajo de los desarrolladores, ya que les proporciona documentación clara sobre cómo usar cada método. Con Copilot en modo Agent, es posible automatizar buena parte de este proceso, permitiéndote definir comandos, crear archivos y generar configuraciones de manera sencilla y rápida.
+
+¿Qué ventajas tiene utilizar Swagger con tu API en Go?
+
+Swagger no solo ayuda a documentar, sino también a definir y visualizar claramente el funcionamiento de tu API. Algunas de sus ventajas son:
+
+Facilita la comunicación sobre funcionalidades disponibles.
+Proporciona documentación automática y actualizada.
+Mejora la colaboración dentro del equipo de desarrollo.
+
+## CLASE 18: GitHub Copilot en modo agentic: asignación automática de tareas
+GitHub Copilot ha tomado un rol importante en la automatización y optimización de tareas en proyectos de desarrollo. El modo agentic de Copilot permite delegar tareas específicas directamente a esta herramienta, actuando así como tu asistente personal en desarrollo.
+
+¿Qué es el modo agentic de GitHub Copilot?
+
+El modo agentic de Copilot facilita la automatización de tareas asignadas mediante issues en proyectos de GitHub. En lugar de que una persona realice la tarea, Copilot, al asignársele dicho issue, automáticamente empieza a trabajar generando un pull request y ejecutando las acciones necesarias.
+
+¿Cómo funciona la asignación de tareas a Copilot?
+
+Asignar tareas a Copilot es sencillo:
+
+Creas un issue bien detallado y específico en tu repositorio de GitHub.
+Asignas este issue directamente a GitHub Copilot en vez de asignarlo a una persona.
+Copilot inicia un trabajo automatizado con un pull request en modo draft.
+
+## CLASE 19: Automatización de pull requests con Copilot
+Utilizar herramientas inteligentes como Copilot para automatizar procesos en la creación y revisión de pull requests puede optimizar notablemente el flujo de trabajo en proyectos de programación. Esta integración permite a los desarrolladores gestionar tareas y revisiones con mínima intervención manual, proporcionando notificaciones oportunas sobre el progreso y los cambios realizados.
+
+¿Qué puede hacer Copilot al gestionar un pull request?
+
+Copilot puede automatizar diversos aspectos involucrados en la solicitud de cambios o revisiones en tu proyecto, demostrando su utilidad al:
+
+Enviar notificaciones automáticas cuando finaliza una tarea solicitada.
+Crear pull requests automáticamente, evitando la necesidad de intervención directa.
+Proporcionar documentación y realizar cambios específicos en múltiples archivos.
+Ejecutar y evidenciar resultados de pruebas para asegurar calidad y funcionalidad.
+¿Qué consideraciones se deben tener al revisar código generado por Copilot?
+
+Aunque Copilot facilita considerablemente el proceso, algunas revisiones manuales continúan siendo necesarias para mantener altos estándares de calidad:
+
+Revisar brevemente los archivos modificados para asegurar que sean pertinentes.
+Confirmar resultados de pruebas automáticas proporcionados por Copilot.
+Tener claro que una misma persona no debe realizar y aprobar el mismo trabajo para mantener el criterio objetivo de calidad.
+¿Cómo solucionar el conflicto de aprobación generado por Copilot?
+
+Un aspecto crucial a tener en cuenta es la imposibilidad de que el mismo individuo genere y apruebe cambios automáticamente generados por Copilot bajo su propio nombre. Para resolverlo eficientemente:
+
+Añadir un tercer usuario en calidad de revisor.
+Esperar la revisión de esta persona antes de proceder con el merge.
+Finalizar adecuadamente con un merge y eliminar ramas innecesarias para mantener el proyecto organizado.
