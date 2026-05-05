@@ -8,17 +8,17 @@
 | **Publicado el** | Publicado el 30 de junio de 2025 |
 | **Profesor** | Amin Espinoza |
 | **Fecha de Inicio** | 27/04/2026 |
-| **Fecha de Fin** |  |
+| **Fecha de Fin** | 05/05/2026 |
 
 ---
 <div align="center">
-  <img src="image.png" alt="Global Certificate" width="70%" />
+  <img src="CursoGithub_01.png" alt="Certificate" width="70%" />
 </div>
 
 
 | Curso | Certificado |
 | :--- | :---: |
-| [Automatiza tareas de desarrollo de software usando GitHub Copilot en VS Code y GitHub.com, genera código, documenta, crea APIs, pruebas, scripts y plantillas, resuelve errores y mejora flujos de trabajo.](#) | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/02_DesarrolloBackendPythonDjango_2025_Avanzado\02_CreacionCRUD\2025_diploma-python-practico_PLATZI.pdf) |
+|Automate software development tasks using GitHub Copilot in VS Code and GitHub.com. Generate code, documentation, APIs, tests, scripts, and templates while resolving bugs and optimizing workflows | [Ver PDF](https://github.com/LeoSan/CursosBackendPython/blob/main/03_habilidades_tecnicas/01_cursos_github_copilot/2026_diploma-github-copilot_PLATZI.pdf) |
 
 
 --- 
